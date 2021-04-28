@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.LongArrayType;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,6 +22,7 @@ import lombok.Data;
 @Data
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@TypeDef(name = "int-array", typeClass = IntArrayType.class)
 @TypeDef(name = "long-array", typeClass = LongArrayType.class)
 public abstract class BrBaseTable implements Serializable {
 
