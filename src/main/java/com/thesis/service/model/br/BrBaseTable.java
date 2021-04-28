@@ -15,6 +15,7 @@ import com.vladmihalcea.hibernate.type.array.LongArrayType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.TextType;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Data;
@@ -24,6 +25,7 @@ import lombok.Data;
 @EntityListeners(AuditingEntityListener.class)
 @TypeDef(name = "int-array", typeClass = IntArrayType.class)
 @TypeDef(name = "long-array", typeClass = LongArrayType.class)
+@TypeDef(name = "text", typeClass = TextType.class)
 public abstract class BrBaseTable implements Serializable {
 
   @Id
