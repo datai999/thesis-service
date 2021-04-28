@@ -5,6 +5,8 @@ import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,6 +19,10 @@ import lombok.Data;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BrBaseTable implements Serializable {
+
+  @Id
+  @GeneratedValue
+  private long id;
 
   private boolean deleted = false;
 

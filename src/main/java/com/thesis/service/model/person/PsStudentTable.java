@@ -1,10 +1,11 @@
 package com.thesis.service.model.person;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.thesis.service.model.br.BrConstDataTable;
 
@@ -16,7 +17,9 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "ps_student")
 public class PsStudentTable extends PsBaseTable {
-  @Id
+
+  @NotNull
+  @Column(unique=true)
   private int studentCode;
 
   @OneToOne
