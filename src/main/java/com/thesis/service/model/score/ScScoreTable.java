@@ -48,6 +48,7 @@ public class ScScoreTable extends BrBaseTable {
   @Column(name = "score", columnDefinition = "integer[]")
   private Collection<Integer> scores;
 
+  @Type(type = "text")
   private String comment;
 
 }

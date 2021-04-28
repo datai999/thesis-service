@@ -8,6 +8,8 @@ import javax.persistence.Table;
 import com.thesis.service.model.br.BrBaseTable;
 import com.thesis.service.model.br.BrConstDataTable;
 
+import org.hibernate.annotations.Type;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -25,6 +27,7 @@ public class ScCriterionTemplateTable extends BrBaseTable {
   @JoinColumn(name = "score_method_id")
   private BrConstDataTable scoreMethod;
 
+  @Type(type = "text")
   private String description;
 
 }

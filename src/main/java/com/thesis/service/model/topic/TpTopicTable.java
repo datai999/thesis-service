@@ -10,6 +10,8 @@ import com.thesis.service.model.br.BrBaseTable;
 import com.thesis.service.model.br.BrConstDataTable;
 import com.thesis.service.model.person.PsAcademyStaffTable;
 
+import org.hibernate.annotations.Type;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -41,12 +43,16 @@ public class TpTopicTable extends BrBaseTable {
   @Min(1)
   private Integer maxStudentTake;
 
+  @Type(type = "text")
   private String description;
 
+  @Type(type = "text")
   private String mainTask;
 
+  @Type(type = "text")
   private String thesisTask;
 
+  @Type(type = "text")
   private String note;
 
   @OneToOne

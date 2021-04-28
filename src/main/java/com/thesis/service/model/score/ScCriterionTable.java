@@ -7,6 +7,8 @@ import javax.persistence.Table;
 
 import com.thesis.service.model.br.BrBaseTable;
 
+import org.hibernate.annotations.Type;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,6 +26,7 @@ public class ScCriterionTable extends BrBaseTable {
 
   private float priority = 1L;
 
+  @Type(type = "text")
   private String description;
 
 }
