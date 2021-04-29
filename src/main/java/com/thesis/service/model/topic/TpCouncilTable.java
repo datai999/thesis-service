@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.thesis.service.model.br.BrBaseTable;
+import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.br.BrConstDataTable;
 
 import org.hibernate.annotations.Type;
@@ -23,7 +23,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "tp_council")
-public class TpCouncilTable extends BrBaseTable {
+public class TpCouncilTable extends BaseTable {
 
   @OneToOne
   @JoinColumn(name = "subject_department_id")

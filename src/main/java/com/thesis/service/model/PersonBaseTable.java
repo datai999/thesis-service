@@ -1,10 +1,8 @@
-package com.thesis.service.model.person;
+package com.thesis.service.model;
 
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
-import com.thesis.service.model.br.BrBaseTable;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
-public abstract class PsBaseTable extends BrBaseTable {
+public abstract class PersonBaseTable extends BaseTable {
 
   @NotBlank
   private String name;

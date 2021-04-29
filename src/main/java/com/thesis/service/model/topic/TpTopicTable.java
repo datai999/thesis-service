@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
-import com.thesis.service.model.br.BrBaseTable;
+import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.br.BrConstDataTable;
 import com.thesis.service.model.person.PsAcademyStaffTable;
 
@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "tp_topic")
-public class TpTopicTable extends BrBaseTable {
+public class TpTopicTable extends BaseTable {
 
   private Integer topicCode;
 

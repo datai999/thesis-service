@@ -1,4 +1,4 @@
-package com.thesis.service.model.br;
+package com.thesis.service.model;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -26,7 +26,7 @@ import lombok.Data;
 @TypeDef(name = "int-array", typeClass = IntArrayType.class)
 @TypeDef(name = "long-array", typeClass = LongArrayType.class)
 @TypeDef(name = "text", typeClass = TextType.class)
-public abstract class BrBaseTable implements Serializable {
+public abstract class BaseTable implements Serializable {
 
   @Id
   @GeneratedValue

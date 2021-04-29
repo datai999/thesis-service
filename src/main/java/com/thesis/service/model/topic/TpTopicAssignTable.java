@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.thesis.service.model.br.BrBaseTable;
+import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.person.PsTeacherTable;
 
 import org.hibernate.annotations.Type;
@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "tp_topic_assign")
-public class TpTopicAssignTable extends BrBaseTable {
+public class TpTopicAssignTable extends BaseTable {
 
   @OneToOne
   @JoinColumn(name = "topic_id")

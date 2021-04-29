@@ -5,6 +5,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.thesis.service.model.PersonBaseTable;
 import com.thesis.service.model.br.BrConstDataTable;
 
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ps_teacher")
-public class PsTeacherTable extends PsBaseTable {
+public class PsTeacherTable extends PersonBaseTable {
 
   @OneToOne
   @JoinColumn(name = "subject_department_id")

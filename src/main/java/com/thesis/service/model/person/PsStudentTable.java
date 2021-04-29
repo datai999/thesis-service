@@ -7,6 +7,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.thesis.service.model.PersonBaseTable;
 import com.thesis.service.model.br.BrConstDataTable;
 
 import lombok.Data;
@@ -16,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ps_student")
-public class PsStudentTable extends PsBaseTable {
+public class PsStudentTable extends PersonBaseTable {
 
   @NotNull
   @Column(unique=true)

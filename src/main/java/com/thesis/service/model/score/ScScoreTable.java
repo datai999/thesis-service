@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.thesis.service.model.br.BrBaseTable;
+import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.person.PsStudentTable;
 import com.thesis.service.model.person.PsTeacherTable;
 import com.thesis.service.model.topic.TpTopicTable;
@@ -22,7 +22,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "sc_score")
-public class ScScoreTable extends BrBaseTable {
+public class ScScoreTable extends BaseTable {
 
   @OneToOne
   @JoinColumn(name = "topic_id")
