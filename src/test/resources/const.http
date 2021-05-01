@@ -31,3 +31,7 @@ Content-Type: application/json
   { "type": "degree", "value": "Doctor"},
   { "type": "degree", "value": "Professor"}
 ]
+
+### delete all
+DELETE {{http}}://{{host}}{{port}}{{base-url}}/const
+Content-Type: application/json

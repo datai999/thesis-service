@@ -11,6 +11,7 @@ import com.thesis.service.common.service.EntityService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,8 +46,14 @@ public abstract class EntityController<E extends BaseTable, R extends BaseReposi
   }
 
   @PostMapping("/example")
-  protected Object findAll(@RequestBody E entity) {
+  public Object findAll(@RequestBody E entity) {
     return WrapResponse.data(repository.findAll(Example.of(entity)));
+  }
+
+  @DeleteMapping
+  public Object deleteAll() {
+    repository.deleteAll();
+    return WrapResponse.data(true);
   }
 
 }
