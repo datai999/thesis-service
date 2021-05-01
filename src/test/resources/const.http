@@ -1,0 +1,22 @@
+
+###  get all
+GET {{http}}://{{host}}{{port}}{{base-url}}/const
+Content-Type: application/json
+
+
+###  create const
+POST {{http}}://{{host}}{{port}}{{base-url}}/const/all
+Content-Type: application/json
+
+[
+  { "type": "subjectDepartment", "value": "Information System"},
+  { "type": "subjectDepartment", "value": "Software Technology"},
+  { "type": "subjectDepartment", "value": "Systems and Networks"},
+  { "type": "subjectDepartment", "value": "Computer Science"},
+  { "type": "subjectDepartment", "value": "Computer Engineering"},
+
+  { "type": "degree", "value": "Bachelor"},
+  { "type": "degree", "value": "Master"},
+  { "type": "degree", "value": "Doctor"},
+  { "type": "degree", "value": "Professor"}
+]
