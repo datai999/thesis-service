@@ -1,10 +1,10 @@
-package com.thesis.service.model.br;
+package com.thesis.service.br.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.thesis.service.model.BaseTable;
+import com.thesis.service.common.model.BaseTable;
 
 import lombok.EqualsAndHashCode;
 

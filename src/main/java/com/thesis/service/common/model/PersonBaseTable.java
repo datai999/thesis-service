@@ -1,4 +1,4 @@
-package com.thesis.service.model;
+package com.thesis.service.common.model;
 
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Email;

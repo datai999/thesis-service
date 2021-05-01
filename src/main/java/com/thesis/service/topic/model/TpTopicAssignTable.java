@@ -1,4 +1,4 @@
-package com.thesis.service.model.topic;
+package com.thesis.service.topic.model;
 
 import java.util.Set;
 
@@ -8,8 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.person.PsTeacherTable;
+import com.thesis.service.common.model.BaseTable;
+import com.thesis.service.person.model.PsTeacherTable;
 
 import org.hibernate.annotations.Type;
 

@@ -1,4 +1,4 @@
-package com.thesis.service.model;
+package com.thesis.service.common.model;
 
 import java.io.Serializable;
 import java.time.Instant;

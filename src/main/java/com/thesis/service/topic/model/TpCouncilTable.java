@@ -1,4 +1,4 @@
-package com.thesis.service.model.topic;
+package com.thesis.service.topic.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.br.BrConstDataTable;
+import com.thesis.service.br.model.BrConstDataTable;
+import com.thesis.service.common.model.BaseTable;
 
 import org.hibernate.annotations.Type;
 

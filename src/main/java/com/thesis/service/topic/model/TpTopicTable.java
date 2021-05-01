@@ -1,4 +1,4 @@
-package com.thesis.service.model.topic;
+package com.thesis.service.topic.model;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -6,9 +6,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
-import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.br.BrConstDataTable;
-import com.thesis.service.model.person.PsAcademyStaffTable;
+import com.thesis.service.br.model.BrConstDataTable;
+import com.thesis.service.common.model.BaseTable;
+import com.thesis.service.person.model.PsAcademyStaffTable;
 
 import org.hibernate.annotations.Type;
 

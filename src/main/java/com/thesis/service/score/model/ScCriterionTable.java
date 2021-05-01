@@ -1,11 +1,11 @@
-package com.thesis.service.model.score;
+package com.thesis.service.score.model;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.thesis.service.model.BaseTable;
+import com.thesis.service.common.model.BaseTable;
 
 import org.hibernate.annotations.Type;
 
