@@ -33,7 +33,7 @@ public abstract class EntityController<E extends BaseTable, R extends BaseReposi
   }
 
   @PostMapping
-  public Object save(@RequestBody E requestBody) {
+  public <D extends E> Object save(@RequestBody D requestBody) {
     return WrapResponse.data(repository.save(requestBody));
   }
 
