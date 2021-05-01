@@ -13,4 +13,8 @@ public class WrapResponse {
   public static WrapResponse data(Object data) {
     return new WrapResponse(data, null);
   }
+
+  public static WrapResponse error(Object error) {
+    return new WrapResponse(null, error);
+  }
 }
