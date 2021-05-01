@@ -1,5 +1,7 @@
 package com.thesis.service.common.controller;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import com.thesis.service.common.dto.response.WrapResponse;
@@ -38,7 +40,7 @@ public abstract class EntityController<E extends BaseTable, R extends BaseReposi
   }
 
   @PostMapping("/all")
-  public Object saveAll(@RequestBody Iterable<E> requestBody) {
+  public <D extends E> Object saveAll(@RequestBody List<D> requestBody) {
     return WrapResponse.data(repository.saveAll(requestBody));
   }
 
