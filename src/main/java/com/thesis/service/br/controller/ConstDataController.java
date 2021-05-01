@@ -22,8 +22,8 @@ public class ConstDataController extends EntityController<BrConstDataTable, BrCo
   }
 
   @GetMapping("types")
-  public Object findAllTypes() {
-    return WrapResponse.data(super.repository.findDistinctType());
+  public Object findAllType() {
+    return WrapResponse.data(super.repository.findAllType());
   }
 
 }

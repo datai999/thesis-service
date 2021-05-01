@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface BrConstDataRepository extends BaseRepository<BrConstDataTable> {
 
   @Query(value = "SELECT DISTINCT type FROM br_const_data", nativeQuery = true)
-  List<String> findDistinctType();
+  List<String> findAllType();
 
 }
