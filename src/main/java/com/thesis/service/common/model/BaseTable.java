@@ -30,9 +30,9 @@ public abstract class BaseTable implements Serializable {
 
   @Id
   @GeneratedValue
-  private long id;
+  private Long id;
 
-  private boolean deleted = false;
+  private Boolean deleted = false;
 
   @Column(updatable = false)
   @CreationTimestamp
