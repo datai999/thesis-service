@@ -1,7 +1,7 @@
 package com.thesis.service.br.repository;
 
-import com.thesis.service.model.br.BrConstDataTable;
-import com.thesis.service.repository.BaseRepository;
+import com.thesis.service.br.model.BrConstDataTable;
+import com.thesis.service.common.repository.BaseRepository;
 
 import org.springframework.stereotype.Repository;
 

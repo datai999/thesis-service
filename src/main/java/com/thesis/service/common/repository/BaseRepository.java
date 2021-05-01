@@ -1,6 +1,6 @@
-package com.thesis.service.repository;
+package com.thesis.service.common.repository;
 
-import com.thesis.service.model.BaseTable;
+import com.thesis.service.common.model.BaseTable;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
