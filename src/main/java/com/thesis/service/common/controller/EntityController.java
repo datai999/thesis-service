@@ -26,8 +26,8 @@ public abstract class EntityController<E extends BaseTable> {
   }
 
   @GetMapping
-  public Object count() {
-    return repository.count();
+  public Object findAll() {
+    return repository.findAll();
   }
 
   @PostMapping
