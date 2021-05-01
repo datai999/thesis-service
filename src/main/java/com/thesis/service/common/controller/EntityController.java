@@ -2,6 +2,7 @@ package com.thesis.service.common.controller;
 
 import javax.annotation.PostConstruct;
 
+import com.thesis.service.common.dto.response.WrapResponse;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.EntityService;
@@ -27,12 +28,17 @@ public abstract class EntityController<E extends BaseTable> {
 
   @GetMapping
   public Object findAll() {
-    return repository.findAll();
+    return WrapResponse.data(repository.findAll());
   }
 
   @PostMapping
   public Object save(@RequestBody E requestBody) {
-    return repository.save(requestBody);
+    return WrapResponse.data(repository.save(requestBody));
+  }
+
+  @PostMapping("/all")
+  public Object saveAll(@RequestBody Iterable<E> requestBody) {
+    return WrapResponse.data(repository.saveAll(requestBody));
   }
 
 }
