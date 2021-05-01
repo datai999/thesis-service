@@ -3,6 +3,17 @@
 GET {{http}}://{{host}}{{port}}{{base-url}}/const
 Content-Type: application/json
 
+###  get all type
+GET {{http}}://{{host}}{{port}}{{base-url}}/const/types
+Content-Type: application/json
+
+
+###  get by example
+POST {{http}}://{{host}}{{port}}{{base-url}}/const/example
+Content-Type: application/json
+
+{ "type": "subjectDepartment"}
+
 
 ###  create const
 POST {{http}}://{{host}}{{port}}{{base-url}}/const/all

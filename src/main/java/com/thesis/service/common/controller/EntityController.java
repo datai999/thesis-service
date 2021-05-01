@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-public abstract class EntityController<E extends BaseTable> {
+public abstract class EntityController<E extends BaseTable, R extends BaseRepository<E>> {
 
   @Autowired
   private EntityService service;
 
-  private BaseRepository<E> repository;
+  protected R repository;
 
   public abstract String declareBaseService();
 
