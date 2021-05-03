@@ -29,7 +29,15 @@ Content-Type: application/json
   { "type": "degree", "value": "Bachelor"},
   { "type": "degree", "value": "Master"},
   { "type": "degree", "value": "Doctor"},
-  { "type": "degree", "value": "Professor"}
+  { "type": "degree", "value": "Professor"},
+
+  { "type": "major", "value": "Computer Science"},
+  { "type": "major", "value": "Computer Engineering"},
+
+  { "type": "educationMethod", "value": "Formal"},
+  { "type": "educationMethod", "value": "CLC"},
+  { "type": "educationMethod", "value": "Link"}
+
 ]
 
 ### delete all
