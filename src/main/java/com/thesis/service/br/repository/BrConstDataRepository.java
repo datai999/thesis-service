@@ -12,8 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BrConstDataRepository extends BaseRepository<BrConstDataTable> {
 
-  @Query(value = "SELECT type, ARRAY_AGG(value) AS arrValue " + "FROM br_const_data "
-      + "GROUP BY type", nativeQuery = true)
+  @Query(value = TypeValueDto.QUERY, nativeQuery = true)
   List<TypeValueDto> findAllType();
 
 }
