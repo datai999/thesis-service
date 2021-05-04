@@ -4,6 +4,7 @@ import com.thesis.service.br.repository.BrConstDataRepository;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.person.repository.PsTeacherRepository;
+import com.thesis.service.topic.repository.TpTopicRepository;
 
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,10 @@ import lombok.RequiredArgsConstructor;
 public class EntityService {
 
   public final BrConstDataRepository constData;
+
   public final PsTeacherRepository teacher;
+
+  public final TpTopicRepository topic;
 
   @SuppressWarnings("unchecked")
   public <T extends BaseTable, E extends BaseRepository<T>> E get(String name) {
