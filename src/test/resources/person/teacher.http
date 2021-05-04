@@ -11,3 +11,14 @@ Content-Type: application/json
   "name": "Teacher",
   "degree": "41"
 }
+
+###  create many
+POST {{http}}://{{host}}:{{port}}{{base-url}}/teacher/all
+Content-Type: application/json
+
+[
+  {"name": "Đức Anh Tài"},
+  {"name": "Danh Trí Hiếu"},
+  {"name": "Phan Đình Tuệ"},
+  {"name": "Trần Thị Vân"}
+]
