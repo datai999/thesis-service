@@ -2,3 +2,11 @@
 ###  get all
 GET {{http}}://{{host}}:{{port}}{{base-url}}/teacher
 Content-Type: application/json
+
+###  create one
+POST {{http}}://{{host}}:{{port}}{{base-url}}/teacher
+Content-Type: application/json
+
+{
+  "name": "Teacher"
+}
