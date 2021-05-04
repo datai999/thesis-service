@@ -1,0 +1,4 @@
+
+###  get all
+GET {{http}}://{{host}}:{{port}}{{base-url}}/teacher
+Content-Type: application/json
