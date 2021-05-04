@@ -8,5 +8,6 @@ POST {{http}}://{{host}}:{{port}}{{base-url}}/teacher
 Content-Type: application/json
 
 {
-  "name": "Teacher"
+  "name": "Teacher",
+  "degree": "41"
 }

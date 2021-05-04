@@ -9,15 +9,23 @@ import com.thesis.service.common.model.BaseTable;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+@Data
+@NoArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "br_const_data", uniqueConstraints = { @UniqueConstraint(columnNames = { "type", "value" }) })
 @EqualsAndHashCode(callSuper = true)
-@Data
 public class BrConstDataTable extends BaseTable {
 
   @NotNull
   private String type;
 
   private String value;
+
+  public static BrConstDataTable from(Object id) {
+    return BrConstDataTable.builder().id(Long.parseLong(id.toString())).type("").build();
+  }
 }

@@ -19,8 +19,12 @@ import org.hibernate.type.TextType;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
+@NoArgsConstructor
+@SuperBuilder
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @TypeDef(name = "int-array", typeClass = IntArrayType.class)
