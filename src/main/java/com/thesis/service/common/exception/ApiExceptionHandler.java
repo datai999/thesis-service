@@ -4,14 +4,16 @@ import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolationException;
 
+import com.thesis.service.common.dto.response.WrapResponse;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
+public class ApiExceptionHandler {
 
   @ExceptionHandler(ConstraintViolationException.class)
   ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex) {
@@ -22,5 +24,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }).collect(Collectors.toList());
 
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
+  }
+
+  @ExceptionHandler(HttpMessageNotReadableException.class)
+  ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(WrapResponse.error(ex.getMostSpecificCause().getStackTrace()[0]));
   }
 }
