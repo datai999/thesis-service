@@ -1,0 +1,21 @@
+
+###  get all
+GET {{http}}://{{host}}:{{port}}{{base-url}}/topic
+Content-Type: application/json
+
+###  create one
+POST {{http}}://{{host}}:{{port}}{{base-url}}/topic
+Content-Type: application/json
+
+{
+  "name": "Teacher",
+  "degree": "41"
+}
+
+###  create many
+POST {{http}}://{{host}}:{{port}}{{base-url}}/topic/all
+Content-Type: application/json
+
+[
+  {"topicCode": 1713015, "name": "Đức Anh Tài"}
+]
