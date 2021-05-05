@@ -31,12 +31,4 @@ public class PsStudentTable extends PersonBaseTable {
   @JoinColumn(name = "education_method_id")
   private BrConstDataTable educationMethod;
 
-  public void setMajor(Object id) {
-    this.major = BrConstDataTable.from(id);
-  }
-
-  public void setEducationMethod(Object id) {
-    this.educationMethod = BrConstDataTable.from(id);
-  }
-
 }

@@ -10,12 +10,10 @@ import com.thesis.service.common.model.BaseTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 @Data
-@NoArgsConstructor
-@SuperBuilder
 @Entity
+@NoArgsConstructor
 @Table(name = "br_const_data", uniqueConstraints = { @UniqueConstraint(columnNames = { "type", "value" }) })
 @EqualsAndHashCode(callSuper = true)
 public class BrConstDataTable extends BaseTable {
@@ -25,7 +23,12 @@ public class BrConstDataTable extends BaseTable {
 
   private String value;
 
-  public static BrConstDataTable from(Object id) {
-    return BrConstDataTable.builder().id(Long.parseLong(id.toString())).type("").build();
+  public BrConstDataTable(String id) {
+    this.setId(Long.parseLong(id));
+    this.type = "";
+  }
+
+  public BrConstDataTable(Object id) {
+    this(id.toString());
   }
 }

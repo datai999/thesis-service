@@ -25,11 +25,4 @@ public class PsTeacherTable extends PersonBaseTable {
   @JoinColumn(name = "degree_id")
   private BrConstDataTable degree;
 
-  public void setSubjectDepartment(Object id) {
-    this.subjectDepartment = BrConstDataTable.from(id);
-  }
-
-  public void setDegree(Object id) {
-    this.degree = BrConstDataTable.from(id);
-  }
 }
