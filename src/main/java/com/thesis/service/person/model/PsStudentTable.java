@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 public class PsStudentTable extends PersonBaseTable {
 
   @NotNull
-  @Column(unique=true)
+  @Column(unique = true)
   private int studentCode;
 
   @OneToOne
@@ -30,4 +30,13 @@ public class PsStudentTable extends PersonBaseTable {
   @OneToOne
   @JoinColumn(name = "education_method_id")
   private BrConstDataTable educationMethod;
+
+  public void setMajor(Object id) {
+    this.major = BrConstDataTable.from(id);
+  }
+
+  public void setEducationMethod(Object id) {
+    this.educationMethod = BrConstDataTable.from(id);
+  }
+
 }
