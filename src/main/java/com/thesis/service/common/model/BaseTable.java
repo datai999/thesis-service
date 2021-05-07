@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
+import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import com.vladmihalcea.hibernate.type.array.LongArrayType;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,6 +26,7 @@ import lombok.Data;
 @EntityListeners(AuditingEntityListener.class)
 @TypeDef(name = "int-array", typeClass = IntArrayType.class)
 @TypeDef(name = "long-array", typeClass = LongArrayType.class)
+@TypeDef(name = "list-array", typeClass = ListArrayType.class)
 @TypeDef(name = "text", typeClass = TextType.class)
 public abstract class BaseTable implements Serializable {
 
