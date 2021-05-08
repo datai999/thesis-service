@@ -7,10 +7,7 @@ Content-Type: application/json
 POST {{http}}://{{host}}:{{port}}{{base-url}}/topic
 Content-Type: application/json
 
-{
-  "name": "Teacher",
-  "degree": "41"
-}
+{"major":["62"]}
 
 ###  create many
 POST {{http}}://{{host}}:{{port}}{{base-url}}/topic/all

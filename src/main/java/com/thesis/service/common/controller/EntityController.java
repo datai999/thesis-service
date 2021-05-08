@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import com.thesis.service.br.repository.BrConstDataRepository;
 import com.thesis.service.common.dto.response.WrapResponse;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
@@ -22,12 +23,14 @@ public abstract class EntityController<E extends BaseTable, R extends BaseReposi
   private EntityService service;
 
   protected R repository;
+  protected BrConstDataRepository constRepository;
 
   public abstract String declareBaseService();
 
   @PostConstruct
   protected void setBaseService() {
     this.repository = this.service.get(this.declareBaseService());
+    this.constRepository = this.service.get("constData");
   }
 
   @GetMapping
