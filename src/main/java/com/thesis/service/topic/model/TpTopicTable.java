@@ -11,6 +11,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.model.BaseTable;
@@ -28,6 +29,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "tp_topic")
 public class TpTopicTable extends BaseTable {
 
+  @NotNull
   private Integer topicCode;
 
   private String topicName;
