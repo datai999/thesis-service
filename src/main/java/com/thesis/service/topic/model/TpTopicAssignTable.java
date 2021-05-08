@@ -23,7 +23,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "tp_topic_assign")
 public class TpTopicAssignTable extends BaseTable {
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = { CascadeType.PERSIST })
   @JoinColumn(name = "topic_id", referencedColumnName = "id")
   private TpTopicTable topic;
 
