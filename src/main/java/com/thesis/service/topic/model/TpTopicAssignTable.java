@@ -1,5 +1,6 @@
 package com.thesis.service.topic.model;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,13 +37,13 @@ public class TpTopicAssignTable extends BaseTable {
   @JoinColumn(name = "topic_id", referencedColumnName = "id")
   private TpTopicTable topic;
 
-  @Type(type = "long-array")
+  @Type(type = "list-array")
   @Column(name = "execute_student_id", columnDefinition = "bigint[]")
-  private Set<Long> executeStudentId;
+  private List<Long> executeStudentId;
 
-  @Type(type = "long-array")
+  @Type(type = "list-array")
   @Column(name = "guide_teacher_id", columnDefinition = "bigint[]")
-  private Set<Long> guideTeacherId;
+  private List<Long> guideTeacherId;
 
   @OneToOne
   @JoinColumn(name = "review_teacher_id")
@@ -61,9 +62,9 @@ public class TpTopicAssignTable extends BaseTable {
   @PrePersist
   private void prePersist() {
     if (!CollectionUtils.isEmpty(this.executeStudent))
-      this.executeStudentId = this.executeStudent.stream().map(BaseTable::getId).collect(Collectors.toSet());
+      this.executeStudentId = this.executeStudent.stream().map(BaseTable::getId).collect(Collectors.toList());
     if (!CollectionUtils.isEmpty(this.guideTeacher))
-      this.guideTeacherId = this.guideTeacher.stream().map(BaseTable::getId).collect(Collectors.toSet());
+      this.guideTeacherId = this.guideTeacher.stream().map(BaseTable::getId).collect(Collectors.toList());
   }
 
 }

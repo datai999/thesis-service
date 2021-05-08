@@ -20,3 +20,34 @@ Content-Type: application/json
 
 ]
 
+###  create test
+POST {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign
+Content-Type: application/json
+
+{
+    "guideTeacher": [
+        {
+            "id": 68,
+            "deleted": false,
+            "createdAt": "2021-05-04T15:23:41.387447Z",
+            "updatedAt": "2021-05-04T15:23:41.387447Z",
+            "name": "Teacher",
+            "email": null,
+            "phone": null,
+            "gender": null,
+            "subjectDepartment": null,
+            "degree": {
+                "id": 41,
+                "deleted": false,
+                "createdAt": "2021-05-01T15:55:23.562561Z",
+                "updatedAt": "2021-05-01T15:55:23.562561Z",
+                "type": "subjectDepartment",
+                "value": "Computer Engineering"
+            }
+        }
+    ],
+    "executeStudent": [],
+    "topic": {
+        "topicCode": "123"
+    }
+}
