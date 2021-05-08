@@ -2,6 +2,7 @@ package com.thesis.service.topic.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -22,8 +23,8 @@ import lombok.EqualsAndHashCode;
 @Table(name = "tp_topic_assign")
 public class TpTopicAssignTable extends BaseTable {
 
-  @OneToOne
-  @JoinColumn(name = "topic_id")
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "topic_id", referencedColumnName = "id")
   private TpTopicTable topic;
 
   @Type(type = "long-array")
