@@ -5,6 +5,7 @@ import com.thesis.service.common.dto.response.WrapResponse;
 import com.thesis.service.topic.model.TpTopicTable;
 import com.thesis.service.topic.repository.TpTopicRepository;
 
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,10 @@ public class TopicController extends EntityController<TpTopicTable, TpTopicRepos
   @GetMapping
   public Object findAll() {
     var result = super.repository.findAll();
-    result.parallelStream().forEach(x -> x.setMajor(super.constRepository.findAllById(x.getMajorId())));
+    result.parallelStream().forEach(x -> {
+      if (!CollectionUtils.isEmpty(x.getMajorId()))
+        x.setMajor(super.constRepository.findAllById(x.getMajorId()));
+    });
     return WrapResponse.data(result);
   }
 

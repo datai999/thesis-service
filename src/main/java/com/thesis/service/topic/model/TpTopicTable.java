@@ -17,6 +17,7 @@ import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsAcademyStaffTable;
 
 import org.hibernate.annotations.Type;
+import org.springframework.util.CollectionUtils;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -70,6 +71,7 @@ public class TpTopicTable extends BaseTable {
 
   @PrePersist
   private void prePersist() {
-    this.majorId = this.major.stream().map(BrConstDataTable::getId).collect(Collectors.toList());
+    if (!CollectionUtils.isEmpty(this.major))
+      this.majorId = this.major.stream().map(BrConstDataTable::getId).collect(Collectors.toList());
   }
 }
