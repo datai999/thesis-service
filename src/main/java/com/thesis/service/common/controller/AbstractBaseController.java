@@ -3,7 +3,6 @@ package com.thesis.service.common.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -11,7 +10,6 @@ import javax.validation.constraints.PositiveOrZero;
 import com.thesis.service.br.repository.BrConstDataRepository;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
-import com.thesis.service.common.service.EntityService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -26,25 +24,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Validated
-public abstract class EntityController<E extends BaseTable, R extends BaseRepository<E>> {
+public abstract class AbstractBaseController<E extends BaseTable, S extends BaseRepository<E>> {
 
   @Autowired
-  private EntityService service;
-
-  protected R repository;
+  protected S service;
+  @Autowired
   protected BrConstDataRepository constRepository;
-
-  public abstract String declareBaseService();
-
-  @PostConstruct
-  protected void setBaseService() {
-    this.repository = this.service.get(this.declareBaseService());
-    this.constRepository = this.service.get("constData");
-  }
 
   @GetMapping
   public Object findAll() {
-    return repository.findAll();
+    return service.findAll();
   }
 
   @GetMapping("/paging")
@@ -61,27 +50,27 @@ public abstract class EntityController<E extends BaseTable, R extends BaseReposi
       pageable = PageRequest.of(page, size);
     }
 
-    return repository.findAll(pageable);
+    return service.findAll(pageable);
   }
 
   @PostMapping
   public <D extends E> Object save(@RequestBody D requestBody) {
-    return repository.save(requestBody);
+    return service.save(requestBody);
   }
 
   @PostMapping("/all")
   public <D extends E> Object saveAll(@RequestBody List<D> requestBody) {
-    return repository.saveAll(requestBody);
+    return service.saveAll(requestBody);
   }
 
   @PostMapping("/example")
   public Object findAll(@RequestBody E entity) {
-    return repository.findAll(Example.of(entity));
+    return service.findAll(Example.of(entity));
   }
 
   @DeleteMapping
   public Object deleteAll() {
-    repository.deleteAll();
+    service.deleteAll();
     return true;
   }
 

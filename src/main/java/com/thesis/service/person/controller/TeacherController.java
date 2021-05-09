@@ -1,6 +1,6 @@
 package com.thesis.service.person.controller;
 
-import com.thesis.service.common.controller.EntityController;
+import com.thesis.service.common.controller.AbstractBaseController;
 import com.thesis.service.person.model.PsTeacherTable;
 import com.thesis.service.person.repository.PsTeacherRepository;
 
@@ -13,16 +13,11 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/teacher")
 @RequiredArgsConstructor
-public class TeacherController extends EntityController<PsTeacherTable, PsTeacherRepository> {
-
-  @Override
-  public String declareBaseService() {
-    return "teacher";
-  }
+public class TeacherController extends AbstractBaseController<PsTeacherTable, PsTeacherRepository> {
 
   @GetMapping("search")
   public Object search(String value) {
-    return super.repository.searchIlikeName(value);
+    return super.service.searchIlikeName(value);
   }
 
 }
