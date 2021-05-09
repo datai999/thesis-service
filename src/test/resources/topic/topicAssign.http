@@ -3,6 +3,10 @@
 GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign
 Content-Type: application/json
 
+###  get by paging
+GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/paging?page=1&size=5&sort=id&descend=false
+Content-Type: application/json
+
 ###  get all topic
 GET {{http}}://{{host}}:{{port}}{{base-url}}/topic
 Content-Type: application/json
