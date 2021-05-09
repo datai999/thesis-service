@@ -1,8 +1,12 @@
 package com.thesis.service.common.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 import com.thesis.service.br.repository.BrConstDataRepository;
 import com.thesis.service.common.dto.response.WrapResponse;
@@ -12,10 +16,14 @@ import com.thesis.service.common.service.EntityService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public abstract class EntityController<E extends BaseTable, R extends BaseRepository<E>> {
 
@@ -36,6 +44,23 @@ public abstract class EntityController<E extends BaseTable, R extends BaseReposi
   @GetMapping
   public Object findAll() {
     return WrapResponse.data(repository.findAll());
+  }
+
+  @GetMapping("/paging")
+  public Object findPaging(@RequestParam @NotNull @PositiveOrZero Integer page,
+      @RequestParam @NotNull @Positive Integer size, Optional<String> sort,
+      @RequestParam(defaultValue = "false") boolean descend) {
+
+    Pageable pageable = null;
+
+    if (sort.isPresent()) {
+      Sort sortable = descend ? Sort.by(sort.get()).descending() : Sort.by(sort.get());
+      pageable = PageRequest.of(page, size, sortable);
+    } else {
+      pageable = PageRequest.of(page, size);
+    }
+
+    return WrapResponse.data(repository.findAll(pageable));
   }
 
   @PostMapping
