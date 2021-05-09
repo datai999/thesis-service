@@ -3,9 +3,11 @@ package com.thesis.service.common.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.thesis.service.br.repository.BrConstDataRepository;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +17,13 @@ public abstract class AbstractBaseService<T extends BaseTable, R extends BaseRep
     implements BaseRepository<T> {
 
   private R mainRepository;
+
+  protected BrConstDataRepository constRepository;
+
+  @Autowired
+  public final void setConstRepository(BrConstDataRepository constRepository) {
+    this.constRepository = constRepository;
+  }
 
   protected void setMainRepository(R repository) {
     this.mainRepository = repository;

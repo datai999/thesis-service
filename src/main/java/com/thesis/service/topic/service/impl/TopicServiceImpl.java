@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import javax.annotation.PostConstruct;
 
-import com.thesis.service.br.repository.BrConstDataRepository;
 import com.thesis.service.common.service.AbstractBaseService;
 import com.thesis.service.topic.model.TpTopicTable;
 import com.thesis.service.topic.repository.TpTopicRepository;
@@ -22,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 public class TopicServiceImpl extends AbstractBaseService<TpTopicTable, TpTopicRepository> implements TopicService {
 
   final TpTopicRepository repository;
-  final BrConstDataRepository constRepository;
 
   @PostConstruct
   private void setRepository() {
@@ -34,7 +32,7 @@ public class TopicServiceImpl extends AbstractBaseService<TpTopicTable, TpTopicR
     if (Objects.isNull(topic))
       return null;
     if (!CollectionUtils.isEmpty(topic.getMajorId()))
-      topic.setMajor(constRepository.findAllById(topic.getMajorId()));
+      topic.setMajor(super.constRepository.findAllById(topic.getMajorId()));
     return topic;
   }
 
