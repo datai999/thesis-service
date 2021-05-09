@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.thesis.service.br.ConstDataService;
 import com.thesis.service.br.model.BrConstDataTable;
-import com.thesis.service.br.repository.BrConstDataRepository;
-import com.thesis.service.common.controller.AbstractBaseController;
+import com.thesis.service.common.controller.ABaseController;
 
 import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/const")
 @RequiredArgsConstructor
-public class ConstDataController extends AbstractBaseController<BrConstDataTable, BrConstDataRepository> {
+public class ConstDataController extends ABaseController<BrConstDataTable, ConstDataService> {
 
   @Override
   @PostMapping

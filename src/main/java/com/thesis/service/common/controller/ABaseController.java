@@ -2,14 +2,16 @@ package com.thesis.service.common.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
-import com.thesis.service.br.repository.BrConstDataRepository;
+import com.thesis.service.br.ConstDataService;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
+import com.thesis.service.common.service.IService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -24,16 +26,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Validated
-public abstract class AbstractBaseController<E extends BaseTable, S extends BaseRepository<E>> {
+public abstract class ABaseController<E extends BaseTable, S extends BaseRepository<E> & IService<E>> {
 
   @Autowired
   protected S service;
   @Autowired
-  protected BrConstDataRepository constRepository;
+  protected ConstDataService constService;
 
   @GetMapping
   public List<E> findAll() {
-    return service.findAll();
+    return service.findAll().stream().map(entity -> service.build(entity)).collect(Collectors.toList());
   }
 
   @GetMapping("/paging")

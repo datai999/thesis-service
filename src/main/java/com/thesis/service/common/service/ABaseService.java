@@ -13,8 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public abstract class AbstractBaseService<T extends BaseTable, R extends BaseRepository<T>>
-    implements BaseRepository<T> {
+public abstract class ABaseService<T extends BaseTable, R extends BaseRepository<T>> implements BaseRepository<T> {
 
   @Autowired
   protected R mainRepository;

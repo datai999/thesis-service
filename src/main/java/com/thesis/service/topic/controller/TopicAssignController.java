@@ -3,7 +3,7 @@ package com.thesis.service.topic.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.thesis.service.common.controller.AbstractBaseController;
+import com.thesis.service.common.controller.ABaseController;
 import com.thesis.service.topic.model.TpTopicAssignTable;
 import com.thesis.service.topic.service.TopicAssignService;
 
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/topic/assign")
 @RequiredArgsConstructor
-public class TopicAssignController extends AbstractBaseController<TpTopicAssignTable, TopicAssignService> {
+public class TopicAssignController extends ABaseController<TpTopicAssignTable, TopicAssignService> {
 
   @Override
   @GetMapping
