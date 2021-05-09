@@ -16,18 +16,11 @@ import org.springframework.data.domain.Sort;
 public abstract class AbstractBaseService<T extends BaseTable, R extends BaseRepository<T>>
     implements BaseRepository<T> {
 
-  private R mainRepository;
-
-  protected BrConstDataRepository constRepository;
+  @Autowired
+  protected R mainRepository;
 
   @Autowired
-  public final void setConstRepository(BrConstDataRepository constRepository) {
-    this.constRepository = constRepository;
-  }
-
-  protected void setMainRepository(R repository) {
-    this.mainRepository = repository;
-  }
+  protected BrConstDataRepository constRepository;
 
   @Override
   public List<T> findAll() {

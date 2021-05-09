@@ -2,8 +2,6 @@ package com.thesis.service.topic.service.impl;
 
 import java.util.Objects;
 
-import javax.annotation.PostConstruct;
-
 import com.thesis.service.common.service.AbstractBaseService;
 import com.thesis.service.topic.model.TpTopicTable;
 import com.thesis.service.topic.repository.TpTopicRepository;
@@ -19,13 +17,6 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TopicServiceImpl extends AbstractBaseService<TpTopicTable, TpTopicRepository> implements TopicService {
-
-  final TpTopicRepository repository;
-
-  @PostConstruct
-  private void setRepository() {
-    super.setMainRepository(repository);
-  }
 
   @Override
   public TpTopicTable buildFull(TpTopicTable topic) {

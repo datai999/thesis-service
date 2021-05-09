@@ -2,8 +2,6 @@ package com.thesis.service.topic.service.impl;
 
 import java.util.stream.Collectors;
 
-import javax.annotation.PostConstruct;
-
 import com.thesis.service.common.service.AbstractBaseService;
 import com.thesis.service.person.repository.PsStudentRepository;
 import com.thesis.service.person.repository.PsTeacherRepository;
@@ -24,16 +22,10 @@ import lombok.RequiredArgsConstructor;
 public class TopicAssignServiceImpl extends AbstractBaseService<TpTopicAssignTable, TpTopicAssignRepository>
     implements TopicAssignService {
 
-  final TpTopicAssignRepository repository;
   final PsStudentRepository studentRepository;
   final PsTeacherRepository teacherRepository;
 
   final TopicService topicService;
-
-  @PostConstruct
-  private void setRepository() {
-    super.setMainRepository(repository);
-  }
 
   @Override
   public TpTopicAssignTable buildFull(TpTopicAssignTable topicAssign) {
