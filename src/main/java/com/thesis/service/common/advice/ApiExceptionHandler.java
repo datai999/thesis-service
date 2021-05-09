@@ -1,4 +1,4 @@
-package com.thesis.service.common.exception;
+package com.thesis.service.common.advice;
 
 import java.util.stream.Collectors;
 
