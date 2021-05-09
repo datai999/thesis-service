@@ -32,7 +32,7 @@ public abstract class AbstractBaseController<E extends BaseTable, S extends Base
   protected BrConstDataRepository constRepository;
 
   @GetMapping
-  public Object findAll() {
+  public List<E> findAll() {
     return service.findAll();
   }
 

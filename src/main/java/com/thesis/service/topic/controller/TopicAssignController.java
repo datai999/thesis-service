@@ -1,5 +1,8 @@
 package com.thesis.service.topic.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.thesis.service.common.controller.AbstractBaseController;
 import com.thesis.service.topic.model.TpTopicAssignTable;
 import com.thesis.service.topic.service.TopicAssignService;
@@ -17,10 +20,8 @@ public class TopicAssignController extends AbstractBaseController<TpTopicAssignT
 
   @Override
   @GetMapping
-  public Object findAll() {
-    var result = super.service.findAll();
-    result.parallelStream().forEach(x -> super.service.buildFull(x));
-    return result;
+  public List<TpTopicAssignTable> findAll() {
+    return super.findAll().stream().map(super.service::build).collect(Collectors.toList());
   }
 
 }

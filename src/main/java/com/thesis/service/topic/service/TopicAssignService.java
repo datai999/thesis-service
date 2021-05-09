@@ -5,6 +5,6 @@ import com.thesis.service.topic.repository.TpTopicAssignRepository;
 
 public interface TopicAssignService extends TpTopicAssignRepository {
 
-  TpTopicAssignTable buildFull(TpTopicAssignTable topicAssign);
+  TpTopicAssignTable build(TpTopicAssignTable topicAssign);
 
 }

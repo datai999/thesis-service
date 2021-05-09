@@ -1,5 +1,7 @@
 package com.thesis.service.topic.controller;
 
+import java.util.List;
+
 import com.thesis.service.common.controller.AbstractBaseController;
 import com.thesis.service.topic.model.TpTopicTable;
 import com.thesis.service.topic.service.TopicService;
@@ -18,7 +20,7 @@ public class TopicController extends AbstractBaseController<TpTopicTable, TopicS
 
   @Override
   @GetMapping
-  public Object findAll() {
+  public List<TpTopicTable> findAll() {
     var result = super.service.findAll();
     result.parallelStream().forEach(x -> {
       if (!CollectionUtils.isEmpty(x.getMajorId()))

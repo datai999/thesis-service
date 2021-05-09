@@ -28,7 +28,7 @@ public class TopicAssignServiceImpl extends AbstractBaseService<TpTopicAssignTab
   final TopicService topicService;
 
   @Override
-  public TpTopicAssignTable buildFull(TpTopicAssignTable topicAssign) {
+  public TpTopicAssignTable build(TpTopicAssignTable topicAssign) {
     topicAssign.setTopic(topicService.buildFull(topicAssign.getTopic()));
     if (!CollectionUtils.isEmpty(topicAssign.getExecuteStudentId()))
       topicAssign.setExecuteStudent(
