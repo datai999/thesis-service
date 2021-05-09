@@ -9,7 +9,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import com.thesis.service.br.repository.BrConstDataRepository;
-import com.thesis.service.common.dto.response.WrapResponse;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.EntityService;
@@ -45,7 +44,7 @@ public abstract class EntityController<E extends BaseTable, R extends BaseReposi
 
   @GetMapping
   public Object findAll() {
-    return WrapResponse.data(repository.findAll());
+    return repository.findAll();
   }
 
   @GetMapping("/paging")
@@ -62,28 +61,28 @@ public abstract class EntityController<E extends BaseTable, R extends BaseReposi
       pageable = PageRequest.of(page, size);
     }
 
-    return WrapResponse.data(repository.findAll(pageable));
+    return repository.findAll(pageable);
   }
 
   @PostMapping
   public <D extends E> Object save(@RequestBody D requestBody) {
-    return WrapResponse.data(repository.save(requestBody));
+    return repository.save(requestBody);
   }
 
   @PostMapping("/all")
   public <D extends E> Object saveAll(@RequestBody List<D> requestBody) {
-    return WrapResponse.data(repository.saveAll(requestBody));
+    return repository.saveAll(requestBody);
   }
 
   @PostMapping("/example")
   public Object findAll(@RequestBody E entity) {
-    return WrapResponse.data(repository.findAll(Example.of(entity)));
+    return repository.findAll(Example.of(entity));
   }
 
   @DeleteMapping
   public Object deleteAll() {
     repository.deleteAll();
-    return WrapResponse.data(true);
+    return true;
   }
 
 }
