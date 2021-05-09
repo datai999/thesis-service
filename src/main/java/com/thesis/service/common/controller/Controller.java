@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
   @GetMapping("/")
   public String controller() {
-    return "Hello word";
+    return "Version:5.09.10";
   }
 }

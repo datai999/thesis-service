@@ -34,6 +34,8 @@ public class TopicAssignController extends EntityController<TpTopicAssignTable, 
   public Object findAll() {
     var result = super.repository.findAll();
     result.parallelStream().forEach(x -> {
+      if (!CollectionUtils.isEmpty(x.getTopic().getMajorId()))
+        x.getTopic().setMajor(super.constRepository.findAllById(x.getTopic().getMajorId()));
       if (!CollectionUtils.isEmpty(x.getExecuteStudentId()))
         x.setExecuteStudent(
             studentRepository.findAllById(x.getExecuteStudentId()).stream().collect(Collectors.toSet()));
