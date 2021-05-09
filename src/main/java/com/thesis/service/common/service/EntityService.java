@@ -6,7 +6,7 @@ import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.person.repository.PsStudentRepository;
 import com.thesis.service.person.repository.PsTeacherRepository;
 import com.thesis.service.topic.repository.TpTopicAssignRepository;
-import com.thesis.service.topic.repository.TpTopicRepository;
+import com.thesis.service.topic.service.TopicService;
 
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class EntityService {
   public final PsStudentRepository student;
   public final PsTeacherRepository teacher;
 
-  public final TpTopicRepository topic;
+  public final TopicService topic;
   public final TpTopicAssignRepository topicAssign;
 
   @SuppressWarnings("unchecked")
