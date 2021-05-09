@@ -1,7 +1,6 @@
 package com.thesis.service.topic.controller;
 
 import com.thesis.service.common.controller.EntityController;
-import com.thesis.service.common.dto.response.WrapResponse;
 import com.thesis.service.topic.model.TpTopicTable;
 import com.thesis.service.topic.repository.TpTopicRepository;
 
@@ -30,7 +29,7 @@ public class TopicController extends EntityController<TpTopicTable, TpTopicRepos
       if (!CollectionUtils.isEmpty(x.getMajorId()))
         x.setMajor(super.constRepository.findAllById(x.getMajorId()));
     });
-    return WrapResponse.data(result);
+    return result;
   }
 
 }

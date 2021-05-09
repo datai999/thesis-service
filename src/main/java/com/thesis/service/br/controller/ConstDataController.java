@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.br.repository.BrConstDataRepository;
 import com.thesis.service.common.controller.EntityController;
-import com.thesis.service.common.dto.response.WrapResponse;
 
 import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,24 +31,21 @@ public class ConstDataController extends EntityController<BrConstDataTable, BrCo
   @PostMapping
   public <D extends BrConstDataTable> Object save(@RequestBody D requestBody) {
     var exists = super.repository.findAll(Example.of(requestBody));
-    return exists.isEmpty() ? super.save(requestBody) : WrapResponse.data(exists.get(0));
+    return exists.isEmpty() ? super.save(requestBody) : exists.get(0);
   }
 
   @Override
   @PostMapping("/all")
   public <D extends BrConstDataTable> Object saveAll(@RequestBody List<D> requestBody) {
-
-    var result = Set.copyOf(requestBody).stream().map(x -> {
+    return Set.copyOf(requestBody).stream().map(x -> {
       var exists = super.repository.findAll(Example.of(x));
       return exists.isEmpty() ? super.repository.save(x) : exists.get(0);
     }).collect(Collectors.toSet());
-
-    return WrapResponse.data(result);
   }
 
   @GetMapping("types")
   public Object findAllType() {
-    return WrapResponse.data(super.repository.findAllType());
+    return super.repository.findAllType();
   }
 
 }

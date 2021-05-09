@@ -3,7 +3,6 @@ package com.thesis.service.topic.controller;
 import java.util.stream.Collectors;
 
 import com.thesis.service.common.controller.EntityController;
-import com.thesis.service.common.dto.response.WrapResponse;
 import com.thesis.service.person.repository.PsStudentRepository;
 import com.thesis.service.person.repository.PsTeacherRepository;
 import com.thesis.service.topic.model.TpTopicAssignTable;
@@ -42,7 +41,7 @@ public class TopicAssignController extends EntityController<TpTopicAssignTable, 
       if (!CollectionUtils.isEmpty(x.getGuideTeacherId()))
         x.setGuideTeacher(teacherRepository.findAllById(x.getGuideTeacherId()).stream().collect(Collectors.toSet()));
     });
-    return WrapResponse.data(result);
+    return result;
   }
 
 }

@@ -1,7 +1,6 @@
 package com.thesis.service.person.controller;
 
 import com.thesis.service.common.controller.EntityController;
-import com.thesis.service.common.dto.response.WrapResponse;
 import com.thesis.service.person.model.PsStudentTable;
 import com.thesis.service.person.repository.PsStudentRepository;
 
@@ -23,7 +22,7 @@ public class StudentController extends EntityController<PsStudentTable, PsStuden
 
   @GetMapping("search")
   public Object search(String value) {
-    return WrapResponse.data(super.repository.searchIlikeNameOrCode(value));
+    return super.repository.searchIlikeNameOrCode(value);
   }
 
 }
