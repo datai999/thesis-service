@@ -5,7 +5,7 @@ import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.person.repository.PsStudentRepository;
 import com.thesis.service.person.repository.PsTeacherRepository;
-import com.thesis.service.topic.repository.TpTopicAssignRepository;
+import com.thesis.service.topic.service.TopicAssignService;
 import com.thesis.service.topic.service.TopicService;
 
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class EntityService {
   public final PsTeacherRepository teacher;
 
   public final TopicService topic;
-  public final TpTopicAssignRepository topicAssign;
+  public final TopicAssignService topicAssign;
 
   @SuppressWarnings("unchecked")
   public <T extends BaseTable, E extends BaseRepository<T>> E get(String name) {
