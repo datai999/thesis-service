@@ -39,7 +39,7 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
   }
 
   @GetMapping("/paging")
-  public Object findPaging(@RequestParam @NotNull @PositiveOrZero Integer page,
+  public Object findPaging(@RequestParam @NotNull @PositiveOrZero Integer number,
       @RequestParam @NotNull @Positive Integer size, Optional<String> sort,
       @RequestParam(defaultValue = "false") boolean descend) {
 
@@ -47,9 +47,9 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
 
     if (sort.isPresent()) {
       Sort sortable = descend ? Sort.by(sort.get()).descending() : Sort.by(sort.get());
-      pageable = PageRequest.of(page, size, sortable);
+      pageable = PageRequest.of(number, size, sortable);
     } else {
-      pageable = PageRequest.of(page, size);
+      pageable = PageRequest.of(number, size);
     }
 
     return service.findAll(pageable);
