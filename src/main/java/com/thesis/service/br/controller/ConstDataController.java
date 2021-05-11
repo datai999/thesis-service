@@ -4,10 +4,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.thesis.service.br.ConstDataService;
 import com.thesis.service.br.model.BrConstDataTable;
-import com.thesis.service.br.repository.BrConstDataRepository;
-import com.thesis.service.common.controller.EntityController;
-import com.thesis.service.common.dto.response.WrapResponse;
+import com.thesis.service.common.controller.ABaseController;
 
 import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,35 +20,27 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/const")
 @RequiredArgsConstructor
-public class ConstDataController extends EntityController<BrConstDataTable, BrConstDataRepository> {
-
-  @Override
-  public String declareBaseService() {
-    return "constData";
-  }
+public class ConstDataController extends ABaseController<BrConstDataTable, ConstDataService> {
 
   @Override
   @PostMapping
   public <D extends BrConstDataTable> Object save(@RequestBody D requestBody) {
-    var exists = super.repository.findAll(Example.of(requestBody));
-    return exists.isEmpty() ? super.save(requestBody) : WrapResponse.data(exists.get(0));
+    var exists = super.service.findAll(Example.of(requestBody));
+    return exists.isEmpty() ? super.save(requestBody) : exists.get(0);
   }
 
   @Override
   @PostMapping("/all")
   public <D extends BrConstDataTable> Object saveAll(@RequestBody List<D> requestBody) {
-
-    var result = Set.copyOf(requestBody).stream().map(x -> {
-      var exists = super.repository.findAll(Example.of(x));
-      return exists.isEmpty() ? super.repository.save(x) : exists.get(0);
+    return Set.copyOf(requestBody).stream().map(x -> {
+      var exists = super.service.findAll(Example.of(x));
+      return exists.isEmpty() ? super.service.save(x) : exists.get(0);
     }).collect(Collectors.toSet());
-
-    return WrapResponse.data(result);
   }
 
   @GetMapping("types")
   public Object findAllType() {
-    return WrapResponse.data(super.repository.findAllType());
+    return super.service.findAllType();
   }
 
 }

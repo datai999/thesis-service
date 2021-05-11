@@ -1,9 +1,8 @@
 package com.thesis.service.person.controller;
 
-import com.thesis.service.common.controller.EntityController;
-import com.thesis.service.common.dto.response.WrapResponse;
+import com.thesis.service.common.controller.ABaseController;
 import com.thesis.service.person.model.PsStudentTable;
-import com.thesis.service.person.repository.PsStudentRepository;
+import com.thesis.service.person.service.StudentService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,16 +13,11 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/student")
 @RequiredArgsConstructor
-public class StudentController extends EntityController<PsStudentTable, PsStudentRepository> {
-
-  @Override
-  public String declareBaseService() {
-    return "student";
-  }
+public class StudentController extends ABaseController<PsStudentTable, StudentService> {
 
   @GetMapping("search")
   public Object search(String value) {
-    return WrapResponse.data(super.repository.searchIlikeNameOrCode(value));
+    return super.service.searchIlikeNameOrCode(value);
   }
 
 }
