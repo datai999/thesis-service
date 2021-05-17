@@ -28,11 +28,6 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   }
 
   @Override
-  public T preSave(T entity) {
-    return entity;
-  }
-
-  @Override
   public List<T> findAll() {
     return mainRepository.findAll();
   }
