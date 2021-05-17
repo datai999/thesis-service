@@ -3,7 +3,6 @@ package com.thesis.service.topic.service;
 import java.util.stream.Collectors;
 
 import com.thesis.service.common.service.ABaseService;
-import com.thesis.service.common.service.IService;
 import com.thesis.service.person.repository.PsStudentRepository;
 import com.thesis.service.person.repository.PsTeacherRepository;
 import com.thesis.service.topic.model.TpTopicAssignTable;
@@ -16,14 +15,14 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopicAssignRepository>
-    implements IService<TpTopicAssignTable> {
+public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopicAssignRepository> {
 
   final PsStudentRepository studentRepository;
   final PsTeacherRepository teacherRepository;
 
   final TopicService topicService;
 
+  @Override
   public TpTopicAssignTable build(TpTopicAssignTable topicAssign) {
     topicAssign.setTopic(topicService.build(topicAssign.getTopic()));
     if (!CollectionUtils.isEmpty(topicAssign.getExecuteStudentId()))

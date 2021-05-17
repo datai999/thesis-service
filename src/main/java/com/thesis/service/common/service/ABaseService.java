@@ -13,13 +13,24 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public abstract class ABaseService<T extends BaseTable, R extends BaseRepository<T>> implements BaseRepository<T> {
+public abstract class ABaseService<T extends BaseTable, R extends BaseRepository<T>>
+    implements BaseRepository<T>, IService<T> {
 
   @Autowired
   protected R mainRepository;
 
   @Autowired
   protected BrConstDataRepository constRepository;
+
+  @Override
+  public T build(T entity) {
+    return entity;
+  }
+
+  @Override
+  public T preSave(T entity) {
+    return entity;
+  }
 
   @Override
   public List<T> findAll() {

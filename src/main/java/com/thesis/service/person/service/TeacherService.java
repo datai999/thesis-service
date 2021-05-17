@@ -3,7 +3,6 @@ package com.thesis.service.person.service;
 import java.util.List;
 
 import com.thesis.service.common.service.ABaseService;
-import com.thesis.service.common.service.IService;
 import com.thesis.service.person.model.PsTeacherTable;
 import com.thesis.service.person.repository.PsTeacherRepository;
 
@@ -15,13 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Primary
 @Service
 @RequiredArgsConstructor
-public class TeacherService extends ABaseService<PsTeacherTable, PsTeacherRepository>
-    implements PsTeacherRepository, IService<PsTeacherTable> {
-
-  @Override
-  public PsTeacherTable build(PsTeacherTable entity) {
-    return entity;
-  }
+public class TeacherService extends ABaseService<PsTeacherTable, PsTeacherRepository> implements PsTeacherRepository {
 
   @Override
   public List<PsTeacherTable> searchIlikeName(String value) {

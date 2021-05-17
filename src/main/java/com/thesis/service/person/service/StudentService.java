@@ -3,7 +3,6 @@ package com.thesis.service.person.service;
 import java.util.List;
 
 import com.thesis.service.common.service.ABaseService;
-import com.thesis.service.common.service.IService;
 import com.thesis.service.person.model.PsStudentTable;
 import com.thesis.service.person.repository.PsStudentRepository;
 
@@ -15,13 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Primary
 @Service
 @RequiredArgsConstructor
-public class StudentService extends ABaseService<PsStudentTable, PsStudentRepository>
-    implements PsStudentRepository, IService<PsStudentTable> {
-
-  @Override
-  public PsStudentTable build(PsStudentTable entity) {
-    return entity;
-  }
+public class StudentService extends ABaseService<PsStudentTable, PsStudentRepository> implements PsStudentRepository {
 
   @Override
   public List<PsStudentTable> searchIlikeNameOrCode(String value) {
