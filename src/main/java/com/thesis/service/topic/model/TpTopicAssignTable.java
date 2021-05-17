@@ -18,6 +18,7 @@ import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsStudentTable;
 import com.thesis.service.person.model.PsTeacherTable;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import org.springframework.util.CollectionUtils;
 
@@ -29,6 +30,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Entity
+@DynamicUpdate
 @Table(name = "tp_topic_assign")
 public class TpTopicAssignTable extends BaseTable {
 
