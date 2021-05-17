@@ -3,8 +3,8 @@ package com.thesis.service.topic.service;
 import java.util.stream.Collectors;
 
 import com.thesis.service.common.service.ABaseService;
-import com.thesis.service.person.repository.PsStudentRepository;
-import com.thesis.service.person.repository.PsTeacherRepository;
+import com.thesis.service.person.service.StudentService;
+import com.thesis.service.person.service.TeacherService;
 import com.thesis.service.topic.model.TpTopicAssignTable;
 import com.thesis.service.topic.repository.TpTopicAssignRepository;
 
@@ -17,8 +17,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopicAssignRepository> {
 
-  final PsStudentRepository studentRepository;
-  final PsTeacherRepository teacherRepository;
+  final StudentService studentService;
+  final TeacherService teacherService;
 
   final TopicService topicService;
 
@@ -27,11 +27,24 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
     topicAssign.setTopic(topicService.build(topicAssign.getTopic()));
     if (!CollectionUtils.isEmpty(topicAssign.getExecuteStudentId()))
       topicAssign.setExecuteStudent(
-          studentRepository.findAllById(topicAssign.getExecuteStudentId()).stream().collect(Collectors.toSet()));
+          studentService.findAllById(topicAssign.getExecuteStudentId()).stream().collect(Collectors.toSet()));
     if (!CollectionUtils.isEmpty(topicAssign.getGuideTeacherId()))
       topicAssign.setGuideTeacher(
-          teacherRepository.findAllById(topicAssign.getGuideTeacherId()).stream().collect(Collectors.toSet()));
+          teacherService.findAllById(topicAssign.getGuideTeacherId()).stream().collect(Collectors.toSet()));
     return topicAssign;
+  }
+
+  @Override
+  public <S extends TpTopicAssignTable> S save(S entity) {
+    entity.setTopic(topicService.save(entity.getTopic()));
+
+    if (!CollectionUtils.isEmpty(entity.getExecuteStudent()))
+      entity.setExecuteStudent(studentService.saveAll(entity.getExecuteStudent()).stream().collect(Collectors.toSet()));
+
+    if (!CollectionUtils.isEmpty(entity.getGuideTeacher()))
+      entity.setGuideTeacher(teacherService.saveAll(entity.getGuideTeacher()).stream().collect(Collectors.toSet()));
+
+    return mainRepository.save(entity);
   }
 
 }
