@@ -12,27 +12,29 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsStudentTable;
 import com.thesis.service.person.model.PsTeacherTable;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import org.springframework.util.CollectionUtils;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Entity
+@DynamicUpdate
 @Table(name = "tp_topic_assign")
 public class TpTopicAssignTable extends BaseTable {
 
-  @NonNull
+  @NotNull
   @OneToOne(cascade = { CascadeType.PERSIST })
   @JoinColumn(name = "topic_id", referencedColumnName = "id")
   private TpTopicTable topic;

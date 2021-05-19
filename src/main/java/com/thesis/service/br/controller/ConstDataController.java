@@ -40,6 +40,11 @@ public class ConstDataController extends ABaseController<BrConstDataTable, Const
 
   @GetMapping("types")
   public Object findAllType() {
+    return super.findAll().parallelStream().collect(Collectors.groupingBy(BrConstDataTable::getType));
+  }
+
+  @GetMapping("types/value")
+  public Object findAllTypeValue() {
     return super.service.findAllType();
   }
 

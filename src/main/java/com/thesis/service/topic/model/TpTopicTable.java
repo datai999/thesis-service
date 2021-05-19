@@ -17,6 +17,7 @@ import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsAcademyStaffTable;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import org.springframework.util.CollectionUtils;
 
@@ -26,6 +27,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@DynamicUpdate
 @Table(name = "tp_topic")
 public class TpTopicTable extends BaseTable {
 

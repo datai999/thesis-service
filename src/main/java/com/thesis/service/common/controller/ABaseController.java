@@ -52,7 +52,7 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
       pageable = PageRequest.of(number, size);
     }
 
-    return service.findAll(pageable);
+    return service.findAll(pageable).map(entity -> service.build(entity));
   }
 
   @PostMapping
