@@ -60,14 +60,17 @@ public class TpTopicTable extends BaseTable {
   @Min(1)
   private Integer maxStudentTake;
 
-  @Type(type = "text")
-  private String description;
+  @Type(type = "json")
+  @Column(columnDefinition = "json")
+  private MultiLangDto description;
 
-  @Type(type = "text")
-  private String mainTask;
+  @Type(type = "json")
+  @Column(columnDefinition = "json")
+  private MultiLangDto mainTask;
 
-  @Type(type = "text")
-  private String thesisTask;
+  @Type(type = "json")
+  @Column(columnDefinition = "json")
+  private MultiLangDto thesisTask;
 
   @Type(type = "text")
   private String note;
