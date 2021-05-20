@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.thesis.service.br.model.BrConstDataTable;
+import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsAcademyStaffTable;
 
@@ -34,7 +35,9 @@ public class TpTopicTable extends BaseTable {
   @NotNull
   private Integer topicCode;
 
-  private String topicName;
+  @Type(type = "json")
+  @Column(columnDefinition = "json")
+  private MultiLangDto topicName;
 
   @OneToOne
   @JoinColumn(name = "semester_id")

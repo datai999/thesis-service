@@ -12,6 +12,7 @@ import javax.persistence.MappedSuperclass;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import com.vladmihalcea.hibernate.type.array.LongArrayType;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.TypeDef;
@@ -28,6 +29,7 @@ import lombok.Data;
 @TypeDef(name = "long-array", typeClass = LongArrayType.class)
 @TypeDef(name = "list-array", typeClass = ListArrayType.class)
 @TypeDef(name = "text", typeClass = TextType.class)
+@TypeDef(name = "json", typeClass = JsonStringType.class)
 public abstract class BaseTable implements Serializable {
 
   @Id
