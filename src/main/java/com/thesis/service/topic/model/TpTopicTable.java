@@ -1,13 +1,11 @@
 package com.thesis.service.topic.model;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
@@ -20,7 +18,6 @@ import com.thesis.service.person.model.PsAcademyStaffTable;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
-import org.springframework.util.CollectionUtils;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -79,9 +76,4 @@ public class TpTopicTable extends BaseTable {
   @JoinColumn(name = "create_by")
   private PsAcademyStaffTable createBy;
 
-  @PrePersist
-  private void prePersist() {
-    if (!CollectionUtils.isEmpty(this.major))
-      this.majorId = this.major.stream().map(BrConstDataTable::getId).collect(Collectors.toList());
-  }
 }
