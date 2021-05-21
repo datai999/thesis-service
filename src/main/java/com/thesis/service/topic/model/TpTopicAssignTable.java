@@ -25,7 +25,9 @@ import org.springframework.util.CollectionUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -47,9 +49,9 @@ public class TpTopicAssignTable extends BaseTable {
   @Column(name = "guide_teacher_id", columnDefinition = "bigint[]")
   private List<Long> guideTeacherId;
 
-  @OneToOne
-  @JoinColumn(name = "review_teacher_id")
-  private PsTeacherTable reviewTeacher;
+  @Type(type = "list-array")
+  @Column(name = "review_teacher_id", columnDefinition = "bigint[]")
+  private List<Long> reviewTeacherId;
 
   @OneToOne
   @JoinColumn(name = "council_id")
@@ -63,6 +65,7 @@ public class TpTopicAssignTable extends BaseTable {
 
   @PrePersist
   private void prePersist() {
+    log.info("prePersist");
     if (!CollectionUtils.isEmpty(this.executeStudent))
       this.executeStudentId = this.executeStudent.stream().map(BaseTable::getId).collect(Collectors.toList());
     if (!CollectionUtils.isEmpty(this.guideTeacher))

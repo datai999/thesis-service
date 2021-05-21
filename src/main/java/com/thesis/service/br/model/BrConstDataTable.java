@@ -1,11 +1,15 @@
 package com.thesis.service.br.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
+
+import org.hibernate.annotations.Type;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,11 +25,12 @@ public class BrConstDataTable extends BaseTable {
   @NotNull
   private String type;
 
-  private String value;
+  @Type(type = "json")
+  @Column(columnDefinition = "json")
+  private MultiLangDto value;
 
   public BrConstDataTable(String id) {
     this.setId(Long.parseLong(id));
-    this.type = "";
   }
 
   public BrConstDataTable(Object id) {
