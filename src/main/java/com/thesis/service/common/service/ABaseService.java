@@ -89,6 +89,7 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
 
   @Override
   public <S extends T> S save(S entity) {
+    entity.mapId();
     return mainRepository.save(entity);
   }
 
