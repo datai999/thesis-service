@@ -57,7 +57,7 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
 
   @PostMapping
   public <D extends E> Object save(@RequestBody D requestBody) {
-    return service.save(requestBody);
+    return service.build(service.save(requestBody));
   }
 
   @PostMapping("/all")
