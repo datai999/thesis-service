@@ -58,4 +58,7 @@ public class TpTopicAssignTable extends BaseTable {
   @Transient
   private Set<PsTeacherTable> guideTeacher;
 
+  @Transient
+  private Set<PsTeacherTable> reviewTeacher;
+
 }
