@@ -3,6 +3,7 @@ package com.thesis.service.common.model;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,7 +71,7 @@ public abstract class BaseTable implements Serializable {
         var value = field.get(this);
 
         if (Iterable.class.isAssignableFrom(field.getType())) {
-          List<BaseTable> valueList = List.class.cast(value);
+          Collection<BaseTable> valueList = Collection.class.cast(value);
           if (!CollectionUtils.isEmpty(valueList)) {
             toField.set(this, valueList.stream().map(BaseTable::getId).collect(Collectors.toList()));
           }

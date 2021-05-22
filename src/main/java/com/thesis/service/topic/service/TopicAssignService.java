@@ -36,14 +36,8 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
 
   @Override
   public <S extends TpTopicAssignTable> S save(S entity) {
+    entity.mapId();
     entity.setTopic(topicService.save(entity.getTopic()));
-
-    if (!CollectionUtils.isEmpty(entity.getExecuteStudent()))
-      entity.setExecuteStudent(studentService.saveAll(entity.getExecuteStudent()).stream().collect(Collectors.toSet()));
-
-    if (!CollectionUtils.isEmpty(entity.getGuideTeacher()))
-      entity.setGuideTeacher(teacherService.saveAll(entity.getGuideTeacher()).stream().collect(Collectors.toSet()));
-
     return mainRepository.save(entity);
   }
 
