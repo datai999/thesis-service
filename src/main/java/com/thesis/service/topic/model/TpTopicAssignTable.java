@@ -22,9 +22,7 @@ import org.hibernate.annotations.Type;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
