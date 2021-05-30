@@ -2,14 +2,12 @@ package com.thesis.service.topic.model;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -20,14 +18,11 @@ import com.thesis.service.person.model.PsTeacherTable;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
-import org.springframework.util.CollectionUtils;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
@@ -63,13 +58,7 @@ public class TpTopicAssignTable extends BaseTable {
   @Transient
   private Set<PsTeacherTable> guideTeacher;
 
-  @PrePersist
-  private void prePersist() {
-    log.info("prePersist");
-    if (!CollectionUtils.isEmpty(this.executeStudent))
-      this.executeStudentId = this.executeStudent.stream().map(BaseTable::getId).collect(Collectors.toList());
-    if (!CollectionUtils.isEmpty(this.guideTeacher))
-      this.guideTeacherId = this.guideTeacher.stream().map(BaseTable::getId).collect(Collectors.toList());
-  }
+  @Transient
+  private Set<PsTeacherTable> reviewTeacher;
 
 }

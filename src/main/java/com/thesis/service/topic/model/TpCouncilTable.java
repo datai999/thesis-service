@@ -3,7 +3,6 @@ package com.thesis.service.topic.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,6 +42,6 @@ public class TpCouncilTable extends BaseTable {
 
   @Type(type = "long-array")
   @Column(name = "role_id", columnDefinition = "bigint[]")
-  private Set<Long> roleIds;
+  private Collection<Long> roleIds;
 
 }

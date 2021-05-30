@@ -3,7 +3,9 @@ package com.thesis.service.common.model;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.Column;
@@ -12,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.thesis.service.common.repository.BaseRepository;
+import com.thesis.service.common.service.IService;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import com.vladmihalcea.hibernate.type.array.LongArrayType;
@@ -62,20 +66,20 @@ public abstract class BaseTable implements Serializable {
         return;
 
       try {
-        var toField = this.getClass().getDeclaredField(field.getName().concat("Id"));
+        var targetField = this.getClass().getDeclaredField(field.getName().concat("Id"));
 
         field.setAccessible(true);
-        toField.setAccessible(true);
+        targetField.setAccessible(true);
 
         var value = field.get(this);
 
         if (Iterable.class.isAssignableFrom(field.getType())) {
-          List<BaseTable> valueList = List.class.cast(value);
+          Collection<BaseTable> valueList = Collection.class.cast(value);
           if (!CollectionUtils.isEmpty(valueList)) {
-            toField.set(this, valueList.stream().map(BaseTable::getId).collect(Collectors.toList()));
+            targetField.set(this, valueList.stream().map(BaseTable::getId).collect(Collectors.toList()));
           }
         } else {
-          toField.set(this, BaseTable.class.cast(value).getId());
+          targetField.set(this, BaseTable.class.cast(value).getId());
         }
       } catch (Exception e) {
         e.printStackTrace();
@@ -84,4 +88,36 @@ public abstract class BaseTable implements Serializable {
     return this;
   }
 
+  @SuppressWarnings("unchecked")
+  public <E extends BaseTable, S extends BaseRepository<E> & IService<E>> void setById(S service, String... fields) {
+
+    List.of(fields).parallelStream().forEach(field -> {
+      try {
+        var sourceField = this.getClass().getDeclaredField(field.concat("Id"));
+        var targetField = this.getClass().getDeclaredField(field);
+
+        sourceField.setAccessible(true);
+        targetField.setAccessible(true);
+
+        var id = sourceField.get(this);
+
+        if (Iterable.class.isAssignableFrom(sourceField.getType())) {
+
+          var ids = Collection.class.cast(id);
+
+          if (!CollectionUtils.isEmpty(ids)) {
+            var values = service.findAllById(ids);
+            if (Set.class.isAssignableFrom(targetField.getType()))
+              targetField.set(this, values.stream().collect(Collectors.toSet()));
+            else
+              targetField.set(this, values);
+          }
+        } else {
+          targetField.set(this, service.findById(Long.valueOf(id.toString())));
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    });
+  }
 }
