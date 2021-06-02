@@ -1,0 +1,13 @@
+
+###  get all
+GET {{http}}://{{host}}:{{port}}{{base-url}}/council
+Content-Type: application/json
+
+###  create one
+POST {{http}}://{{host}}:{{port}}{{base-url}}/council
+Content-Type: application/json
+
+{
+  "reserveDate": "2021-06-02",
+  "startTime": "10:15:30"
+}
