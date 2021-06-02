@@ -32,7 +32,7 @@ public class ConstDataController extends ABaseController<BrConstDataTable, Const
   @Override
   @PostMapping("/all")
   public <D extends BrConstDataTable> Object saveAll(@RequestBody List<D> requestBody) {
-    return Set.copyOf(requestBody).stream().map(x -> {
+    return Set.copyOf(requestBody).parallelStream().map(x -> {
       var exists = super.service.findAll(Example.of(x));
       return exists.isEmpty() ? super.service.save(x) : exists.get(0);
     }).collect(Collectors.toSet());
