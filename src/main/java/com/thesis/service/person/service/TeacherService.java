@@ -17,6 +17,11 @@ import lombok.RequiredArgsConstructor;
 public class TeacherService extends ABaseService<PsTeacherTable, PsTeacherRepository> implements PsTeacherRepository {
 
   @Override
+  protected void preBuild(PsTeacherTable entity) {
+    // do nothing
+  }
+
+  @Override
   public List<PsTeacherTable> searchIlikeName(String value) {
     return super.mainRepository.searchIlikeName(value);
   }

@@ -17,6 +17,11 @@ import lombok.RequiredArgsConstructor;
 public class StudentService extends ABaseService<PsStudentTable, PsStudentRepository> implements PsStudentRepository {
 
   @Override
+  protected void preBuild(PsStudentTable entity) {
+    // do nothing
+  }
+
+  @Override
   public List<PsStudentTable> searchIlikeNameOrCode(String value) {
     return super.mainRepository.searchIlikeNameOrCode(value);
   }

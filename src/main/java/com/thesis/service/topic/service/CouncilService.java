@@ -23,12 +23,12 @@ public class CouncilService extends ABaseService<TpCouncilTable, TpCouncilReposi
   final TeacherService teacherService;
 
   @Override
-  public TpCouncilTable build(TpCouncilTable entity) {
+  public void preBuild(TpCouncilTable entity) {
     entity.setById(constDataService, "role");
     entity.setById(teacherService, "teacher");
 
     if (Objects.isNull(entity.getRoleId())) {
-      return entity;
+      return;
     }
 
     // set arrReacher fit with arrTeacherId
@@ -36,8 +36,6 @@ public class CouncilService extends ABaseService<TpCouncilTable, TpCouncilReposi
         .collect(Collectors.toMap(PsTeacherTable::getId, Function.identity()));
     entity.getTeacher().clear();
     entity.getTeacherId().forEach(teacherId -> entity.getTeacher().add(teacherMap.get(teacherId)));
-
-    return entity;
   }
 
 }
