@@ -39,14 +39,14 @@ public class TpCouncilTable extends BaseTable {
 
   private LocalTime endTime;
 
-  @Type(type = "long-array")
+  @Type(type = "list-array")
   @Column(name = "role_id", columnDefinition = "bigint[]")
   private Collection<Long> roleId;
 
   @Transient
   private List<BrConstDataTable> role;
 
-  @Type(type = "long-array")
+  @Type(type = "list-array")
   @Column(name = "teacher_id", columnDefinition = "bigint[]")
   private Collection<Long> teacherId;
 
