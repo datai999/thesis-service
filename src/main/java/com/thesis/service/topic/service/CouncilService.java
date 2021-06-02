@@ -27,7 +27,7 @@ public class CouncilService extends ABaseService<TpCouncilTable, TpCouncilReposi
     entity.setById(constDataService, "role");
     entity.setById(teacherService, "teacher");
 
-    if (Objects.isNull(entity.getRoleId())) {
+    if (Objects.isNull(entity.getTeacherId())) {
       return;
     }
 
