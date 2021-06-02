@@ -27,6 +27,8 @@ public class BrConstDataTable extends BaseTable {
   @Type(type = "json")
   private MultiLangDto value;
 
+  private Integer no = 0;
+
   public BrConstDataTable(String id) {
     this.setId(Long.parseLong(id));
   }
