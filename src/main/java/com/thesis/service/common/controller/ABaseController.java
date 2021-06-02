@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -56,7 +57,7 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
   }
 
   @PostMapping
-  public <D extends E> Object save(@RequestBody D requestBody) {
+  public <D extends E> Object save(@RequestBody @Valid D requestBody) {
     return service.build(service.save(requestBody));
   }
 
