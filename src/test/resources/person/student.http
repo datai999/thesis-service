@@ -17,5 +17,5 @@ POST {{http}}://{{host}}:{{port}}{{base-url}}/student/all
 Content-Type: application/json
 
 [
-  {"studentCode": 1713015, "name": "Đức Anh Tài"}
+  {"code": 1713015, "name": "Đức Anh Tài"}
 ]
