@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -76,7 +77,10 @@ public abstract class BaseTable implements Serializable {
         if (Iterable.class.isAssignableFrom(field.getType())) {
           Collection<BaseTable> valueList = Collection.class.cast(value);
           if (!CollectionUtils.isEmpty(valueList)) {
-            targetField.set(this, valueList.stream().map(BaseTable::getId).collect(Collectors.toList()));
+            targetField.set(this, valueList.stream().map(baseValue -> {
+              if (Objects.isNull(baseValue)) return null;
+              return baseValue.getId();
+            }).collect(Collectors.toList()));
           }
         } else {
           targetField.set(this, BaseTable.class.cast(value).getId());

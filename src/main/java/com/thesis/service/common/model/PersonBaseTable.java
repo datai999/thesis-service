@@ -1,7 +1,13 @@
 package com.thesis.service.common.model;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.thesis.service.br.model.BrConstDataTable;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +17,10 @@ import lombok.EqualsAndHashCode;
 @MappedSuperclass
 public abstract class PersonBaseTable extends BaseTable {
 
+  @NotNull
+  @Column(unique = true)
+  private int code;
+
   @NotBlank
   private String name;
 
@@ -18,6 +28,7 @@ public abstract class PersonBaseTable extends BaseTable {
 
   private String phone;
 
-  private String gender;
-
+  @OneToOne
+  @JoinColumn(name = "gender_id")
+  private BrConstDataTable gender;
 }

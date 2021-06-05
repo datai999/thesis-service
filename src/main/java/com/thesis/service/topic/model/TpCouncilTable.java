@@ -3,15 +3,18 @@ package com.thesis.service.topic.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.model.BaseTable;
+import com.thesis.service.person.model.PsTeacherTable;
 
 import org.hibernate.annotations.Type;
 
@@ -36,12 +39,18 @@ public class TpCouncilTable extends BaseTable {
 
   private LocalTime endTime;
 
-  @Type(type = "long-array")
-  @Column(name = "teacher_id", columnDefinition = "bigint[]")
-  private Collection<Long> teacherIds;
-
-  @Type(type = "long-array")
+  @Type(type = "list-array")
   @Column(name = "role_id", columnDefinition = "bigint[]")
-  private Collection<Long> roleIds;
+  private Collection<Long> roleId;
+
+  @Transient
+  private List<BrConstDataTable> role;
+
+  @Type(type = "list-array")
+  @Column(name = "teacher_id", columnDefinition = "bigint[]")
+  private Collection<Long> teacherId;
+
+  @Transient
+  private List<PsTeacherTable> teacher;
 
 }

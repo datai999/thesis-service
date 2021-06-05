@@ -18,15 +18,15 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
   final TeacherService teacherService;
 
   final TopicService topicService;
+  final CouncilService councilService;
 
   @Override
-  public TpTopicAssignTable build(TpTopicAssignTable topicAssign) {
+  protected void preBuild(TpTopicAssignTable topicAssign) {
     topicAssign.setTopic(topicService.build(topicAssign.getTopic()));
+    topicAssign.setCouncil(councilService.build(topicAssign.getCouncil()));
 
     topicAssign.setById(studentService, "executeStudent");
     topicAssign.setById(teacherService, "guideTeacher", "reviewTeacher");
-
-    return topicAssign;
   }
 
   @Override

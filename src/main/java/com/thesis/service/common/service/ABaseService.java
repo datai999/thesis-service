@@ -1,6 +1,7 @@
 package com.thesis.service.common.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import com.thesis.service.br.repository.BrConstDataRepository;
@@ -22,8 +23,13 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   @Autowired
   protected BrConstDataRepository constRepository;
 
+  protected abstract void preBuild(T entity);
+
   @Override
   public T build(T entity) {
+    if (Objects.nonNull(entity)) {
+      preBuild(entity);
+    }
     return entity;
   }
 

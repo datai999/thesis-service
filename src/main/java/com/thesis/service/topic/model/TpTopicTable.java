@@ -33,7 +33,6 @@ public class TpTopicTable extends BaseTable {
   private Integer topicCode;
 
   @Type(type = "json")
-  @Column(columnDefinition = "json")
   private MultiLangDto topicName;
 
   @OneToOne
@@ -58,15 +57,12 @@ public class TpTopicTable extends BaseTable {
   private Integer maxStudentTake;
 
   @Type(type = "json")
-  @Column(columnDefinition = "json")
   private MultiLangDto description;
 
   @Type(type = "json")
-  @Column(columnDefinition = "json")
   private MultiLangDto mainTask;
 
   @Type(type = "json")
-  @Column(columnDefinition = "json")
   private MultiLangDto thesisTask;
 
   @Type(type = "text")

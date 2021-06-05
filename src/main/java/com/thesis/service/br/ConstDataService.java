@@ -19,6 +19,11 @@ public class ConstDataService extends ABaseService<BrConstDataTable, BrConstData
     implements BrConstDataRepository {
 
   @Override
+  protected void preBuild(BrConstDataTable entity) {
+    // do nothing
+  }
+
+  @Override
   public List<TypeValueDto> findAllType() {
     return super.mainRepository.findAllType();
   }

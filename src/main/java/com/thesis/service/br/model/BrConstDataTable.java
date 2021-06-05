@@ -1,6 +1,5 @@
 package com.thesis.service.br.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -26,8 +25,9 @@ public class BrConstDataTable extends BaseTable {
   private String type;
 
   @Type(type = "json")
-  @Column(columnDefinition = "json")
   private MultiLangDto value;
+
+  private Integer no = 0;
 
   public BrConstDataTable(String id) {
     this.setId(Long.parseLong(id));
@@ -36,4 +36,5 @@ public class BrConstDataTable extends BaseTable {
   public BrConstDataTable(Object id) {
     this(id.toString());
   }
+
 }
