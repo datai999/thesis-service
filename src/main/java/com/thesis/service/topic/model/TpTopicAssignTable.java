@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsStudentTable;
 import com.thesis.service.person.model.PsTeacherTable;
@@ -36,14 +37,17 @@ public class TpTopicAssignTable extends BaseTable {
   @JoinColumn(name = "topic_id", referencedColumnName = "id")
   private TpTopicTable topic;
 
+  @JsonIgnore
   @Type(type = "list-array")
   @Column(name = "execute_student_id", columnDefinition = "bigint[]")
   private List<Long> executeStudentId;
 
+  @JsonIgnore
   @Type(type = "list-array")
   @Column(name = "guide_teacher_id", columnDefinition = "bigint[]")
   private List<Long> guideTeacherId;
 
+  @JsonIgnore
   @Type(type = "list-array")
   @Column(name = "review_teacher_id", columnDefinition = "bigint[]")
   private List<Long> reviewTeacherId;

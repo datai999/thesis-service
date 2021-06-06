@@ -11,6 +11,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
@@ -39,6 +40,7 @@ public class TpTopicTable extends BaseTable {
   @JoinColumn(name = "semester_id")
   private BrConstDataTable semester;
 
+  @JsonIgnore
   @Type(type = "list-array")
   @Column(name = "major_id", columnDefinition = "bigint[]")
   private List<Long> majorId;

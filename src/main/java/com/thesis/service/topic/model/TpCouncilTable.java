@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsTeacherTable;
@@ -39,6 +40,7 @@ public class TpCouncilTable extends BaseTable {
 
   private LocalTime endTime;
 
+  @JsonIgnore
   @Type(type = "list-array")
   @Column(name = "role_id", columnDefinition = "bigint[]")
   private Collection<Long> roleId;
@@ -46,6 +48,7 @@ public class TpCouncilTable extends BaseTable {
   @Transient
   private List<BrConstDataTable> role;
 
+  @JsonIgnore
   @Type(type = "list-array")
   @Column(name = "teacher_id", columnDefinition = "bigint[]")
   private Collection<Long> teacherId;
