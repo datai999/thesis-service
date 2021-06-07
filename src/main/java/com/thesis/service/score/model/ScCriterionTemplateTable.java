@@ -6,6 +6,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.thesis.service.br.model.BrConstDataTable;
+import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
 
 import org.hibernate.annotations.Type;
@@ -19,6 +20,9 @@ import lombok.EqualsAndHashCode;
 @Table(name = "sc_criterion_template")
 public class ScCriterionTemplateTable extends BaseTable {
 
+  @Type(type = "json")
+  private MultiLangDto name;
+
   @OneToOne
   @JoinColumn(name = "score_type_id")
   private BrConstDataTable scoreType;
@@ -27,7 +31,7 @@ public class ScCriterionTemplateTable extends BaseTable {
   @JoinColumn(name = "score_method_id")
   private BrConstDataTable scoreMethod;
 
-  @Type(type = "text")
-  private String description;
+  @Type(type = "json")
+  private MultiLangDto description;
 
 }

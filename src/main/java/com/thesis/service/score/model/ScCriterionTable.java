@@ -5,6 +5,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
 
 import org.hibernate.annotations.Type;
@@ -22,11 +23,12 @@ public class ScCriterionTable extends BaseTable {
   @JoinColumn(name = "criterion_template_id")
   private ScCriterionTemplateTable criterionTemplate;
 
-  private String criterionName;
+  @Type(type = "json")
+  private MultiLangDto name;
 
   private float priority = 1L;
 
-  @Type(type = "text")
-  private String description;
+  @Type(type = "json")
+  private MultiLangDto description;
 
 }
