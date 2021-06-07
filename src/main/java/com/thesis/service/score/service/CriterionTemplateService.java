@@ -12,10 +12,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CriterionTemplateService extends ABaseService<ScCriterionTemplateTable, ScCriterionTemplateRepository> {
 
+  final CriterionService criterionService;
+
   @Override
   protected void preBuild(ScCriterionTemplateTable entity) {
-    // TODO Auto-generated method stub
-
+    entity.setById(criterionService, "criterion");
   }
 
 }

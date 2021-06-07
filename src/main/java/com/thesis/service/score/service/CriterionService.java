@@ -14,8 +14,7 @@ public class CriterionService extends ABaseService<ScCriterionTable, ScCriterion
 
   @Override
   protected void preBuild(ScCriterionTable entity) {
-    // TODO Auto-generated method stub
-
+    // do nothing
   }
 
 }
