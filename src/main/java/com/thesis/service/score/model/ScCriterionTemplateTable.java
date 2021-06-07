@@ -29,8 +29,8 @@ public class ScCriterionTemplateTable extends BaseTable {
   private MultiLangDto name;
 
   @OneToOne
-  @JoinColumn(name = "score_type_id")
-  private BrConstDataTable scoreType;
+  @JoinColumn(name = "thesis_flag")
+  private BrConstDataTable thesisFlag;
 
   @OneToOne
   @JoinColumn(name = "score_method_id")
