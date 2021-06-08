@@ -39,13 +39,8 @@ public class TpTopicAssignTable extends BaseTable {
 
   @JsonIgnore
   @Type(type = "list-array")
-  @Column(name = "execute_student_id", columnDefinition = "bigint[]")
-  private List<Long> executeStudentId;
-
-  @JsonIgnore
-  @Type(type = "list-array")
-  @Column(name = "guide_teacher_id", columnDefinition = "bigint[]")
-  private List<Long> guideTeacherId;
+  @Column(name = "execute_student_code", columnDefinition = "bigint[]")
+  private List<Long> executeStudentCode;
 
   @JsonIgnore
   @Type(type = "list-array")
@@ -54,8 +49,8 @@ public class TpTopicAssignTable extends BaseTable {
 
   @JsonIgnore
   @Type(type = "list-array")
-  @Column(name = "review_teacher_id", columnDefinition = "bigint[]")
-  private List<Long> reviewTeacherId;
+  @Column(name = "review_teacher_code", columnDefinition = "bigint[]")
+  private List<Long> reviewTeacherCode;
 
   @OneToOne
   @JoinColumn(name = "council_id")
