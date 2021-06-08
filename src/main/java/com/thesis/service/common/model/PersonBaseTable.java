@@ -19,7 +19,7 @@ public abstract class PersonBaseTable extends BaseTable {
 
   @NotNull
   @Column(unique = true)
-  private int code;
+  private String code;
 
   @NotBlank
   private String name;
