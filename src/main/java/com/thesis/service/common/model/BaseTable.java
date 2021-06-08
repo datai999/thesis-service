@@ -17,6 +17,7 @@ import javax.persistence.MappedSuperclass;
 
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.IService;
+import com.thesis.service.person.service.IPersonService;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import com.vladmihalcea.hibernate.type.array.LongArrayType;
@@ -113,8 +114,15 @@ public abstract class BaseTable implements Serializable {
   public <E extends BaseTable, S extends BaseRepository<E> & IService<E>> void setById(S service, String... fields) {
 
     List.of(fields).parallelStream().forEach(field -> {
+      var identify = "Code";
       try {
-        var sourceField = this.getClass().getDeclaredField(field.concat("Id"));
+        Field sourceField;
+        try {
+          sourceField = this.getClass().getDeclaredField(field.concat(identify));
+        } catch (NoSuchFieldException e) {
+          identify = "Id";
+          sourceField = this.getClass().getDeclaredField(field.concat(identify));
+        }
         var targetField = this.getClass().getDeclaredField(field);
 
         sourceField.setAccessible(true);
@@ -127,14 +135,28 @@ public abstract class BaseTable implements Serializable {
           var ids = Collection.class.cast(id);
 
           if (!CollectionUtils.isEmpty(ids)) {
-            var values = service.findAllById(ids);
+            List<E> values;
+            if ("Code".equals(identify)) {
+              var personService = IPersonService.class.cast(service);
+              values = personService.findAllByCode(ids);
+            } else {
+              values = service.findAllById(ids);
+            }
+
             if (Set.class.isAssignableFrom(targetField.getType()))
               targetField.set(this, values.stream().collect(Collectors.toSet()));
             else
               targetField.set(this, values);
           }
         } else {
-          targetField.set(this, service.findById(Long.valueOf(id.toString())));
+          Object value;
+          if ("Code".equals(identify)) {
+            var personService = IPersonService.class.cast(service);
+            value = personService.findAllByCode(List.of(id.toString())).get(0);
+          } else {
+            value = service.findById(Long.valueOf(id.toString()));
+          }
+          targetField.set(this, value);
         }
       } catch (Exception e) {
         e.printStackTrace();
