@@ -1,6 +1,7 @@
 package com.thesis.service.topic.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.thesis.service.common.service.ABaseService;
 import com.thesis.service.person.service.StudentService;
@@ -41,7 +42,8 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
 
   @Override
   public List<TpTopicAssignTable> findByTeacherCode(String teacherCode) {
-    return super.mainRepository.findByTeacherCode(teacherCode);
+    return super.mainRepository.findByTeacherCode(teacherCode).parallelStream().map(this::build)
+        .collect(Collectors.toList());
   }
 
 }
