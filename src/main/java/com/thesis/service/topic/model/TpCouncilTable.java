@@ -50,8 +50,8 @@ public class TpCouncilTable extends BaseTable {
 
   @JsonIgnore
   @Type(type = "list-array")
-  @Column(name = "teacher_id", columnDefinition = "bigint[]")
-  private Collection<Long> teacherId;
+  @Column(name = "teacher_code", columnDefinition = "bigint[]")
+  private Collection<Long> teacherCode;
 
   @Transient
   private List<PsTeacherTable> teacher;
