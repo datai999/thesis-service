@@ -55,7 +55,7 @@ public abstract class BaseTable implements Serializable {
   private Instant updatedAt;
 
   @SuppressWarnings("unchecked")
-  public Object mapIdOrCode() {
+  public Object mapId() {
 
     var fields = List.of(this.getClass().getDeclaredFields());
 
@@ -63,13 +63,13 @@ public abstract class BaseTable implements Serializable {
 
     fields.parallelStream().forEach(field -> {
 
-      var identify = "Id";
+      var identify = "Code";
 
       if (!fieldNames.contains(field.getName().concat(identify))) {
-        if (!fieldNames.contains(field.getName().concat("Code"))) {
+        if (!fieldNames.contains(field.getName().concat("Id"))) {
           return;
         }
-        identify = "Code";
+        identify = "Id";
       }
 
       try {
@@ -81,13 +81,23 @@ public abstract class BaseTable implements Serializable {
         var value = field.get(this);
 
         if (Iterable.class.isAssignableFrom(field.getType())) {
-          Collection<BaseTable> valueList = Collection.class.cast(value);
-          if (!CollectionUtils.isEmpty(valueList)) {
-            targetField.set(this, valueList.stream().map(baseValue -> {
-              if (Objects.isNull(baseValue))
-                return null;
-              return baseValue.getId();
-            }).collect(Collectors.toList()));
+
+          Collection<?> idList;
+
+          if ("Code".equals(identify)) {
+            Collection<PersonBaseTable> valueList = Collection.class.cast(value);
+            idList = valueList.stream().map(item -> {
+              return Objects.isNull(item) ? null : item.getCode();
+            }).collect(Collectors.toList());
+          } else {
+            Collection<BaseTable> valueList = Collection.class.cast(value);
+            idList = valueList.stream().map(item -> {
+              return Objects.isNull(item) ? null : item.getId();
+            }).collect(Collectors.toList());
+          }
+
+          if (!CollectionUtils.isEmpty(idList)) {
+            targetField.set(this, idList);
           }
         } else {
           targetField.set(this, BaseTable.class.cast(value).getId());
