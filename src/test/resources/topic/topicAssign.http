@@ -8,7 +8,11 @@ GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/paging?page=1&size=5&s
 Content-Type: application/json
 
 ###  get all topic
-GET {{http}}://{{host}}:{{port}}{{base-url}}/topic
+GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign
+Content-Type: application/json
+
+###  get all topic
+GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/search/teacher?code=123
 Content-Type: application/json
 
 ###  create many

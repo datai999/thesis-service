@@ -1,7 +1,8 @@
 package com.thesis.service.topic.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import javax.validation.constraints.NotBlank;
 
 import com.thesis.service.common.controller.ABaseController;
 import com.thesis.service.topic.model.TpTopicAssignTable;
@@ -9,6 +10,7 @@ import com.thesis.service.topic.service.TopicAssignService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -18,10 +20,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TopicAssignController extends ABaseController<TpTopicAssignTable, TopicAssignService> {
 
-  @Override
-  @GetMapping
-  public List<TpTopicAssignTable> findAll() {
-    return super.findAll().stream().map(super.service::build).collect(Collectors.toList());
+  @GetMapping("/search/teacher")
+  public List<TpTopicAssignTable> findByTeacherCode(@RequestParam @NotBlank String code) {
+    return super.service.findByTeacherCode(code);
   }
 
 }
