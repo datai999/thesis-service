@@ -31,7 +31,7 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
 
   @Override
   public <S extends TpTopicAssignTable> S save(S entity) {
-    entity.mapIdOrCode();
+    entity.mapId();
     entity.setTopic(topicService.save(entity.getTopic()));
     return mainRepository.save(entity);
   }
