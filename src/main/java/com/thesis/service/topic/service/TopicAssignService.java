@@ -1,5 +1,7 @@
 package com.thesis.service.topic.service;
 
+import java.util.List;
+
 import com.thesis.service.common.service.ABaseService;
 import com.thesis.service.person.service.StudentService;
 import com.thesis.service.person.service.TeacherService;
@@ -12,7 +14,8 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopicAssignRepository> {
+public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopicAssignRepository>
+    implements TpTopicAssignRepository {
 
   final StudentService studentService;
   final TeacherService teacherService;
@@ -34,6 +37,11 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
     entity.mapId();
     entity.setTopic(topicService.save(entity.getTopic()));
     return mainRepository.save(entity);
+  }
+
+  @Override
+  public List<TpTopicAssignTable> findByTeacherCode(String teacherCode) {
+    return super.mainRepository.findByTeacherCode(teacherCode);
   }
 
 }
