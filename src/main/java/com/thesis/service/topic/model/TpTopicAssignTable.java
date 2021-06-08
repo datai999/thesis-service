@@ -49,11 +49,6 @@ public class TpTopicAssignTable extends BaseTable {
 
   @JsonIgnore
   @Type(type = "list-array")
-  @Column(name = "guide_teacher_code", columnDefinition = "bigint[]")
-  private List<Long> guideTeacherCode;
-
-  @JsonIgnore
-  @Type(type = "list-array")
   @Column(name = "review_teacher_id", columnDefinition = "bigint[]")
   private List<Long> reviewTeacherId;
 
