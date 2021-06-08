@@ -36,7 +36,7 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
 
   @GetMapping
   public List<E> findAll() {
-    return service.findAll().stream().map(service::build).collect(Collectors.toList());
+    return service.findAll().stream().map(entity -> service.build(entity)).collect(Collectors.toList());
   }
 
   @GetMapping("/paging")
