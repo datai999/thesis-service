@@ -81,6 +81,9 @@ public abstract class BaseTable implements Serializable {
 
         var value = field.get(this);
 
+        if (Objects.isNull(value))
+          return;
+
         if (Iterable.class.isAssignableFrom(field.getType())) {
 
           Collection<?> idList;
