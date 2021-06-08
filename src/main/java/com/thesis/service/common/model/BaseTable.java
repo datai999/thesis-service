@@ -55,7 +55,7 @@ public abstract class BaseTable implements Serializable {
   private Instant updatedAt;
 
   @SuppressWarnings("unchecked")
-  public Object mapId() {
+  public Object mapIdOrCode() {
 
     var fields = List.of(this.getClass().getDeclaredFields());
 
@@ -63,11 +63,17 @@ public abstract class BaseTable implements Serializable {
 
     fields.parallelStream().forEach(field -> {
 
-      if (!fieldNames.contains(field.getName().concat("Id")))
-        return;
+      var identify = "Id";
+
+      if (!fieldNames.contains(field.getName().concat(identify))) {
+        if (!fieldNames.contains(field.getName().concat("Code"))) {
+          return;
+        }
+        identify = "Code";
+      }
 
       try {
-        var targetField = this.getClass().getDeclaredField(field.getName().concat("Id"));
+        var targetField = this.getClass().getDeclaredField(field.getName().concat(identify));
 
         field.setAccessible(true);
         targetField.setAccessible(true);
@@ -78,7 +84,8 @@ public abstract class BaseTable implements Serializable {
           Collection<BaseTable> valueList = Collection.class.cast(value);
           if (!CollectionUtils.isEmpty(valueList)) {
             targetField.set(this, valueList.stream().map(baseValue -> {
-              if (Objects.isNull(baseValue)) return null;
+              if (Objects.isNull(baseValue))
+                return null;
               return baseValue.getId();
             }).collect(Collectors.toList()));
           }
