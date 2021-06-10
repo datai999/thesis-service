@@ -8,4 +8,8 @@ Content-Type: application/json
 POST {{http}}://{{host}}:{{port}}{{base-url}}/setting/example
 Content-Type: application/json
 
-{ "name": "subjectDepartment"}
+{ 
+  "name": {
+    "en":"subjectDepartment"
+  }
+}
