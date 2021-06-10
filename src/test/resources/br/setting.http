@@ -1,0 +1,11 @@
+
+###  get all
+GET {{http}}://{{host}}:{{port}}{{base-url}}/setting
+Content-Type: application/json
+
+
+###  get by example
+POST {{http}}://{{host}}:{{port}}{{base-url}}/setting/example
+Content-Type: application/json
+
+{ "name": "subjectDepartment"}
