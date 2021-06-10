@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.thesis.service.br.ConstDataService;
+import com.thesis.service.br.service.ConstDataService;
 import com.thesis.service.common.service.ABaseService;
 import com.thesis.service.person.model.PsTeacherTable;
 import com.thesis.service.person.service.TeacherService;
