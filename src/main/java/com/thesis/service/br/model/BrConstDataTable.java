@@ -37,4 +37,10 @@ public class BrConstDataTable extends BaseTable {
     this(id.toString());
   }
 
+  public static BrConstDataTable type(String type) {
+    var result = new BrConstDataTable();
+    result.setType(type);
+    return result;
+  }
+
 }

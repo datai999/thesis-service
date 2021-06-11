@@ -37,4 +37,10 @@ public class BrSettingTable extends BaseTable {
     this.refId = List.of(id);
     return this;
   }
+
+  public <T extends BaseTable> BrSettingTable(BrConstDataTable name, String refTable, T entity) {
+    this.name = name;
+    this.refTable = refTable;
+    this.setSingleRefId(entity.getId());
+  }
 }
