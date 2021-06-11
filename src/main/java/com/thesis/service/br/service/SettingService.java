@@ -48,4 +48,9 @@ public class SettingService extends ABaseService<BrSettingTable, BrSettingReposi
     return super.save(settingRecord);
   }
 
+  @Override
+  public BrSettingTable findByType(String type) {
+    return this.build(super.mainRepository.findByType(type));
+  }
+
 }

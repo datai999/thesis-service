@@ -3,20 +3,13 @@
 GET {{http}}://{{host}}:{{port}}{{base-url}}/setting
 Content-Type: application/json
 
-
-###  get by example
-POST {{http}}://{{host}}:{{port}}{{base-url}}/setting/example
-Content-Type: application/json
-
-{ 
-  "name": {
-    "en":"subjectDepartment"
-  }
-}
-
 ###  setting template
 
 POST {{http}}://{{host}}:{{port}}{{base-url}}/setting/template?thesis=false
 Content-Type: application/json
 
 {}
+
+###  get template
+GET {{http}}://{{host}}:{{port}}{{base-url}}/setting/template?thesis=false
+Content-Type: application/json
