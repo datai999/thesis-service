@@ -25,6 +25,8 @@ import lombok.EqualsAndHashCode;
 @Table(name = "sc_criterion_template")
 public class ScCriterionTemplateTable extends BaseTable {
 
+  public static final String TABLE = "sc_criterion_template";
+
   @Type(type = "json")
   private MultiLangDto name;
 

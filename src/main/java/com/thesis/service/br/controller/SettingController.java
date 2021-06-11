@@ -21,7 +21,9 @@ public class SettingController extends ABaseController<BrSettingTable, SettingSe
 
   @PostMapping("/topic-template")
   public <D extends ScCriterionTemplateTable> Object settingTopicTemplate(@RequestBody @Valid D requestBody) {
-    return null;
+    var entity = new BrSettingTable();
+    entity.setSingleRefId(requestBody.getId()).setRefTable(ScCriterionTemplateTable.TABLE);
+    return super.service.save(entity);
   }
 
   @PostMapping("/thesis-template")

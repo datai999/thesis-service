@@ -31,4 +31,8 @@ public class BrSettingTable extends BaseTable {
   @Column(name = "ref_id", columnDefinition = "bigint[]")
   private List<Long> refId;
 
+  public BrSettingTable setSingleRefId(Long id) {
+    this.refId = List.of(id);
+    return this;
+  }
 }
