@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.thesis.service.common.model.BaseTable;
 
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "br_setting")
+@Table(name = "br_setting", uniqueConstraints = { @UniqueConstraint(columnNames = { "name_id" }) })
 @EqualsAndHashCode(callSuper = true)
 public class BrSettingTable extends BaseTable {
 
