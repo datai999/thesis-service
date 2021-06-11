@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.IService;
 import com.thesis.service.person.service.IPersonService;
@@ -55,6 +56,7 @@ public abstract class BaseTable implements Serializable {
   @UpdateTimestamp
   private Instant updatedAt;
 
+  @JsonIgnore
   public abstract String getTableName();
 
   @SuppressWarnings("unchecked")
