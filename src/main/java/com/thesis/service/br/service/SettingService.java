@@ -23,8 +23,12 @@ public class SettingService extends ABaseService<BrSettingTable, BrSettingReposi
   public <T extends BaseTable> Object setting(String type, T refRecord) {
     var constDataExample = Example.of(BrConstDataTable.type(type));
     var constDataRecord = super.constRepository.findAll(constDataExample).stream().findFirst().orElseThrow();
-    var entity = new BrSettingTable(constDataRecord, refRecord);
-    return super.save(entity);
+
+    var settingExample = Example.of(BrSettingTable.name(constDataRecord));
+    var settingRecord = super.mainRepository.findAll(settingExample).stream().findFirst().orElseThrow();
+    settingRecord.setRef(refRecord).setName(constDataRecord);
+
+    return super.save(settingRecord);
   }
 
 }

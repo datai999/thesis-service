@@ -45,14 +45,20 @@ public class BrSettingTable extends BaseTable {
     return this;
   }
 
-  public <T extends BaseTable> BrSettingTable(BrConstDataTable name, T refRecord) {
-    this.name = name;
+  public static BrSettingTable name(BrConstDataTable name) {
+    var result = new BrSettingTable();
+    result.setName(name);
+    return result;
+  }
+
+  public <T extends BaseTable> BrSettingTable setRef(T refRecord) {
     this.refTable = refRecord.getTableName();
     if (Objects.isNull(refRecord.getId())) {
       this.refId = null;
     } else {
       this.refId = List.of(refRecord.getId());
     }
-
+    return this;
   }
+
 }
