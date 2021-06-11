@@ -55,6 +55,8 @@ public abstract class BaseTable implements Serializable {
   @UpdateTimestamp
   private Instant updatedAt;
 
+  public abstract String getTableName();
+
   @SuppressWarnings("unchecked")
   public Object mapId() {
 

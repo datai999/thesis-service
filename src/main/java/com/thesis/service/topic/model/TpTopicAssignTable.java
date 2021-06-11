@@ -65,4 +65,9 @@ public class TpTopicAssignTable extends BaseTable {
   @Transient
   private Set<PsTeacherTable> reviewTeacher;
 
+  @Override
+  public String getTableName() {
+    return "tp_topic_assign";
+  }
+
 }

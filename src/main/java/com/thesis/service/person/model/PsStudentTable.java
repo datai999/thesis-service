@@ -25,4 +25,9 @@ public class PsStudentTable extends PersonBaseTable {
   @JoinColumn(name = "education_method_id")
   private BrConstDataTable educationMethod;
 
+  @Override
+  public String getTableName() {
+    return "ps_student";
+  }
+
 }

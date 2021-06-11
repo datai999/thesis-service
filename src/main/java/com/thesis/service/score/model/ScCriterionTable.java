@@ -23,4 +23,9 @@ public class ScCriterionTable extends BaseTable {
   @Type(type = "json")
   private MultiLangDto description;
 
+  @Override
+  public String getTableName() {
+    return "sc_criterion";
+  }
+
 }

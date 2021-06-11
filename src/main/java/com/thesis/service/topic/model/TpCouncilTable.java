@@ -56,4 +56,9 @@ public class TpCouncilTable extends BaseTable {
   @Transient
   private List<PsTeacherTable> teacher;
 
+  @Override
+  public String getTableName() {
+    return "tp_council";
+  }
+
 }

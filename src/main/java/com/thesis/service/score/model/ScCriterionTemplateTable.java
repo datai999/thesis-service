@@ -45,4 +45,9 @@ public class ScCriterionTemplateTable extends BaseTable {
   @Transient
   private List<ScCriterionTable> criterion;
 
+  @Override
+  public String getTableName() {
+    return "sc_criterion_template";
+  }
+
 }

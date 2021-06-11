@@ -13,4 +13,9 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "ps_academy_staff")
 public class PsAcademyStaffTable extends PersonBaseTable {
+
+  @Override
+  public String getTableName() {
+    return "ps_academy_staff";
+  }
 }

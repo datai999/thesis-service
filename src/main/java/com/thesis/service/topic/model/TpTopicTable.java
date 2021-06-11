@@ -74,4 +74,9 @@ public class TpTopicTable extends BaseTable {
   @JoinColumn(name = "create_by")
   private PsAcademyStaffTable createBy;
 
+  @Override
+  public String getTableName() {
+    return "tp_topic";
+  }
+
 }

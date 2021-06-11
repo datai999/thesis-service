@@ -29,6 +29,11 @@ public class BrConstDataTable extends BaseTable {
 
   private Integer no = 0;
 
+  @Override
+  public String getTableName() {
+    return "br_const_data";
+  }
+
   public BrConstDataTable(String id) {
     this.setId(Long.parseLong(id));
   }

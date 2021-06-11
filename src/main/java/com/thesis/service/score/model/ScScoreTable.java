@@ -51,4 +51,9 @@ public class ScScoreTable extends BaseTable {
   @Type(type = "text")
   private String comment;
 
+  @Override
+  public String getTableName() {
+    return "sc_score";
+  }
+
 }

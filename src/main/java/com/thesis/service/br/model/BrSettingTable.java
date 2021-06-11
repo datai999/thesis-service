@@ -34,18 +34,23 @@ public class BrSettingTable extends BaseTable {
   @Column(name = "ref_id", columnDefinition = "bigint[]")
   private List<Long> refId;
 
+  @Override
+  public String getTableName() {
+    return "br_setting";
+  }
+
   public BrSettingTable setSingleRefId(Long id) {
     this.refId = List.of(id);
     return this;
   }
 
-  public <T extends BaseTable> BrSettingTable(BrConstDataTable name, String refTable, T entity) {
+  public <T extends BaseTable> BrSettingTable(BrConstDataTable name, T refRecord) {
     this.name = name;
-    this.refTable = refTable;
-    if (Objects.isNull(entity) || Objects.isNull(entity.getId())) {
+    this.refTable = refRecord.getTableName();
+    if (Objects.isNull(refRecord.getId())) {
       this.refId = null;
     } else {
-      this.refId = List.of(entity.getId());
+      this.refId = List.of(refRecord.getId());
     }
 
   }
