@@ -1,5 +1,7 @@
 package com.thesis.service.br.service;
 
+import java.util.Objects;
+
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.br.model.BrSettingTable;
 import com.thesis.service.br.repository.BrSettingRepository;
@@ -21,6 +23,10 @@ public class SettingService extends ABaseService<BrSettingTable, BrSettingReposi
 
   @Override
   protected void preBuild(BrSettingTable entity) {
+
+    if (Objects.isNull(entity.getRefId())) {
+      return;
+    }
 
     BaseRepository<?> refService = null;
 
