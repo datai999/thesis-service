@@ -1,6 +1,8 @@
 package com.thesis.service.br.service;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.br.model.BrSettingTable;
@@ -8,6 +10,7 @@ import com.thesis.service.br.repository.BrSettingRepository;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.ABaseService;
+import com.thesis.service.common.service.IService;
 import com.thesis.service.score.service.CriterionTemplateService;
 
 import org.springframework.data.domain.Example;
@@ -28,19 +31,23 @@ public class SettingService extends ABaseService<BrSettingTable, BrSettingReposi
       return;
     }
 
-    BaseRepository<?> refService = null;
+    List<? extends BaseTable> setting = null;
 
     switch (entity.getRefTable()) {
     case "sc_criterion_template":
-      refService = criterionTemplateService;
+      setting = buildService(criterionTemplateService, entity);
       break;
     default:
-      refService = constRepository;
       break;
     }
 
-    var settingResponse = refService.findAllById(entity.getRefId());
-    entity.setSetting(settingResponse);
+    entity.setSetting(setting);
+  }
+
+  private <E extends BaseTable, S extends BaseRepository<E> & IService<E>> List<? extends BaseTable> buildService(
+      S convertService, BrSettingTable entity) {
+    var response = convertService.findAllById(entity.getRefId());
+    return response.stream().map(item -> convertService.build(item)).collect(Collectors.toList());
   }
 
   public <T extends BaseTable> Object setting(String type, T refRecord) {
