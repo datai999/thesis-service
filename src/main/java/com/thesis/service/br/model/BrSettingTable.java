@@ -4,9 +4,10 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
 
 import org.hibernate.annotations.Type;
@@ -22,8 +23,9 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class BrSettingTable extends BaseTable {
 
-  @Type(type = "json")
-  private MultiLangDto name;
+  @OneToOne
+  @JoinColumn(name = "name_id")
+  private BrConstDataTable name;
 
   private String refTable;
 
