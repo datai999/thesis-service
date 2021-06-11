@@ -25,7 +25,7 @@ public class SettingService extends ABaseService<BrSettingTable, BrSettingReposi
     var constDataRecord = super.constRepository.findAll(constDataExample).stream().findFirst().orElseThrow();
 
     var settingExample = Example.of(BrSettingTable.name(constDataRecord));
-    var settingRecord = super.mainRepository.findAll(settingExample).stream().findFirst().orElseThrow();
+    var settingRecord = super.mainRepository.findAll(settingExample).stream().findFirst().orElse(new BrSettingTable());
     settingRecord.setRef(refRecord).setName(constDataRecord);
 
     return super.save(settingRecord);
