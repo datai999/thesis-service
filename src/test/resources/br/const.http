@@ -46,7 +46,10 @@ Content-Type: application/json
   { "type": "councilRole", "value": {"en":"?", "vi":"Thư ký"}},
 
   { "type": "gender", "value": {"en":"Male", "vi":"Nam"}},
-  { "type": "gender", "value": {"en":"Female", "vi":"Nữ"}}
+  { "type": "gender", "value": {"en":"Female", "vi":"Nữ"}},
+
+  { "type": "setting.topicTemplate", "value": {"en":"Topic evaluation form", "vi":"Mẫu đánh giá đề tài"}},
+  { "type": "setting.thesisTemplate", "value": {"en":"Thesis evaluation form", "vi":"Mẫu đánh giá luận văn"}}
 
 ]
 
