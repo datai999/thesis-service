@@ -13,3 +13,10 @@ Content-Type: application/json
     "en":"subjectDepartment"
   }
 }
+
+###  setting template
+
+POST {{http}}://{{host}}:{{port}}{{base-url}}/setting/template?thesis=false
+Content-Type: application/json
+
+{}

@@ -1,6 +1,7 @@
 package com.thesis.service.br.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +42,11 @@ public class BrSettingTable extends BaseTable {
   public <T extends BaseTable> BrSettingTable(BrConstDataTable name, String refTable, T entity) {
     this.name = name;
     this.refTable = refTable;
-    this.setSingleRefId(entity.getId());
+    if (Objects.isNull(entity) || Objects.isNull(entity.getId())) {
+      this.refId = null;
+    } else {
+      this.refId = List.of(entity.getId());
+    }
+
   }
 }

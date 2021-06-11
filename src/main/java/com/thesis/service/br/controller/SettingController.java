@@ -12,25 +12,23 @@ import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/setting")
-@RequiredArgsConstructor
 public class SettingController extends ABaseController<BrSettingTable, SettingService> {
 
-  @PostMapping("/topic-template")
-  public <D extends ScCriterionTemplateTable> Object settingTopicTemplate(@RequestBody @Valid D requestBody) {
-    var constDataExample = BrConstDataTable.type("setting.topicTemplate");
+  @PostMapping("/template")
+  public <D extends ScCriterionTemplateTable> Object settingTopicTemplate(
+      @RequestParam(defaultValue = "true") boolean thesis, @RequestBody @Valid D requestBody) {
+
+    var type = thesis ? "thesis" : "topic";
+    var constDataExample = BrConstDataTable.type("setting.".concat(type).concat("Template"));
     var constDataRecord = super.constService.findAll(Example.of(constDataExample)).stream().findFirst().orElseThrow();
+
     var entity = new BrSettingTable(constDataRecord, ScCriterionTemplateTable.TABLE, requestBody);
     return super.service.save(entity);
   }
 
-  @PostMapping("/thesis-template")
-  public <D extends ScCriterionTemplateTable> Object settingThesisTemplate(@RequestBody @Valid D requestBody) {
-    return null;
-  }
 }
