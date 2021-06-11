@@ -4,7 +4,9 @@ import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.br.model.BrSettingTable;
 import com.thesis.service.br.repository.BrSettingRepository;
 import com.thesis.service.common.model.BaseTable;
+import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.ABaseService;
+import com.thesis.service.score.service.CriterionTemplateService;
 
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,24 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SettingService extends ABaseService<BrSettingTable, BrSettingRepository> implements BrSettingRepository {
 
+  final CriterionTemplateService criterionTemplateService;
+
   @Override
   protected void preBuild(BrSettingTable entity) {
-    // do nothing
+
+    BaseRepository<?> refService = null;
+
+    switch (entity.getRefTable()) {
+    case "sc_criterion_template":
+      refService = criterionTemplateService;
+      break;
+    default:
+      refService = constRepository;
+      break;
+    }
+
+    var settingResponse = refService.findAllById(entity.getRefId());
+    entity.setSetting(settingResponse);
   }
 
   public <T extends BaseTable> Object setting(String type, T refRecord) {

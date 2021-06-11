@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.common.model.BaseTable;
 
 import org.hibernate.annotations.Type;
@@ -29,11 +31,16 @@ public class BrSettingTable extends BaseTable {
   @JoinColumn(name = "name_id")
   private BrConstDataTable name;
 
+  @JsonIgnore
   private String refTable;
 
+  @JsonIgnore
   @Type(type = "list-array")
   @Column(name = "ref_id", columnDefinition = "bigint[]")
   private List<Long> refId;
+
+  @Transient
+  private List<? extends BaseTable> setting;
 
   @Override
   public String getTableName() {
