@@ -36,9 +36,7 @@ public class TpTopicTable extends BaseTable {
   @Type(type = "json")
   private MultiLangDto topicName;
 
-  @OneToOne
-  @JoinColumn(name = "semester_id")
-  private BrConstDataTable semester;
+  private Integer semester;
 
   @JsonIgnore
   @Type(type = "list-array")
