@@ -34,7 +34,7 @@ public class TpTopicTable extends BaseTable {
   private String code;
 
   @Type(type = "json")
-  private MultiLangDto topicName;
+  private MultiLangDto name;
 
   private Integer semester;
 
