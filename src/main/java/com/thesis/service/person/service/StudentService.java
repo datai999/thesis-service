@@ -2,7 +2,6 @@ package com.thesis.service.person.service;
 
 import java.util.List;
 
-import com.thesis.service.common.service.ABaseService;
 import com.thesis.service.person.model.PsStudentTable;
 import com.thesis.service.person.repository.PsStudentRepository;
 
@@ -14,7 +13,8 @@ import lombok.RequiredArgsConstructor;
 @Primary
 @Service
 @RequiredArgsConstructor
-public class StudentService extends ABaseService<PsStudentTable, PsStudentRepository> implements PsStudentRepository {
+public class StudentService extends APersonBaseService<PsStudentTable, PsStudentRepository>
+    implements PsStudentRepository {
 
   @Override
   protected void preBuild(PsStudentTable entity) {
@@ -24,6 +24,11 @@ public class StudentService extends ABaseService<PsStudentTable, PsStudentReposi
   @Override
   public List<PsStudentTable> searchIlikeNameOrCode(String value) {
     return super.mainRepository.searchIlikeNameOrCode(value);
+  }
+
+  @Override
+  public List<PsStudentTable> findAllByCode(Iterable<String> codes) {
+    return super.mainRepository.findAllByCode(codes);
   }
 
 }

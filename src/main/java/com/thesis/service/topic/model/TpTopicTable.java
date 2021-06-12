@@ -11,6 +11,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
@@ -30,15 +31,14 @@ import lombok.EqualsAndHashCode;
 public class TpTopicTable extends BaseTable {
 
   @NotNull
-  private Integer topicCode;
+  private String code;
 
   @Type(type = "json")
-  private MultiLangDto topicName;
+  private MultiLangDto name;
 
-  @OneToOne
-  @JoinColumn(name = "semester_id")
-  private BrConstDataTable semester;
+  private Integer semester;
 
+  @JsonIgnore
   @Type(type = "list-array")
   @Column(name = "major_id", columnDefinition = "bigint[]")
   private List<Long> majorId;
@@ -60,7 +60,7 @@ public class TpTopicTable extends BaseTable {
   private MultiLangDto description;
 
   @Type(type = "json")
-  private MultiLangDto mainTask;
+  private MultiLangDto topicTask;
 
   @Type(type = "json")
   private MultiLangDto thesisTask;
@@ -71,5 +71,10 @@ public class TpTopicTable extends BaseTable {
   @OneToOne
   @JoinColumn(name = "create_by")
   private PsAcademyStaffTable createBy;
+
+  @Override
+  public String getTableName() {
+    return "tp_topic";
+  }
 
 }

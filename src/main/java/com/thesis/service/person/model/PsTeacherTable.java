@@ -25,4 +25,9 @@ public class PsTeacherTable extends PersonBaseTable {
   @JoinColumn(name = "degree_id")
   private BrConstDataTable degree;
 
+  @Override
+  public String getTableName() {
+    return "ps_teacher";
+  }
+
 }

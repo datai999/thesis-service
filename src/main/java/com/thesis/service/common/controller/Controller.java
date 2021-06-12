@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
   @GetMapping("/")
   public String controller() {
-    return "Version:6.06.02";
+    return "Version: 6.21.13";
   }
 }

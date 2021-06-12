@@ -15,8 +15,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.IService;
+import com.thesis.service.person.service.IPersonService;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import com.vladmihalcea.hibernate.type.array.LongArrayType;
@@ -54,6 +56,9 @@ public abstract class BaseTable implements Serializable {
   @UpdateTimestamp
   private Instant updatedAt;
 
+  @JsonIgnore
+  public abstract String getTableName();
+
   @SuppressWarnings("unchecked")
   public Object mapId() {
 
@@ -63,24 +68,44 @@ public abstract class BaseTable implements Serializable {
 
     fields.parallelStream().forEach(field -> {
 
-      if (!fieldNames.contains(field.getName().concat("Id")))
-        return;
+      var identify = "Code";
+
+      if (!fieldNames.contains(field.getName().concat(identify))) {
+        if (!fieldNames.contains(field.getName().concat("Id"))) {
+          return;
+        }
+        identify = "Id";
+      }
 
       try {
-        var targetField = this.getClass().getDeclaredField(field.getName().concat("Id"));
+        var targetField = this.getClass().getDeclaredField(field.getName().concat(identify));
 
         field.setAccessible(true);
         targetField.setAccessible(true);
 
         var value = field.get(this);
 
+        if (Objects.isNull(value))
+          return;
+
         if (Iterable.class.isAssignableFrom(field.getType())) {
-          Collection<BaseTable> valueList = Collection.class.cast(value);
-          if (!CollectionUtils.isEmpty(valueList)) {
-            targetField.set(this, valueList.stream().map(baseValue -> {
-              if (Objects.isNull(baseValue)) return null;
-              return baseValue.getId();
-            }).collect(Collectors.toList()));
+
+          Collection<?> idList;
+
+          if ("Code".equals(identify)) {
+            Collection<PersonBaseTable> valueList = Collection.class.cast(value);
+            idList = valueList.stream().map(item -> {
+              return Objects.isNull(item) ? null : item.getCode();
+            }).collect(Collectors.toList());
+          } else {
+            Collection<BaseTable> valueList = Collection.class.cast(value);
+            idList = valueList.stream().map(item -> {
+              return Objects.isNull(item) ? null : item.getId();
+            }).collect(Collectors.toList());
+          }
+
+          if (!CollectionUtils.isEmpty(idList)) {
+            targetField.set(this, idList);
           }
         } else {
           targetField.set(this, BaseTable.class.cast(value).getId());
@@ -96,8 +121,15 @@ public abstract class BaseTable implements Serializable {
   public <E extends BaseTable, S extends BaseRepository<E> & IService<E>> void setById(S service, String... fields) {
 
     List.of(fields).parallelStream().forEach(field -> {
+      var identify = "Code";
       try {
-        var sourceField = this.getClass().getDeclaredField(field.concat("Id"));
+        Field sourceField;
+        try {
+          sourceField = this.getClass().getDeclaredField(field.concat(identify));
+        } catch (NoSuchFieldException e) {
+          identify = "Id";
+          sourceField = this.getClass().getDeclaredField(field.concat(identify));
+        }
         var targetField = this.getClass().getDeclaredField(field);
 
         sourceField.setAccessible(true);
@@ -110,14 +142,28 @@ public abstract class BaseTable implements Serializable {
           var ids = Collection.class.cast(id);
 
           if (!CollectionUtils.isEmpty(ids)) {
-            var values = service.findAllById(ids);
+            List<E> values;
+            if ("Code".equals(identify)) {
+              var personService = IPersonService.class.cast(service);
+              values = personService.findAllByCode(ids);
+            } else {
+              values = service.findAllById(ids);
+            }
+
             if (Set.class.isAssignableFrom(targetField.getType()))
               targetField.set(this, values.stream().collect(Collectors.toSet()));
             else
               targetField.set(this, values);
           }
         } else {
-          targetField.set(this, service.findById(Long.valueOf(id.toString())));
+          Object value;
+          if ("Code".equals(identify)) {
+            var personService = IPersonService.class.cast(service);
+            value = personService.findAllByCode(List.of(id.toString())).get(0);
+          } else {
+            value = service.findById(Long.valueOf(id.toString()));
+          }
+          targetField.set(this, value);
         }
       } catch (Exception e) {
         e.printStackTrace();

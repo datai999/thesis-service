@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
-import com.thesis.service.br.ConstDataService;
+import com.thesis.service.br.service.ConstDataService;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.IService;

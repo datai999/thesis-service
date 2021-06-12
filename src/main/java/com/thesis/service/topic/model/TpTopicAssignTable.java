@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsStudentTable;
 import com.thesis.service.person.model.PsTeacherTable;
@@ -36,17 +37,23 @@ public class TpTopicAssignTable extends BaseTable {
   @JoinColumn(name = "topic_id", referencedColumnName = "id")
   private TpTopicTable topic;
 
-  @Type(type = "list-array")
-  @Column(name = "execute_student_id", columnDefinition = "bigint[]")
-  private List<Long> executeStudentId;
+  @NotNull
+  private Boolean thesisFlag = true;
 
+  @JsonIgnore
   @Type(type = "list-array")
-  @Column(name = "guide_teacher_id", columnDefinition = "bigint[]")
-  private List<Long> guideTeacherId;
+  @Column(name = "execute_student_code", columnDefinition = "varchar[]")
+  private List<String> executeStudentCode;
 
+  @JsonIgnore
   @Type(type = "list-array")
-  @Column(name = "review_teacher_id", columnDefinition = "bigint[]")
-  private List<Long> reviewTeacherId;
+  @Column(name = "guide_teacher_code", columnDefinition = "varchar[]")
+  private List<String> guideTeacherCode;
+
+  @JsonIgnore
+  @Type(type = "list-array")
+  @Column(name = "review_teacher_code", columnDefinition = "varchar[]")
+  private List<String> reviewTeacherCode;
 
   @OneToOne
   @JoinColumn(name = "council_id")
@@ -60,5 +67,10 @@ public class TpTopicAssignTable extends BaseTable {
 
   @Transient
   private Set<PsTeacherTable> reviewTeacher;
+
+  @Override
+  public String getTableName() {
+    return "tp_topic_assign";
+  }
 
 }

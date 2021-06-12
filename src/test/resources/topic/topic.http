@@ -14,5 +14,5 @@ POST {{http}}://{{host}}:{{port}}{{base-url}}/topic/all
 Content-Type: application/json
 
 [
-  {"topicCode": 1713015, "name": "Đức Anh Tài"}
+  {"code": 1713015, "name": "Đức Anh Tài"}
 ]

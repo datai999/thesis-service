@@ -1,0 +1,15 @@
+
+###  get all
+GET {{http}}://{{host}}:{{port}}{{base-url}}/setting
+Content-Type: application/json
+
+###  setting template
+
+POST {{http}}://{{host}}:{{port}}{{base-url}}/setting/template?thesis=false
+Content-Type: application/json
+
+{}
+
+###  get template
+GET {{http}}://{{host}}:{{port}}{{base-url}}/setting/template?thesis=false
+Content-Type: application/json

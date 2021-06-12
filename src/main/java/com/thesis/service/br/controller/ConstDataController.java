@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.thesis.service.br.ConstDataService;
 import com.thesis.service.br.model.BrConstDataTable;
+import com.thesis.service.br.service.ConstDataService;
 import com.thesis.service.common.controller.ABaseController;
 
 import org.springframework.data.domain.Example;

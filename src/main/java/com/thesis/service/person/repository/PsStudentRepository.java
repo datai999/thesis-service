@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 public interface PsStudentRepository extends BaseRepository<PsStudentTable> {
 
   @Query(value = "SELECT * FROM ps_student "
-      + "WHERE name ILIKE %:value% OR CAST(student_code AS VARCHAR) ILIKE %:value%", nativeQuery = true)
+      + "WHERE name ILIKE %:value% OR CAST(code AS VARCHAR) ILIKE %:value%", nativeQuery = true)
   List<PsStudentTable> searchIlikeNameOrCode(@Param("value") String value);
 
+  @Query(value = "SELECT * FROM ps_student WHERE code IN (:codes)", nativeQuery = true)
+  List<PsStudentTable> findAllByCode(@Param("codes") Iterable<String> codes);
 }

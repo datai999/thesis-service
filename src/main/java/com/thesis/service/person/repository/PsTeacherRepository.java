@@ -14,4 +14,7 @@ public interface PsTeacherRepository extends BaseRepository<PsTeacherTable> {
 
   @Query(value = "SELECT * FROM ps_teacher WHERE name ILIKE %:value%", nativeQuery = true)
   List<PsTeacherTable> searchIlikeName(@Param("value") String value);
+
+  @Query(value = "SELECT * FROM ps_teacher WHERE code IN (:codes)", nativeQuery = true)
+  List<PsTeacherTable> findAllByCode(@Param("codes") Iterable<String> codes);
 }
