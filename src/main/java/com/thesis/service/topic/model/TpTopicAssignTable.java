@@ -37,6 +37,9 @@ public class TpTopicAssignTable extends BaseTable {
   @JoinColumn(name = "topic_id", referencedColumnName = "id")
   private TpTopicTable topic;
 
+  @NotNull
+  private Boolean thesisFlag = true;
+
   @JsonIgnore
   @Type(type = "list-array")
   @Column(name = "execute_student_code", columnDefinition = "varchar[]")
