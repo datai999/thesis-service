@@ -41,8 +41,8 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
   }
 
   @Override
-  public List<TpTopicAssignTable> findByTeacherCode(String teacherCode) {
-    return super.mainRepository.findByTeacherCode(teacherCode).parallelStream().map(this::build)
+  public List<TpTopicAssignTable> findByTeacherCode(String teacherCode, String sort, Boolean isDescend) {
+    return super.mainRepository.findByTeacherCode(teacherCode, sort, isDescend).stream().map(this::build)
         .collect(Collectors.toList());
   }
 

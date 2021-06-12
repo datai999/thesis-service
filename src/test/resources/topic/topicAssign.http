@@ -11,7 +11,7 @@ Content-Type: application/json
 GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign
 Content-Type: application/json
 
-###  get all topic
+###  search by teacher code
 GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/search/teacher?code=123
 Content-Type: application/json
 

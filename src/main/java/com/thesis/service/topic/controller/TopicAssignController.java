@@ -21,8 +21,9 @@ import lombok.RequiredArgsConstructor;
 public class TopicAssignController extends ABaseController<TpTopicAssignTable, TopicAssignService> {
 
   @GetMapping("/search/teacher")
-  public List<TpTopicAssignTable> findByTeacherCode(@RequestParam @NotBlank String code) {
-    return super.service.findByTeacherCode(code);
+  public List<TpTopicAssignTable> findByTeacherCode(@RequestParam @NotBlank String code,
+      @RequestParam(defaultValue = "semester") String sort, @RequestParam(defaultValue = "true") boolean descend) {
+    return super.service.findByTeacherCode(code, sort, descend);
   }
 
 }
