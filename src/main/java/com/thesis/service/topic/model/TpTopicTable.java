@@ -62,7 +62,7 @@ public class TpTopicTable extends BaseTable {
   private MultiLangDto description;
 
   @Type(type = "json")
-  private MultiLangDto mainTask;
+  private MultiLangDto topicTask;
 
   @Type(type = "json")
   private MultiLangDto thesisTask;
