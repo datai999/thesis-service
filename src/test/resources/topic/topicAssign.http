@@ -22,7 +22,7 @@ Content-Type: application/json
 [
   {
     "topic": {
-      "topicCode": 123
+      "code": 123
     }
   }
 
@@ -56,6 +56,6 @@ Content-Type: application/json
     ],
     "executeStudent": [],
     "topic": {
-        "topicCode": "123"
+        "code": "123"
     }
 }

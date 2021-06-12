@@ -31,7 +31,7 @@ import lombok.EqualsAndHashCode;
 public class TpTopicTable extends BaseTable {
 
   @NotNull
-  private Integer topicCode;
+  private String code;
 
   @Type(type = "json")
   private MultiLangDto topicName;
