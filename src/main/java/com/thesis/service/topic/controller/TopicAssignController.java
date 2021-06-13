@@ -26,4 +26,10 @@ public class TopicAssignController extends ABaseController<TpTopicAssignTable, T
     return super.service.findByTeacherCode(code, sort, descend);
   }
 
+  @GetMapping("/search/topic")
+  public Object search(@RequestParam String value, @RequestParam(defaultValue = "semester") String sort,
+      @RequestParam(defaultValue = "true") boolean descend) {
+    return super.service.searchIlikeTopicName(value, sort, descend);
+  }
+
 }

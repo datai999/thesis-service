@@ -17,4 +17,9 @@ public interface TpTopicAssignRepository extends BaseRepository<TpTopicAssignTab
       + TpQueryClause.ORDER_TOPIC_SEMESTER, nativeQuery = true)
   List<TpTopicAssignTable> findByTeacherCode(@Param("teacherCode") String teacherCode, @Param("sort") String sort,
       @Param("isDescend") Boolean isDescend);
+
+  @Query(value = TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC + "WHERE tP.name ILIKE %:value% ORDER BY"
+      + TpQueryClause.ORDER_TOPIC_SEMESTER, nativeQuery = true)
+  List<TpTopicAssignTable> searchIlikeTopicName(@Param("value") String value, @Param("sort") String sort,
+      @Param("isDescend") Boolean isDescend);
 }
