@@ -1,15 +1,15 @@
 
 ###  get all
-GET {{http}}://{{host}}:{{port}}{{base-url}}/setting
+GET {{http}}{{host}}{{port}}{{base-url}}/setting
 Content-Type: application/json
 
 ###  setting template
 
-POST {{http}}://{{host}}:{{port}}{{base-url}}/setting/template?thesis=false
+POST {{http}}{{host}}{{port}}{{base-url}}/setting/template?thesis=false
 Content-Type: application/json
 
 {}
 
 ###  get template
-GET {{http}}://{{host}}:{{port}}{{base-url}}/setting/template?thesis=false
+GET {{http}}{{host}}{{port}}{{base-url}}/setting/template?thesis=false
 Content-Type: application/json

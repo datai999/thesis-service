@@ -1,10 +1,10 @@
 
 ###  get all
-GET {{http}}://{{host}}:{{port}}{{base-url}}/teacher
+GET {{http}}{{host}}{{port}}{{base-url}}/teacher
 Content-Type: application/json
 
 ###  create one
-POST {{http}}://{{host}}:{{port}}{{base-url}}/teacher
+POST {{http}}{{host}}{{port}}{{base-url}}/teacher
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ###  create many
-POST {{http}}://{{host}}:{{port}}{{base-url}}/teacher/all
+POST {{http}}{{host}}{{port}}{{base-url}}/teacher/all
 Content-Type: application/json
 
 [
