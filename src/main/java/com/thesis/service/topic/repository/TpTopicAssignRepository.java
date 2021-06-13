@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface TpTopicAssignRepository extends BaseRepository<TpTopicAssignTable> {
 
   @Query(value = TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC
-      + " WHERE :teacherCode = ANY(guide_teacher_code) OR :teacherCode = ANY(review_teacher_code)" + " ORDER BY"
+      + "WHERE :teacherCode = ANY(guide_teacher_code) OR :teacherCode = ANY(review_teacher_code) ORDER BY"
       + TpQueryClause.ORDER_TOPIC_SEMESTER, nativeQuery = true)
   List<TpTopicAssignTable> findByTeacherCode(@Param("teacherCode") String teacherCode, @Param("sort") String sort,
       @Param("isDescend") Boolean isDescend);
