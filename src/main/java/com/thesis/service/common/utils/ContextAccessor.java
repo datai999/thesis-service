@@ -6,15 +6,15 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StaticContextAccessor implements ApplicationContextAware {
+public class ContextAccessor implements ApplicationContextAware {
 
   private static ApplicationContext applicationContext;
 
   @Override
   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
     synchronized (this) {
-      if (StaticContextAccessor.applicationContext == null) {
-        StaticContextAccessor.applicationContext = applicationContext;
+      if (ContextAccessor.applicationContext == null) {
+        ContextAccessor.applicationContext = applicationContext;
       }
     }
 
