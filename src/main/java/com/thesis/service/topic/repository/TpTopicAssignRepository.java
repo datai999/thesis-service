@@ -12,10 +12,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TpTopicAssignRepository extends BaseRepository<TpTopicAssignTable> {
 
-  @Query(value = "SELECT tPA.* FROM tp_topic_assign tPA INNER JOIN tp_topic tP ON tPA.topic_id = tP.id"
-      + " WHERE :teacherCode = ANY(guide_teacher_code) OR :teacherCode = ANY(review_teacher_code)"
-      + " ORDER BY CASE WHEN :sort = 'semester' AND :isDescend THEN semester END DESC"
-      + " ,CASE WHEN :sort = 'semester' AND NOT :isDescend THEN semester END ASC", nativeQuery = true)
+  @Query(value = TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC
+      + "WHERE :teacherCode = ANY(guide_teacher_code) OR :teacherCode = ANY(review_teacher_code) ORDER BY"
+      + TpQueryClause.ORDER_TOPIC_SEMESTER, nativeQuery = true)
   List<TpTopicAssignTable> findByTeacherCode(@Param("teacherCode") String teacherCode, @Param("sort") String sort,
+      @Param("isDescend") Boolean isDescend);
+
+  @Query(value = TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC + "WHERE tP.name ILIKE %:value% ORDER BY"
+      + TpQueryClause.ORDER_TOPIC_SEMESTER, nativeQuery = true)
+  List<TpTopicAssignTable> searchIlikeTopicName(@Param("value") String value, @Param("sort") String sort,
       @Param("isDescend") Boolean isDescend);
 }

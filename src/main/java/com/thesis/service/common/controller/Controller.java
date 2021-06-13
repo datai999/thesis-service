@@ -3,10 +3,20 @@ package com.thesis.service.common.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequiredArgsConstructor
 public class Controller {
-  @GetMapping("/")
-  public String controller() {
-    return "Version: 6.21.13";
+
+  @GetMapping
+  public Object controller() {
+    @Data
+    class Version {
+      String version = "6.13.23";
+    }
+    return new Version();
   }
+
 }

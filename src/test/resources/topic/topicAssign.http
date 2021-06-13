@@ -15,6 +15,10 @@ Content-Type: application/json
 GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/search/teacher?code=123
 Content-Type: application/json
 
+###  search by topic
+GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/search/topic?value=q
+Content-Type: application/json
+
 ###  create many
 POST {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/all
 Content-Type: application/json

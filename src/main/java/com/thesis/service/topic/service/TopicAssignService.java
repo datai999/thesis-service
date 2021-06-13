@@ -1,7 +1,6 @@
 package com.thesis.service.topic.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.thesis.service.common.service.ABaseService;
 import com.thesis.service.person.service.StudentService;
@@ -42,8 +41,16 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
 
   @Override
   public List<TpTopicAssignTable> findByTeacherCode(String teacherCode, String sort, Boolean isDescend) {
-    return super.mainRepository.findByTeacherCode(teacherCode, sort, isDescend).stream().map(this::build)
-        .collect(Collectors.toList());
+    var response = super.mainRepository.findByTeacherCode(teacherCode, sort, isDescend);
+    response.parallelStream().forEach(super::build);
+    return response;
+  }
+
+  @Override
+  public List<TpTopicAssignTable> searchIlikeTopicName(String value, String sort, Boolean isDescend) {
+    var searchResponse = super.mainRepository.searchIlikeTopicName(value, sort, isDescend);
+    searchResponse.parallelStream().forEach(super::build);
+    return searchResponse;
   }
 
 }
