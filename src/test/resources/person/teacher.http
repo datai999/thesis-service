@@ -12,6 +12,12 @@ Content-Type: application/json
   "degree": "41"
 }
 
+###  get by email example
+POST {{http}}{{host}}{{port}}{{base-url}}/teacher/example
+Content-Type: application/json
+
+{ "email": "1@hcmut.edu.vn"}
+
 ###  create many
 POST {{http}}{{host}}{{port}}{{base-url}}/teacher/all
 Content-Type: application/json
