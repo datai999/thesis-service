@@ -1,4 +1,4 @@
 
 ###  get all
-GET {{http}}://{{host}}:{{port}}{{base-url}}/criterion/template
+GET {{http}}{{host}}{{port}}{{base-url}}/criterion/template
 Content-Type: application/json

@@ -1,26 +1,26 @@
 
 ###  get all
-GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign
+GET {{http}}{{host}}{{port}}{{base-url}}/topic/assign
 Content-Type: application/json
 
 ###  get by paging
-GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/paging?page=1&size=5&sort=id&descend=false
+GET {{http}}{{host}}{{port}}{{base-url}}/topic/assign/paging?page=1&size=5&sort=id&descend=false
 Content-Type: application/json
 
 ###  get all topic
-GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign
+GET {{http}}{{host}}{{port}}{{base-url}}/topic/assign
 Content-Type: application/json
 
 ###  search by teacher code
-GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/search/teacher?code=123
+GET {{http}}{{host}}{{port}}{{base-url}}/topic/assign/search/teacher?code=123
 Content-Type: application/json
 
 ###  search by topic
-GET {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/search/topic?value=q
+GET {{http}}{{host}}{{port}}{{base-url}}/topic/assign/search/topic?value=q
 Content-Type: application/json
 
 ###  create many
-POST {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign/all
+POST {{http}}{{host}}{{port}}{{base-url}}/topic/assign/all
 Content-Type: application/json
 
 [
@@ -33,7 +33,7 @@ Content-Type: application/json
 ]
 
 ###  create test
-POST {{http}}://{{host}}:{{port}}{{base-url}}/topic/assign
+POST {{http}}{{host}}{{port}}{{base-url}}/topic/assign
 Content-Type: application/json
 
 {

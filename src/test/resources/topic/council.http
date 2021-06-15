@@ -1,10 +1,10 @@
 
 ###  get all
-GET {{http}}://{{host}}:{{port}}{{base-url}}/council
+GET {{http}}{{host}}{{port}}{{base-url}}/council
 Content-Type: application/json
 
 ###  create one
-POST {{http}}://{{host}}:{{port}}{{base-url}}/council
+POST {{http}}{{host}}{{port}}{{base-url}}/council
 Content-Type: application/json
 
 {

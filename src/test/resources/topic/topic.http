@@ -1,16 +1,16 @@
 
 ###  get all
-GET {{http}}://{{host}}:{{port}}{{base-url}}/topic
+GET {{http}}{{host}}{{port}}{{base-url}}/topic
 Content-Type: application/json
 
 ###  create one
-POST {{http}}://{{host}}:{{port}}{{base-url}}/topic
+POST {{http}}{{host}}{{port}}{{base-url}}/topic
 Content-Type: application/json
 
 {"major":["62"]}
 
 ###  create many
-POST {{http}}://{{host}}:{{port}}{{base-url}}/topic/all
+POST {{http}}{{host}}{{port}}{{base-url}}/topic/all
 Content-Type: application/json
 
 [

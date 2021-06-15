@@ -3,7 +3,9 @@ package com.thesis.service.common.model;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -136,25 +138,36 @@ public abstract class BaseTable implements Serializable {
         targetField.setAccessible(true);
 
         var id = sourceField.get(this);
+        if (Objects.isNull(id))
+          return;
 
         if (Iterable.class.isAssignableFrom(sourceField.getType())) {
 
-          var ids = Collection.class.cast(id);
+          List<?> idOriginList = new ArrayList<>((Collection<?>) id);
+          List<?> ids = idOriginList.parallelStream().distinct().collect(Collectors.toList());
+          List<E> response;
 
-          if (!CollectionUtils.isEmpty(ids)) {
-            List<E> values;
+          if (ids.size() <= 1 && Objects.isNull(ids.get(0))) {
+            response = Collections.nCopies(idOriginList.size(), null);
+          }
+
+          else {
+
             if ("Code".equals(identify)) {
               var personService = IPersonService.class.cast(service);
-              values = personService.findAllByCode(ids);
+              response = personService
+                  .findAllByCode(ids.parallelStream().map(String::valueOf).collect(Collectors.toList()));
             } else {
-              values = service.findAllById(ids);
+              response = service
+                  .findAllById(ids.parallelStream().map(x -> Long.valueOf(x.toString())).collect(Collectors.toList()));
             }
-
-            if (Set.class.isAssignableFrom(targetField.getType()))
-              targetField.set(this, values.stream().collect(Collectors.toSet()));
-            else
-              targetField.set(this, values);
           }
+
+          if (Set.class.isAssignableFrom(targetField.getType()))
+            targetField.set(this, response.stream().collect(Collectors.toSet()));
+          else
+            targetField.set(this, response);
+
         } else {
           Object value;
           if ("Code".equals(identify)) {
