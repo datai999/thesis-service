@@ -138,6 +138,8 @@ public abstract class BaseTable implements Serializable {
         targetField.setAccessible(true);
 
         var id = sourceField.get(this);
+        if (Objects.isNull(id))
+          return;
 
         if (Iterable.class.isAssignableFrom(sourceField.getType())) {
 
