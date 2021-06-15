@@ -47,7 +47,13 @@ public class ConstDataController extends ABaseController<BrConstDataTable, Const
 
   @GetMapping("types")
   public Object findAllType() {
-    return super.findAll().parallelStream().collect(Collectors.groupingBy(BrConstDataTable::getType));
+    var mapResponse = super.findAll().parallelStream().collect(Collectors.groupingBy(BrConstDataTable::getType));
+    mapResponse.keySet().parallelStream().forEach(key -> {
+      var mapSortResponse = mapResponse.get(key).parallelStream().sorted((x, y) -> x.getNo().compareTo(y.getNo()))
+          .collect(Collectors.toList());
+      mapResponse.put(key, mapSortResponse);
+    });
+    return mapResponse;
   }
 
   @GetMapping("types/value")
