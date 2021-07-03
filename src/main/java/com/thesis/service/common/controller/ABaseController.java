@@ -1,6 +1,7 @@
 package com.thesis.service.common.controller;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import com.thesis.service.br.service.ConstDataService;
+import com.thesis.service.common.dto.request.SearchRequest;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.IService;
@@ -51,6 +53,20 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
       pageable = PageRequest.of(number, size, sortable);
     } else {
       pageable = PageRequest.of(number, size);
+    }
+
+    return service.findAll(pageable).map(entity -> service.build(entity));
+  }
+
+  @PostMapping("/search")
+  public Object search(@RequestBody @Valid SearchRequest requestBody) {
+
+    Pageable pageable = PageRequest.of(requestBody.getPage().getNumber(), requestBody.getPage().getSize());
+
+    if (!Objects.isNull(requestBody.getSort())) {
+      Sort sortable = Sort.by(requestBody.getSort().getField());
+      sortable = requestBody.getSort().getDescend() ? sortable.descending() : sortable.ascending();
+      pageable = PageRequest.of(requestBody.getPage().getNumber(), requestBody.getPage().getSize(), sortable);
     }
 
     return service.findAll(pageable).map(entity -> service.build(entity));

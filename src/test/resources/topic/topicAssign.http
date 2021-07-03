@@ -7,6 +7,17 @@ Content-Type: application/json
 GET {{http}}{{host}}{{port}}{{base-url}}/topic/assign/paging?page=1&size=5&sort=id&descend=false
 Content-Type: application/json
 
+###  get by search
+POST {{http}}{{host}}{{port}}{{base-url}}/topic/assign/search
+Content-Type: application/json
+
+{
+  "sort": {
+    "field": "semester",
+    "descend": false
+  }
+}
+
 ###  get all topic
 GET {{http}}{{host}}{{port}}{{base-url}}/topic/assign
 Content-Type: application/json
