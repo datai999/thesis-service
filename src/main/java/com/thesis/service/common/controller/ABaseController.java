@@ -63,7 +63,7 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
 
     Pageable pageable = PageRequest.of(requestBody.getPage().getNumber(), requestBody.getPage().getSize());
 
-    if (!Objects.isNull(requestBody.getSort())) {
+    if (!Objects.isNull(requestBody.getSort()) && !Objects.isNull(requestBody.getSort().getField())) {
       Sort sortable = Sort.by(requestBody.getSort().getField());
       sortable = requestBody.getSort().getDescend() ? sortable.descending() : sortable.ascending();
       pageable = PageRequest.of(requestBody.getPage().getNumber(), requestBody.getPage().getSize(), sortable);
