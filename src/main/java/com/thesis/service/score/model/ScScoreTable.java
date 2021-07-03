@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsStudentTable;
 import com.thesis.service.person.model.PsTeacherTable;
-import com.thesis.service.topic.model.TpTopicTable;
+import com.thesis.service.topic.model.TpTopicAssignTable;
 
 import org.hibernate.annotations.Type;
 
@@ -25,28 +25,24 @@ import lombok.EqualsAndHashCode;
 public class ScScoreTable extends BaseTable {
 
   @OneToOne
-  @JoinColumn(name = "topic_id")
-  private TpTopicTable topic;
+  @JoinColumn(name = "topic_assign_id")
+  private TpTopicAssignTable topicAssign;
 
   @OneToOne
   @JoinColumn(name = "criterion_template_id")
   private ScCriterionTemplateTable criterionTemplate;
 
   @OneToOne
-  @JoinColumn(name = "teacher_id")
+  @JoinColumn(name = "teacher_code", referencedColumnName = "code")
   private PsTeacherTable teacher;
 
   @OneToOne
-  @JoinColumn(name = "student_id")
+  @JoinColumn(name = "student_code", referencedColumnName = "code")
   private PsStudentTable student;
-
-  @Type(type = "long-array")
-  @Column(name = "criterion_id", columnDefinition = "bigint[]")
-  private Collection<Long> criterionId;
 
   @Type(type = "int-array")
   @Column(name = "score", columnDefinition = "integer[]")
-  private Collection<Integer> scores;
+  private Collection<Integer> score;
 
   @Type(type = "text")
   private String comment;
