@@ -58,7 +58,7 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
     return service.findAll(pageable).map(entity -> service.build(entity));
   }
 
-  @PostMapping("/search")
+  @PostMapping("/paging/search")
   public Object search(@RequestBody @Valid SearchRequest requestBody) {
 
     Pageable pageable = PageRequest.of(requestBody.getPage().getNumber(), requestBody.getPage().getSize());
