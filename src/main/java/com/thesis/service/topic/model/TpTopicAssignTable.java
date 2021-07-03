@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsStudentTable;
 import com.thesis.service.person.model.PsTeacherTable;
@@ -38,7 +39,11 @@ public class TpTopicAssignTable extends BaseTable {
   private TpTopicTable topic;
 
   @NotNull
-  private Boolean thesisFlag = true;
+  private Integer semester;
+
+  @OneToOne
+  @JoinColumn(name = "status_id")
+  private BrConstDataTable status;
 
   @JsonIgnore
   @Type(type = "list-array")
