@@ -11,6 +11,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import com.thesis.service.br.service.ConstDataService;
+import com.thesis.service.common.dto.DataBaseFieldConst;
 import com.thesis.service.common.dto.request.SearchRequest;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.repository.BaseRepository;
@@ -64,7 +65,13 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
     Pageable pageable = PageRequest.of(requestBody.getPage().getNumber(), requestBody.getPage().getSize());
 
     if (!Objects.isNull(requestBody.getSort()) && !Objects.isNull(requestBody.getSort().getField())) {
-      Sort sortable = Sort.by(requestBody.getSort().getField());
+
+      String dbField = DataBaseFieldConst.map.get(requestBody.getSort().getField());
+      if (Objects.isNull(dbField)) {
+        dbField = requestBody.getSort().getField();
+      }
+
+      Sort sortable = Sort.by(dbField);
       sortable = requestBody.getSort().getDescend() ? sortable.descending() : sortable.ascending();
       pageable = PageRequest.of(requestBody.getPage().getNumber(), requestBody.getPage().getSize(), sortable);
     }
