@@ -2,6 +2,7 @@ package com.thesis.service.topic.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,9 +31,9 @@ public class TopicAssignExtendService {
 
   public Page<TpTopicAssignTable> search(SearchRequest requestBody) {
 
-    var query = new StringBuilder(TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC);
-
-    query.append(getFilterQuery(requestBody.getFilter()));
+    var query = new StringBuilder(TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC)
+        .append(this.getWhereQuery(requestBody.getFilter()))
+        .append(this.getOrderQuery(requestBody.getSort().getField(), requestBody.getSort().getDescend()));
 
     Pageable pageable = pageService.getPageable(requestBody);
 
@@ -43,21 +44,26 @@ public class TopicAssignExtendService {
     return new PageImpl<>(result, pageable, result.size());
   }
 
-  private String getFilterQuery(Map<String, Object> fieldFilter) {
+  private String getWhereQuery(Map<String, Object> fieldFilter) {
 
     if (fieldFilter.isEmpty())
       return "";
 
-    String lang = ContextHolder.getLang();
-
     var filterQuery = new StringBuilder();
     fieldFilter.keySet().parallelStream().forEach(filterField -> {
-      String filterEntityField = String.format(DataBaseFieldConst.ENTITY.get(filterField), lang);
+      String filterEntityField = String.format(DataBaseFieldConst.ENTITY.get(filterField), ContextHolder.getLang());
       filterQuery.append("AND ").append(filterEntityField).append(" ILIKE '%").append(fieldFilter.get(filterField))
           .append("%' ");
     });
 
-    return "WHERE " + filterQuery.substring(4);
+    return String.format("WHERE %s", filterQuery.substring(4));
+  }
+
+  private String getOrderQuery(String field, boolean descend) {
+    if (Objects.isNull(field))
+      return "";
+    String sortEntityField = String.format(DataBaseFieldConst.ENTITY.get(field), ContextHolder.getLang());
+    return String.format("ORDER BY %s %s", sortEntityField, descend ? "DESC" : "ASC");
   }
 
 }

@@ -42,10 +42,6 @@ public class TopicAssignController extends ABaseController<TpTopicAssignTable, T
   @Override
   @PostMapping("/paging/search")
   public Object search(@RequestBody @Valid SearchRequest requestBody) {
-
-    if (requestBody.getFilter().isEmpty())
-      return super.search(requestBody);
-
     return this.topicAssignExtendService.search(requestBody);
   }
 
