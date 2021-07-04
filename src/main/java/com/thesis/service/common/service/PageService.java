@@ -28,13 +28,6 @@ public class PageService {
       pageable = PageRequest.of(searchRequest.getPage().getNumber(), searchRequest.getPage().getSize(), sortable);
     }
 
-    // map filter
-    searchRequest.getFilter().keySet().parallelStream().forEach(filterField -> {
-      String filterEntityField = DataBaseFieldConst.ENTITY.get(filterField);
-      searchRequest.getFilter().put(filterEntityField, searchRequest.getFilter().get(filterField));
-      searchRequest.getFilter().remove(filterField);
-    });
-
     return pageable;
   }
 

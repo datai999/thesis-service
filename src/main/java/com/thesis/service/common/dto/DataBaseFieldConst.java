@@ -11,7 +11,7 @@ public class DataBaseFieldConst {
   public static final Map<String, String> MODAL = Map.ofEntries(Map.entry("guideTeacher", "guideTeacherCode"),
       Map.entry("executeStudent", "executeStudentCode"), Map.entry("topic.major", "topic.majorId"));
 
-  public static final Map<String, String> ENTITY = Map.ofEntries(Map.entry("executeStudent", "executeStudentCode"),
+  public static final Map<String, String> ENTITY = Map.ofEntries(Map.entry("topic.name", "tP.name::::json->>'%s'"),
       Map.entry("topic.major", "topic.majorId"));
 
 }
