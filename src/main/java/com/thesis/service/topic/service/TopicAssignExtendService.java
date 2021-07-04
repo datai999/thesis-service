@@ -1,6 +1,7 @@
 package com.thesis.service.topic.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,17 +32,7 @@ public class TopicAssignExtendService {
 
     var query = new StringBuilder(TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC);
 
-    String lang = ContextHolder.getLang();
-
-    var filterQuery = new StringBuilder();
-    requestBody.getFilter().keySet().parallelStream().forEach(filterField -> {
-      String filterEntityField = String.format(DataBaseFieldConst.ENTITY.get(filterField), lang);
-      filterQuery.append("AND ").append(filterEntityField).append(" ILIKE '%")
-          .append(requestBody.getFilter().get(filterField)).append("%' ");
-    });
-    if (!requestBody.getFilter().isEmpty()) {
-      query.append("WHERE ").append(filterQuery.substring(4));
-    }
+    query.append(getFilterQuery(requestBody.getFilter()));
 
     Pageable pageable = pageService.getPageable(requestBody);
 
@@ -50,6 +41,23 @@ public class TopicAssignExtendService {
         .getResultList();
 
     return new PageImpl<>(result, pageable, result.size());
+  }
+
+  private String getFilterQuery(Map<String, Object> fieldFilter) {
+
+    if (fieldFilter.isEmpty())
+      return "";
+
+    String lang = ContextHolder.getLang();
+
+    var filterQuery = new StringBuilder();
+    fieldFilter.keySet().parallelStream().forEach(filterField -> {
+      String filterEntityField = String.format(DataBaseFieldConst.ENTITY.get(filterField), lang);
+      filterQuery.append("AND ").append(filterEntityField).append(" ILIKE '%").append(fieldFilter.get(filterField))
+          .append("%' ");
+    });
+
+    return "WHERE " + filterQuery.substring(4);
   }
 
 }
