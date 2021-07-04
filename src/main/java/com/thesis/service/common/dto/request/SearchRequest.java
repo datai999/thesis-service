@@ -8,12 +8,12 @@ import lombok.Data;
 @Data
 public class SearchRequest {
 
-  private PageRequest page = new PageRequest();
+  private PageSearchRequest page = new PageSearchRequest();
   private SortRequest sort = new SortRequest();
   private Map<String, Object> filter = new HashMap<>();
 
   @Data
-  public static class PageRequest {
+  public static class PageSearchRequest {
     private Integer number = 0;
     private Integer size = 5;
   }
