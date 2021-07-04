@@ -32,8 +32,7 @@ public class TopicAssignExtendService {
   public Page<TpTopicAssignTable> search(SearchRequest requestBody) {
 
     var query = new StringBuilder(TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC)
-        .append(this.getWhereQuery(requestBody.getFilter()))
-        .append(this.getOrderQuery(requestBody.getSort().getField(), requestBody.getSort().getDescend()));
+        .append(this.getWhereQuery(requestBody.getFilter())).append(this.getOrderQuery(requestBody.getSort()));
 
     Pageable pageable = pageService.getPageable(requestBody);
 
@@ -59,11 +58,12 @@ public class TopicAssignExtendService {
     return String.format("WHERE %s", filterQuery.substring(4));
   }
 
-  private String getOrderQuery(String field, boolean descend) {
-    if (Objects.isNull(field))
+  private String getOrderQuery(SearchRequest.SortRequest sortRequest) {
+    if (Objects.isNull(sortRequest.getField()))
       return "";
-    String sortEntityField = String.format(DataBaseFieldConst.ENTITY.get(field), ContextHolder.getLang());
-    return String.format("ORDER BY %s %s", sortEntityField, descend ? "DESC" : "ASC");
+    String sortEntityField = String.format(DataBaseFieldConst.ENTITY.get(sortRequest.getField()),
+        ContextHolder.getLang());
+    return String.format("ORDER BY %s %s", sortEntityField, sortRequest.getDescend() ? "DESC" : "ASC");
   }
 
 }
