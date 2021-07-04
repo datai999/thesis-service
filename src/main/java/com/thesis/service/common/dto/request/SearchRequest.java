@@ -1,5 +1,6 @@
 package com.thesis.service.common.dto.request;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import lombok.Data;
@@ -8,8 +9,8 @@ import lombok.Data;
 public class SearchRequest {
 
   private PageRequest page = new PageRequest();
-  private SortRequest sort;
-  private Map<String, Object> filter;
+  private SortRequest sort = new SortRequest();
+  private Map<String, Object> filter = new HashMap<>();
 
   @Data
   public static class PageRequest {
