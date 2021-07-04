@@ -66,7 +66,7 @@ public abstract class ABaseController<E extends BaseTable, S extends BaseReposit
 
     if (!Objects.isNull(requestBody.getSort()) && !Objects.isNull(requestBody.getSort().getField())) {
 
-      String dbField = DataBaseFieldConst.map.get(requestBody.getSort().getField());
+      String dbField = DataBaseFieldConst.MODAL.get(requestBody.getSort().getField());
       if (Objects.isNull(dbField)) {
         dbField = requestBody.getSort().getField();
       }

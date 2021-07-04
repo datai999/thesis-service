@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DataBaseFieldConst {
 
-  public static final Map<String, String> map = Map.ofEntries(Map.entry("guideTeacher", "guideTeacherCode"),
+  public static final Map<String, String> MODAL = Map.ofEntries(Map.entry("guideTeacher", "guideTeacherCode"),
       Map.entry("executeStudent", "executeStudentCode"), Map.entry("topic.major", "topic.majorId"));
+
+  public static final Map<String, String> ENTITY = Map.ofEntries(Map.entry("executeStudent", "executeStudentCode"),
+      Map.entry("topic.major", "topic.majorId"));
 
 }
