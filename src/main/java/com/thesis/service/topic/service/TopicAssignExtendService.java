@@ -3,6 +3,7 @@ package com.thesis.service.topic.service;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -25,6 +26,7 @@ public class TopicAssignExtendService {
   @PersistenceContext
   private EntityManager entityManager;
   private final PageService pageService;
+  private final TopicAssignService topicAssignService;
 
   public Page<TpTopicAssignTable> search(SearchRequest requestBody) {
 
@@ -58,6 +60,9 @@ public class TopicAssignExtendService {
     @SuppressWarnings("unchecked")
     List<TpTopicAssignTable> queryResponse = query.getResultList();
 
+    queryResponse = queryResponse.stream().map(topicAssignService::build)
+        .collect(Collectors.toList());
+
     return new PageImpl<>(queryResponse, pageable, totalRecord);
   }
 
@@ -83,7 +88,7 @@ public class TopicAssignExtendService {
       return "";
     String sortEntityField = String.format(DataBaseFieldConst.ENTITY.get(sortRequest.getField()),
         ContextHolder.getLang());
-    return String.format("ORDER BY (ARRAY_AGG(%s))[0] %s", sortEntityField,
+    return String.format("ORDER BY (ARRAY_AGG(%s))[1] %s", sortEntityField,
         sortRequest.getDescend() ? "DESC" : "ASC");
   }
 
