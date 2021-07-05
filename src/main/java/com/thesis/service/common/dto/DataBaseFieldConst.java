@@ -18,6 +18,11 @@ public class DataBaseFieldConst {
       Map.entry("topic.name", "tP.name::::json->>'%s'"),
       Map.entry("topic.major", "bCD_major.value::::json->>'%s'"),
       Map.entry("topic.educationMethod", "bCD_edu_method.value::::json->>'%s'"),
+      Map.entry("subjectDepartment", "bCD_subject_department.value::::json->>'%s'"),
+      Map.entry("educationMethod", "bCD_edu_method.value::::json->>'%s'"),
+      Map.entry("gender", "bCD_gender.value::::json->>'%s'"),
+      Map.entry("degree", "bCD_degree.value::::json->>'%s'"),
+      Map.entry("major", "bCD_major.value::::json->>'%s'"),
       Map.entry("guideTeacher", "pT.name"),
       Map.entry("executeStudent", "pS.name")
 
@@ -27,18 +32,23 @@ public class DataBaseFieldConst {
       Map.entry("code", "pT.code"),
       Map.entry("name", "pT.name"),
       Map.entry("email", "pT.email"),
-      Map.entry("phone", "pT.phone"),
-      Map.entry("gender", "bCD_gender.value::::json->>'%s'"),
-      Map.entry("subjectDepartment", "bCD_subject_department.value::::json->>'%s'"),
-      Map.entry("degree", "bCD_degree.value::::json->>'%s'")
+      Map.entry("phone", "pT.phone"));
+
+  public static final Map<String, String> STUDENT = Map.ofEntries(
+      Map.entry("code", "psS.code"),
+      Map.entry("name", "psS.name"),
+      Map.entry("email", "psS.email"),
+      Map.entry("phone", "psS.phone")
 
   );
 
-  public static final Map<String, String> TEACHER_ENTITY = Map.copyOf(TEACHER);
+  public static final Map<String, String> TEACHER_ENTITY = Map.copyOf(ENTITY);
+  public static final Map<String, String> STUDENT_ENTITY = Map.copyOf(ENTITY);
 
   @PostConstruct
   private void initMap() {
-    TEACHER_ENTITY.putAll(ENTITY);
+    TEACHER_ENTITY.putAll(TEACHER);
+    STUDENT_ENTITY.putAll(STUDENT);
   }
 
 }
