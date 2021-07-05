@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.thesis.service.common.dto.DataBaseFieldConst;
 import com.thesis.service.common.dto.request.SearchRequest;
@@ -31,16 +32,30 @@ public class TopicAssignExtendService {
 
   public Page<TpTopicAssignTable> search(SearchRequest requestBody) {
 
-    var query = new StringBuilder(TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC)
-        .append(this.getWhereQuery(requestBody.getFilter())).append(this.getOrderQuery(requestBody.getSort()));
-
     Pageable pageable = pageService.getPageable(requestBody);
 
-    @SuppressWarnings("unchecked")
-    List<TpTopicAssignTable> result = entityManager.createNativeQuery(query.toString(), TpTopicAssignTable.class)
-        .getResultList();
+    StringBuilder selectClause = new StringBuilder(TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC);
+    String whereClause = this.getWhereQuery(requestBody.getFilter());
+    String orderClause = this.getOrderQuery(requestBody.getSort());
 
-    return new PageImpl<>(result, pageable, result.size());
+    StringBuilder queryCount = new StringBuilder("SELECT COUNT(*) FROM (").append(selectClause).append(whereClause)
+        .append(") main_query");
+
+    Integer totalRecord = Integer
+        .valueOf(entityManager.createNativeQuery(queryCount.toString()).getSingleResult().toString());
+
+    if (totalRecord == 0)
+      return new PageImpl<>(List.of(), pageable, totalRecord);
+
+    Query query = entityManager.createNativeQuery(selectClause.append(whereClause).append(orderClause).toString(),
+        TpTopicAssignTable.class);
+    query.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
+    query.setMaxResults(pageable.getPageSize());
+
+    @SuppressWarnings("unchecked")
+    List<TpTopicAssignTable> queryResponse = query.getResultList();
+
+    return new PageImpl<>(queryResponse, pageable, totalRecord);
   }
 
   private String getWhereQuery(Map<String, Object> fieldFilter) {
