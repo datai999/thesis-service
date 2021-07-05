@@ -32,8 +32,7 @@ public class TopicAssignExtendService {
 
     Pageable pageable = pageService.getPageable(requestBody);
 
-    StringBuilder selectClause =
-        new StringBuilder(TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC_LEFT_JOIN_TEACHER);
+    StringBuilder selectClause = new StringBuilder(TpQueryClause.TOPIC_ASSIGN_SEARCH);
     String whereClause = this.getWhereQuery(requestBody.getFilter());
     String groupClause = "GROUP BY tPA.id ";
     String orderClause = this.getOrderQuery(requestBody.getSort());

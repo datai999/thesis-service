@@ -16,6 +16,7 @@ public class DataBaseFieldConst {
       Map.entry("topic.semester", "tP.semester"),
       Map.entry("topic.name", "tP.name::::json->>'%s'"),
       Map.entry("topic.major", "bCD_major.value::::json->>'%s'"),
+      Map.entry("topic.educationMethod", "bCD_edu_method.value::::json->>'%s'"),
       Map.entry("guideTeacher", "pT.name")
 
   );
