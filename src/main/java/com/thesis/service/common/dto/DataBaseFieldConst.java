@@ -24,7 +24,10 @@ public class DataBaseFieldConst {
   );
 
   public static final Map<String, String> TEACHER = Map.ofEntries(
-      Map.entry("code", "pT.code")
+      Map.entry("code", "pT.code"),
+      Map.entry("name", "pT.name"),
+      Map.entry("email", "pT.email"),
+      Map.entry("phone", "pT.phone")
 
   );
 
