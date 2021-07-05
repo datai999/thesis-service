@@ -30,14 +30,17 @@ public class TopicAssignExtendService {
 
     Pageable pageable = pageService.getPageable(requestBody);
 
-    StringBuilder selectClause = new StringBuilder(TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC);
+    StringBuilder selectClause =
+        new StringBuilder(TpQueryClause.TOPIC_ASSIGN_INNER_JOIN_TOPIC_LEFT_JOIN_TEACHER);
     String whereClause = this.getWhereQuery(requestBody.getFilter());
+    String groupClause = "GROUP BY tPA.id ";
     String orderClause = this.getOrderQuery(requestBody.getSort());
 
     StringBuilder queryCount =
-        new StringBuilder("SELECT COUNT(*) FROM (")
+        new StringBuilder("SELECT COUNT(*) FROM ( ")
             .append(selectClause)
             .append(whereClause)
+            .append(groupClause)
             .append(") main_query");
 
     Integer totalRecord = Integer.valueOf(
@@ -47,7 +50,7 @@ public class TopicAssignExtendService {
       return new PageImpl<>(List.of(), pageable, totalRecord);
 
     Query query = entityManager.createNativeQuery(
-        selectClause.append(whereClause).append(orderClause).toString(),
+        selectClause.append(whereClause).append(groupClause).append(orderClause).toString(),
         TpTopicAssignTable.class);
     query.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
     query.setMaxResults(pageable.getPageSize());
@@ -80,7 +83,7 @@ public class TopicAssignExtendService {
       return "";
     String sortEntityField = String.format(DataBaseFieldConst.ENTITY.get(sortRequest.getField()),
         ContextHolder.getLang());
-    return String.format("ORDER BY %s %s", sortEntityField,
+    return String.format("ORDER BY (ARRAY_AGG(%s))[0] %s", sortEntityField,
         sortRequest.getDescend() ? "DESC" : "ASC");
   }
 
