@@ -2,6 +2,7 @@ package com.thesis.service.topic.service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import com.thesis.service.common.dto.DataBaseFieldConst;
 import com.thesis.service.common.dto.request.SearchRequest;
 import com.thesis.service.common.service.PageService;
 import com.thesis.service.topic.model.TpTopicAssignTable;
@@ -24,7 +25,11 @@ public class TopicAssignExtendService {
     String selectClause = TpQueryClause.TOPIC_ASSIGN_SEARCH;
     String groupClause = "GROUP BY tPA.id ";
 
-    return pageService.search(requestBody, TpTopicAssignTable.class, topicAssignService,
+    return pageService.search(
+        requestBody,
+        DataBaseFieldConst.ENTITY,
+        TpTopicAssignTable.class,
+        topicAssignService,
         selectClause, groupClause);
   }
 

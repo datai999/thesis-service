@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import com.thesis.service.common.dto.DataBaseFieldConst;
 import com.thesis.service.common.dto.request.SearchRequest;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.utils.ContextHolder;
@@ -25,13 +24,13 @@ public class PageService {
   @PersistenceContext
   private EntityManager entityManager;
 
-  public Pageable getPageable(SearchRequest searchRequest) {
+  public Pageable getPageable(SearchRequest searchRequest, Map<String, String> dbFieldNameMap) {
 
     // map sort
     String sortEntityField = searchRequest.getSort().getField();
     if (Objects.nonNull(sortEntityField)) {
       sortEntityField = ObjectUtils.defaultIfNull(
-          DataBaseFieldConst.ENTITY.get(sortEntityField),
+          dbFieldNameMap.get(sortEntityField),
           sortEntityField);
     }
 
@@ -63,7 +62,8 @@ public class PageService {
         entityManager.createNativeQuery(queryCount.toString()).getSingleResult().toString());
   }
 
-  public String getSearchWhereQuery(Map<String, Object> fieldFilter) {
+  public String getSearchWhereQuery(Map<String, Object> fieldFilter,
+      Map<String, String> dbFieldNameMap) {
 
     if (fieldFilter.isEmpty())
       return "";
@@ -71,7 +71,7 @@ public class PageService {
     var filterQuery = new StringBuilder();
     fieldFilter.keySet().stream().forEach(filterField -> {
       String filterEntityField =
-          String.format(DataBaseFieldConst.ENTITY.get(filterField), ContextHolder.getLang());
+          String.format(dbFieldNameMap.get(filterField), ContextHolder.getLang());
       filterQuery.append("AND ").append(filterEntityField).append("::::TEXT ILIKE '%")
           .append(fieldFilter.get(filterField))
           .append("%' ");
@@ -80,12 +80,13 @@ public class PageService {
     return String.format("WHERE %s", filterQuery.substring(4));
   }
 
-  public String getSearchOrderQuery(SearchRequest.SortRequest sortRequest) {
+  public String getSearchOrderQuery(SearchRequest.SortRequest sortRequest,
+      Map<String, String> dbFieldNameMap) {
 
     if (Objects.isNull(sortRequest.getField()))
       return "";
 
-    String sortEntityField = String.format(DataBaseFieldConst.ENTITY.get(sortRequest.getField()),
+    String sortEntityField = String.format(dbFieldNameMap.get(sortRequest.getField()),
         ContextHolder.getLang());
 
     var orderClause = new StringBuilder("ORDER BY ");
@@ -106,17 +107,18 @@ public class PageService {
 
   public <E extends BaseTable> Page<E> search(
       SearchRequest requestBody,
+      Map<String, String> dbFieldNameMap,
       Class<E> response,
       IService<E> buildService,
       String selectClause,
       String groupClause) {
 
-    String whereClause = this.getSearchWhereQuery(requestBody.getFilter());
-    String orderClause = this.getSearchOrderQuery(requestBody.getSort());
+    String whereClause = this.getSearchWhereQuery(requestBody.getFilter(), dbFieldNameMap);
+    String orderClause = this.getSearchOrderQuery(requestBody.getSort(), dbFieldNameMap);
 
     int totalRecord = this.getTotalRecord(selectClause, whereClause, groupClause);
 
-    Pageable pageable = this.getPageable(requestBody);
+    Pageable pageable = this.getPageable(requestBody, dbFieldNameMap);
 
     if (totalRecord == 0)
       return new PageImpl<>(List.of(), pageable, totalRecord);
