@@ -1,13 +1,19 @@
 package com.thesis.service.common.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import com.thesis.service.common.dto.DataBaseFieldConst;
 import com.thesis.service.common.dto.request.SearchRequest;
+import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.utils.ContextHolder;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -96,5 +102,43 @@ public class PageService {
     return orderClause.toString();
   }
 
+
+
+  public <E extends BaseTable> Page<E> search(
+      SearchRequest requestBody,
+      Class<E> response,
+      IService<E> buildService,
+      String selectClause,
+      String groupClause) {
+
+    String whereClause = this.getSearchWhereQuery(requestBody.getFilter());
+    String orderClause = this.getSearchOrderQuery(requestBody.getSort());
+
+    int totalRecord = this.getTotalRecord(selectClause, whereClause, groupClause);
+
+    Pageable pageable = this.getPageable(requestBody);
+
+    if (totalRecord == 0)
+      return new PageImpl<>(List.of(), pageable, totalRecord);
+
+    String queryClause =
+        new StringBuilder(selectClause)
+            .append(whereClause)
+            .append(groupClause)
+            .append(orderClause)
+            .toString();
+
+    Query query = entityManager.createNativeQuery(queryClause, response);
+    query.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
+    query.setMaxResults(pageable.getPageSize());
+
+    @SuppressWarnings("unchecked")
+    List<E> queryResponse = query.getResultList();
+
+    queryResponse = queryResponse.stream().map(buildService::build)
+        .collect(Collectors.toList());
+
+    return new PageImpl<>(queryResponse, pageable, totalRecord);
+  }
 
 }
