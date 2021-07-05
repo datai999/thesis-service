@@ -70,8 +70,8 @@ public class PageService {
 
     var filterQuery = new StringBuilder();
     fieldFilter.keySet().stream().forEach(filterField -> {
-      String filterEntityField =
-          String.format(dbFieldNameMap.get(filterField), ContextHolder.getLang());
+      String dbFieldForm = dbFieldNameMap.get(filterField);
+      String filterEntityField = String.format(dbFieldForm, ContextHolder.getLang());
       filterQuery.append("AND ").append(filterEntityField).append("::::TEXT ILIKE '%")
           .append(fieldFilter.get(filterField))
           .append("%' ");

@@ -1,12 +1,25 @@
 package com.thesis.service.common.dto;
 
 import java.util.Map;
-import javax.annotation.PostConstruct;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DataBaseFieldConst {
+
+  private static Map<String, String> overrideMap(
+      Map<String, String> originMap,
+      Map<String, String> newMap) {
+
+    return Stream.of(originMap, newMap)
+        .flatMap(map -> map.entrySet().stream())
+        .collect(Collectors.toMap(
+            Map.Entry::getKey,
+            Map.Entry::getValue,
+            (map1, map2) -> map2));
+  }
 
   public static final Map<String, String> MODAL = Map.ofEntries(
       Map.entry("guideTeacher", "guideTeacherCode"),
@@ -42,13 +55,10 @@ public class DataBaseFieldConst {
 
   );
 
-  public static final Map<String, String> TEACHER_ENTITY = Map.copyOf(ENTITY);
-  public static final Map<String, String> STUDENT_ENTITY = Map.copyOf(ENTITY);
+  public static final Map<String, String> TEACHER_ENTITY =
+      DataBaseFieldConst.overrideMap(ENTITY, TEACHER);
 
-  @PostConstruct
-  private void initMap() {
-    TEACHER_ENTITY.putAll(TEACHER);
-    STUDENT_ENTITY.putAll(STUDENT);
-  }
+  public static final Map<String, String> STUDENT_ENTITY =
+      DataBaseFieldConst.overrideMap(ENTITY, STUDENT);
 
 }
