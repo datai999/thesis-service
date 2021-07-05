@@ -53,9 +53,9 @@ public class PageService {
   public int getTotalRecord(String selectClause, String whereClause, String groupClause) {
     StringBuilder queryCount =
         new StringBuilder("SELECT COUNT(*) FROM ( ")
-            .append(selectClause)
-            .append(whereClause)
-            .append(groupClause)
+            .append(selectClause).append(" ")
+            .append(whereClause).append(" ")
+            .append(groupClause).append(" ")
             .append(") main_query");
 
     return Integer.valueOf(
@@ -124,10 +124,10 @@ public class PageService {
       return new PageImpl<>(List.of(), pageable, totalRecord);
 
     String queryClause =
-        new StringBuilder(selectClause)
-            .append(whereClause)
-            .append(groupClause)
-            .append(orderClause)
+        new StringBuilder(selectClause).append(" ")
+            .append(whereClause).append(" ")
+            .append(groupClause).append(" ")
+            .append(orderClause).append(" ")
             .toString();
 
     Query query = entityManager.createNativeQuery(queryClause, response);
