@@ -6,7 +6,8 @@ public interface TpQueryClause {
       "SELECT tPA.* FROM tp_topic_assign tPA INNER JOIN tp_topic tP ON tPA.topic_id = tP.id ";
 
   String TOPIC_ASSIGN_INNER_JOIN_TOPIC_LEFT_JOIN_TEACHER = TOPIC_ASSIGN_INNER_JOIN_TOPIC
-      + "LEFT JOIN ps_teacher pT ON pT.code =  ANY(tPA.guide_teacher_code) ";
+      + "LEFT JOIN ps_teacher pT ON pT.code =  ANY(tPA.guide_teacher_code) "
+      + "LEFT JOIN br_const_data bCD ON bCD.id = ANY(tP.major_id) ";
 
   String ORDER_TOPIC_SEMESTER =
       " CASE WHEN :sort = 'semester' AND :isDescend THEN tP.semester END DESC"

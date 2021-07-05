@@ -14,7 +14,7 @@ public class DataBaseFieldConst {
   public static final Map<String, String> ENTITY = Map.ofEntries(
       Map.entry("topic.code", "tP.code"),
       Map.entry("topic.semester", "tP.semester"),
-      Map.entry("topic.major", "tP.major"),
+      Map.entry("topic.major", "bCD.value::::json->>'%s'"),
       Map.entry("topic.name", "tP.name::::json->>'%s'"),
       Map.entry("guideTeacher", "pT.name")
 

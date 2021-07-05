@@ -88,8 +88,17 @@ public class TopicAssignExtendService {
       return "";
     String sortEntityField = String.format(DataBaseFieldConst.ENTITY.get(sortRequest.getField()),
         ContextHolder.getLang());
-    return String.format("ORDER BY (ARRAY_AGG(%s))[1] %s", sortEntityField,
-        sortRequest.getDescend() ? "DESC" : "ASC");
+
+    var orderClause = new StringBuilder("ORDER BY ");
+
+    orderClause.append(String.format(
+        "CARDINALITY(ARRAY_REMOVE(ARRAY_AGG(%s), NULL)) %s",
+        sortEntityField, sortRequest.getDescend() ? "DESC" : "ASC"));
+    orderClause.append(String.format(
+        ", (ARRAY_AGG(%s))[1] %s",
+        sortEntityField, !sortRequest.getDescend() ? "DESC" : "ASC"));
+
+    return orderClause.toString();
   }
 
 }
