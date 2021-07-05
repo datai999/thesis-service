@@ -44,6 +44,10 @@ Content-Type: application/json
   { "type": "gender", "value": {"en":"Male", "vi":"Nam"}},
   { "type": "gender", "value": {"en":"Female", "vi":"Nữ"}},
 
+  { "type": "topicStatus", "no": 1, "value": {"en":"Outline","vi":"Đề cương"}},
+  { "type": "topicStatus", "no": 2, "value": {"en":"Thesis","vi":"Luận văn"}},
+  { "type": "topicStatus", "no": 3, "value": {"en":"Reserve","vi":"Bảo lưu"}},
+
   { "type": "setting.topicTemplate", "value": {"en":"Topic evaluation form", "vi":"Mẫu đánh giá đề tài"}},
   { "type": "setting.thesisTemplate", "value": {"en":"Thesis evaluation form", "vi":"Mẫu đánh giá luận văn"}}
 

@@ -14,7 +14,7 @@ public class Controller {
   public Object controller() {
     @Data
     class Version {
-      String version = "6.17.00";
+      String version = "7.06.01";
     }
     return new Version();
   }
