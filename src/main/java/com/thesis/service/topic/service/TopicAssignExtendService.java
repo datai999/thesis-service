@@ -90,11 +90,13 @@ public class TopicAssignExtendService {
 
     var orderClause = new StringBuilder("ORDER BY ");
 
+    // FIXME order by sum record field
+    // orderClause.append(String.format(
+    // "CARDINALITY(ARRAY_REMOVE(ARRAY_AGG(%s), NULL)) %s",
+    // sortEntityField, sortRequest.getDescend() ? "DESC" : "ASC"));
+
     orderClause.append(String.format(
-        "CARDINALITY(ARRAY_REMOVE(ARRAY_AGG(%s), NULL)) %s",
-        sortEntityField, sortRequest.getDescend() ? "DESC" : "ASC"));
-    orderClause.append(String.format(
-        ", (ARRAY_AGG(%s))[1] %s",
+        " (ARRAY_AGG(%s))[1] %s",
         sortEntityField, !sortRequest.getDescend() ? "DESC" : "ASC"));
 
     return orderClause.toString();
