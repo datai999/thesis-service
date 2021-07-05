@@ -40,7 +40,11 @@ public class TeacherService extends APersonBaseService<PsTeacherTable, PsTeacher
 
   public Page<PsTeacherTable> search(SearchRequest requestBody) {
 
-    String selectClause = "SELECT pT.* FROM ps_teacher pT";
+    String selectClause = "SELECT pT.* FROM ps_teacher pT "
+        + "LEFT JOIN br_const_data bCD_gender ON bCD_gender.id = pT.gender_id "
+        + "LEFT JOIN br_const_data bCD_subject_department ON bCD_subject_department.id = pT.subject_department_id "
+        + "LEFT JOIN br_const_data bCD_degree ON bCD_degree.id = pT.degree_id ";
+
     String groupClause = "GROUP BY pT.id";
 
     return pageService.search(

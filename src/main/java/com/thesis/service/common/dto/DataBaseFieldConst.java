@@ -27,7 +27,10 @@ public class DataBaseFieldConst {
       Map.entry("code", "pT.code"),
       Map.entry("name", "pT.name"),
       Map.entry("email", "pT.email"),
-      Map.entry("phone", "pT.phone")
+      Map.entry("phone", "pT.phone"),
+      Map.entry("gender", "bCD_gender.value::::json->>'%s'"),
+      Map.entry("subjectDepartment", "bCD_subject_department.value::::json->>'%s'"),
+      Map.entry("degree", "bCD_degree.value::::json->>'%s'")
 
   );
 
