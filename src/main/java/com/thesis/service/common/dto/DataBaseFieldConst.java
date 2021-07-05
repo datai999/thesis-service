@@ -1,6 +1,7 @@
 package com.thesis.service.common.dto;
 
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -21,5 +22,17 @@ public class DataBaseFieldConst {
       Map.entry("executeStudent", "pS.name")
 
   );
+
+  public static final Map<String, String> TEACHER = Map.ofEntries(
+      Map.entry("code", "pT.code")
+
+  );
+
+  public static final Map<String, String> TEACHER_ENTITY = Map.copyOf(TEACHER);
+
+  @PostConstruct
+  private void initMap() {
+    TEACHER_ENTITY.putAll(ENTITY);
+  }
 
 }
