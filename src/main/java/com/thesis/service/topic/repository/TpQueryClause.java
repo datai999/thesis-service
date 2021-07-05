@@ -11,6 +11,7 @@ public final class TpQueryClause {
 
   public static final String TOPIC_ASSIGN_SEARCH = TOPIC_ASSIGN_INNER_JOIN_TOPIC
       + "LEFT JOIN ps_teacher pT ON pT.code =  ANY(tPA.guide_teacher_code) "
+      + "LEFT JOIN ps_student pS ON pS.code =  ANY(tPA.execute_student_code) "
       + "LEFT JOIN br_const_data bCD_major ON bCD_major.id = ANY(tP.major_id) "
       + "LEFT JOIN br_const_data bCD_edu_method ON bCD_edu_method.id = tP.education_method_id "
 
