@@ -71,10 +71,10 @@ public class TopicAssignExtendService {
       return "";
 
     var filterQuery = new StringBuilder();
-    fieldFilter.keySet().parallelStream().forEach(filterField -> {
+    fieldFilter.keySet().stream().forEach(filterField -> {
       String filterEntityField =
           String.format(DataBaseFieldConst.ENTITY.get(filterField), ContextHolder.getLang());
-      filterQuery.append("AND ").append(filterEntityField).append(" ILIKE '%")
+      filterQuery.append("AND ").append(filterEntityField).append("::::TEXT ILIKE '%")
           .append(fieldFilter.get(filterField))
           .append("%' ");
     });
