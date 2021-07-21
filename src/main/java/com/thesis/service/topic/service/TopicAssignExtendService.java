@@ -27,7 +27,7 @@ public class TopicAssignExtendService {
 
     return pageService.search(
         requestBody,
-        DataBaseFieldConst.ENTITY,
+        DataBaseFieldConst.TOPIC_ASSIGN_ENTITY,
         TpTopicAssignTable.class,
         topicAssignService,
         selectClause, groupClause);
