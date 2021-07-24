@@ -31,7 +31,7 @@ GET {{http}}{{host}}{{port}}{{base-url}}/topic/assign/search/topic?value=q
 Content-Type: application/json
 
 ### find by topic id
-GET {{http}}{{host}}{{port}}{{base-url}}/topic/assign/search/topic/1
+GET {{http}}{{host}}{{port}}{{base-url}}/topic/assign/search/topic/164
 Content-Type: application/json
 
 ###  create many

@@ -44,9 +44,9 @@ public class TopicAssignController extends ABaseController<TpTopicAssignTable, T
     return this.topicAssignExtendService.search(requestBody);
   }
 
-  @GetMapping("search/topic/{id}")
-  public Object search(@PathVariable long id) {
-    return id;
+  @GetMapping("search/topic/{topicId}")
+  public Object search(@PathVariable long topicId) {
+    return super.service.findByTopicIdOrderSemester(topicId);
   }
 
 }
