@@ -9,6 +9,7 @@ import com.thesis.service.topic.model.TpTopicAssignTable;
 import com.thesis.service.topic.service.TopicAssignExtendService;
 import com.thesis.service.topic.service.TopicAssignService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,11 @@ public class TopicAssignController extends ABaseController<TpTopicAssignTable, T
   @PostMapping("/paging/search")
   public Object search(@RequestBody @Valid SearchRequest requestBody) {
     return this.topicAssignExtendService.search(requestBody);
+  }
+
+  @GetMapping("search/topic/{id}")
+  public Object search(@PathVariable long id) {
+    return id;
   }
 
 }
