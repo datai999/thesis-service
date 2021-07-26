@@ -1,8 +1,10 @@
 package com.thesis.service.common.dto;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.apache.commons.lang3.SerializationUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +21,15 @@ public class DataBaseFieldConst {
             Map.Entry::getKey,
             Map.Entry::getValue,
             (map1, map2) -> map2));
+  }
+
+  private static Map<String, String> put(
+      Map<String, String> source,
+      String key,
+      String value) {
+    var result = SerializationUtils.clone(new HashMap<>(source));
+    result.put(key, value);
+    return result;
   }
 
   public static final Map<String, String> MODAL = Map.ofEntries(
@@ -60,5 +71,8 @@ public class DataBaseFieldConst {
 
   public static final Map<String, String> STUDENT_ENTITY =
       DataBaseFieldConst.overrideMap(ENTITY, STUDENT);
+
+  public static final Map<String, String> TOPIC_ASSIGN_ENTITY =
+      DataBaseFieldConst.put(ENTITY, "id", "tPA.id");
 
 }
