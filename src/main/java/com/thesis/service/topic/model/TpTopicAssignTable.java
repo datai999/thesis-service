@@ -1,26 +1,17 @@
 package com.thesis.service.topic.model;
 
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsStudentTable;
 import com.thesis.service.person.model.PsTeacherTable;
-
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Type;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -34,48 +25,25 @@ import lombok.NoArgsConstructor;
 public class TpTopicAssignTable extends BaseTable {
 
   @NotNull
-  @OneToOne(cascade = { CascadeType.PERSIST })
-  @JoinColumn(name = "topic_id", referencedColumnName = "id")
+  @OneToOne(cascade = {CascadeType.PERSIST})
   private TpTopicTable topic;
 
   @NotNull
   private Integer semester;
 
   @OneToOne
-  @JoinColumn(name = "status_id")
   private BrConstDataTable status;
 
-  @JsonIgnore
-  @Type(type = "list-array")
-  @Column(name = "execute_student_code", columnDefinition = "varchar[]")
-  private List<String> executeStudentCode;
+  @OneToMany
+  private List<PsTeacherTable> guideTeachers;
 
-  @JsonIgnore
-  @Type(type = "list-array")
-  @Column(name = "guide_teacher_code", columnDefinition = "varchar[]")
-  private List<String> guideTeacherCode;
+  @OneToMany
+  private List<PsStudentTable> students;
 
-  @JsonIgnore
-  @Type(type = "list-array")
-  @Column(name = "review_teacher_code", columnDefinition = "varchar[]")
-  private List<String> reviewTeacherCode;
+  @OneToMany
+  private List<PsTeacherTable> reviewTeachers;
 
   @OneToOne
-  @JoinColumn(name = "council_id")
   private TpCouncilTable council;
-
-  @Transient
-  private Set<PsStudentTable> executeStudent;
-
-  @Transient
-  private Set<PsTeacherTable> guideTeacher;
-
-  @Transient
-  private Set<PsTeacherTable> reviewTeacher;
-
-  @Override
-  public String getTableName() {
-    return "tp_topic_assign";
-  }
 
 }

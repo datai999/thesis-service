@@ -2,12 +2,12 @@ package com.thesis.service.person.model;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.model.PersonBaseTable;
-
+import com.thesis.service.topic.model.TpTopicAssignTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -25,9 +25,7 @@ public class PsTeacherTable extends PersonBaseTable {
   @JoinColumn(name = "degree_id")
   private BrConstDataTable degree;
 
-  @Override
-  public String getTableName() {
-    return "ps_teacher";
-  }
+  @ManyToOne
+  private TpTopicAssignTable topicAssign;
 
 }
