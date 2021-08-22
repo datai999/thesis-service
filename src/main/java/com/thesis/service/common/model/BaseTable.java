@@ -10,13 +10,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.IService;
@@ -25,14 +23,12 @@ import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import com.vladmihalcea.hibernate.type.array.LongArrayType;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.TextType;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.CollectionUtils;
-
 import lombok.Data;
 
 @Data
@@ -59,7 +55,9 @@ public abstract class BaseTable implements Serializable {
   private Instant updatedAt;
 
   @JsonIgnore
-  public abstract String getTableName();
+  public String getTableName() {
+    return null;
+  }
 
   @SuppressWarnings("unchecked")
   public Object mapId() {
@@ -120,7 +118,8 @@ public abstract class BaseTable implements Serializable {
   }
 
   @SuppressWarnings("unchecked")
-  public <E extends BaseTable, S extends BaseRepository<E> & IService<E>> void setById(S service, String... fields) {
+  public <E extends BaseTable, S extends BaseRepository<E> & IService<E>> void setById(S service,
+      String... fields) {
 
     List.of(fields).parallelStream().forEach(field -> {
       var identify = "Code";
@@ -156,10 +155,12 @@ public abstract class BaseTable implements Serializable {
             if ("Code".equals(identify)) {
               var personService = IPersonService.class.cast(service);
               response = personService
-                  .findAllByCode(ids.parallelStream().map(String::valueOf).collect(Collectors.toList()));
+                  .findAllByCode(
+                      ids.parallelStream().map(String::valueOf).collect(Collectors.toList()));
             } else {
               response = service
-                  .findAllById(ids.parallelStream().map(x -> Long.valueOf(x.toString())).collect(Collectors.toList()));
+                  .findAllById(ids.parallelStream().map(x -> Long.valueOf(x.toString()))
+                      .collect(Collectors.toList()));
             }
           }
 
