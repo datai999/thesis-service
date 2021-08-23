@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
+import com.thesis.service.common.model.SyMajorTable;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import lombok.Data;
@@ -37,7 +38,7 @@ public class TpTopicTable extends BaseTable {
   private List<Long> majorId;
 
   @Transient
-  private List<BrConstDataTable> major;
+  private List<SyMajorTable> major;
 
   @OneToOne
   private BrConstDataTable educationMethod;
