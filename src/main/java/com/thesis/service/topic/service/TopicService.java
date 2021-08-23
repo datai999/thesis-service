@@ -17,7 +17,7 @@ public class TopicService extends ABaseService<TpTopicTable, TpTopicRepository> 
   @Override
   public void preBuild(TpTopicTable topic) {
     if (!CollectionUtils.isEmpty(topic.getMajorId()))
-      topic.setMajor(majorRepository.findAllById(topic.getMajorId()));
+      topic.setMajors(majorRepository.findAllById(topic.getMajorId()));
   }
 
 }

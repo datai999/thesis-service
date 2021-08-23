@@ -38,7 +38,7 @@ public class TpTopicTable extends BaseTable {
   private List<Long> majorId;
 
   @Transient
-  private List<SyMajorTable> major;
+  private List<SyMajorTable> majors;
 
   @OneToOne
   private BrConstDataTable educationMethod;
