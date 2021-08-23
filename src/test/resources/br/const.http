@@ -12,7 +12,7 @@ Content-Type: application/json
 POST {{http}}{{host}}{{port}}{{base-url}}/const/example
 Content-Type: application/json
 
-{ "type": "subjectDepartment"}
+{ "type": "educationMethod"}
 
 
 ###  create const
