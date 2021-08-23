@@ -31,9 +31,6 @@ Content-Type: application/json
   { "type": "degree", "no": 3, "value": {"en":"Doctor", "vi":"Tiến sĩ"}},
   { "type": "degree", "no": 4, "value": {"en":"Professor","en":"Giáo sư"}},
 
-  { "type": "major", "value": {"en":"Computer Science","vi":"Khoa học máy tính"}},
-  { "type": "major", "value": {"en":"Computer Engineering","vi":"Kỹ thuật máy tính"}},
-
   { "type": "educationMethod", "value": {"en":"Formal","vi":"Chính quy"}},
   { "type": "educationMethod", "value": {"en":"CLC","vi":"Tiên tiến chất lượng cao"}},
 

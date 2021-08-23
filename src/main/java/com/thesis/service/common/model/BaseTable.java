@@ -2,10 +2,10 @@ package com.thesis.service.common.model;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -13,8 +13,11 @@ import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.IService;
@@ -23,10 +26,10 @@ import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import com.vladmihalcea.hibernate.type.array.LongArrayType;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.TextType;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.CollectionUtils;
 import lombok.Data;
@@ -42,17 +45,21 @@ import lombok.Data;
 public abstract class BaseTable implements Serializable {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Boolean deleted = false;
+  @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
+  protected boolean deleted;
 
-  @Column(updatable = false)
-  @CreationTimestamp
-  private Instant createdAt;
+  @CreatedDate
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+  protected Date createdAt = new Date();
 
-  @UpdateTimestamp
-  private Instant updatedAt;
+  @LastModifiedDate
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+  protected Date updatedAt = new Date();
 
   @JsonIgnore
   public String getTableName() {
