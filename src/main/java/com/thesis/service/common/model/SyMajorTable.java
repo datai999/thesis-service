@@ -7,8 +7,10 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @DynamicUpdate
@@ -17,4 +19,8 @@ public class SyMajorTable extends BaseTable {
 
   @Type(type = "json")
   private MultiLangDto name;
+
+  public SyMajorTable(String id) {
+    this.setId(Long.parseLong(id));
+  }
 }

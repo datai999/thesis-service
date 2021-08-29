@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
 import org.hibernate.annotations.Type;
@@ -20,7 +19,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class BrConstDataTable extends BaseTable {
 
-  @NotNull
+  @Column(nullable = false)
   private String type;
 
   @Type(type = "json")
@@ -29,13 +28,12 @@ public class BrConstDataTable extends BaseTable {
   @Column(columnDefinition = "INTEGER DEFAULT 0")
   private Integer no;
 
-  @Override
-  public String getTableName() {
-    return "br_const_data";
-  }
-
   public BrConstDataTable(String id) {
     this.setId(Long.parseLong(id));
+  }
+
+  public BrConstDataTable(Integer id) {
+    this(id.toString());
   }
 
   public BrConstDataTable(Object id) {
