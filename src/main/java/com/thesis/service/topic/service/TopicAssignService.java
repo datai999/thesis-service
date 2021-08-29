@@ -23,7 +23,6 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
 
   @Override
   protected void preBuild(TpTopicAssignTable topicAssign) {
-    topicAssign.setTopic(topicService.build(topicAssign.getTopic()));
     topicAssign.setCouncil(councilService.build(topicAssign.getCouncil()));
 
     topicAssign.setById(studentService, "executeStudent");
@@ -33,7 +32,6 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
   @Override
   public <S extends TpTopicAssignTable> S save(S entity) {
     entity.mapId();
-    entity.setTopic(topicService.save(entity.getTopic()));
     return mainRepository.save(entity);
   }
 

@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.person.model.PsStudentTable;
@@ -24,11 +23,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "tp_topic_assign")
 public class TpTopicAssignTable extends BaseTable {
 
-  @NotNull
   @OneToOne(cascade = {CascadeType.PERSIST})
   private TpTopicTable topic;
 
-  @NotNull
   private Integer semester;
 
   @OneToOne

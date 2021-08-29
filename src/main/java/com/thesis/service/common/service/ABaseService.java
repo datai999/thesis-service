@@ -23,7 +23,9 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   @Autowired
   protected BrConstDataRepository constRepository;
 
-  protected abstract void preBuild(T entity);
+  protected void preBuild(T entity) {
+
+  }
 
   @Override
   public T build(T entity) {
