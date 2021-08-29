@@ -2,7 +2,7 @@ package com.thesis.service.topic.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import com.thesis.service.common.service.ABaseService;
+import com.thesis.service.common.service.AbstractBaseService;
 import com.thesis.service.person.service.StudentService;
 import com.thesis.service.person.service.TeacherService;
 import com.thesis.service.topic.model.TpTopicAssignTable;
@@ -12,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopicAssignRepository>
-    implements TpTopicAssignRepository {
+public class TopicAssignService
+    extends AbstractBaseService<TpTopicAssignTable, TpTopicAssignRepository> {
 
   final StudentService studentService;
   final TeacherService teacherService;
@@ -21,44 +21,23 @@ public class TopicAssignService extends ABaseService<TpTopicAssignTable, TpTopic
   final TopicService topicService;
   final CouncilService councilService;
 
-  @Override
-  protected void preBuild(TpTopicAssignTable topicAssign) {
-    topicAssign.setCouncil(councilService.build(topicAssign.getCouncil()));
-
-    topicAssign.setById(studentService, "executeStudent");
-    topicAssign.setById(teacherService, "guideTeacher", "reviewTeacher");
-  }
-
-  @Override
-  public <S extends TpTopicAssignTable> S save(S entity) {
-    entity.mapId();
-    return mainRepository.save(entity);
-  }
-
-  @Override
   public List<TpTopicAssignTable> findByTeacherCode(
       String teacherCode,
       String sort,
       Boolean isDescend) {
-    var response = super.mainRepository.findByTeacherCode(teacherCode, sort, isDescend);
-    response.parallelStream().forEach(super::build);
-    return response;
+    return super.repository.findByTeacherCode(teacherCode, sort, isDescend);
   }
 
-  @Override
   public List<TpTopicAssignTable> searchIlikeTopicName(
       String value,
       String sort,
       Boolean isDescend) {
-    var searchResponse = super.mainRepository.searchIlikeTopicName(value, sort, isDescend);
-    searchResponse.parallelStream().forEach(super::build);
-    return searchResponse;
+    return super.repository.searchIlikeTopicName(value, sort, isDescend);
   }
 
-  @Override
   public List<TpTopicAssignTable> findByTopicIdOrderSemester(long topicId) {
-    return super.mainRepository.findByTopicIdOrderSemester(topicId)
-        .stream().map(super::build).collect(Collectors.toList());
+    return super.repository.findByTopicIdOrderSemester(topicId)
+        .stream().collect(Collectors.toList());
   }
 
 }

@@ -32,7 +32,7 @@ public abstract class AbstractBaseController<T extends BaseTable, R extends Base
   protected S service;
 
   @GetMapping
-  public List<T> findAll() {
+  public Object findAll() {
     return service.getRepository().findAll().stream().collect(Collectors.toList());
   }
 
@@ -77,17 +77,17 @@ public abstract class AbstractBaseController<T extends BaseTable, R extends Base
   }
 
   @PostMapping
-  public T save(@RequestBody @Valid T requestBody) {
+  public Object save(@RequestBody @Valid T requestBody) {
     return service.getRepository().save(requestBody);
   }
 
   @PostMapping("/all")
-  public List<T> saveAll(@RequestBody List<T> requestBody) {
+  public Object saveAll(@RequestBody List<T> requestBody) {
     return service.getRepository().saveAll(requestBody);
   }
 
   @PostMapping("/example")
-  public List<T> findAll(@RequestBody T entity) {
+  public Object findAll(@RequestBody T entity) {
     return service.getRepository().findAll(Example.of(entity));
   }
 

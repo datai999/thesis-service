@@ -3,9 +3,10 @@ package com.thesis.service.topic.controller;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import com.thesis.service.common.controller.ABaseController;
+import com.thesis.service.common.controller.AbstractBaseController;
 import com.thesis.service.common.dto.request.SearchRequest;
 import com.thesis.service.topic.model.TpTopicAssignTable;
+import com.thesis.service.topic.repository.TpTopicAssignRepository;
 import com.thesis.service.topic.service.TopicAssignExtendService;
 import com.thesis.service.topic.service.TopicAssignService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,9 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/topic/assign")
 @RequiredArgsConstructor
-public class TopicAssignController extends ABaseController<TpTopicAssignTable, TopicAssignService> {
+public class TopicAssignController
+    extends
+    AbstractBaseController<TpTopicAssignTable, TpTopicAssignRepository, TopicAssignService> {
 
   private final TopicAssignExtendService topicAssignExtendService;
 
