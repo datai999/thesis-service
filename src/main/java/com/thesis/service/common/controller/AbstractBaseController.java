@@ -2,12 +2,8 @@ package com.thesis.service.common.controller;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
 import com.thesis.service.common.dto.DataBaseFieldConst;
 import com.thesis.service.common.dto.request.SearchRequest;
 import com.thesis.service.common.model.BaseTable;
@@ -18,6 +14,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,23 +30,17 @@ public abstract class AbstractBaseController<T extends BaseTable, R extends Base
 
   @GetMapping
   public Object findAll() {
-    return service.getRepository().findAll().stream().collect(Collectors.toList());
+    return service.getRepository().findAll();
   }
 
   @GetMapping("/paging")
-  public Object findPaging(@RequestParam @NotNull @PositiveOrZero Integer number,
-      @RequestParam @NotNull @Positive Integer size, Optional<String> sort,
-      @RequestParam(defaultValue = "false") boolean descend) {
-
-    Pageable pageable = null;
-
-    if (sort.isPresent()) {
-      Sort sortable = descend ? Sort.by(sort.get()).descending() : Sort.by(sort.get());
-      pageable = PageRequest.of(number, size, sortable);
-    } else {
-      pageable = PageRequest.of(number, size);
-    }
-
+  public Object findPaging(
+      @RequestParam(defaultValue = "1") @Positive Integer page,
+      @RequestParam(defaultValue = "5") @Positive Integer size,
+      @RequestParam(defaultValue = "DESC") String direction,
+      @RequestParam(defaultValue = "id") String sort) {
+    Sort sortable = Sort.by(Direction.valueOf(direction), sort);
+    Pageable pageable = PageRequest.of(page - 1, size, sortable);
     return service.getRepository().findAll(pageable);
   }
 

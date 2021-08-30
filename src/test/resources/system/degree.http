@@ -1,0 +1,4 @@
+
+###  get all
+GET {{http}}{{host}}{{port}}{{base-url}}/degree
+Content-Type: application/json
