@@ -1,12 +1,12 @@
 package com.thesis.service.person.model;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.model.PersonBaseTable;
+import com.thesis.service.common.model.SyDegreeTable;
+import com.thesis.service.common.model.SySubjectDepartmentTable;
 import com.thesis.service.topic.model.TpTopicAssignTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,12 +18,10 @@ import lombok.EqualsAndHashCode;
 public class PsTeacherTable extends PersonBaseTable {
 
   @OneToOne
-  @JoinColumn(name = "subject_department_id")
-  private BrConstDataTable subjectDepartment;
+  private SySubjectDepartmentTable subjectDepartment;
 
   @OneToOne
-  @JoinColumn(name = "degree_id")
-  private BrConstDataTable degree;
+  private SyDegreeTable degree;
 
   @ManyToOne
   private TpTopicAssignTable topicAssign;
