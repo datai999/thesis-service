@@ -1,6 +1,8 @@
 package com.thesis.service.person.controller;
 
+import java.util.stream.Collectors;
 import com.thesis.service.common.controller.AbstractBaseController;
+import com.thesis.service.person.dto.response.TeacherFlatResponse;
 import com.thesis.service.person.model.PsTeacherTable;
 import com.thesis.service.person.repository.PsTeacherRepository;
 import com.thesis.service.person.service.TeacherService;
@@ -14,6 +16,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TeacherController
     extends AbstractBaseController<PsTeacherTable, PsTeacherRepository, TeacherService> {
+
+  @GetMapping("/flat")
+  public Object reduce() {
+    return service.getRepository().findAll().stream()
+        .map(TeacherFlatResponse::from).collect(Collectors.toList());
+  }
 
   @GetMapping("search")
   public Object search(String value) {

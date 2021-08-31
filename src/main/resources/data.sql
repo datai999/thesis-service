@@ -1,34 +1,34 @@
-INSERT INTO sy_major (name) VALUES ('{"en":"Computer Science","vi":"Khoa học máy tính"}');
-INSERT INTO sy_major (name) VALUES ('{"en":"Computer Engineering","vi":"Kỹ thuật máy tính"}');
+INSERT INTO sy_major (name) VALUES ('{"en":"Computer Science","vi":"Khoa học máy tính"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_major (name) VALUES ('{"en":"Computer Engineering","vi":"Kỹ thuật máy tính"}') ON CONFLICT DO NOTHING;
 
-INSERT INTO sy_subject_department (name) VALUES ('{"en":"Information System","vi":"Hệ thống thông tin"}');
-INSERT INTO sy_subject_department (name) VALUES ('{"en":"Software Technology", "vi":"Công nghệ phần mềm"}');
-INSERT INTO sy_subject_department (name) VALUES ('{"en":"Systems and Networks", "vi":"Hệ thống và mạng"}');
-INSERT INTO sy_subject_department (name) VALUES ('{"en":"Computer Science","vi":"Khoa học máy tính"}');
-INSERT INTO sy_subject_department (name) VALUES ('{"en":"Computer Engineering","vi":"Kỹ thuật máy tính"}');
+INSERT INTO sy_subject_department (name) VALUES ('{"en":"Information System","vi":"Hệ thống thông tin"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_subject_department (name) VALUES ('{"en":"Software Technology", "vi":"Công nghệ phần mềm"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_subject_department (name) VALUES ('{"en":"Systems and Networks", "vi":"Hệ thống và mạng"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_subject_department (name) VALUES ('{"en":"Computer Science","vi":"Khoa học máy tính"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_subject_department (name) VALUES ('{"en":"Computer Engineering","vi":"Kỹ thuật máy tính"}') ON CONFLICT DO NOTHING;
 
-INSERT INTO sy_degree (name) VALUES ('{"en":"Master", "vi":"Thạc sĩ"}');
-INSERT INTO sy_degree (name) VALUES ('{"en":"Doctor", "vi":"Tiến sĩ"}');
-INSERT INTO sy_degree (name) VALUES ('{"en":"Professor","en":"Giáo sư"}');
+INSERT INTO sy_degree (name) VALUES ('{"en":"Master", "vi":"Thạc sĩ"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_degree (name) VALUES ('{"en":"Doctor", "vi":"Tiến sĩ"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_degree (name) VALUES ('{"en":"Professor","en":"Giáo sư"}') ON CONFLICT DO NOTHING;
 
-INSERT INTO br_const_data (type, no, value) VALUES ('educationMethod', 0, '{"en":"Formal","vi":"Chính quy"}');
-INSERT INTO br_const_data (type, no, value) VALUES ('educationMethod', 1, '{"en":"CLC","vi":"Chất lượng cao"}');
+INSERT INTO br_const_data (type, no, value) VALUES ('educationMethod', 0, '{"en":"Formal","vi":"Chính quy"}') ON CONFLICT DO NOTHING;
+INSERT INTO br_const_data (type, no, value) VALUES ('educationMethod', 1, '{"en":"CLC","vi":"Chất lượng cao"}') ON CONFLICT DO NOTHING;
 
 -- data test
 
 INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('1', 'Nguyễn Văn', 'A', 'nguyenvana', 1);
+  VALUES ('12', 'Nguyễn Văn', 'A', 'nguyenvana', 1) ON CONFLICT DO NOTHING;
 INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('2', 'Nguyễn Văn', 'B', 'nguyenvanb', 2);
+  VALUES ('25', 'Nguyễn Văn', 'B', 'nguyenvanb', 2) ON CONFLICT DO NOTHING;
 INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('3', 'Nguyễn Thị', 'C', 'nguyenthic', 3);
+  VALUES ('63', 'Nguyễn Thị', 'C', 'nguyenthic', 3) ON CONFLICT DO NOTHING;
 INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('4', 'Nguyễn Văn', 'D', 'nguyenvand', 4);
+  VALUES ('47', 'Nguyễn Văn', 'D', 'nguyenvand', 4) ON CONFLICT DO NOTHING;
 INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('5', 'Nguyễn Văn', 'E', 'nguyenvane', 5);
+  VALUES ('85', 'Nguyễn Văn', 'E', 'nguyenvane', 5) ON CONFLICT DO NOTHING;
 INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('6', 'Nguyễn Thị', 'F', 'nguyenthif', 1);
+  VALUES ('36', 'Nguyễn Thị', 'F', 'nguyenthif', 1) ON CONFLICT DO NOTHING;
 INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('7', 'Nguyễn Thị', 'G', 'nguyenthig', 2);
+  VALUES ('27', 'Nguyễn Thị', 'G', 'nguyenthig', 2) ON CONFLICT DO NOTHING;
 INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('8', 'Nguyễn Thị', 'F', 'nguyenthih', 3);
+  VALUES ('8', 'Nguyễn Thị', 'F', 'nguyenthih', 3) ON CONFLICT DO NOTHING;

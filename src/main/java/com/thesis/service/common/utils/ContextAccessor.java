@@ -1,5 +1,6 @@
 package com.thesis.service.common.utils;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -26,6 +27,10 @@ public class ContextAccessor implements ApplicationContextAware {
 
   public static <T> T getBean(String qualifier, Class<T> clazz) {
     return applicationContext.getBean(qualifier, clazz);
+  }
+
+  public static ModelMapper getModelMapper() {
+    return getBean(ModelMapper.class);
   }
 
 }
