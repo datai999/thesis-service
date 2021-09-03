@@ -6,6 +6,8 @@ import com.thesis.service.person.dto.response.TeacherFlatResponse;
 import com.thesis.service.person.model.PsTeacherTable;
 import com.thesis.service.person.repository.PsTeacherRepository;
 import com.thesis.service.person.service.TeacherService;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +21,8 @@ public class TeacherController
 
   @GetMapping("/flat")
   public Object reduce() {
-    return service.getRepository().findAll().stream()
+    Sort sortable = Sort.by(Direction.DESC, "id");
+    return service.getRepository().findAll(sortable).stream()
         .map(TeacherFlatResponse::from).collect(Collectors.toList());
   }
 
