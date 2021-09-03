@@ -3,13 +3,12 @@ package com.thesis.service.topic.model;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
+import com.thesis.service.common.model.SyEducationMethodTable;
 import com.thesis.service.common.model.SyMajorTable;
 import com.thesis.service.person.model.PsTeacherTable;
 import org.hibernate.annotations.DynamicUpdate;
@@ -32,10 +31,10 @@ public class TpTopicTable extends BaseTable {
   private Boolean thesis = false;
 
   @ManyToMany
-  private List<SyMajorTable> majors;
+  private List<SyEducationMethodTable> educationMethods;
 
-  @OneToOne
-  private BrConstDataTable educationMethod;
+  @ManyToMany
+  private List<SyMajorTable> majors;
 
   @Min(1)
   private Integer minStudentTake = 1;

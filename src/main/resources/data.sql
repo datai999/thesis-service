@@ -11,8 +11,8 @@ INSERT INTO sy_degree (id, name) VALUES (1, '{"en":"Master", "vi":"Thạc sĩ"}'
 INSERT INTO sy_degree (id, name) VALUES (2, '{"en":"Doctor", "vi":"Tiến sĩ"}') ON CONFLICT DO NOTHING;
 INSERT INTO sy_degree (id, name) VALUES (3, '{"en":"Professor","en":"Giáo sư"}') ON CONFLICT DO NOTHING;
 
-INSERT INTO br_const_data (id, type, no, value) VALUES (1, 'educationMethod', 0, '{"en":"Formal","vi":"Chính quy"}') ON CONFLICT DO NOTHING;
-INSERT INTO br_const_data (id, type, no, value) VALUES (2, 'educationMethod', 1, '{"en":"CLC","vi":"Chất lượng cao"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_education_method (id, name) VALUES (1, 'Chính quy') ON CONFLICT DO NOTHING;
+INSERT INTO sy_education_method (id, name) VALUES (2, 'Chất lượng cao') ON CONFLICT DO NOTHING;
 
 -- data test
 

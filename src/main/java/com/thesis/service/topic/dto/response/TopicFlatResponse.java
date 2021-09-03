@@ -2,6 +2,7 @@ package com.thesis.service.topic.dto.response;
 
 import java.util.Objects;
 import java.util.stream.Stream;
+import com.thesis.service.common.model.SyEducationMethodTable;
 import com.thesis.service.common.utils.ContextAccessor;
 import com.thesis.service.person.model.PsTeacherTable;
 import com.thesis.service.topic.model.TpTopicTable;
@@ -15,8 +16,8 @@ public class TopicFlatResponse extends TpTopicTable {
 
   private Stream<String> names;
   private String type;
-  private String educationMethodName;
   private Stream<String> majorNames;
+  private Stream<String> educationMethodNames;
   private Stream<String> guideTeacherNames;
 
   public static TopicFlatResponse from(TpTopicTable entity) {
@@ -29,9 +30,9 @@ public class TopicFlatResponse extends TpTopicTable {
       result.setNames(Stream.of(entity.getName().getVi(), entity.getName().getEn()));
     }
 
-    if (Objects.nonNull(entity.getEducationMethod())
-        && Objects.nonNull(entity.getEducationMethod().getValue())) {
-      result.setEducationMethodName(entity.getEducationMethod().getValue().getVi());
+    if (CollectionUtils.isNotEmpty(entity.getEducationMethods())) {
+      result.setEducationMethodNames(
+          entity.getEducationMethods().stream().map(SyEducationMethodTable::getName));
     }
 
     if (CollectionUtils.isNotEmpty(entity.getMajors())) {
