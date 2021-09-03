@@ -3,8 +3,8 @@ package com.thesis.service.controller.topic;
 import java.util.stream.Collectors;
 import com.thesis.service.controller.AbstractBaseController;
 import com.thesis.service.dto.topic.resposne.TopicFlatResponse;
-import com.thesis.service.model.topic.TpTopicTable;
-import com.thesis.service.repository.topic.TpTopicRepository;
+import com.thesis.service.model.topic.TopicTable;
+import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.service.topic.TopicService;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/topics")
 public class TopicController
-    extends AbstractBaseController<TpTopicTable, TpTopicRepository, TopicService> {
+    extends AbstractBaseController<TopicTable, TopicRepository, TopicService> {
 
   @GetMapping("/{type}-flat")
   public Object reduce(@PathVariable String type) {
-    var example = Example.of(new TpTopicTable().setThesis("thesis".equals(type)));
+    var example = Example.of(new TopicTable().setThesis("thesis".equals(type)));
     Sort sortable = Sort.by(Direction.DESC, "id");
     return service.getRepository().findAll(example, sortable).stream()
         .map(TopicFlatResponse::from).collect(Collectors.toList());

@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "br_const_data",
     uniqueConstraints = {@UniqueConstraint(columnNames = {"type", "value"})})
 @EqualsAndHashCode(callSuper = true)
-public class BrConstDataTable extends BaseTable {
+public class ConstDataTable extends BaseTable {
 
   @Column(nullable = false)
   private String type;
@@ -28,20 +28,20 @@ public class BrConstDataTable extends BaseTable {
   @Column(columnDefinition = "INTEGER DEFAULT 0")
   private Integer no;
 
-  public BrConstDataTable(String id) {
+  public ConstDataTable(String id) {
     this.setId(Long.parseLong(id));
   }
 
-  public BrConstDataTable(Integer id) {
+  public ConstDataTable(Integer id) {
     this(id.toString());
   }
 
-  public BrConstDataTable(Object id) {
+  public ConstDataTable(Object id) {
     this(id.toString());
   }
 
-  public static BrConstDataTable type(String type) {
-    var result = new BrConstDataTable();
+  public static ConstDataTable type(String type) {
+    var result = new ConstDataTable();
     result.setType(type);
     return result;
   }

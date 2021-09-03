@@ -5,9 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import com.thesis.service.model.system.SyEducationMethodTable;
-import com.thesis.service.model.system.SyMajorTable;
-import com.thesis.service.model.topic.TpTopicTable;
+import com.thesis.service.model.system.EducationMethodTable;
+import com.thesis.service.model.system.MajorTable;
+import com.thesis.service.model.topic.TopicTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,15 +15,15 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ps_student")
-public class PsStudentTable extends PersonBaseTable {
+public class StudentTable extends PersonBaseTable {
 
   @OneToOne
-  private SyEducationMethodTable educationMethod;
+  private EducationMethodTable educationMethod;
 
   @OneToOne
-  private SyMajorTable major;
+  private MajorTable major;
 
   @ManyToMany
-  private List<TpTopicTable> topics;
+  private List<TopicTable> topics;
 
 }

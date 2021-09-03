@@ -16,12 +16,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @DynamicUpdate
 @Table(name = "sy_degree")
-public class SyDegreeTable extends BaseTable {
+public class DegreeTable extends BaseTable {
 
   @Type(type = "json")
   private MultiLangDto name;
 
-  public SyDegreeTable(String id) {
+  public DegreeTable(String id) {
     this.setId(Long.parseLong(id));
   }
 }

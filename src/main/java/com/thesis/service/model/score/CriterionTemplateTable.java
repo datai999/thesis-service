@@ -1,4 +1,4 @@
-package com.thesis.service.model.model;
+package com.thesis.service.model.score;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "sc_criterion_template")
-public class ScCriterionTemplateTable extends BaseTable {
+public class CriterionTemplateTable extends BaseTable {
 
   @Type(type = "json")
   private MultiLangDto name;
@@ -33,7 +33,7 @@ public class ScCriterionTemplateTable extends BaseTable {
   private List<Long> criterionId;
 
   @Transient
-  private List<ScCriterionTable> criterion;
+  private List<CriterionTable> criterion;
 
   @Type(type = "int-array")
   @Column(name = "criterion_score", columnDefinition = "int[]")

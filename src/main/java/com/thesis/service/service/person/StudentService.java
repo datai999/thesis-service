@@ -5,8 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.thesis.service.dto.DataBaseFieldConst;
 import com.thesis.service.dto.SearchRequest;
-import com.thesis.service.model.person.PsStudentTable;
-import com.thesis.service.repository.person.PsStudentRepository;
+import com.thesis.service.model.person.StudentTable;
+import com.thesis.service.repository.person.StudentRepository;
 import com.thesis.service.service.PageService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
@@ -16,29 +16,29 @@ import lombok.RequiredArgsConstructor;
 @Primary
 @Service
 @RequiredArgsConstructor
-public class StudentService extends APersonBaseService<PsStudentTable, PsStudentRepository>
-    implements PsStudentRepository {
+public class StudentService extends APersonBaseService<StudentTable, StudentRepository>
+    implements StudentRepository {
 
   @PersistenceContext
   private EntityManager entityManager;
   private final PageService pageService;
 
   @Override
-  protected void preBuild(PsStudentTable entity) {
+  protected void preBuild(StudentTable entity) {
     // do nothing
   }
 
   @Override
-  public List<PsStudentTable> searchIlikeNameOrCode(String value) {
+  public List<StudentTable> searchIlikeNameOrCode(String value) {
     return super.mainRepository.searchIlikeNameOrCode(value);
   }
 
   @Override
-  public List<PsStudentTable> findAllByCode(Iterable<String> codes) {
+  public List<StudentTable> findAllByCode(Iterable<String> codes) {
     return super.mainRepository.findAllByCode(codes);
   }
 
-  public Page<PsStudentTable> search(SearchRequest requestBody) {
+  public Page<StudentTable> search(SearchRequest requestBody) {
 
     String selectClause = "SELECT psS.* FROM ps_student psS "
         + "LEFT JOIN br_const_data bCD_gender ON bCD_gender.id = psS.gender_id "
@@ -50,7 +50,7 @@ public class StudentService extends APersonBaseService<PsStudentTable, PsStudent
     return pageService.search(
         requestBody,
         DataBaseFieldConst.STUDENT_ENTITY,
-        PsStudentTable.class,
+        StudentTable.class,
         this,
         selectClause,
         groupClause);

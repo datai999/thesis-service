@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class TpQueryClause {
+public final class QueryClause {
 
   public static final String TOPIC_ASSIGN_INNER_JOIN_TOPIC =
       "SELECT tPA.* FROM tp_topic_assign tPA INNER JOIN tp_topic tP ON tPA.topic_id = tP.id ";

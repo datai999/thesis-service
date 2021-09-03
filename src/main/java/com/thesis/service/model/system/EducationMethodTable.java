@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @DynamicUpdate
 @Table(name = "sy_education_method")
-public class SyEducationMethodTable extends BaseTable {
+public class EducationMethodTable extends BaseTable {
 
   private String name;
 
-  public SyEducationMethodTable(String id) {
+  public EducationMethodTable(String id) {
     this.setId(Long.parseLong(id));
   }
 

@@ -1,4 +1,4 @@
-package com.thesis.service.model.model;
+package com.thesis.service.model.score;
 
 import java.util.Collection;
 
@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.dto.MultiLangDto;
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.br.BrConstDataTable;
+import com.thesis.service.model.br.ConstDataTable;
 import org.hibernate.annotations.Type;
 
 import lombok.Data;
@@ -19,14 +19,14 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "sc_criterion")
-public class ScCriterionTable extends BaseTable {
+public class CriterionTable extends BaseTable {
 
   @Type(type = "json")
   private MultiLangDto name;
 
   @OneToOne
   @JoinColumn(name = "score_method_id")
-  private BrConstDataTable scoreMethod;
+  private ConstDataTable scoreMethod;
 
   @Type(type = "int-array")
   @Column(name = "score_percent", columnDefinition = "integer[]")

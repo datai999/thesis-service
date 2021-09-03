@@ -8,10 +8,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import com.thesis.service.dto.MultiLangDto;
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.person.PsStudentTable;
-import com.thesis.service.model.person.PsTeacherTable;
-import com.thesis.service.model.system.SyEducationMethodTable;
-import com.thesis.service.model.system.SyMajorTable;
+import com.thesis.service.model.person.StudentTable;
+import com.thesis.service.model.person.TeacherTable;
+import com.thesis.service.model.system.EducationMethodTable;
+import com.thesis.service.model.system.MajorTable;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import lombok.Data;
@@ -22,7 +22,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @DynamicUpdate
 @Table(name = "tp_topic")
-public class TpTopicTable extends BaseTable {
+public class TopicTable extends BaseTable {
 
   @Type(type = "json")
   private MultiLangDto name;
@@ -32,10 +32,10 @@ public class TpTopicTable extends BaseTable {
   private Boolean thesis = false;
 
   @ManyToMany
-  private List<SyEducationMethodTable> educationMethods;
+  private List<EducationMethodTable> educationMethods;
 
   @ManyToMany
-  private List<SyMajorTable> majors;
+  private List<MajorTable> majors;
 
   @Min(1)
   private Integer minStudentTake = 1;
@@ -54,9 +54,9 @@ public class TpTopicTable extends BaseTable {
   private String documentReference;
 
   @ManyToMany
-  private List<PsTeacherTable> guideTeachers;
+  private List<TeacherTable> guideTeachers;
 
   @ManyToMany
-  private List<PsStudentTable> students;
+  private List<StudentTable> students;
 
 }

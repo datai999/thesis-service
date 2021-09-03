@@ -2,8 +2,8 @@ package com.thesis.service.service.topic;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import com.thesis.service.model.topic.TpTopicAssignTable;
-import com.thesis.service.repository.topic.TpTopicAssignRepository;
+import com.thesis.service.model.topic.TopicAssignTable;
+import com.thesis.service.repository.topic.TopicAssignRepository;
 import com.thesis.service.service.AbstractBaseService;
 import com.thesis.service.service.person.StudentService;
 import com.thesis.service.service.person.TeacherService;
@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TopicAssignService
-    extends AbstractBaseService<TpTopicAssignTable, TpTopicAssignRepository> {
+    extends AbstractBaseService<TopicAssignTable, TopicAssignRepository> {
 
   final StudentService studentService;
   final TeacherService teacherService;
@@ -21,21 +21,21 @@ public class TopicAssignService
   final TopicService topicService;
   final CouncilService councilService;
 
-  public List<TpTopicAssignTable> findByTeacherCode(
+  public List<TopicAssignTable> findByTeacherCode(
       String teacherCode,
       String sort,
       Boolean isDescend) {
     return super.repository.findByTeacherCode(teacherCode, sort, isDescend);
   }
 
-  public List<TpTopicAssignTable> searchIlikeTopicName(
+  public List<TopicAssignTable> searchIlikeTopicName(
       String value,
       String sort,
       Boolean isDescend) {
     return super.repository.searchIlikeTopicName(value, sort, isDescend);
   }
 
-  public List<TpTopicAssignTable> findByTopicIdOrderSemester(long topicId) {
+  public List<TopicAssignTable> findByTopicIdOrderSemester(long topicId) {
     return super.repository.findByTopicIdOrderSemester(topicId)
         .stream().collect(Collectors.toList());
   }

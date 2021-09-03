@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ps_academy_staff")
-public class PsAcademyStaffTable extends PersonBaseTable {
+public class AcademyStaffTable extends PersonBaseTable {
 
   @Override
   public String getTableName() {

@@ -3,7 +3,7 @@ package com.thesis.service.controller.person;
 import javax.validation.Valid;
 import com.thesis.service.controller.ABaseController;
 import com.thesis.service.dto.SearchRequest;
-import com.thesis.service.model.person.PsStudentTable;
+import com.thesis.service.model.person.StudentTable;
 import com.thesis.service.service.person.StudentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/student")
 @RequiredArgsConstructor
-public class StudentController extends ABaseController<PsStudentTable, StudentService> {
+public class StudentController extends ABaseController<StudentTable, StudentService> {
 
   @GetMapping("search")
   public Object search(String value) {

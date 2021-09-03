@@ -2,10 +2,10 @@ package com.thesis.service.dto.topic.resposne;
 
 import java.util.Objects;
 import java.util.stream.Stream;
-import com.thesis.service.model.person.PsStudentTable;
-import com.thesis.service.model.person.PsTeacherTable;
-import com.thesis.service.model.system.SyEducationMethodTable;
-import com.thesis.service.model.topic.TpTopicTable;
+import com.thesis.service.model.person.StudentTable;
+import com.thesis.service.model.person.TeacherTable;
+import com.thesis.service.model.system.EducationMethodTable;
+import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.utils.ContextAccessor;
 import org.apache.commons.collections4.CollectionUtils;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TopicFlatResponse extends TpTopicTable {
+public class TopicFlatResponse extends TopicTable {
 
   private Stream<String> names;
   private String type;
@@ -22,7 +22,7 @@ public class TopicFlatResponse extends TpTopicTable {
   private Stream<String> guideTeacherCodeNames;
   private Stream<String> studentCodeNames;
 
-  public static TopicFlatResponse from(TpTopicTable entity) {
+  public static TopicFlatResponse from(TopicTable entity) {
 
     var result = ContextAccessor.getModelMapper()
         .map(entity, TopicFlatResponse.class)
@@ -34,7 +34,7 @@ public class TopicFlatResponse extends TpTopicTable {
 
     if (CollectionUtils.isNotEmpty(entity.getEducationMethods())) {
       result.setEducationMethodNames(
-          entity.getEducationMethods().stream().map(SyEducationMethodTable::getName));
+          entity.getEducationMethods().stream().map(EducationMethodTable::getName));
     }
 
     if (CollectionUtils.isNotEmpty(entity.getMajors())) {
@@ -44,12 +44,12 @@ public class TopicFlatResponse extends TpTopicTable {
 
     if (CollectionUtils.isNotEmpty(entity.getGuideTeachers())) {
       result.setGuideTeacherCodeNames(
-          entity.getGuideTeachers().stream().map(PsTeacherTable::getFullCodeName));
+          entity.getGuideTeachers().stream().map(TeacherTable::getFullCodeName));
     }
 
     if (CollectionUtils.isNotEmpty(entity.getStudents())) {
       result.setGuideTeacherCodeNames(
-          entity.getStudents().stream().map(PsStudentTable::getFullCodeName));
+          entity.getStudents().stream().map(StudentTable::getFullCodeName));
     }
 
     return result;

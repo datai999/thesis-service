@@ -14,8 +14,8 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.br.BrConstDataTable;
-import com.thesis.service.model.person.PsTeacherTable;
+import com.thesis.service.model.br.ConstDataTable;
+import com.thesis.service.model.person.TeacherTable;
 import org.hibernate.annotations.Type;
 
 import lombok.Data;
@@ -25,11 +25,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "tp_council")
-public class TpCouncilTable extends BaseTable {
+public class CouncilTable extends BaseTable {
 
   @OneToOne
   @JoinColumn(name = "subject_department_id")
-  private BrConstDataTable subjectDepartment;
+  private ConstDataTable subjectDepartment;
 
   private String reserveRoom;
 
@@ -45,7 +45,7 @@ public class TpCouncilTable extends BaseTable {
   private Collection<Long> roleId;
 
   @Transient
-  private List<BrConstDataTable> role;
+  private List<ConstDataTable> role;
 
   @JsonIgnore
   @Type(type = "list-array")
@@ -53,7 +53,7 @@ public class TpCouncilTable extends BaseTable {
   private Collection<String> teacherCode;
 
   @Transient
-  private List<PsTeacherTable> teacher;
+  private List<TeacherTable> teacher;
 
   @Override
   public String getTableName() {

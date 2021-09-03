@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.person.PsTeacherTable;
+import com.thesis.service.model.person.TeacherTable;
 import org.hibernate.annotations.DynamicUpdate;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,15 +19,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @DynamicUpdate
 @Table(name = "tp_topic_assign")
-public class TpTopicAssignTable extends BaseTable {
+public class TopicAssignTable extends BaseTable {
 
   @OneToOne(cascade = {CascadeType.PERSIST})
-  private TpTopicTable topic;
+  private TopicTable topic;
 
   @OneToMany
-  private List<PsTeacherTable> reviewTeachers;
+  private List<TeacherTable> reviewTeachers;
 
   @OneToOne
-  private TpCouncilTable council;
+  private CouncilTable council;
 
 }

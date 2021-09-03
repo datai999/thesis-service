@@ -1,4 +1,4 @@
-package com.thesis.service.model.model;
+package com.thesis.service.model.score;
 
 import java.util.Collection;
 import javax.persistence.Column;
@@ -7,9 +7,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.person.PsStudentTable;
-import com.thesis.service.model.person.PsTeacherTable;
-import com.thesis.service.model.topic.TpTopicAssignTable;
+import com.thesis.service.model.person.StudentTable;
+import com.thesis.service.model.person.TeacherTable;
+import com.thesis.service.model.topic.TopicAssignTable;
 import org.hibernate.annotations.Type;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,23 +18,23 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "sc_score")
-public class ScScoreTable extends BaseTable {
+public class ScoreTable extends BaseTable {
 
   @OneToOne
   @JoinColumn(name = "topic_assign_id")
-  private TpTopicAssignTable topicAssign;
+  private TopicAssignTable topicAssign;
 
   @OneToOne
   @JoinColumn(name = "criterion_template_id")
-  private ScCriterionTemplateTable criterionTemplate;
+  private CriterionTemplateTable criterionTemplate;
 
   @OneToOne
   @JoinColumn(name = "teacher_code", referencedColumnName = "code")
-  private PsTeacherTable teacher;
+  private TeacherTable teacher;
 
   @OneToOne
   @JoinColumn(name = "student_code", referencedColumnName = "code")
-  private PsStudentTable student;
+  private StudentTable student;
 
   @Type(type = "int-array")
   @Column(name = "score", columnDefinition = "integer[]")

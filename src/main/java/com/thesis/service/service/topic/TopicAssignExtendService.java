@@ -3,8 +3,8 @@ package com.thesis.service.service.topic;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.thesis.service.dto.SearchRequest;
-import com.thesis.service.model.topic.TpTopicAssignTable;
-import com.thesis.service.repository.topic.TpQueryClause;
+import com.thesis.service.model.topic.TopicAssignTable;
+import com.thesis.service.repository.topic.QueryClause;
 import com.thesis.service.service.PageService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -19,9 +19,9 @@ public class TopicAssignExtendService {
   private final PageService pageService;
   private final TopicAssignService topicAssignService;
 
-  public Page<TpTopicAssignTable> search(SearchRequest requestBody) {
+  public Page<TopicAssignTable> search(SearchRequest requestBody) {
 
-    String selectClause = TpQueryClause.TOPIC_ASSIGN_SEARCH;
+    String selectClause = QueryClause.TOPIC_ASSIGN_SEARCH;
     String groupClause = "GROUP BY tPA.id ";
 
     // TODO

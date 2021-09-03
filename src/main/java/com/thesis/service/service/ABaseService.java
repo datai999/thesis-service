@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.repository.BaseRepository;
-import com.thesis.service.repository.br.BrConstDataRepository;
+import com.thesis.service.repository.br.ConstDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,7 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   protected R mainRepository;
 
   @Autowired
-  protected BrConstDataRepository constRepository;
+  protected ConstDataRepository constRepository;
 
   protected void preBuild(T entity) {
 

@@ -1,7 +1,7 @@
 package com.thesis.service.service.score;
 
-import com.thesis.service.model.model.ScCriterionTemplateTable;
-import com.thesis.service.repository.score.ScCriterionTemplateRepository;
+import com.thesis.service.model.score.CriterionTemplateTable;
+import com.thesis.service.repository.score.CriterionTemplateRepository;
 import com.thesis.service.service.ABaseService;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +9,12 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CriterionTemplateService
-    extends ABaseService<ScCriterionTemplateTable, ScCriterionTemplateRepository> {
+    extends ABaseService<CriterionTemplateTable, CriterionTemplateRepository> {
 
   final CriterionService criterionService;
 
   @Override
-  protected void preBuild(ScCriterionTemplateTable entity) {
+  protected void preBuild(CriterionTemplateTable entity) {
     entity.setById(criterionService, "criterion");
   }
 

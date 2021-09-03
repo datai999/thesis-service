@@ -24,11 +24,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "br_setting", uniqueConstraints = { @UniqueConstraint(columnNames = { "name_id" }) })
 @EqualsAndHashCode(callSuper = true)
-public class BrSettingTable extends BaseTable {
+public class SettingTable extends BaseTable {
 
   @OneToOne
   @JoinColumn(name = "name_id")
-  private BrConstDataTable name;
+  private ConstDataTable name;
 
   @JsonIgnore
   private String refTable;
@@ -46,18 +46,18 @@ public class BrSettingTable extends BaseTable {
     return "br_setting";
   }
 
-  public BrSettingTable setSingleRefId(Long id) {
+  public SettingTable setSingleRefId(Long id) {
     this.refId = List.of(id);
     return this;
   }
 
-  public static BrSettingTable name(BrConstDataTable name) {
-    var result = new BrSettingTable();
+  public static SettingTable name(ConstDataTable name) {
+    var result = new SettingTable();
     result.setName(name);
     return result;
   }
 
-  public <T extends BaseTable> BrSettingTable setRef(T refRecord) {
+  public <T extends BaseTable> SettingTable setRef(T refRecord) {
     this.refTable = refRecord.getTableName();
     if (Objects.isNull(refRecord.getId())) {
       this.refId = null;

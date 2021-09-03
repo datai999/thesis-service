@@ -3,8 +3,8 @@ package com.thesis.service.controller.person;
 import java.util.stream.Collectors;
 import com.thesis.service.controller.AbstractBaseController;
 import com.thesis.service.dto.person.response.TeacherFlatResponse;
-import com.thesis.service.model.person.PsTeacherTable;
-import com.thesis.service.repository.person.PsTeacherRepository;
+import com.thesis.service.model.person.TeacherTable;
+import com.thesis.service.repository.person.TeacherRepository;
 import com.thesis.service.service.person.TeacherService;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/teacher")
 @RequiredArgsConstructor
 public class TeacherController
-    extends AbstractBaseController<PsTeacherTable, PsTeacherRepository, TeacherService> {
+    extends AbstractBaseController<TeacherTable, TeacherRepository, TeacherService> {
 
   @GetMapping("/flat")
   public Object reduce() {

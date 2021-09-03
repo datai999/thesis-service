@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @DynamicUpdate
-@Table(name = "sy_major")
-public class SyMajorTable extends BaseTable {
+@Table(name = "sy_subject_department")
+public class SubjectDepartmentTable extends BaseTable {
 
   @Type(type = "json")
   private MultiLangDto name;
 
-  public SyMajorTable(String id) {
+  public SubjectDepartmentTable(String id) {
     this.setId(Long.parseLong(id));
   }
 }

@@ -1,20 +1,20 @@
 package com.thesis.service.dto.person.response;
 
 import java.util.Objects;
-import com.thesis.service.model.person.PsTeacherTable;
+import com.thesis.service.model.person.TeacherTable;
 import com.thesis.service.utils.ContextAccessor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TeacherFlatResponse extends PsTeacherTable {
+public class TeacherFlatResponse extends TeacherTable {
 
   private String gender;
   private String subjectDepartmentName;
   private String degreeName;
 
-  public static TeacherFlatResponse from(PsTeacherTable entity) {
+  public static TeacherFlatResponse from(TeacherTable entity) {
 
     var result = ContextAccessor.getModelMapper()
         .map(entity, TeacherFlatResponse.class)

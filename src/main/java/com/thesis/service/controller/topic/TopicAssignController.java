@@ -5,8 +5,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import com.thesis.service.controller.AbstractBaseController;
 import com.thesis.service.dto.SearchRequest;
-import com.thesis.service.model.topic.TpTopicAssignTable;
-import com.thesis.service.repository.topic.TpTopicAssignRepository;
+import com.thesis.service.model.topic.TopicAssignTable;
+import com.thesis.service.repository.topic.TopicAssignRepository;
 import com.thesis.service.service.topic.TopicAssignExtendService;
 import com.thesis.service.service.topic.TopicAssignService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +23,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TopicAssignController
     extends
-    AbstractBaseController<TpTopicAssignTable, TpTopicAssignRepository, TopicAssignService> {
+    AbstractBaseController<TopicAssignTable, TopicAssignRepository, TopicAssignService> {
 
   private final TopicAssignExtendService topicAssignExtendService;
 
   @GetMapping("/search/teacher")
-  public List<TpTopicAssignTable> findByTeacherCode(@RequestParam @NotBlank String code,
+  public List<TopicAssignTable> findByTeacherCode(@RequestParam @NotBlank String code,
       @RequestParam(defaultValue = "semester") String sort,
       @RequestParam(defaultValue = "true") boolean descend) {
     return super.service.findByTeacherCode(code, sort, descend);
