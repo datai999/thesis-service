@@ -1,18 +1,18 @@
-INSERT INTO sy_major (name) VALUES ('{"en":"Computer Science","vi":"Khoa học máy tính"}') ON CONFLICT DO NOTHING;
-INSERT INTO sy_major (name) VALUES ('{"en":"Computer Engineering","vi":"Kỹ thuật máy tính"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_major (id, name) VALUES (1, '{"en":"Computer Science","vi":"Khoa học máy tính"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_major (id, name) VALUES (2, '{"en":"Computer Engineering","vi":"Kỹ thuật máy tính"}') ON CONFLICT DO NOTHING;
 
-INSERT INTO sy_subject_department (name) VALUES ('{"en":"Information System","vi":"Hệ thống thông tin"}') ON CONFLICT DO NOTHING;
-INSERT INTO sy_subject_department (name) VALUES ('{"en":"Software Technology", "vi":"Công nghệ phần mềm"}') ON CONFLICT DO NOTHING;
-INSERT INTO sy_subject_department (name) VALUES ('{"en":"Systems and Networks", "vi":"Hệ thống và mạng"}') ON CONFLICT DO NOTHING;
-INSERT INTO sy_subject_department (name) VALUES ('{"en":"Computer Science","vi":"Khoa học máy tính"}') ON CONFLICT DO NOTHING;
-INSERT INTO sy_subject_department (name) VALUES ('{"en":"Computer Engineering","vi":"Kỹ thuật máy tính"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_subject_department (id, name) VALUES (1, '{"en":"Information System","vi":"Hệ thống thông tin"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_subject_department (id, name) VALUES (2, '{"en":"Software Technology", "vi":"Công nghệ phần mềm"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_subject_department (id, name) VALUES (3, '{"en":"Systems and Networks", "vi":"Hệ thống và mạng"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_subject_department (id, name) VALUES (4, '{"en":"Computer Science","vi":"Khoa học máy tính"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_subject_department (id, name) VALUES (5, '{"en":"Computer Engineering","vi":"Kỹ thuật máy tính"}') ON CONFLICT DO NOTHING;
 
-INSERT INTO sy_degree (name) VALUES ('{"en":"Master", "vi":"Thạc sĩ"}') ON CONFLICT DO NOTHING;
-INSERT INTO sy_degree (name) VALUES ('{"en":"Doctor", "vi":"Tiến sĩ"}') ON CONFLICT DO NOTHING;
-INSERT INTO sy_degree (name) VALUES ('{"en":"Professor","en":"Giáo sư"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_degree (id, name) VALUES (1, '{"en":"Master", "vi":"Thạc sĩ"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_degree (id, name) VALUES (2, '{"en":"Doctor", "vi":"Tiến sĩ"}') ON CONFLICT DO NOTHING;
+INSERT INTO sy_degree (id, name) VALUES (3, '{"en":"Professor","en":"Giáo sư"}') ON CONFLICT DO NOTHING;
 
-INSERT INTO br_const_data (type, no, value) VALUES ('educationMethod', 0, '{"en":"Formal","vi":"Chính quy"}') ON CONFLICT DO NOTHING;
-INSERT INTO br_const_data (type, no, value) VALUES ('educationMethod', 1, '{"en":"CLC","vi":"Chất lượng cao"}') ON CONFLICT DO NOTHING;
+INSERT INTO br_const_data (id, type, no, value) VALUES (1, 'educationMethod', 0, '{"en":"Formal","vi":"Chính quy"}') ON CONFLICT DO NOTHING;
+INSERT INTO br_const_data (id, type, no, value) VALUES (2, 'educationMethod', 1, '{"en":"CLC","vi":"Chất lượng cao"}') ON CONFLICT DO NOTHING;
 
 -- data test
 
