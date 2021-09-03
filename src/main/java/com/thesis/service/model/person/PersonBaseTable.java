@@ -1,7 +1,8 @@
-package com.thesis.service.common.model;
+package com.thesis.service.model.person;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import com.thesis.service.common.model.BaseTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,6 +27,10 @@ public abstract class PersonBaseTable extends BaseTable {
 
   public String getFullName() {
     return String.format("%s %s", this.firstName, this.lastName);
+  }
+
+  public String getFullCodeName() {
+    return String.format("%s - %s", this.getCode(), this.getFullName());
   }
 
 }

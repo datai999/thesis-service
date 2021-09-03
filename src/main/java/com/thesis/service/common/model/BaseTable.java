@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.common.repository.BaseRepository;
 import com.thesis.service.common.service.IService;
+import com.thesis.service.model.person.PersonBaseTable;
 import com.thesis.service.person.service.IPersonService;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;

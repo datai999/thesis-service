@@ -2,9 +2,7 @@ package com.thesis.service.person.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import com.thesis.service.common.model.PersonBaseTable;
-
+import com.thesis.service.model.person.PersonBaseTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

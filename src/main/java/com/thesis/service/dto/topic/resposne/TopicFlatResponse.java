@@ -1,9 +1,10 @@
-package com.thesis.service.topic.dto.response;
+package com.thesis.service.dto.topic.resposne;
 
 import java.util.Objects;
 import java.util.stream.Stream;
 import com.thesis.service.common.model.SyEducationMethodTable;
 import com.thesis.service.common.utils.ContextAccessor;
+import com.thesis.service.model.person.PsStudentTable;
 import com.thesis.service.model.topic.TpTopicTable;
 import com.thesis.service.person.model.PsTeacherTable;
 import org.apache.commons.collections4.CollectionUtils;
@@ -18,7 +19,8 @@ public class TopicFlatResponse extends TpTopicTable {
   private String type;
   private Stream<String> majorNames;
   private Stream<String> educationMethodNames;
-  private Stream<String> guideTeacherNames;
+  private Stream<String> guideTeacherCodeNames;
+  private Stream<String> studentCodeNames;
 
   public static TopicFlatResponse from(TpTopicTable entity) {
 
@@ -41,8 +43,13 @@ public class TopicFlatResponse extends TpTopicTable {
     }
 
     if (CollectionUtils.isNotEmpty(entity.getGuideTeachers())) {
-      result.setGuideTeacherNames(
-          entity.getGuideTeachers().stream().map(PsTeacherTable::getFullName));
+      result.setGuideTeacherCodeNames(
+          entity.getGuideTeachers().stream().map(PsTeacherTable::getFullCodeName));
+    }
+
+    if (CollectionUtils.isNotEmpty(entity.getStudents())) {
+      result.setGuideTeacherCodeNames(
+          entity.getStudents().stream().map(PsStudentTable::getFullCodeName));
     }
 
     return result;

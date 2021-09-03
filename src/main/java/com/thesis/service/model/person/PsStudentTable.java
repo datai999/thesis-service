@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import com.thesis.service.common.model.PersonBaseTable;
 import com.thesis.service.common.model.SyEducationMethodTable;
 import com.thesis.service.common.model.SyMajorTable;
 import com.thesis.service.model.topic.TpTopicTable;
