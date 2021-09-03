@@ -1,14 +1,14 @@
 
 ###  get all
-GET {{http}}{{host}}{{port}}{{base-url}}/topic
+GET {{http}}{{host}}{{port}}{{base-url}}/topics
 Content-Type: application/json
 
 ###  get all topic flat
-GET {{http}}{{host}}{{port}}{{base-url}}/topic/flat
+GET {{http}}{{host}}{{port}}{{base-url}}/topics/thesis-flat
 Content-Type: application/json
 
 ###  create one
-POST {{http}}{{host}}{{port}}{{base-url}}/topic
+POST {{http}}{{host}}{{port}}{{base-url}}/topics
 Content-Type: application/json
 
 {"major":["62"]}
