@@ -2,11 +2,11 @@ package com.thesis.service.dto.topic.resposne;
 
 import java.util.Objects;
 import java.util.stream.Stream;
-import com.thesis.service.common.model.SyEducationMethodTable;
-import com.thesis.service.common.utils.ContextAccessor;
 import com.thesis.service.model.person.PsStudentTable;
+import com.thesis.service.model.person.PsTeacherTable;
+import com.thesis.service.model.system.SyEducationMethodTable;
 import com.thesis.service.model.topic.TpTopicTable;
-import com.thesis.service.person.model.PsTeacherTable;
+import com.thesis.service.utils.ContextAccessor;
 import org.apache.commons.collections4.CollectionUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

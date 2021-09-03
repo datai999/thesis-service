@@ -1,0 +1,15 @@
+package com.thesis.service.controller.system;
+
+import com.thesis.service.controller.ABaseController;
+import com.thesis.service.model.system.SyMajorTable;
+import com.thesis.service.service.system.MajorService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/major")
+@RequiredArgsConstructor
+public class MajorController extends ABaseController<SyMajorTable, MajorService> {
+
+}

@@ -2,7 +2,7 @@ package com.thesis.service.model.person;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import com.thesis.service.common.model.BaseTable;
+import com.thesis.service.model.BaseTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
