@@ -11,6 +11,7 @@ import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.model.SyMajorTable;
+import com.thesis.service.person.model.PsTeacherTable;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import lombok.Data;
@@ -51,5 +52,8 @@ public class TpTopicTable extends BaseTable {
 
   @Type(type = "text")
   private String documentReference;
+
+  @ManyToMany
+  private List<PsTeacherTable> guideTeachers;
 
 }

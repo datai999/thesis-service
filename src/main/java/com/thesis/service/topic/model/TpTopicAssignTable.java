@@ -32,9 +32,6 @@ public class TpTopicAssignTable extends BaseTable {
   private BrConstDataTable status;
 
   @OneToMany
-  private List<PsTeacherTable> guideTeachers;
-
-  @OneToMany
   private List<PsStudentTable> students;
 
   @OneToMany
