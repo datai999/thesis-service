@@ -23,4 +23,9 @@ public abstract class PersonBaseTable extends BaseTable {
 
   @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
   private Boolean male;
+
+  public String getFullName() {
+    return String.format("%s %s", this.firstName, this.lastName);
+  }
+
 }
