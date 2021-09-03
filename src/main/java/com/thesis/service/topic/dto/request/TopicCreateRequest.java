@@ -1,7 +1,7 @@
 package com.thesis.service.topic.dto.request;
 
 import java.util.List;
-import com.thesis.service.topic.model.TpTopicTable;
+import com.thesis.service.model.topic.TpTopicTable;
 import lombok.Data;
 
 @Data

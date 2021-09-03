@@ -1,13 +1,14 @@
-package com.thesis.service.person.model;
+package com.thesis.service.model.person;
 
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import com.thesis.service.br.model.BrConstDataTable;
 import com.thesis.service.common.model.PersonBaseTable;
+import com.thesis.service.common.model.SyEducationMethodTable;
 import com.thesis.service.common.model.SyMajorTable;
-import com.thesis.service.topic.model.TpTopicAssignTable;
+import com.thesis.service.model.topic.TpTopicTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -18,12 +19,12 @@ import lombok.EqualsAndHashCode;
 public class PsStudentTable extends PersonBaseTable {
 
   @OneToOne
-  private SyMajorTable major;
+  private SyEducationMethodTable educationMethod;
 
   @OneToOne
-  private BrConstDataTable educationMethod;
+  private SyMajorTable major;
 
-  @ManyToOne
-  private TpTopicAssignTable topicAssign;
+  @ManyToMany
+  private List<TpTopicTable> topics;
 
 }

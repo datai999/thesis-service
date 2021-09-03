@@ -3,7 +3,7 @@ package com.thesis.service.person.controller;
 import javax.validation.Valid;
 import com.thesis.service.common.controller.ABaseController;
 import com.thesis.service.common.dto.request.SearchRequest;
-import com.thesis.service.person.model.PsStudentTable;
+import com.thesis.service.model.person.PsStudentTable;
 import com.thesis.service.person.service.StudentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

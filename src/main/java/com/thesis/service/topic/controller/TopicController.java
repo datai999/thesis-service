@@ -2,8 +2,8 @@ package com.thesis.service.topic.controller;
 
 import java.util.stream.Collectors;
 import com.thesis.service.common.controller.AbstractBaseController;
+import com.thesis.service.model.topic.TpTopicTable;
 import com.thesis.service.topic.dto.response.TopicFlatResponse;
-import com.thesis.service.topic.model.TpTopicTable;
 import com.thesis.service.topic.repository.TpTopicRepository;
 import com.thesis.service.topic.service.TopicService;
 import org.springframework.data.domain.Example;

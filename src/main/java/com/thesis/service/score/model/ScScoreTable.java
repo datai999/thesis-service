@@ -1,20 +1,16 @@
 package com.thesis.service.score.model;
 
 import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import com.thesis.service.common.model.BaseTable;
-import com.thesis.service.person.model.PsStudentTable;
+import com.thesis.service.model.person.PsStudentTable;
 import com.thesis.service.person.model.PsTeacherTable;
 import com.thesis.service.topic.model.TpTopicAssignTable;
-
 import org.hibernate.annotations.Type;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

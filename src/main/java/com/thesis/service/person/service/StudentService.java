@@ -6,7 +6,7 @@ import javax.persistence.PersistenceContext;
 import com.thesis.service.common.dto.DataBaseFieldConst;
 import com.thesis.service.common.dto.request.SearchRequest;
 import com.thesis.service.common.service.PageService;
-import com.thesis.service.person.model.PsStudentTable;
+import com.thesis.service.model.person.PsStudentTable;
 import com.thesis.service.person.repository.PsStudentRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;

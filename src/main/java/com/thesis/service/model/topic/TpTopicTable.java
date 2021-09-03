@@ -1,4 +1,4 @@
-package com.thesis.service.topic.model;
+package com.thesis.service.model.topic;
 
 import java.util.List;
 import javax.persistence.Entity;
@@ -10,6 +10,7 @@ import com.thesis.service.common.dto.MultiLangDto;
 import com.thesis.service.common.model.BaseTable;
 import com.thesis.service.common.model.SyEducationMethodTable;
 import com.thesis.service.common.model.SyMajorTable;
+import com.thesis.service.model.person.PsStudentTable;
 import com.thesis.service.person.model.PsTeacherTable;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
@@ -54,5 +55,8 @@ public class TpTopicTable extends BaseTable {
 
   @ManyToMany
   private List<PsTeacherTable> guideTeachers;
+
+  @ManyToMany
+  private List<PsStudentTable> students;
 
 }
