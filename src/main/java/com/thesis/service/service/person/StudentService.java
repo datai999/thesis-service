@@ -1,12 +1,11 @@
 package com.thesis.service.service.person;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import com.thesis.service.dto.DataBaseFieldConst;
 import com.thesis.service.dto.SearchRequest;
 import com.thesis.service.model.person.StudentTable;
 import com.thesis.service.repository.person.StudentRepository;
+import com.thesis.service.service.AbstractBaseService;
 import com.thesis.service.service.PageService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
@@ -16,27 +15,12 @@ import lombok.RequiredArgsConstructor;
 @Primary
 @Service
 @RequiredArgsConstructor
-public class StudentService extends APersonBaseService<StudentTable, StudentRepository>
-    implements StudentRepository {
+public class StudentService extends AbstractBaseService<StudentTable, StudentRepository> {
 
   @PersistenceContext
   private EntityManager entityManager;
   private final PageService pageService;
 
-  @Override
-  protected void preBuild(StudentTable entity) {
-    // do nothing
-  }
-
-  @Override
-  public List<StudentTable> searchIlikeNameOrCode(String value) {
-    return super.mainRepository.searchIlikeNameOrCode(value);
-  }
-
-  @Override
-  public List<StudentTable> findAllByCode(Iterable<String> codes) {
-    return super.mainRepository.findAllByCode(codes);
-  }
 
   public Page<StudentTable> search(SearchRequest requestBody) {
 
@@ -47,12 +31,15 @@ public class StudentService extends APersonBaseService<StudentTable, StudentRepo
 
     String groupClause = "GROUP BY psS.id";
 
-    return pageService.search(
-        requestBody,
-        DataBaseFieldConst.STUDENT_ENTITY,
-        StudentTable.class,
-        this,
-        selectClause,
-        groupClause);
+    // TODO: fix
+    return null;
+
+    // return pageService.search(
+    // requestBody,
+    // DataBaseFieldConst.STUDENT_ENTITY,
+    // StudentTable.class,
+    // this,
+    // selectClause,
+    // groupClause);
   }
 }
