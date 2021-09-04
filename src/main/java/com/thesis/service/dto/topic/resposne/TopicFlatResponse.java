@@ -48,7 +48,7 @@ public class TopicFlatResponse extends TopicTable {
     }
 
     if (CollectionUtils.isNotEmpty(entity.getStudents())) {
-      result.setGuideTeacherCodeNames(
+      result.setStudentCodeNames(
           entity.getStudents().stream().map(StudentTable::getFullCodeName));
     }
 
