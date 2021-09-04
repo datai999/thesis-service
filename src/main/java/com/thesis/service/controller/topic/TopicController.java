@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +26,11 @@ public class TopicController
     Sort sortable = Sort.by(Direction.DESC, "id");
     return service.getRepository().findAll(example, sortable).stream()
         .map(TopicFlatResponse::from).collect(Collectors.toList());
+  }
+
+  @PostMapping("/{topicId}/student-register")
+  public Object studentRegisterTopic(@PathVariable Long topicId) {
+    return super.service.studentRegister(topicId);
   }
 
 }

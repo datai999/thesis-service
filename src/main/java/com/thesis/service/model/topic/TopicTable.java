@@ -1,6 +1,7 @@
 package com.thesis.service.model.topic;
 
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -25,6 +26,7 @@ import lombok.EqualsAndHashCode;
 public class TopicTable extends BaseTable {
 
   @Type(type = "json")
+  @Column(columnDefinition = "TEXT")
   private MultiLangDto name;
 
   private Integer semester;
