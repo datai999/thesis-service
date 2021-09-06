@@ -4,7 +4,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=public
     username: postgres
     password: 1
-    initialization-mode: always 
+    initialization-mode: always
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,6 +13,9 @@ spring:
       hibernate:
         format_sql: true
         dialect: com.thesis.service.config.CustomPostgreSQLDialect
+
+firebase:
+  config.adminSdkPath: firebase-config.json
 
 server.servlet.context-path: /api
 jwt.secrect: "thesis"

@@ -1,3 +1,7 @@
+###  get all
+GET {{http}}{{host}}{{port}}{{base-url}}/topics
+Content-Type: application/json
+X-auth: {{taiHcmutToken}}
 
 ###  get all
 GET {{http}}{{host}}{{port}}{{base-url}}/topics
@@ -6,4 +10,4 @@ Content-Type: application/json
 ###  get all topic flat
 GET {{http}}{{host}}{{port}}{{base-url}}/topics/thesis-flat
 Content-Type: application/json
-Authorization: Bearer {{token}}
+X-auth: "s"

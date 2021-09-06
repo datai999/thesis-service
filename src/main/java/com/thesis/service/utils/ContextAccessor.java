@@ -25,7 +25,7 @@ public class ContextAccessor implements ApplicationContextAware {
     return applicationContext.getBean(clazz);
   }
 
-  public static <T> T getBean(String qualifier, Class<T> clazz) {
+  public static <T> T getBean(Class<T> clazz, String qualifier) {
     return applicationContext.getBean(qualifier, clazz);
   }
 
