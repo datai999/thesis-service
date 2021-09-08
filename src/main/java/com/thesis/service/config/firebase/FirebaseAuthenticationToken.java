@@ -1,12 +1,15 @@
 package com.thesis.service.config.firebase;
 
 import java.util.Collection;
+import com.thesis.service.model.person.PersonTable;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
+import lombok.Getter;
 
+@Getter
 public class FirebaseAuthenticationToken extends AbstractAuthenticationToken {
 
-  private final Object principal;
+  private final PersonTable principal;
   private Object credentials;
 
   /**
@@ -15,7 +18,7 @@ public class FirebaseAuthenticationToken extends AbstractAuthenticationToken {
    * {@link #isAuthenticated()} will return <code>false</code>.
    *
    */
-  public FirebaseAuthenticationToken(Object principal, Object credentials) {
+  public FirebaseAuthenticationToken(PersonTable principal, Object credentials) {
     super(null);
     this.principal = principal;
     this.credentials = credentials;
@@ -32,22 +35,12 @@ public class FirebaseAuthenticationToken extends AbstractAuthenticationToken {
    * @param credentials
    * @param authorities
    */
-  public FirebaseAuthenticationToken(Object principal, Object credentials,
+  public FirebaseAuthenticationToken(PersonTable principal, Object credentials,
       Collection<? extends GrantedAuthority> authorities) {
     super(authorities);
     this.principal = principal;
     this.credentials = credentials;
     super.setAuthenticated(true); // must use super, as we override
-  }
-  // ~ Methods
-  // ========================================================================================================
-
-  public Object getCredentials() {
-    return this.credentials;
-  }
-
-  public Object getPrincipal() {
-    return this.principal;
   }
 
   public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {

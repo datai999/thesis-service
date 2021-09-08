@@ -2,10 +2,12 @@
 ###  get all
 GET {{http}}{{host}}{{port}}{{base-url}}/teacher
 Content-Type: application/json
+X-auth: {{taiHcmutToken}}
 
 ###  get all
 GET {{http}}{{host}}{{port}}{{base-url}}/teacher/flat
 Content-Type: application/json
+X-auth: {{taiHcmutToken}}
 
 ###  create one
 POST {{http}}{{host}}{{port}}{{base-url}}/teacher

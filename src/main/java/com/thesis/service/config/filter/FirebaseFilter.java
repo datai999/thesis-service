@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
-import com.thesis.service.config.firebase.FirebaseAuthenticationToken;
+import com.thesis.service.service.person.PersonService;
 import com.thesis.service.utils.ContextAccessor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,9 +32,9 @@ public class FirebaseFilter extends OncePerRequestFilter {
         throw new BadCredentialsException("Token must not be blank");
       }
 
-      FirebaseToken token = FirebaseAuth.getInstance().verifyIdToken(xAuth);
+      FirebaseToken firebaseToken = FirebaseAuth.getInstance().verifyIdToken(xAuth);
 
-      var auth = new FirebaseAuthenticationToken(token.getEmail(), null);
+      var auth = ContextAccessor.getBean(PersonService.class).getAuthentication(firebaseToken);
       SecurityContextHolder.getContext().setAuthentication(auth);
 
       filterChain.doFilter(request, response);

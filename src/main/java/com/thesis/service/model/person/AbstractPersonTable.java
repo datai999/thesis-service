@@ -14,6 +14,10 @@ public class AbstractPersonTable extends BaseTable {
   @OneToOne(optional = false)
   private PersonTable person;
 
+  public String getGender() {
+    return this.person.getMale() ? "Nam" : "Nữ";
+  }
+
   public String getFullCodeName() {
     return String.format("%s - %s", this.person.getCode(), this.person.getFullName());
   }
