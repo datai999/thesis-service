@@ -23,6 +23,13 @@ public class WrapResponseAdvice implements ResponseBodyAdvice<Object> {
       MediaType selectedContentType,
       Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
       ServerHttpResponse response) {
-    return (body instanceof WrapResponse) ? body : WrapResponse.data(String.valueOf(body));
+
+    if (body instanceof WrapResponse)
+      return body;
+    if (body instanceof String)
+      return String.format("{\"data\":\"%s\"}", body);
+
+    return WrapResponse.data(body);
+
   }
 }
