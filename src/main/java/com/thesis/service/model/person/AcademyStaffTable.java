@@ -9,10 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ps_academy_staff")
-public class AcademyStaffTable extends PersonBaseTable {
+public class AcademyStaffTable extends AbstractPersonTable {
 
-  @Override
-  public String getTableName() {
-    return "ps_academy_staff";
-  }
 }

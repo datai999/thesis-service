@@ -29,11 +29,9 @@ public class ScoreTable extends BaseTable {
   private CriterionTemplateTable criterionTemplate;
 
   @OneToOne
-  @JoinColumn(name = "teacher_code", referencedColumnName = "code")
   private TeacherTable teacher;
 
   @OneToOne
-  @JoinColumn(name = "student_code", referencedColumnName = "code")
   private StudentTable student;
 
   @Type(type = "int-array")
@@ -42,10 +40,5 @@ public class ScoreTable extends BaseTable {
 
   @Type(type = "text")
   private String comment;
-
-  @Override
-  public String getTableName() {
-    return "sc_score";
-  }
 
 }

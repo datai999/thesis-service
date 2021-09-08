@@ -1,15 +1,17 @@
 package com.thesis.service.model.person;
 
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@MappedSuperclass
-public abstract class PersonBaseTable extends BaseTable {
+@Entity
+@Table(name = "ps_person")
+public class PersonTable extends BaseTable {
 
   @Column(unique = true)
   private String code;

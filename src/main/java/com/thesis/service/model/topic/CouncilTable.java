@@ -4,20 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.br.ConstDataTable;
 import com.thesis.service.model.person.TeacherTable;
 import org.hibernate.annotations.Type;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -47,17 +44,12 @@ public class CouncilTable extends BaseTable {
   @Transient
   private List<ConstDataTable> role;
 
-  @JsonIgnore
-  @Type(type = "list-array")
-  @Column(name = "teacher_code", columnDefinition = "varchar[]")
-  private Collection<String> teacherCode;
+  // @JsonIgnore
+  // @Type(type = "list-array")
+  // @Column(name = "teacher_code", columnDefinition = "varchar[]")
+  // private Collection<String> teacherCode;
 
   @Transient
   private List<TeacherTable> teacher;
-
-  @Override
-  public String getTableName() {
-    return "tp_council";
-  }
 
 }

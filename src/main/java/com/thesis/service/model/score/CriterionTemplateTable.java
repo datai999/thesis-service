@@ -1,17 +1,14 @@
 package com.thesis.service.model.score;
 
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.dto.MultiLangDto;
 import com.thesis.service.model.BaseTable;
 import org.hibernate.annotations.Type;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -38,10 +35,5 @@ public class CriterionTemplateTable extends BaseTable {
   @Type(type = "int-array")
   @Column(name = "criterion_score", columnDefinition = "int[]")
   private List<Long> criterionScore;
-
-  @Override
-  public String getTableName() {
-    return "sc_criterion_template";
-  }
 
 }

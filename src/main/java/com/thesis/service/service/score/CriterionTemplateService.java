@@ -15,7 +15,7 @@ public class CriterionTemplateService
 
   @Override
   protected void preBuild(CriterionTemplateTable entity) {
-    entity.setById(criterionService, "criterion");
+    // entity.setById(criterionService, "criterion");
   }
 
 }

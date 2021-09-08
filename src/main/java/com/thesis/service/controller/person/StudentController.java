@@ -29,11 +29,6 @@ public class StudentController
         .map(StudentFlatResponse::from);
   }
 
-  @GetMapping("search")
-  public Object search(String value) {
-    return super.service.getRepository().searchIlikeNameOrCode(value);
-  }
-
   @Override
   @PostMapping("/paging/search")
   public Object search(@RequestBody @Valid SearchRequest requestBody) {

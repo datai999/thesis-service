@@ -26,9 +26,4 @@ public class TeacherController
         .map(TeacherFlatResponse::from).collect(Collectors.toList());
   }
 
-  @GetMapping("search")
-  public Object search(String value) {
-    return super.service.getRepository().searchIlikeName(value);
-  }
-
 }

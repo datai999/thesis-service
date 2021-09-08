@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "ps_student")
-public class StudentTable extends PersonBaseTable {
+public class StudentTable extends AbstractPersonTable {
 
   @OneToOne
   private EducationMethodTable educationMethod;

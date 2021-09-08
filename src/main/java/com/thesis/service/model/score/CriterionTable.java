@@ -1,7 +1,6 @@
 package com.thesis.service.model.score;
 
 import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -11,7 +10,6 @@ import com.thesis.service.dto.MultiLangDto;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.br.ConstDataTable;
 import org.hibernate.annotations.Type;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -34,10 +32,5 @@ public class CriterionTable extends BaseTable {
 
   @Type(type = "json")
   private MultiLangDto description;
-
-  @Override
-  public String getTableName() {
-    return "sc_criterion";
-  }
 
 }

@@ -1,8 +1,6 @@
 package com.thesis.service.model.br;
 
 import java.util.List;
-import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -10,11 +8,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.model.BaseTable;
 import org.hibernate.annotations.Type;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -22,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "br_setting", uniqueConstraints = { @UniqueConstraint(columnNames = { "name_id" }) })
+@Table(name = "br_setting", uniqueConstraints = {@UniqueConstraint(columnNames = {"name_id"})})
 @EqualsAndHashCode(callSuper = true)
 public class SettingTable extends BaseTable {
 
@@ -41,11 +37,6 @@ public class SettingTable extends BaseTable {
   @Transient
   private List<? extends BaseTable> setting;
 
-  @Override
-  public String getTableName() {
-    return "br_setting";
-  }
-
   public SettingTable setSingleRefId(Long id) {
     this.refId = List.of(id);
     return this;
@@ -55,16 +46,6 @@ public class SettingTable extends BaseTable {
     var result = new SettingTable();
     result.setName(name);
     return result;
-  }
-
-  public <T extends BaseTable> SettingTable setRef(T refRecord) {
-    this.refTable = refRecord.getTableName();
-    if (Objects.isNull(refRecord.getId())) {
-      this.refId = null;
-    } else {
-      this.refId = List.of(refRecord.getId());
-    }
-    return this;
   }
 
 }

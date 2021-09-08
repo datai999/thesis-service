@@ -16,32 +16,35 @@ INSERT INTO sy_education_method (id, name) VALUES (2, 'Chất lượng cao') ON 
 
 -- data test
 
-INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('12', 'Nguyễn Văn', 'A', 'nguyenvana', 1) ON CONFLICT DO NOTHING;
-INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('25', 'Nguyễn Văn', 'B', 'nguyenvanb', 2) ON CONFLICT DO NOTHING;
-INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('63', 'Nguyễn Thị', 'C', 'nguyenthic', 3) ON CONFLICT DO NOTHING;
-INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('47', 'Nguyễn Văn', 'D', 'nguyenvand', 4) ON CONFLICT DO NOTHING;
-INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('85', 'Nguyễn Văn', 'E', 'nguyenvane', 5) ON CONFLICT DO NOTHING;
-INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('36', 'Nguyễn Thị', 'F', 'nguyenthif', 1) ON CONFLICT DO NOTHING;
-INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('27', 'Nguyễn Thị', 'G', 'nguyenthig', 2) ON CONFLICT DO NOTHING;
-INSERT INTO ps_teacher (code, first_name, last_name, email, subject_department_id)
-  VALUES ('8', 'Nguyễn Thị', 'F', 'nguyenthih', 3) ON CONFLICT DO NOTHING;
+INSERT INTO ps_person (code, first_name, last_name, email)
+  VALUES ('12', 'Nguyễn Văn', 'A', 'nguyenvana') ON CONFLICT DO NOTHING;
+INSERT INTO ps_person (code, first_name, last_name, email)
+  VALUES ('25', 'Nguyễn Văn', 'B', 'nguyenvanb') ON CONFLICT DO NOTHING;
+INSERT INTO ps_person (code, first_name, last_name, email)
+  VALUES ('63', 'Nguyễn Thị', 'C', 'nguyenthic') ON CONFLICT DO NOTHING;
+INSERT INTO ps_person (code, first_name, last_name, email)
+  VALUES ('47', 'Nguyễn Văn', 'D', 'nguyenvand') ON CONFLICT DO NOTHING;
+INSERT INTO ps_person (code, first_name, last_name, email)
+  VALUES ('85', 'Nguyễn Văn', 'E', 'nguyenvane') ON CONFLICT DO NOTHING;
+INSERT INTO ps_person (code, first_name, last_name, email)
+  VALUES ('36', 'Nguyễn Thị', 'F', 'nguyenthif') ON CONFLICT DO NOTHING;
+INSERT INTO ps_person (code, first_name, last_name, email)
+  VALUES ('27', 'Nguyễn Thị', 'G', 'nguyenthig') ON CONFLICT DO NOTHING;
+INSERT INTO ps_person (code, first_name, last_name, email)
+  VALUES ('8', 'Nguyễn Thị', 'F', 'nguyenthih') ON CONFLICT DO NOTHING;
+INSERT INTO ps_person (code, first_name, last_name, email)
+  VALUES ('84', 'Nguyễn Thị', 'B', 'nguyenthib') ON CONFLICT DO NOTHING;
+INSERT INTO ps_person (code, first_name, last_name, email)
+  VALUES ('38', 'Nguyễn Thị', 'H', 'nguyenthih') ON CONFLICT DO NOTHING;
 
-INSERT INTO ps_student (code, first_name, last_name, email, education_method_id, major_id) 
-  VALUES ('1713015', 'Nguyễn Đức Anh', 'Tài', 'tai.nguyen.cse.datai', 1, 1) ON CONFLICT DO NOTHING;
-INSERT INTO ps_student (code, first_name, last_name, email, education_method_id, major_id)
-  VALUES ('1713016', 'Nguyễn Sinh Viên', '1', 'sv1', 2, 1) ON CONFLICT DO NOTHING;
-INSERT INTO ps_student (code, first_name, last_name, email, education_method_id, major_id)
-  VALUES ('1713032', 'Nguyễn Sinh Viên', '2', 'sv2', 1, 2) ON CONFLICT DO NOTHING;
-INSERT INTO ps_student (code, first_name, last_name, email, education_method_id, major_id)
-  VALUES ('1713043', 'Nguyễn Sinh', 'Viên', 'sv', 2, 2) ON CONFLICT DO NOTHING;
-INSERT INTO ps_student (code, first_name, last_name, email, education_method_id, major_id)
-  VALUES ('1713045', 'Nguyễn Sinh Viên', 'C', 'svc', 2, 1) ON CONFLICT DO NOTHING;
-INSERT INTO ps_student (code, first_name, last_name, email, education_method_id, major_id)
-  VALUES ('1713052', 'Nguyễn Sinh Văn', 'Viên', 'svv', 1, 1) ON CONFLICT DO NOTHING;
+INSERT INTO ps_teacher (person_id, subject_department_id, degree_id) VALUES (1, 1, 1) ON CONFLICT DO NOTHING;
+INSERT INTO ps_teacher (person_id, subject_department_id, degree_id) VALUES (2, 2, 2) ON CONFLICT DO NOTHING;
+INSERT INTO ps_teacher (person_id, subject_department_id, degree_id) VALUES (3, 3, 3) ON CONFLICT DO NOTHING;
+INSERT INTO ps_teacher (person_id, subject_department_id, degree_id) VALUES (4, 4, 1) ON CONFLICT DO NOTHING;
+INSERT INTO ps_teacher (person_id, subject_department_id, degree_id) VALUES (5, 5, 2) ON CONFLICT DO NOTHING;
+INSERT INTO ps_teacher (person_id, subject_department_id, degree_id) VALUES (6, 1, 3) ON CONFLICT DO NOTHING;
+INSERT INTO ps_teacher (person_id, subject_department_id, degree_id) VALUES (7, 2, 1) ON CONFLICT DO NOTHING;
+
+INSERT INTO ps_student (person_id, education_method_id, major_id) VALUES (8, 1, 1) ON CONFLICT DO NOTHING;
+INSERT INTO ps_student (person_id, education_method_id, major_id) VALUES (9, 1, 2) ON CONFLICT DO NOTHING;
+INSERT INTO ps_student (person_id, education_method_id, major_id) VALUES (10, 2, 1) ON CONFLICT DO NOTHING;

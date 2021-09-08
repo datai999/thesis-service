@@ -15,7 +15,7 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
 
   @Override
   public void preBuild(CouncilTable entity) {
-    entity.setById(constDataService, "role");
+    // entity.setById(constDataService, "role");
   }
 
 }
