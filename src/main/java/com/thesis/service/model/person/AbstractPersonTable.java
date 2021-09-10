@@ -1,5 +1,6 @@
 package com.thesis.service.model.person;
 
+import java.util.Objects;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import com.thesis.service.model.BaseTable;
@@ -12,7 +13,7 @@ import lombok.EqualsAndHashCode;
 public class AbstractPersonTable extends BaseTable {
 
   @OneToOne(optional = false)
-  private PersonTable person;
+  private PersonTable person = new PersonTable();
 
   public String getCode() {
     return this.person.getCode();
@@ -27,7 +28,7 @@ public class AbstractPersonTable extends BaseTable {
   }
 
   public String getGender() {
-    return this.person.getMale() ? "Nam" : "Nữ";
+    return this.person.isMale() ? "Nam" : "Nữ";
   }
 
   public String getEmail() {
@@ -39,7 +40,8 @@ public class AbstractPersonTable extends BaseTable {
   }
 
   public String getFullCodeName() {
-    return String.format("%s - %s", this.person.getCode(), this.person.getFullName());
+    return Objects.isNull(this.person) ? null
+        : String.format("%s - %s", this.person.getCode(), this.person.getFullName());
   }
 
 }

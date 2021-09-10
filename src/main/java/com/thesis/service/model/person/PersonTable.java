@@ -32,7 +32,7 @@ public class PersonTable extends BaseTable {
   private String phone;
 
   @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
-  private Boolean male;
+  private boolean male;
 
   @Type(type = "list-array")
   @Column(columnDefinition = "text[]")
