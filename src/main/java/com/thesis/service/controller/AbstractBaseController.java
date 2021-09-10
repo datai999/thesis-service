@@ -29,8 +29,11 @@ public abstract class AbstractBaseController<T extends BaseTable, R extends Base
   protected S service;
 
   @GetMapping
-  public Object findAll() {
-    return service.getRepository().findAll();
+  public Object findAll(
+      @RequestParam(defaultValue = "ASC") String direction,
+      @RequestParam(defaultValue = "id") String sort) {
+    Sort sortable = Sort.by(Direction.valueOf(direction), sort);
+    return service.getRepository().findAll(sortable);
   }
 
   @GetMapping("/paging")

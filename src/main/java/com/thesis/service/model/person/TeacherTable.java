@@ -1,6 +1,7 @@
 package com.thesis.service.model.person;
 
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -30,5 +31,21 @@ public class TeacherTable extends AbstractPersonTable {
 
   @ManyToOne
   private TopicAssignTable topicAssign;
+
+  public String getSubjectDepartmentName() {
+    if (Objects.nonNull(this.subjectDepartment)
+        && Objects.nonNull(this.subjectDepartment.getName())) {
+      return this.subjectDepartment.getName().getVi();
+    }
+    return null;
+  }
+
+  public String getDegreeName() {
+    if (Objects.nonNull(this.degree)
+        && Objects.nonNull(this.degree.getName())) {
+      return this.degree.getName().getVi();
+    }
+    return null;
+  }
 
 }

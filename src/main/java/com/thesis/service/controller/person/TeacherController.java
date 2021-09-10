@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/teacher")
+@RequestMapping("/teachers")
 @RequiredArgsConstructor
 public class TeacherController
     extends AbstractBaseController<TeacherTable, TeacherRepository, TeacherService> {

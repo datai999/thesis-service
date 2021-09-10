@@ -1,6 +1,7 @@
 package com.thesis.service.dto.person.response;
 
 import java.util.Objects;
+import com.thesis.service.model.person.PersonTable;
 import com.thesis.service.model.person.TeacherTable;
 import com.thesis.service.utils.ContextAccessor;
 import lombok.Data;
@@ -8,7 +9,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TeacherFlatResponse extends TeacherTable {
+public class TeacherFlatResponse extends PersonTable {
 
   private String gender;
   private String subjectDepartmentName;
