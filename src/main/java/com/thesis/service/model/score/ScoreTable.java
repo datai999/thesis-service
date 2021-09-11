@@ -7,8 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.person.StudentTable;
-import com.thesis.service.model.person.TeacherTable;
 import com.thesis.service.model.topic.TopicAssignTable;
 import org.hibernate.annotations.Type;
 import lombok.Data;
@@ -28,11 +26,11 @@ public class ScoreTable extends BaseTable {
   @JoinColumn(name = "criterion_template_id")
   private CriterionTemplateTable criterionTemplate;
 
-  @OneToOne
-  private TeacherTable teacher;
+  // @OneToOne
+  // private TeacherTable teacher;
 
-  @OneToOne
-  private StudentTable student;
+  // @OneToOne
+  // private StudentTable student;
 
   @Type(type = "int-array")
   @Column(name = "score", columnDefinition = "integer[]")

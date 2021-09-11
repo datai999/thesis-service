@@ -13,7 +13,6 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.br.ConstDataTable;
-import com.thesis.service.model.person.TeacherTable;
 import org.hibernate.annotations.Type;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -49,7 +48,7 @@ public class CouncilTable extends BaseTable {
   // @Column(name = "teacher_code", columnDefinition = "varchar[]")
   // private Collection<String> teacherCode;
 
-  @Transient
-  private List<TeacherTable> teacher;
+  // @Transient
+  // private List<TeacherTable> teacher;
 
 }

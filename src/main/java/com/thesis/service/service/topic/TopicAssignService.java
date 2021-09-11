@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 import com.thesis.service.model.topic.TopicAssignTable;
 import com.thesis.service.repository.topic.TopicAssignRepository;
 import com.thesis.service.service.AbstractBaseService;
-import com.thesis.service.service.person.StudentService;
-import com.thesis.service.service.person.TeacherService;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -14,9 +12,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TopicAssignService
     extends AbstractBaseService<TopicAssignTable, TopicAssignRepository> {
-
-  final StudentService studentService;
-  final TeacherService teacherService;
 
   final TopicService topicService;
   final CouncilService councilService;
