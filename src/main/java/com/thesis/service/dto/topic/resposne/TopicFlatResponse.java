@@ -2,9 +2,8 @@ package com.thesis.service.dto.topic.resposne;
 
 import java.util.Objects;
 import java.util.stream.Stream;
-import com.thesis.service.model.person.StudentTable;
-import com.thesis.service.model.person.TeacherTable;
 import com.thesis.service.model.system.EducationMethodTable;
+import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.utils.ContextAccessor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -39,17 +38,7 @@ public class TopicFlatResponse extends TopicTable {
 
     if (CollectionUtils.isNotEmpty(entity.getMajors())) {
       result.setMajorNames(
-          entity.getMajors().stream().map(major -> major.getName().getVi()));
-    }
-
-    if (CollectionUtils.isNotEmpty(entity.getGuideTeachers())) {
-      result.setGuideTeacherCodeNames(
-          entity.getGuideTeachers().stream().map(TeacherTable::getFullCodeName));
-    }
-
-    if (CollectionUtils.isNotEmpty(entity.getStudents())) {
-      result.setStudentCodeNames(
-          entity.getStudents().stream().map(StudentTable::getFullCodeName));
+          entity.getMajors().stream().map(MajorTable::getName));
     }
 
     return result;

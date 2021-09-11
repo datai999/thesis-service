@@ -21,13 +21,12 @@ public class TeacherFlatResponse extends PersonTable {
         .map(entity, TeacherFlatResponse.class)
         .setGender(entity.getPerson().isMale() ? "Nam" : "Nữ");
 
-    if (Objects.nonNull(entity.getSubjectDepartment())
-        && Objects.nonNull(entity.getSubjectDepartment().getName())) {
-      result.setSubjectDepartmentName(entity.getSubjectDepartment().getName().getVi());
+    if (Objects.nonNull(entity.getSubjectDepartment())) {
+      result.setSubjectDepartmentName(entity.getSubjectDepartment().getName());
     }
 
-    if (Objects.nonNull(entity.getDegree()) && Objects.nonNull(entity.getDegree().getName())) {
-      result.setDegreeName(entity.getDegree().getName().getVi());
+    if (Objects.nonNull(entity.getDegree())) {
+      result.setDegreeName(entity.getDegree().getName());
     }
 
     return result;

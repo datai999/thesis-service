@@ -24,9 +24,8 @@ public class StudentFlatResponse extends StudentTable {
       result.setEducationMethodName(entity.getEducationMethod().getName());
     }
 
-    if (Objects.nonNull(entity.getEducationMethod())
-        && Objects.nonNull(entity.getEducationMethod().getName())) {
-      result.setMajorName(entity.getMajor().getName().getVi());
+    if (Objects.nonNull(entity.getEducationMethod())) {
+      result.setMajorName(entity.getMajor().getName());
     }
 
     return result;

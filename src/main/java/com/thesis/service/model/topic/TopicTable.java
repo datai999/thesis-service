@@ -1,18 +1,20 @@
 package com.thesis.service.model.topic;
 
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import com.thesis.service.dto.MultiLangDto;
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.person.StudentTable;
-import com.thesis.service.model.person.TeacherTable;
 import com.thesis.service.model.system.EducationMethodTable;
 import com.thesis.service.model.system.MajorTable;
+import com.thesis.service.model.user.UserTable;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import lombok.Data;
@@ -34,10 +36,16 @@ public class TopicTable extends BaseTable {
   private Boolean thesis = false;
 
   @ManyToMany
-  private List<EducationMethodTable> educationMethods;
+  @JoinTable(name = "tp_topic_property",
+      joinColumns = @JoinColumn(name = "topic_id"),
+      inverseJoinColumns = @JoinColumn(name = "education_method_id"))
+  private Set<EducationMethodTable> educationMethods;
 
   @ManyToMany
-  private List<MajorTable> majors;
+  @JoinTable(name = "tp_topic_property",
+      joinColumns = @JoinColumn(name = "topic_id"),
+      inverseJoinColumns = @JoinColumn(name = "major_id"))
+  private Set<MajorTable> majors;
 
   @Min(1)
   private Integer minStudentTake = 1;
@@ -56,9 +64,21 @@ public class TopicTable extends BaseTable {
   private String documentReference;
 
   @ManyToMany
-  private List<TeacherTable> guideTeachers;
+  @JoinTable(name = "tp_topic_assign",
+      joinColumns = @JoinColumn(name = "topic_id"),
+      inverseJoinColumns = @JoinColumn(name = "student_id"))
+  private List<UserTable> students;
 
   @ManyToMany
-  private List<StudentTable> students;
+  @JoinTable(name = "tp_topic_assign",
+      joinColumns = @JoinColumn(name = "topic_id"),
+      inverseJoinColumns = @JoinColumn(name = "guide_teacher_id"))
+  private List<UserTable> guideTeachers;
+
+  @ManyToMany
+  @JoinTable(name = "tp_topic_assign",
+      joinColumns = @JoinColumn(name = "topic_id"),
+      inverseJoinColumns = @JoinColumn(name = "review_teacher_id"))
+  private List<UserTable> reviewTeachers;
 
 }
