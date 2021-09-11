@@ -2,8 +2,6 @@ package com.thesis.service.model.system;
 
 import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
@@ -23,10 +21,7 @@ public class EducationMethodTable extends BaseTable {
 
   private String name;
 
-  @ManyToMany
-  @JoinTable(name = "tp_topic_property",
-      joinColumns = @JoinColumn(name = "education_method_id"),
-      inverseJoinColumns = @JoinColumn(name = "topic_id"))
+  @ManyToMany(mappedBy = "educationMethods")
   private Set<TopicTable> topics;
 
   public EducationMethodTable(String id) {

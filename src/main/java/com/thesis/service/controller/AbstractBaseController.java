@@ -27,7 +27,7 @@ public abstract class AbstractBaseController<T extends BaseTable, S extends Abst
   @Autowired
   protected S service;
 
-  @GetMapping
+  @GetMapping("/core")
   public Object findAll(
       @RequestParam(defaultValue = "ASC") String direction,
       @RequestParam(defaultValue = "id") String sort) {
@@ -69,7 +69,7 @@ public abstract class AbstractBaseController<T extends BaseTable, S extends Abst
     return service.getRepository().findAll(pageable);
   }
 
-  @PostMapping
+  @PostMapping("/core")
   public Object save(@RequestBody @Valid T requestBody) {
     return service.getRepository().save(requestBody);
   }

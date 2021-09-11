@@ -1,18 +1,18 @@
 package com.thesis.service.dto.system;
 
-import com.thesis.service.model.system.MajorTable;
+import com.thesis.service.model.BaseTable;
 import com.thesis.service.utils.ContextAccessor;
 import lombok.Data;
 
 @Data
-public class MajorResponse {
+public class BaseResponse {
 
   private Long id;
   private String name;
 
-  public MajorResponse map(MajorTable entity) {
+  public <T extends BaseTable> BaseResponse map(T entity) {
     return ContextAccessor.getModelMapper()
-        .map(entity, MajorResponse.class);
+        .map(entity, BaseResponse.class);
   }
 
 }

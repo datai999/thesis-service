@@ -1,6 +1,6 @@
 package com.thesis.service.service.system;
 
-import com.thesis.service.dto.system.MajorResponse;
+import com.thesis.service.dto.system.BaseResponse;
 import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.repository.system.MajorRepository;
 import com.thesis.service.service.AbstractBaseService;
@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 public class MajorService extends AbstractBaseService<MajorTable, MajorRepository> {
 
   public Object findAll(Sort sort) {
-    return super.repository.findAll(sort).parallelStream().map(new MajorResponse()::map);
+    return super.repository.findAll(sort).parallelStream().map(new BaseResponse()::map);
   }
 
 }
