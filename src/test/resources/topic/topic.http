@@ -1,13 +1,22 @@
 ###  get all
 GET {{http}}{{host}}{{port}}{{base-url}}/topics
 Content-Type: application/json
-X-auth: {{taiHcmutToken}}
+X-auth: {{backDoorToken}}
 
-###  get all
-GET {{http}}{{host}}{{port}}{{base-url}}/topics
+###  get one
+GET {{http}}{{host}}{{port}}{{base-url}}/topics/1
 Content-Type: application/json
+X-auth: {{backDoorToken}}
 
-###  get all topic flat
-GET {{http}}{{host}}{{port}}{{base-url}}/topics/thesis-flat
+###  create topic
+POST {{http}}{{host}}{{port}}{{base-url}}/topics
 Content-Type: application/json
-X-auth: "s"
+X-auth: {{backDoorToken}}
+
+{
+  "guideTeachers":[
+    {
+      "id":2
+    }
+  ]
+}

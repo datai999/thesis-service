@@ -17,13 +17,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService extends AbstractBaseService<UserTable, UserRepository> {
 
-  public FirebaseAuthenticationToken getAuthentication(FirebaseToken firebaseToken) {
+  public FirebaseAuthenticationToken getAuthentication(String email) {
 
-    var user = super.repository.findByEmail(firebaseToken.getEmail());
+    var user = super.repository.findByEmail(email);
 
     if (Objects.isNull(user)) {
       var newUser = UserTable.builder()
-          .email(firebaseToken.getEmail())
+          .email(email)
           .type(UserType.STUDENT)
           .roles(List.of(UserType.STUDENT.name()))
           .createdAt(new Date())
@@ -32,11 +32,17 @@ public class UserService extends AbstractBaseService<UserTable, UserRepository> 
       user = super.repository.save(newUser);
     }
 
-    var roles = user.getRoles().stream()
-        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-        .collect(Collectors.toList());
+    var roles = Objects.nonNull(user.getRoles())
+        ? user.getRoles().stream()
+            .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+            .collect(Collectors.toList())
+        : null;
 
     return new FirebaseAuthenticationToken(user, null, roles);
+  }
+
+  public FirebaseAuthenticationToken getAuthentication(FirebaseToken firebaseToken) {
+    return this.getAuthentication(firebaseToken.getEmail());
   }
 
   public Object findByType(UserType type, Sort sort) {

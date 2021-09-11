@@ -75,10 +75,10 @@ public class TopicTable extends BaseTable {
       inverseJoinColumns = @JoinColumn(name = "guide_teacher_id"))
   private List<UserTable> guideTeachers;
 
-  @ManyToMany
-  @JoinTable(name = "tp_topic_assign",
-      joinColumns = @JoinColumn(name = "topic_id"),
-      inverseJoinColumns = @JoinColumn(name = "review_teacher_id"))
-  private List<UserTable> reviewTeachers;
+  // @ManyToMany
+  // @JoinTable(name = "tp_topic_assign",
+  // joinColumns = @JoinColumn(name = "topic_id"),
+  // inverseJoinColumns = @JoinColumn(name = "review_teacher_id"))
+  // private List<UserTable> reviewTeachers;
 
 }

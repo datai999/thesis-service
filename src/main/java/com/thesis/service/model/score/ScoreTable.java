@@ -7,7 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.topic.TopicAssignTable;
 import org.hibernate.annotations.Type;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,9 +17,9 @@ import lombok.EqualsAndHashCode;
 @Table(name = "sc_score")
 public class ScoreTable extends BaseTable {
 
-  @OneToOne
-  @JoinColumn(name = "topic_assign_id")
-  private TopicAssignTable topicAssign;
+  // @OneToOne
+  // @JoinColumn(name = "topic_assign_id")
+  // private TopicAssignTable topicAssign;
 
   @OneToOne
   @JoinColumn(name = "criterion_template_id")

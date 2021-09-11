@@ -24,6 +24,11 @@ public class UserController extends AbstractBaseController<UserTable, UserServic
     return super.service.getAuth();
   }
 
+  @GetMapping("/token")
+  Object getUser() {
+    return super.service.getAuth();
+  }
+
   @GetMapping("/{type}")
   Object findByType(
       @PathVariable String type,

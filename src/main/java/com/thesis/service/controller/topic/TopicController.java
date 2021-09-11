@@ -19,6 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class TopicController
     extends AbstractBaseController<TopicTable, TopicService> {
 
+  @GetMapping("/{id}")
+  public Object get(@PathVariable Long id) {
+    var response = service.getRepository().findById(id);
+    return response;
+  }
+
   @GetMapping("/{type}-flat")
   public Object reduce(@PathVariable String type) {
     var example = Example.of(new TopicTable().setThesis("thesis".equals(type)));

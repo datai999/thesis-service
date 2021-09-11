@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -67,23 +65,17 @@ public class UserTable extends BaseTable {
   @OneToOne
   private DegreeTable degree;
 
-  @ManyToMany
-  @JoinTable(name = "tp_topic_assign",
-      joinColumns = @JoinColumn(name = "guide_teacher_id"),
-      inverseJoinColumns = @JoinColumn(name = "topic_id"))
+  @ManyToMany(mappedBy = "students")
   private List<TopicTable> topicExecutes;
 
-  @ManyToMany
-  @JoinTable(name = "tp_topic_assign",
-      joinColumns = @JoinColumn(name = "guide_teacher_id"),
-      inverseJoinColumns = @JoinColumn(name = "topic_id"))
+  @ManyToMany(mappedBy = "guideTeachers")
   private List<TopicTable> topicGuides;
 
-  @ManyToMany
-  @JoinTable(name = "tp_topic_assign",
-      joinColumns = @JoinColumn(name = "review_teacher_id"),
-      inverseJoinColumns = @JoinColumn(name = "topic_id"))
-  private List<TopicTable> topicReviews;
+  // @ManyToMany
+  // @JoinTable(name = "tp_topic_assign",
+  // joinColumns = @JoinColumn(name = "review_teacher_id", nullable = true),
+  // inverseJoinColumns = @JoinColumn(name = "topic_id"))
+  // private List<TopicTable> topicReviews;
 
 
 

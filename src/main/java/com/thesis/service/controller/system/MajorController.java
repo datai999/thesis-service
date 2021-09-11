@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/major")
+@RequestMapping("/majors")
 @RequiredArgsConstructor
 public class MajorController extends ABaseController<MajorTable, MajorService> {
 
