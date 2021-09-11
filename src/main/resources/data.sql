@@ -16,23 +16,23 @@ INSERT INTO sy_education_method (id, name) VALUES (2, 'Chất lượng cao') ON 
 
 -- data test
 
-INSERT INTO us_user (code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-  VALUES ('12', 'Nguyễn Văn', 'A', 'nguyenvana@hcmut.edu.vn', 1, 1, 1, 1) ON CONFLICT DO NOTHING;
-INSERT INTO us_user (code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-  VALUES ('25', 'Nguyễn Văn', 'B', 'nguyenvanb@hcmut.edu.vn', 1, 1, 1, 2) ON CONFLICT DO NOTHING;
-INSERT INTO us_user (code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-  VALUES ('63', 'Nguyễn Thị', 'C', 'nguyenthic@hcmut.edu.vn', 1, 1, 1, 3) ON CONFLICT DO NOTHING;
-INSERT INTO us_user (code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-  VALUES ('47', 'Nguyễn Văn', 'D', 'nguyenvand@hcmut.edu.vn', 1, 1, 2, 1) ON CONFLICT DO NOTHING;
-INSERT INTO us_user (code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-  VALUES ('85', 'Nguyễn Văn', 'E', 'nguyenvane@hcmut.edu.vn', 1, 2, 3, 2) ON CONFLICT DO NOTHING;
-INSERT INTO us_user (code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-  VALUES ('36', 'Nguyễn Thị', 'F', 'nguyenthif@hcmut.edu.vn', 2, 2, 4, 3) ON CONFLICT DO NOTHING;
-INSERT INTO us_user (code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-  VALUES ('27', 'Nguyễn Thị', 'G', 'nguyenthig@hcmut.edu.vn', 2, 1, 5, 1) ON CONFLICT DO NOTHING;
-INSERT INTO us_user (code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-  VALUES ('8', 'Nguyễn Thị', 'F', 'nguyenthih@hcmut.edu.vn', 1, 1, 1, 2) ON CONFLICT DO NOTHING;
-INSERT INTO us_user (code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-  VALUES ('84', 'Nguyễn Thị', 'B', 'nguyenthib@hcmut.edu.vn', 2, 2, 3, 1) ON CONFLICT DO NOTHING;
-INSERT INTO us_user (code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-  VALUES ('38', 'Nguyễn Thị', 'H', 'nguyenthih@hcmut.edu.vn', 2, 1, 5, 2) ON CONFLICT DO NOTHING;
+INSERT INTO us_user (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  VALUES ('TEACHER', '12', 'Nguyễn Văn', 'A', 'nguyenvana@hcmut.edu.vn', 1, 1, 1, 1) ON CONFLICT DO NOTHING;
+INSERT INTO us_user (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  VALUES ('TEACHER', '25', 'Nguyễn Văn', 'B', 'nguyenvanb@hcmut.edu.vn', 1, 1, 1, 2) ON CONFLICT DO NOTHING;
+INSERT INTO us_user (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  VALUES ('TEACHER', '63', 'Nguyễn Thị', 'C', 'nguyenthic@hcmut.edu.vn', 1, 1, 1, 3) ON CONFLICT DO NOTHING;
+INSERT INTO us_user (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  VALUES ('TEACHER', '47', 'Nguyễn Văn', 'D', 'nguyenvand@hcmut.edu.vn', 1, 1, 2, 1) ON CONFLICT DO NOTHING;
+INSERT INTO us_user (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  VALUES ('TEACHER', '85', 'Nguyễn Văn', 'E', 'nguyenvane@hcmut.edu.vn', 1, 2, 3, 2) ON CONFLICT DO NOTHING;
+INSERT INTO us_user (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  VALUES ('TEACHER', '36', 'Nguyễn Thị', 'F', 'nguyenthif@hcmut.edu.vn', 2, 2, 4, 3) ON CONFLICT DO NOTHING;
+INSERT INTO us_user (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  VALUES ('TEACHER', '27', 'Nguyễn Thị', 'G', 'nguyenthig@hcmut.edu.vn', 2, 1, 5, 1) ON CONFLICT DO NOTHING;
+INSERT INTO us_user (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  VALUES ('STUDENT', '8', 'Nguyễn Thị', 'F', 'nguyenthih@hcmut.edu.vn', 1, 1, 1, 2) ON CONFLICT DO NOTHING;
+INSERT INTO us_user (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  VALUES ('STUDENT', '84', 'Nguyễn Thị', 'B', 'nguyenthib@hcmut.edu.vn', 2, 2, 3, 1) ON CONFLICT DO NOTHING;
+INSERT INTO us_user (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  VALUES ('STUDENT', '38', 'Nguyễn Thị', 'H', 'nguyenthih@hcmut.edu.vn', 2, 1, 5, 2) ON CONFLICT DO NOTHING;

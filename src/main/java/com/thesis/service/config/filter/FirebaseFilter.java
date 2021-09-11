@@ -32,6 +32,12 @@ public class FirebaseFilter extends OncePerRequestFilter {
         throw new BadCredentialsException("Token must not be blank");
       }
 
+      // TODO: remove back door
+      if (xAuth.equals("tai")) {
+        filterChain.doFilter(request, response);
+        return;
+      }
+
       FirebaseToken firebaseToken = FirebaseAuth.getInstance().verifyIdToken(xAuth);
 
       var auth = ContextAccessor.getBean(UserService.class).getAuthentication(firebaseToken);

@@ -13,6 +13,7 @@ spring:
       hibernate:
         format_sql: true
         dialect: com.thesis.service.config.CustomPostgreSQLDialect
+        enable_lazy_load_no_trans: true
 
 firebase:
   config.adminSdkPath: firebase-config.json

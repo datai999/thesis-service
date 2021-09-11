@@ -1,0 +1,10 @@
+
+###  get all teacher
+GET {{http}}{{host}}{{port}}{{base-url}}/users/teachers?direction=DESC
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+###  get all student
+GET {{http}}{{host}}{{port}}{{base-url}}/users/students?direction=DESC
+Content-Type: application/json
+X-auth: {{backDoorToken}}

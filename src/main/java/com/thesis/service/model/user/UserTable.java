@@ -1,6 +1,7 @@
 package com.thesis.service.model.user;
 
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -51,6 +52,7 @@ public class UserTable extends BaseTable {
   private List<String> roles;
 
   @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
   private UserType type;
 
   @OneToOne
@@ -83,12 +85,36 @@ public class UserTable extends BaseTable {
       inverseJoinColumns = @JoinColumn(name = "topic_id"))
   private List<TopicTable> topicReviews;
 
+
+
   public String getFullName() {
     return String.format("%s %s", this.firstName, this.lastName);
   }
 
   public String getFullCodeName() {
     return String.format("%s - %s", this.getCode(), this.getFullName());
+  }
+
+  public String getGender() {
+    if (Objects.isNull(this.male))
+      return null;
+    return this.male ? "Nam" : "Nữ";
+  }
+
+  public String getEducationMethodName() {
+    return Objects.nonNull(this.educationMethod) ? this.educationMethod.getName() : null;
+  }
+
+  public String getMajorName() {
+    return Objects.nonNull(this.major) ? this.major.getName() : null;
+  }
+
+  public String getSubjectDepartmentName() {
+    return Objects.nonNull(this.subjectDepartment) ? this.subjectDepartment.getName() : null;
+  }
+
+  public String getDegreeName() {
+    return Objects.nonNull(this.degree) ? this.degree.getName() : null;
   }
 
 }

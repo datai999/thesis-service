@@ -10,6 +10,7 @@ import com.thesis.service.constant.UserType;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.AbstractBaseService;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class UserService extends AbstractBaseService<UserTable, UserRepository> 
     if (Objects.isNull(user)) {
       var newUser = UserTable.builder()
           .email(firebaseToken.getEmail())
+          .type(UserType.STUDENT)
           .roles(List.of(UserType.STUDENT.name()))
           .createdAt(new Date())
           .updatedAt(new Date())
@@ -35,6 +37,10 @@ public class UserService extends AbstractBaseService<UserTable, UserRepository> 
         .collect(Collectors.toList());
 
     return new FirebaseAuthenticationToken(user, null, roles);
+  }
+
+  public Object findByType(UserType type, Sort sort) {
+    return super.repository.findByType(type, sort);
   }
 
 }
