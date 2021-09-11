@@ -4,7 +4,6 @@ import java.util.stream.Collectors;
 import com.thesis.service.controller.AbstractBaseController;
 import com.thesis.service.dto.topic.resposne.TopicFlatResponse;
 import com.thesis.service.model.topic.TopicTable;
-import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.service.topic.TopicService;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/topics")
 public class TopicController
-    extends AbstractBaseController<TopicTable, TopicRepository, TopicService> {
+    extends AbstractBaseController<TopicTable, TopicService> {
 
   @GetMapping("/{type}-flat")
   public Object reduce(@PathVariable String type) {

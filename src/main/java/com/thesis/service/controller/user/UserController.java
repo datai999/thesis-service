@@ -1,18 +1,15 @@
-package com.thesis.service.controller.person;
+package com.thesis.service.controller.user;
 
 import com.thesis.service.controller.AbstractBaseController;
-import com.thesis.service.model.person.PersonTable;
-import com.thesis.service.service.person.PersonService;
+import com.thesis.service.model.user.UserTable;
+import com.thesis.service.service.user.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/persons")
-@RequiredArgsConstructor
-public class PersonController
-    extends AbstractBaseController<PersonTable, PersonService> {
+@RequestMapping("/users")
+public class UserController extends AbstractBaseController<UserTable, UserService> {
 
   @PostMapping("/login")
   Object login() {

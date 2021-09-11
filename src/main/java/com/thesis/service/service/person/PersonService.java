@@ -36,6 +36,7 @@ public class PersonService extends AbstractBaseService<PersonTable, PersonReposi
         .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
         .collect(Collectors.toList());
 
-    return new FirebaseAuthenticationToken(person, null, roles);
+    // return new FirebaseAuthenticationToken(person, null, roles);
+    return null;
   }
 }

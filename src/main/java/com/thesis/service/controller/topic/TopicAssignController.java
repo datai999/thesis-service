@@ -6,7 +6,6 @@ import javax.validation.constraints.NotBlank;
 import com.thesis.service.controller.AbstractBaseController;
 import com.thesis.service.dto.SearchRequest;
 import com.thesis.service.model.topic.TopicAssignTable;
-import com.thesis.service.repository.topic.TopicAssignRepository;
 import com.thesis.service.service.topic.TopicAssignExtendService;
 import com.thesis.service.service.topic.TopicAssignService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TopicAssignController
     extends
-    AbstractBaseController<TopicAssignTable, TopicAssignRepository, TopicAssignService> {
+    AbstractBaseController<TopicAssignTable, TopicAssignService> {
 
   private final TopicAssignExtendService topicAssignExtendService;
 

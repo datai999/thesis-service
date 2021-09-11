@@ -7,7 +7,6 @@ import javax.validation.constraints.Positive;
 import com.thesis.service.dto.DataBaseFieldConst;
 import com.thesis.service.dto.SearchRequest;
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.repository.BaseRepository;
 import com.thesis.service.service.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Validated
-public abstract class AbstractBaseController<T extends BaseTable, R extends BaseRepository<T>, S extends AbstractBaseService<T, R>> {
+public abstract class AbstractBaseController<T extends BaseTable, S extends AbstractBaseService<T, ?>> {
 
   @Autowired
   protected S service;

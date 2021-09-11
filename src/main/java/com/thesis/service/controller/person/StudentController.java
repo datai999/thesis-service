@@ -5,7 +5,6 @@ import com.thesis.service.controller.AbstractBaseController;
 import com.thesis.service.dto.SearchRequest;
 import com.thesis.service.dto.person.response.StudentFlatResponse;
 import com.thesis.service.model.person.StudentTable;
-import com.thesis.service.repository.person.StudentRepository;
 import com.thesis.service.service.person.StudentService;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -20,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/students")
 @RequiredArgsConstructor
 public class StudentController
-    extends AbstractBaseController<StudentTable, StudentRepository, StudentService> {
+    extends AbstractBaseController<StudentTable, StudentService> {
 
   @GetMapping("/flat")
   public Object reduce() {

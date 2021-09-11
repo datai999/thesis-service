@@ -18,7 +18,7 @@ public class StudentFlatResponse extends StudentTable {
 
     var result = ContextAccessor.getModelMapper()
         .map(entity, StudentFlatResponse.class)
-        .setGender(entity.getPerson().getMale() ? "Nam" : "Nữ");
+        .setGender(entity.getPerson().isMale() ? "Nam" : "Nữ");
 
     if (Objects.nonNull(entity.getEducationMethod())) {
       result.setEducationMethodName(entity.getEducationMethod().getName());

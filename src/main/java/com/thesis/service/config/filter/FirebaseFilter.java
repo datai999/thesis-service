@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
-import com.thesis.service.service.person.PersonService;
+import com.thesis.service.service.user.UserService;
 import com.thesis.service.utils.ContextAccessor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -34,14 +34,14 @@ public class FirebaseFilter extends OncePerRequestFilter {
 
       FirebaseToken firebaseToken = FirebaseAuth.getInstance().verifyIdToken(xAuth);
 
-      var auth = ContextAccessor.getBean(PersonService.class).getAuthentication(firebaseToken);
+      var auth = ContextAccessor.getBean(UserService.class).getAuthentication(firebaseToken);
       SecurityContextHolder.getContext().setAuthentication(auth);
-
-      filterChain.doFilter(request, response);
 
     } catch (Exception e) {
       this.authorException(request, response, e.getMessage());
     }
+
+    filterChain.doFilter(request, response);
   }
 
   private void authorException(

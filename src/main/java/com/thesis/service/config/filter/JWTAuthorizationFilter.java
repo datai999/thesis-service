@@ -6,7 +6,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.thesis.service.service.person.UserService;
+import com.thesis.service.service.user.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -58,9 +58,11 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         .getBody();
 
     var username = String.valueOf(claims.get("username"));
-    var userDetails = customUserDetailService.loadUserByUsername(username);
-    return new UsernamePasswordAuthenticationToken(userDetails,
-        null, userDetails.getAuthorities());
+    // var userDetails = customUserDetailService.loadUserByUsername(username);
+    // return new UsernamePasswordAuthenticationToken(userDetails,
+    // null, userDetails.getAuthorities());
+
+    return null;
   }
 
 }

@@ -1,7 +1,7 @@
 package com.thesis.service.config.firebase;
 
 import java.util.Collection;
-import com.thesis.service.model.person.PersonTable;
+import com.thesis.service.model.user.UserTable;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class FirebaseAuthenticationToken extends AbstractAuthenticationToken {
 
-  private final PersonTable principal;
+  private final UserTable principal;
   private Object credentials;
 
   /**
@@ -18,7 +18,7 @@ public class FirebaseAuthenticationToken extends AbstractAuthenticationToken {
    * {@link #isAuthenticated()} will return <code>false</code>.
    *
    */
-  public FirebaseAuthenticationToken(PersonTable principal, Object credentials) {
+  public FirebaseAuthenticationToken(UserTable principal, Object credentials) {
     super(null);
     this.principal = principal;
     this.credentials = credentials;
@@ -35,7 +35,7 @@ public class FirebaseAuthenticationToken extends AbstractAuthenticationToken {
    * @param credentials
    * @param authorities
    */
-  public FirebaseAuthenticationToken(PersonTable principal, Object credentials,
+  public FirebaseAuthenticationToken(UserTable principal, Object credentials,
       Collection<? extends GrantedAuthority> authorities) {
     super(authorities);
     this.principal = principal;

@@ -1,7 +1,7 @@
 package com.thesis.service.service;
 
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.person.PersonTable;
+import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,8 +13,8 @@ public abstract class AbstractBaseService<T extends BaseTable, R extends BaseRep
   @Autowired
   protected R repository;
 
-  public PersonTable getAuth() {
-    return PersonTable.class.cast(
+  public UserTable getAuth() {
+    return UserTable.class.cast(
         SecurityContextHolder.getContext().getAuthentication().getPrincipal());
   }
 
