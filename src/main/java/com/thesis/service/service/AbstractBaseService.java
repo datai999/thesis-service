@@ -1,6 +1,8 @@
 package com.thesis.service.service;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.Objects;
+import java.util.function.Function;
 import com.thesis.service.dto.ModelConverter;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.user.UserTable;
@@ -31,19 +33,31 @@ public abstract class AbstractBaseService<T extends BaseTable, R extends BaseRep
     return (Class<T>) entityType;
   }
 
+  protected Function<T, ?> mapping() {
+    return null;
+  }
+
   public Object findAll(Sort sort) {
-    return this.mapper.map(this.repository.findAll(sort), this.getResponseClass());
+    var response = this.repository.findAll(sort);
+    return Objects.isNull(this.mapping())
+        ? this.mapper.map(response, this.getResponseClass())
+        : this.mapper.map(response, this.mapping());
   }
 
   public Object findById(Long id) {
-    return this.mapper.map(this.repository.findById(id), this.getResponseClass());
+    var response = this.repository.findById(id).orElseThrow();
+    return Objects.isNull(this.mapping())
+        ? this.mapper.map(response, this.getResponseClass())
+        : this.mapping().apply(response);
   }
 
   public Object findByExample(T entity, Sort sort) {
     entity.setCreatedAt(null).setUpdatedAt(null);
     var example = Example.of(entity);
     var response = this.repository.findAll(example, sort);
-    return this.mapper.map(response, this.getResponseClass());
+    return Objects.isNull(this.mapping())
+        ? this.mapper.map(response, this.getResponseClass())
+        : this.mapper.map(response, this.mapping());
   }
 
   public Object save(T entity) {

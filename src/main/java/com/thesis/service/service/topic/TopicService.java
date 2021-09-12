@@ -1,6 +1,7 @@
 package com.thesis.service.service.topic;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 import com.thesis.service.dto.topic.resposne.TopicResponse;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.model.user.UserTable;
@@ -15,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 public class TopicService extends AbstractBaseService<TopicTable, TopicRepository> {
 
   @Override
-  protected Class<?> getResponseClass() {
-    return TopicResponse.class;
+  protected Function<TopicTable, ?> mapping() {
+    return TopicResponse::new;
   }
 
   public Object studentRegister(Long topicId) {

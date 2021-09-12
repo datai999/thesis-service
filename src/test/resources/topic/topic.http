@@ -3,8 +3,13 @@ GET {{http}}{{host}}{{port}}{{base-url}}/topics
 Content-Type: application/json
 X-auth: {{backDoorToken}}
 
+###  get all outline
+GET {{http}}{{host}}{{port}}{{base-url}}/topics/outline
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
 ###  get one
-GET {{http}}{{host}}{{port}}{{base-url}}/topics/1
+GET {{http}}{{host}}{{port}}{{base-url}}/topics/detail/1
 Content-Type: application/json
 X-auth: {{backDoorToken}}
 

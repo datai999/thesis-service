@@ -1,13 +1,16 @@
 package com.thesis.service.dto.topic.resposne;
 
 import java.util.List;
+import com.thesis.service.dto.user.response.UserResponse;
 import com.thesis.service.model.system.EducationMethodTable;
 import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.utils.ContextAccessor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class TopicResponse {
 
   private Long id;
@@ -22,8 +25,8 @@ public class TopicResponse {
   private String type;
   private List<String> majorNames;
   private List<String> educationMethodNames;
-  private List<String> studentCodeNames;
-  private List<String> guideTeacherCodeNames;
+  private List<UserResponse> students;
+  private List<UserResponse> guideTeachers;
 
   public TopicResponse(TopicTable entity) {
 
@@ -35,6 +38,8 @@ public class TopicResponse {
     this.educationMethodNames =
         mapper.map(entity.getEducationMethods(), EducationMethodTable::getName);
     this.majorNames = mapper.map(entity.getMajors(), MajorTable::getName);
+    this.students = mapper.map(entity.getStudents(), UserResponse.class);
+    this.guideTeachers = mapper.map(entity.getGuideTeachers(), UserResponse.class);
 
   }
 
