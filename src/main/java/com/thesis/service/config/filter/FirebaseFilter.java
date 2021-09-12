@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import com.thesis.service.service.user.UserService;
 import com.thesis.service.utils.ContextAccessor;
@@ -46,21 +47,28 @@ public class FirebaseFilter extends OncePerRequestFilter {
       var auth = ContextAccessor.getBean(UserService.class).getAuthentication(firebaseToken);
       SecurityContextHolder.getContext().setAuthentication(auth);
 
+      filterChain.doFilter(request, response);
+    } catch (FirebaseAuthException e) {
+      this.authorException(request, response,
+          new FirebaseAuthException(
+              e.getErrorCode(),
+              e.getMessage(),
+              e.getCause(),
+              e.getHttpResponse(),
+              e.getAuthErrorCode()));
     } catch (Exception e) {
-      this.authorException(request, response, e.getMessage());
+      this.authorException(request, response, new BadCredentialsException(e.getMessage()));
     }
-
-    filterChain.doFilter(request, response);
   }
 
   private void authorException(
       HttpServletRequest request,
       HttpServletResponse response,
-      String message) {
-    log.error("Token Firebase Exception : {}", message);
+      Exception ex) {
+    log.error("Firebase exception >>> {}", ex.getMessage());
     SecurityContextHolder.clearContext();
     ContextAccessor.getBean(HandlerExceptionResolver.class, "handlerExceptionResolver")
-        .resolveException(request, response, null, new BadCredentialsException(message));
+        .resolveException(request, response, null, ex);
   }
 
 }

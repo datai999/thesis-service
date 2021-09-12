@@ -2,6 +2,7 @@ package com.thesis.service.advice;
 
 import java.util.stream.Collectors;
 import javax.validation.ConstraintViolationException;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.thesis.service.dto.WrapResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
+
+  @ExceptionHandler(FirebaseAuthException.class)
+  Object firebaseAuthException(FirebaseAuthException ex) {
+    return ResponseEntity.badRequest()
+        .body(WrapResponse.error(ex.getAuthErrorCode(), ex.getMessage()));
+  }
 
   @ExceptionHandler(BadCredentialsException.class)
   Object handleBadCredentialsException(BadCredentialsException ex) {
