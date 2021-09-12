@@ -4,11 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
 import org.hibernate.annotations.DynamicUpdate;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity

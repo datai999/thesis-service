@@ -17,12 +17,14 @@ import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.system.SubjectDepartmentTable;
 import com.thesis.service.model.topic.TopicTable;
 import org.hibernate.annotations.Type;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
