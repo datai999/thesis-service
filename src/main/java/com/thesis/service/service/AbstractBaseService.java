@@ -40,6 +40,7 @@ public abstract class AbstractBaseService<T extends BaseTable, R extends BaseRep
   }
 
   public Object findByExample(T entity, Sort sort) {
+    entity.setCreatedAt(null).setUpdatedAt(null);
     var example = Example.of(entity);
     var response = this.repository.findAll(example, sort);
     return this.mapper.map(response, this.getResponseClass());
