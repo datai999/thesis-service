@@ -7,7 +7,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.modelmapper.convention.NameTokenizers;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,8 +16,7 @@ public class ModelConverter {
 
   public ModelConverter() {
     this.modelMapper = new ModelMapper();
-    this.modelMapper.getConfiguration().setSourceNameTokenizer(NameTokenizers.UNDERSCORE)
-        .setDestinationNameTokenizer(NameTokenizers.UNDERSCORE).setSkipNullEnabled(true);
+    this.modelMapper.getConfiguration().setSkipNullEnabled(true);
   }
 
   /**
