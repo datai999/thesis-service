@@ -43,7 +43,30 @@ public class UserService extends AbstractBaseService<UserTable, UserRepository> 
   }
 
   public FirebaseAuthenticationToken getAuthentication(FirebaseToken firebaseToken) {
-    return this.getAuthentication(firebaseToken.getEmail());
+    var user = super.repository.findByEmail(firebaseToken.getEmail());
+
+    if (Objects.isNull(user)) {
+      var nameBulkhead = firebaseToken.getName().lastIndexOf(" ");
+      var newUser = UserTable.builder()
+          .email(firebaseToken.getEmail())
+          .code("1713015")
+          .firstName(firebaseToken.getName().substring(0, nameBulkhead))
+          .lastName(firebaseToken.getName().substring(nameBulkhead + 1))
+          .type(UserType.STUDENT)
+          .roles(List.of(UserType.STUDENT.name()))
+          .createdAt(new Date())
+          .updatedAt(new Date())
+          .build();
+      user = super.repository.save(newUser);
+    }
+
+    var roles = Objects.nonNull(user.getRoles())
+        ? user.getRoles().stream()
+            .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+            .collect(Collectors.toList())
+        : null;
+
+    return new FirebaseAuthenticationToken(user, null, roles);
   }
 
   @Override
