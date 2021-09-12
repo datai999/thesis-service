@@ -6,6 +6,7 @@ import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -36,6 +37,12 @@ public abstract class AbstractBaseService<T extends BaseTable, R extends BaseRep
 
   public Object findById(Long id) {
     return this.mapper.map(this.repository.findById(id), this.getResponseClass());
+  }
+
+  public Object findByExample(T entity, Sort sort) {
+    var example = Example.of(entity);
+    var response = this.repository.findAll(example, sort);
+    return this.mapper.map(response, this.getResponseClass());
   }
 
   public Object save(T entity) {

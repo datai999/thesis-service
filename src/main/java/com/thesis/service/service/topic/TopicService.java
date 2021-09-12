@@ -7,7 +7,6 @@ import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.service.AbstractBaseService;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -15,8 +14,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TopicService extends AbstractBaseService<TopicTable, TopicRepository> {
 
-  public Object findAll(Sort sort) {
-    return mapper.map(super.repository.findAll(sort), TopicResponse::new);
+  @Override
+  protected Class<?> getResponseClass() {
+    return TopicResponse.class;
   }
 
   public Object studentRegister(Long topicId) {
