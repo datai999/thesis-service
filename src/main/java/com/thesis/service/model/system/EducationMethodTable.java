@@ -1,6 +1,6 @@
 package com.thesis.service.model.system;
 
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -24,7 +24,7 @@ public class EducationMethodTable extends BaseTable {
   private String name;
 
   @ManyToMany(mappedBy = "educationMethods")
-  private Set<TopicTable> topics;
+  private List<TopicTable> topics;
 
   public EducationMethodTable(String id) {
     this.setId(Long.parseLong(id));

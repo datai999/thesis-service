@@ -1,7 +1,7 @@
 package com.thesis.service.model.topic;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -17,10 +17,12 @@ import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.user.UserTable;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @DynamicUpdate
@@ -39,13 +41,13 @@ public class TopicTable extends BaseTable {
   @JoinTable(name = "tp_topic_property",
       joinColumns = @JoinColumn(name = "topic_id"),
       inverseJoinColumns = @JoinColumn(name = "education_method_id"))
-  private Set<EducationMethodTable> educationMethods;
+  private List<EducationMethodTable> educationMethods;
 
   @ManyToMany
   @JoinTable(name = "tp_topic_property",
       joinColumns = @JoinColumn(name = "topic_id"),
       inverseJoinColumns = @JoinColumn(name = "major_id"))
-  private Set<MajorTable> majors;
+  private List<MajorTable> majors;
 
   @Min(1)
   private Integer minStudentTake = 1;
@@ -75,10 +77,16 @@ public class TopicTable extends BaseTable {
       inverseJoinColumns = @JoinColumn(name = "guide_teacher_id"))
   private List<UserTable> guideTeachers;
 
-  // @ManyToMany
-  // @JoinTable(name = "tp_topic_assign",
-  // joinColumns = @JoinColumn(name = "topic_id"),
-  // inverseJoinColumns = @JoinColumn(name = "review_teacher_id"))
-  // private List<UserTable> reviewTeachers;
+  @ManyToMany
+  @JoinTable(name = "tp_topic_assign",
+      joinColumns = @JoinColumn(name = "topic_id"),
+      inverseJoinColumns = @JoinColumn(name = "review_teacher_id"))
+  private List<UserTable> reviewTeachers;
+
+  public String getType() {
+    if (Objects.isNull(this.thesis))
+      return null;
+    return this.thesis ? "Luận văn" : "Đề cương";
+  }
 
 }

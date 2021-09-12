@@ -69,9 +69,10 @@ public abstract class AbstractBaseController<T extends BaseTable, S extends Abst
     return service.getRepository().findAll(pageable);
   }
 
-  @PostMapping("/core")
+  @PostMapping
   public Object save(@RequestBody @Valid T requestBody) {
-    return service.getRepository().save(requestBody);
+    service.getRepository().save(requestBody);
+    return true;
   }
 
   @PostMapping("/all")

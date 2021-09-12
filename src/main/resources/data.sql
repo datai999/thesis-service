@@ -1,7 +1,11 @@
 -- DROP CONTRAINT
 
 ALTER TABLE tp_topic_assign ALTER COLUMN student_id DROP NOT NULL,
-                            ALTER COLUMN guide_teacher_id DROP NOT NULL;
+                            ALTER COLUMN guide_teacher_id DROP NOT NULL,
+                            ALTER COLUMN review_teacher_id DROP NOT NULL;
+
+ALTER TABLE tp_topic_property ALTER COLUMN major_id DROP NOT NULL,
+                              ALTER COLUMN education_method_id DROP NOT NULL;
 
 -- INIT DATA
 

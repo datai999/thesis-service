@@ -8,39 +8,42 @@ import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.utils.ContextAccessor;
 import org.apache.commons.collections4.CollectionUtils;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class TopicFlatResponse extends TopicTable {
+public class TopicResponse {
+
+  private Long id;
+  private Integer semester;
+  private Integer minStudentTake = 1;
+  private Integer maxStudentTake = 3;
+  private String description;
+  private String task;
+  private String documentReference;
 
   private Stream<String> names;
   private String type;
   private Stream<String> majorNames;
   private Stream<String> educationMethodNames;
-  private Stream<String> guideTeacherCodeNames;
   private Stream<String> studentCodeNames;
+  private Stream<String> guideTeacherCodeNames;
 
-  public static TopicFlatResponse from(TopicTable entity) {
+  public TopicResponse(TopicTable entity) {
 
-    var result = ContextAccessor.getModelMapper()
-        .map(entity, TopicFlatResponse.class)
-        .setType(entity.getThesis() ? "Luận văn" : "Đề cương");
+    ContextAccessor.getModelMapper().map(entity, this);
 
     if (Objects.nonNull(entity.getName())) {
-      result.setNames(Stream.of(entity.getName().getVi(), entity.getName().getEn()));
+      this.names = Stream.of(entity.getName().getVi(), entity.getName().getEn());
     }
 
     if (CollectionUtils.isNotEmpty(entity.getEducationMethods())) {
-      result.setEducationMethodNames(
-          entity.getEducationMethods().stream().map(EducationMethodTable::getName));
+      this.educationMethodNames =
+          entity.getEducationMethods().stream().parallel().map(EducationMethodTable::getName);
     }
 
     if (CollectionUtils.isNotEmpty(entity.getMajors())) {
-      result.setMajorNames(
-          entity.getMajors().stream().map(MajorTable::getName));
+      this.majorNames =
+          entity.getMajors().stream().parallel().map(MajorTable::getName);
     }
 
-    return result;
   }
 }
