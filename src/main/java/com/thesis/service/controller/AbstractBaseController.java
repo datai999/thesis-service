@@ -25,7 +25,7 @@ public abstract class AbstractBaseController<T extends BaseTable, S extends Abst
     return service.findAll(sortable);
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/{id}/detail")
   public Object findById(@PathVariable Long id) {
     return service.findById(id);
   }
