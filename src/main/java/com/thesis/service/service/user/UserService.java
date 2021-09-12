@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import com.google.firebase.auth.FirebaseToken;
 import com.thesis.service.config.firebase.FirebaseAuthenticationToken;
 import com.thesis.service.constant.UserType;
+import com.thesis.service.dto.user.response.UserResponse;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.AbstractBaseService;
@@ -45,8 +46,13 @@ public class UserService extends AbstractBaseService<UserTable, UserRepository> 
     return this.getAuthentication(firebaseToken.getEmail());
   }
 
+  public Object getRequestUser() {
+    return new UserResponse(super.getAuth());
+  }
+
   public Object findByType(UserType type, Sort sort) {
-    return super.repository.findByType(type, sort);
+    return super.repository.findByType(type, sort).parallelStream()
+        .map(UserResponse::new).collect(Collectors.toList());
   }
 
 }

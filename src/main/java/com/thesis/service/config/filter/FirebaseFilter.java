@@ -26,6 +26,8 @@ public class FirebaseFilter extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
       FilterChain filterChain) throws ServletException, IOException {
 
+    System.out.println("\nNew request");
+
     String xAuth = request.getHeader(HEADER_NAME);
 
     try {
@@ -38,6 +40,8 @@ public class FirebaseFilter extends OncePerRequestFilter {
         var auth =
             ContextAccessor.getBean(UserService.class).getAuthentication("nguyenvana@hcmut.edu.vn");
         SecurityContextHolder.getContext().setAuthentication(auth);
+
+        log.info("Request user >>> {}", auth.getPrincipal().getEmail());
         filterChain.doFilter(request, response);
         return;
       }
@@ -47,6 +51,7 @@ public class FirebaseFilter extends OncePerRequestFilter {
       var auth = ContextAccessor.getBean(UserService.class).getAuthentication(firebaseToken);
       SecurityContextHolder.getContext().setAuthentication(auth);
 
+      log.info("Request user >>> {}", auth.getPrincipal().getEmail());
       filterChain.doFilter(request, response);
     } catch (FirebaseAuthException e) {
       this.authorException(request, response,

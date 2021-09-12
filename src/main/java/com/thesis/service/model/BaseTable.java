@@ -44,12 +44,12 @@ public abstract class BaseTable implements Serializable {
 
   @CreatedDate
   @Temporal(TemporalType.TIMESTAMP)
-  @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-  protected Date createdAt;
+  @Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
+  protected Date createdAt = new Date();
 
   @LastModifiedDate
   @Temporal(TemporalType.TIMESTAMP)
-  @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-  protected Date updatedAt;
+  @Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
+  protected Date updatedAt = new Date();
 
 }

@@ -21,12 +21,12 @@ public class UserController extends AbstractBaseController<UserTable, UserServic
 
   @PostMapping("/login")
   Object login() {
-    return super.service.getAuth();
+    return super.service.getRequestUser();
   }
 
   @GetMapping("/token")
   Object getUser() {
-    return super.service.getAuth();
+    return super.service.getRequestUser();
   }
 
   @GetMapping("/{type}")

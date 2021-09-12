@@ -93,20 +93,21 @@ public class UserTable extends BaseTable {
     return this.male ? "Nam" : "Nữ";
   }
 
-  public String getEducationMethodName() {
-    return Objects.nonNull(this.educationMethod) ? this.educationMethod.getName() : null;
-  }
+  // public String getEducationMethodName() {
+  // return Objects.nonNull(this.educationMethod) ? this.educationMethod.getName() : null;
+  // }
 
-  public String getMajorName() {
-    return Objects.nonNull(this.major) ? this.major.getName() : null;
-  }
+  // public String getMajorName() {
+  // return Objects.nonNull(this.major) ? this.major.getName() : null;
+  // }
 
-  public String getSubjectDepartmentName() {
-    return Objects.nonNull(this.subjectDepartment) ? this.subjectDepartment.getName() : null;
-  }
+  // public String getSubjectDepartmentName() {
+  // return Objects.nonNull(this.subjectDepartment) ? this.subjectDepartment.getName() : null;
+  // }
 
-  public String getDegreeName() {
-    return Objects.nonNull(this.degree) ? this.degree.getName() : null;
-  }
+  // public String getDegreeName() {
+  // // return Objects.nonNull(this.degree) ? this.degree.getName() : null;
+  // return "s";
+  // }
 
 }
