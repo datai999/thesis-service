@@ -1,7 +1,6 @@
 package com.thesis.service.service.topic;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 import com.thesis.service.dto.topic.resposne.TopicResponse;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.model.user.UserTable;
@@ -17,8 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class TopicService extends AbstractBaseService<TopicTable, TopicRepository> {
 
   public Object findAll(Sort sort) {
-    return super.repository.findAll(sort).parallelStream()
-        .map(TopicResponse::new).collect(Collectors.toList());
+    return mapper.map(super.repository.findAll(sort), TopicResponse::new);
   }
 
   public Object studentRegister(Long topicId) {

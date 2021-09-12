@@ -1,12 +1,10 @@
 package com.thesis.service.dto.topic.resposne;
 
-import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.List;
 import com.thesis.service.model.system.EducationMethodTable;
 import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.utils.ContextAccessor;
-import org.apache.commons.collections4.CollectionUtils;
 import lombok.Data;
 
 @Data
@@ -20,30 +18,24 @@ public class TopicResponse {
   private String task;
   private String documentReference;
 
-  private Stream<String> names;
+  private List<String> names;
   private String type;
-  private Stream<String> majorNames;
-  private Stream<String> educationMethodNames;
-  private Stream<String> studentCodeNames;
-  private Stream<String> guideTeacherCodeNames;
+  private List<String> majorNames;
+  private List<String> educationMethodNames;
+  private List<String> studentCodeNames;
+  private List<String> guideTeacherCodeNames;
 
   public TopicResponse(TopicTable entity) {
 
-    ContextAccessor.getModelMapper().map(entity, this);
+    var mapper = ContextAccessor.getModelConverter();
 
-    if (Objects.nonNull(entity.getName())) {
-      this.names = Stream.of(entity.getName().getVi(), entity.getName().getEn());
-    }
+    mapper.map(entity, this);
 
-    if (CollectionUtils.isNotEmpty(entity.getEducationMethods())) {
-      this.educationMethodNames =
-          entity.getEducationMethods().stream().parallel().map(EducationMethodTable::getName);
-    }
-
-    if (CollectionUtils.isNotEmpty(entity.getMajors())) {
-      this.majorNames =
-          entity.getMajors().stream().parallel().map(MajorTable::getName);
-    }
+    this.names = mapper.map(entity.getName());
+    this.educationMethodNames =
+        mapper.map(entity.getEducationMethods(), EducationMethodTable::getName);
+    this.majorNames = mapper.map(entity.getMajors(), MajorTable::getName);
 
   }
+
 }

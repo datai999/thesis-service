@@ -1,6 +1,6 @@
 package com.thesis.service.utils;
 
-import org.modelmapper.ModelMapper;
+import com.thesis.service.dto.ModelConverter;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -29,8 +29,8 @@ public class ContextAccessor implements ApplicationContextAware {
     return applicationContext.getBean(qualifier, clazz);
   }
 
-  public static ModelMapper getModelMapper() {
-    return getBean(ModelMapper.class);
+  public static ModelConverter getModelConverter() {
+    return getBean(ModelConverter.class);
   }
 
 }

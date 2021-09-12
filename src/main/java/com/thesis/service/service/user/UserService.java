@@ -47,12 +47,11 @@ public class UserService extends AbstractBaseService<UserTable, UserRepository> 
   }
 
   public Object getRequestUser() {
-    return new UserResponse(super.getAuth());
+    return mapper.map(super.getAuth(), UserResponse.class);
   }
 
   public Object findByType(UserType type, Sort sort) {
-    return super.repository.findByType(type, sort).parallelStream()
-        .map(UserResponse::new).collect(Collectors.toList());
+    return super.mapper.map(super.repository.findByType(type, sort), UserResponse.class);
   }
 
 }
