@@ -52,7 +52,6 @@ public class FirebaseFilter extends OncePerRequestFilter {
       SecurityContextHolder.getContext().setAuthentication(auth);
 
       log.info("Request user >>> {}", auth.getPrincipal().getEmail());
-      filterChain.doFilter(request, response);
     } catch (FirebaseAuthException e) {
       this.authorException(request, response,
           new FirebaseAuthException(
@@ -61,9 +60,13 @@ public class FirebaseFilter extends OncePerRequestFilter {
               e.getCause(),
               e.getHttpResponse(),
               e.getAuthErrorCode()));
+      return;
     } catch (Exception e) {
       this.authorException(request, response, new BadCredentialsException(e.getMessage()));
+      return;
     }
+
+    filterChain.doFilter(request, response);
   }
 
   private void authorException(
