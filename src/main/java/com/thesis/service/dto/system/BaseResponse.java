@@ -10,9 +10,8 @@ public class BaseResponse {
   private Long id;
   private String name;
 
-  public <T extends BaseTable> BaseResponse map(T entity) {
-    return ContextAccessor.getModelMapper()
-        .map(entity, BaseResponse.class);
+  public <T extends BaseTable> BaseResponse(T entity) {
+    ContextAccessor.getModelMapper().map(entity, this);
   }
 
 }

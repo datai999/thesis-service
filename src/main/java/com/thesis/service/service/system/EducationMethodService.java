@@ -14,7 +14,7 @@ public class EducationMethodService
 
   public Object findAll(Sort sort) {
     return super.repository.findAll(sort).parallelStream()
-        .map(new BaseResponse()::map).collect(Collectors.toList());
+        .map(BaseResponse::new).collect(Collectors.toList());
   }
 
 }
