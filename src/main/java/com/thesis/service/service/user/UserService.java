@@ -46,6 +46,11 @@ public class UserService extends AbstractBaseService<UserTable, UserRepository> 
     return this.getAuthentication(firebaseToken.getEmail());
   }
 
+  @Override
+  protected Class<?> getResponseClass() {
+    return UserResponse.class;
+  }
+
   public Object getRequestUser() {
     return mapper.map(super.getAuth(), UserResponse.class);
   }

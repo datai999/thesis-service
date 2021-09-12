@@ -1,11 +1,9 @@
 package com.thesis.service.controller.user;
 
-import java.util.List;
 import com.thesis.service.constant.UserType;
 import com.thesis.service.controller.AbstractBaseController;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.service.user.UserService;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,24 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController extends AbstractBaseController<UserTable, UserService> {
 
   @PostMapping("/login")
-  Object login() {
+  public Object login() {
     return super.service.getRequestUser();
   }
 
   @GetMapping("/token")
-  Object getUser() {
+  public Object getUser() {
     return super.service.getRequestUser();
   }
 
-  @GetMapping("/{type}")
-  Object findByType(
+  @GetMapping("/type-{type}")
+  public Object findByType(
       @PathVariable String type,
       @RequestParam(defaultValue = "ASC") String direction,
       @RequestParam(defaultValue = "id") String sort) {
-    String userType = type.subSequence(0, type.length() - 1).toString().toUpperCase();
+    var entity = new UserTable().setType(UserType.valueOf(type.toUpperCase()));
     Sort sortable = Sort.by(Direction.valueOf(direction), sort);
-    var response = super.service.findByType(UserType.valueOf(userType), sortable);
-    return ObjectUtils.defaultIfNull(response, List.of());
+    return service.findByExample(entity, sortable);
   }
 
 }
