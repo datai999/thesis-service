@@ -8,9 +8,7 @@ import com.thesis.service.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
-import lombok.Getter;
 
-@Getter
 public abstract class AbstractBaseService<T extends BaseTable, R extends BaseRepository<T>> {
 
   @Autowired
@@ -38,6 +36,11 @@ public abstract class AbstractBaseService<T extends BaseTable, R extends BaseRep
 
   public Object findById(Long id) {
     return this.mapper.map(this.repository.findById(id), this.getResponseClass());
+  }
+
+  public Object save(T entity) {
+    this.repository.save(entity);
+    return true;
   }
 
 }
