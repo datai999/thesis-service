@@ -1,6 +1,6 @@
 package com.thesis.service.controller.system;
 
-import com.thesis.service.controller.AbstractBaseController;
+import com.thesis.service.controller.ABaseController;
 import com.thesis.service.model.system.DegreeTable;
 import com.thesis.service.service.system.DegreeService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +11,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/degree")
 @RequiredArgsConstructor
 public class DegreeController
-    extends AbstractBaseController<DegreeTable, DegreeService> {
+    extends ABaseController<DegreeTable, DegreeService> {
 
 }

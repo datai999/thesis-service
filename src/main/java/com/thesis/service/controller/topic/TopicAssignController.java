@@ -2,7 +2,7 @@
 
 // import java.util.List;
 // import javax.validation.constraints.NotBlank;
-// import com.thesis.service.controller.AbstractBaseController;
+// import com.thesis.service.controller.ABaseController;
 // import com.thesis.service.model.topic.TopicAssignTable;
 // import com.thesis.service.service.topic.TopicAssignService;
 // import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@
 // @RequiredArgsConstructor
 // public class TopicAssignController
 //     extends
-//     AbstractBaseController<TopicAssignTable, TopicAssignService> {
+//     ABaseController<TopicAssignTable, TopicAssignService> {
 
 //   @GetMapping("/search/teacher")
 //   public List<TopicAssignTable> findByTeacherCode(@RequestParam @NotBlank String code,

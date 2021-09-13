@@ -1,6 +1,6 @@
 package com.thesis.service.controller.system;
 
-import com.thesis.service.controller.AbstractBaseController;
+import com.thesis.service.controller.ABaseController;
 import com.thesis.service.model.system.SubjectDepartmentTable;
 import com.thesis.service.service.system.SubjectDepartmentService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +12,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SubjectDepartmentController
     extends
-    AbstractBaseController<SubjectDepartmentTable, SubjectDepartmentService> {
+    ABaseController<SubjectDepartmentTable, SubjectDepartmentService> {
 
 }

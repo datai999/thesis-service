@@ -4,13 +4,13 @@
 // import java.util.stream.Collectors;
 // import com.thesis.service.model.topic.TopicAssignTable;
 // import com.thesis.service.repository.topic.TopicAssignRepository;
-// import com.thesis.service.service.AbstractBaseService;
+// import com.thesis.service.service.ABaseService;
 // import lombok.RequiredArgsConstructor;
 
 // // @Service
 // @RequiredArgsConstructor
 // public class TopicAssignService
-//     extends AbstractBaseService<TopicAssignTable, TopicAssignRepository> {
+//     extends ABaseService<TopicAssignTable, TopicAssignRepository> {
 
 //   final TopicService topicService;
 //   final CouncilService councilService;

@@ -12,13 +12,13 @@ import com.thesis.service.dto.user.response.TopicOfUserResponse;
 import com.thesis.service.dto.user.response.UserResponse;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.user.UserRepository;
-import com.thesis.service.service.AbstractBaseService;
+import com.thesis.service.service.ABaseService;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService extends AbstractBaseService<UserTable, UserRepository> {
+public class UserService extends ABaseService<UserTable, UserRepository> {
 
   public FirebaseAuthenticationToken getAuthentication(String email) {
 

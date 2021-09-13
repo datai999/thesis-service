@@ -1,7 +1,7 @@
 package com.thesis.service.controller.user;
 
 import com.thesis.service.constant.UserType;
-import com.thesis.service.controller.AbstractBaseController;
+import com.thesis.service.controller.ABaseController;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.service.user.UserService;
 import org.springframework.data.domain.Sort;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/users")
-public class UserController extends AbstractBaseController<UserTable, UserService> {
+public class UserController extends ABaseController<UserTable, UserService> {
 
   @PostMapping("/login")
   public Object login() {
