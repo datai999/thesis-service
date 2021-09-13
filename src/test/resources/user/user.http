@@ -17,3 +17,8 @@ X-auth: {{backDoorToken}}
 GET {{http}}{{host}}{{port}}{{base-url}}/users/1/detail
 Content-Type: application/json
 X-auth: {{backDoorToken}}
+
+###  get all topic
+GET {{http}}{{host}}{{port}}{{base-url}}/users/topics
+Content-Type: application/json
+X-auth: {{backDoorToken}}

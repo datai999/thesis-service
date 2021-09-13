@@ -37,4 +37,9 @@ public class UserController extends AbstractBaseController<UserTable, UserServic
     return service.findByExample(entity, sortable);
   }
 
+  @GetMapping("/topics")
+  public Object findTopics() {
+    return super.service.findTopics();
+  }
+
 }

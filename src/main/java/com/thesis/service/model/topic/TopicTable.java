@@ -50,11 +50,13 @@ public class TopicTable extends BaseTable {
   private List<MajorTable> majors;
 
   @Min(1)
-  private Integer minStudentTake = 1;
+  @Column(columnDefinition = "INTEGER DEFAULT 1")
+  private Integer minStudentTake;
 
   @Min(1)
   @Max(3)
-  private Integer maxStudentTake = 3;
+  @Column(columnDefinition = "INTEGER DEFAULT 3")
+  private Integer maxStudentTake;
 
   @Type(type = "text")
   private String description;

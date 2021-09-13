@@ -32,7 +32,6 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "us_user")
 public class UserTable extends BaseTable {
 
-  @Column(unique = true)
   private String code;
 
   private String firstName;
@@ -73,13 +72,8 @@ public class UserTable extends BaseTable {
   @ManyToMany(mappedBy = "guideTeachers")
   private List<TopicTable> topicGuides;
 
-  // @ManyToMany
-  // @JoinTable(name = "tp_topic_assign",
-  // joinColumns = @JoinColumn(name = "review_teacher_id", nullable = true),
-  // inverseJoinColumns = @JoinColumn(name = "topic_id"))
-  // private List<TopicTable> topicReviews;
-
-
+  @ManyToMany(mappedBy = "reviewTeachers")
+  private List<TopicTable> topicReviews;
 
   public String getFullName() {
     return String.format("%s %s", this.firstName, this.lastName);
@@ -94,22 +88,5 @@ public class UserTable extends BaseTable {
       return null;
     return this.male ? "Nam" : "Nữ";
   }
-
-  // public String getEducationMethodName() {
-  // return Objects.nonNull(this.educationMethod) ? this.educationMethod.getName() : null;
-  // }
-
-  // public String getMajorName() {
-  // return Objects.nonNull(this.major) ? this.major.getName() : null;
-  // }
-
-  // public String getSubjectDepartmentName() {
-  // return Objects.nonNull(this.subjectDepartment) ? this.subjectDepartment.getName() : null;
-  // }
-
-  // public String getDegreeName() {
-  // // return Objects.nonNull(this.degree) ? this.degree.getName() : null;
-  // return "s";
-  // }
 
 }

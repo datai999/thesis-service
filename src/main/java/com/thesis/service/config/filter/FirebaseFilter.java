@@ -37,8 +37,8 @@ public class FirebaseFilter extends OncePerRequestFilter {
 
       // TODO: remove back door
       if (xAuth.equals("tai")) {
-        var auth =
-            ContextAccessor.getBean(UserService.class).getAuthentication("nguyenvana@hcmut.edu.vn");
+        var auth = ContextAccessor.getBean(UserService.class)
+            .getAuthentication("tai.nguyen.cse.datai@hcmut.edu.vn");
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         log.info("Request user >>> {}", auth.getPrincipal().getEmail());

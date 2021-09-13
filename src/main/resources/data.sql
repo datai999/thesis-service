@@ -9,36 +9,22 @@ ALTER TABLE tp_topic_property ALTER COLUMN major_id DROP NOT NULL,
 
 -- INIT DATA
 
-INSERT INTO sy_major (id, name) VALUES
-    (1, 'Khoa học máy tính')
-  , (2, 'Kỹ thuật máy tính') 
+INSERT INTO sy_education_method (name) VALUES ('Chính quy'), ('Chất lượng cao') ON CONFLICT DO NOTHING;
+INSERT INTO sy_major (name) VALUES ('Khoa học máy tính'), ('Kỹ thuật máy tính') ON CONFLICT DO NOTHING;
+INSERT INTO sy_degree (name) VALUES ('Thạc sĩ'), ('Tiến sĩ'), ('Giáo sư') ON CONFLICT DO NOTHING;
+
+INSERT INTO sy_subject_department (name) VALUES
+    ('Hệ thống thông tin'), ('Công nghệ phần mềm'), ('Hệ thống và mạng')
+  , ('Khoa học máy tính'), ('Kỹ thuật máy tính')
 ON CONFLICT DO NOTHING;
 
-INSERT INTO sy_subject_department (id, name) VALUES 
-    (1, 'Hệ thống thông tin')
-  , (2, 'Công nghệ phần mềm')
-  , (3, 'Hệ thống và mạng')
-  , (4, 'Khoa học máy tính')
-  , (5, 'Kỹ thuật máy tính') 
-ON CONFLICT DO NOTHING;
-
-INSERT INTO sy_degree (id, name) VALUES
-    (1, 'Thạc sĩ')
-  , (2, 'Tiến sĩ')
-  , (3, 'Giáo sư') 
-ON CONFLICT DO NOTHING;
-
-INSERT INTO sy_education_method (id, name) VALUES 
-    (1, 'Chính quy')
-  , (2, 'Chất lượng cao')
-ON CONFLICT DO NOTHING;
-
--- data test
+-- TEST DATA
 
 INSERT INTO us_user
   (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
-VALUES 
-    ('TEACHER', '12', 'Nguyễn Văn', 'A', 'nguyenvana@hcmut.edu.vn', 1, 1, 1, 1)
+VALUES
+    ('TEACHER', '1713015', 'Nguyễn Đức Anh', 'Tài', 'tai.nguyen.cse.datai@hcmut.edu.vn', 1, 1, 1, 1)
+  , ('TEACHER', '12', 'Nguyễn Văn', 'A', 'nguyenvana@hcmut.edu.vn', 1, 1, 1, 1)
   , ('TEACHER', '25', 'Nguyễn Văn', 'B', 'nguyenvanb@hcmut.edu.vn', 1, 1, 1, 2)
   , ('TEACHER', '63', 'Nguyễn Thị', 'C', 'nguyenthic@hcmut.edu.vn', 1, 1, 1, 3)
   , ('TEACHER', '47', 'Nguyễn Văn', 'D', 'nguyenvand@hcmut.edu.vn', 1, 1, 2, 1)
@@ -48,4 +34,26 @@ VALUES
   , ('STUDENT', '8', 'Nguyễn Thị', 'F', 'nguyenthih@hcmut.edu.vn', 1, 1, 1, 2)
   , ('STUDENT', '84', 'Nguyễn Thị', 'B', 'nguyenthib@hcmut.edu.vn', 2, 2, 3, 1)
   , ('STUDENT', '38', 'Nguyễn Thị', 'H', 'nguyenthih@hcmut.edu.vn', 2, 1, 5, 2)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO tp_topic
+  (thesis, name)
+VALUES
+    (false, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}')
+  , (false, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}')
+  , (false, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}')
+  , (true, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}')
+  , (true, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}')
+  , (true, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO tp_topic_assign
+  (topic_id, guide_teacher_id)
+VALUES
+    (1, 1)
+  , (2, 1)
+  , (3, 1)
+  , (4, 1)
+  , (5, 1)
+  , (6, 1)
 ON CONFLICT DO NOTHING;
