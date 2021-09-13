@@ -14,7 +14,7 @@ Content-Type: application/json
 X-auth: {{backDoorToken}}
 
 ###  get by one user
-GET {{http}}{{host}}{{port}}{{base-url}}/topics/user?userId=12&topicRole=STUDENT&direction=DESC
+GET {{http}}{{host}}{{port}}{{base-url}}/topics/user?userId=1&topicRole=STUDENT&direction=DESC
 Content-Type: application/json
 X-auth: {{backDoorToken}}
 
@@ -30,3 +30,8 @@ X-auth: {{backDoorToken}}
     }
   ]
 }
+
+###  student cancel topic
+DELETE  {{http}}{{host}}{{port}}{{base-url}}/topics/4/students/cancel
+Content-Type: application/json
+X-auth: {{backDoorToken}}

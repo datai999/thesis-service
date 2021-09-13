@@ -6,6 +6,7 @@ import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.service.topic.TopicService;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,11 @@ public class TopicController
   @PostMapping("/{topicId}/students")
   public Object studentRegisterTopic(@PathVariable Long topicId) {
     return super.service.studentRegister(topicId);
+  }
+
+  @DeleteMapping("/{topicId}/students/cancel")
+  public Object studentCancel(@PathVariable Long topicId) {
+    return super.service.studentCancel(topicId);
   }
 
 }

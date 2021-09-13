@@ -59,4 +59,9 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
     return super.mapper.map(response, TopicResponse::new);
   }
 
+  public Object studentCancel(Long topicId) {
+    this.topicAssignRepository.studentCancel(topicId, super.getAuth().getId());
+    return true;
+  }
+
 }
