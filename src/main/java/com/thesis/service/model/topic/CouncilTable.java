@@ -1,13 +1,15 @@
 package com.thesis.service.model.topic;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-// @Entity
-// @Table(name = "tp_council")
+@Entity
+@Table(name = "tp_council")
 public class CouncilTable extends BaseTable {
 
   // @OneToOne
