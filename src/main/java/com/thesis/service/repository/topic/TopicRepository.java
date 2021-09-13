@@ -7,6 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TopicRepository extends BaseRepository<TopicTable> {
 
-  // List<TopicTable> findByUserAndRole();
-
 }

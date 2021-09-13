@@ -13,6 +13,11 @@ GET {{http}}{{host}}{{port}}{{base-url}}/topics/detail/1
 Content-Type: application/json
 X-auth: {{backDoorToken}}
 
+###  get by one user
+GET {{http}}{{host}}{{port}}{{base-url}}/topics/user?userId=12&topicRole=STUDENT&direction=DESC
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
 ###  create topic
 POST {{http}}{{host}}{{port}}{{base-url}}/topics
 Content-Type: application/json

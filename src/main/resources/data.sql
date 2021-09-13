@@ -48,12 +48,19 @@ VALUES
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_topic_assign
-  (topic_id, guide_teacher_id)
+  (topic_id, student_id, guide_teacher_id)
 VALUES
-    (1, 1)
-  , (2, 1)
-  , (3, 1)
-  , (4, 1)
-  , (5, 1)
-  , (6, 1)
+    (1, 1, 1)
+  , (2, null, 1)
+  , (3, null, 1)
+  , (4, 1, 1)
+  , (5, null, 1)
+  , (6, null, 1)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO tp_topic_property
+  (topic_id, major_id, education_method_id)
+VALUES
+    (1, 1, 1)
+  , (1, 2, 2)
 ON CONFLICT DO NOTHING;

@@ -4,6 +4,7 @@ import java.util.List;
 import com.thesis.service.dto.user.response.UserResponse;
 import com.thesis.service.model.system.EducationMethodTable;
 import com.thesis.service.model.system.MajorTable;
+import com.thesis.service.model.topic.TopicAssignTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.utils.ContextAccessor;
 import lombok.Data;
@@ -39,6 +40,10 @@ public class TopicResponse {
     this.students = mapper.map(entity.getStudents(), UserResponse.class);
     this.guideTeachers = mapper.map(entity.getGuideTeachers(), UserResponse.class);
 
+  }
+
+  public TopicResponse(TopicAssignTable topicAssign) {
+    this(topicAssign.getTopic());
   }
 
 }
