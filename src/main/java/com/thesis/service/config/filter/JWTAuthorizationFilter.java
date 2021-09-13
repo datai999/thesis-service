@@ -6,7 +6,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -18,9 +17,6 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
   private final static String HEADER = "Authorization";
   private final static String PREFIX = "Bearer ";
-
-  @Value("${jwt.secrect}")
-  private String jwtSecret;
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

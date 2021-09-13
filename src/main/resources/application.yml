@@ -15,13 +15,15 @@ spring:
         dialect: com.thesis.service.config.CustomPostgreSQLDialect
         enable_lazy_load_no_trans: true
 
-logging.level.org.springframework:
-  web.filter.CommonsRequestLoggingFilter: INFO
-  web: TRACE
+logging.level.org:
+  hibernate:
+    SQL: DEBUG
+    type.descriptor.sql.BasicBinder: TRACE
+  springframework:
+    web.filter.CommonsRequestLoggingFilter: INFO
+    web: TRACE
 # logging.file: D:/log/myapp.log
 
-firebase:
-  config.adminSdkPath: firebase-config.json
+firebase.config.adminSdkPath: firebase-config.json
 
 server.servlet.context-path: /api
-jwt.secrect: "thesis"
