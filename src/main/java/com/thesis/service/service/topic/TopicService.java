@@ -1,6 +1,5 @@
 package com.thesis.service.service.topic;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
@@ -8,12 +7,10 @@ import com.thesis.service.constant.TopicRole;
 import com.thesis.service.dto.topic.resposne.TopicResponse;
 import com.thesis.service.model.topic.TopicAssignTable;
 import com.thesis.service.model.topic.TopicTable;
-import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.topic.TopicAssignRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.ABaseService;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -32,14 +29,9 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
 
   public Object studentRegister(Long topicId) {
     var topic = super.repository.findById(topicId).orElseThrow();
-
-    var studentExecuteTopic =
-        ObjectUtils.defaultIfNull(topic.getStudents(), new ArrayList<UserTable>());
-    studentExecuteTopic.add(super.getAuth());
-
-    var topicResponse = super.repository.save(topic.setStudents(studentExecuteTopic));
-
-    return new TopicResponse(topicResponse);
+    var topicAssign = new TopicAssignTable().setTopic(topic).setStudent(super.getAuth());
+    topicAssignRepository.save(topicAssign);
+    return true;
   }
 
   public Object findByUserAndRole(Long userId, TopicRole role, Sort sort) {
@@ -60,6 +52,8 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
   }
 
   public Object studentCancel(Long topicId) {
+    // TODO: check time allow cancel
+    // TODO: notify to all user in topic
     this.topicAssignRepository.studentCancel(topicId, super.getAuth().getId());
     return true;
   }
