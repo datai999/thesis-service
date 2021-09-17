@@ -31,7 +31,7 @@ public class FirebaseFilter extends OncePerRequestFilter {
     String xAuth = request.getHeader(HEADER_NAME);
 
     try {
-      if (StringUtils.isBlank(xAuth)) {
+      if (StringUtils.isBlank(xAuth) || xAuth.length() < 10) {
         throw new BadCredentialsException("Token must not be blank");
       }
 
