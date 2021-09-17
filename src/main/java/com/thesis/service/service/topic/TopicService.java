@@ -11,6 +11,7 @@ import com.thesis.service.repository.topic.TopicAssignRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.ABaseService;
+import com.thesis.service.service.user.NotificationService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
 
   private final TopicAssignRepository topicAssignRepository;
   private final UserRepository userRepository;
+  private final NotificationService notificationService;
 
   @Override
   protected Function<TopicTable, ?> mapping() {
@@ -53,8 +55,13 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
 
   public Object studentCancel(Long topicId) {
     // TODO: check time allow cancel
-    // TODO: notify to all user in topic
     this.topicAssignRepository.studentCancel(topicId, super.getAuth().getId());
+    var topic = super.repository.findById(topicId).orElseThrow();
+    String message = super.getMessage(
+        "student.cancelTopic",
+        super.getAuth().getFullName(),
+        topic.getMultiName("[%s,%s]"));
+    this.notificationService.notify(topic.getStudents(), message);
     return true;
   }
 

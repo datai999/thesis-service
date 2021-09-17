@@ -48,14 +48,14 @@ VALUES
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_topic_assign
-  (topic_id, student_id, guide_teacher_id)
+  (topic_id, student_id, guide_teacher_id, review_teacher_id)
 VALUES
-    (1, 1, 1)
-  , (2, null, 1)
-  , (3, null, 1)
-  , (4, 1, 1)
-  , (5, null, 1)
-  , (6, null, 1)
+    (1, 1, 1, 1)
+  , (2, null, 1, 1)
+  , (3, null, 1, null)
+  , (4, 1, 1, null)
+  , (5, null, 1, null)
+  , (6, null, 1, null)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_topic_property
