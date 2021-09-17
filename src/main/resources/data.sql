@@ -18,6 +18,8 @@ INSERT INTO sy_subject_department (name) VALUES
   , ('Khoa học máy tính'), ('Kỹ thuật máy tính')
 ON CONFLICT DO NOTHING;
 
+INSERT INTO sy_semester (name) VALUES ('210'), ('211'), ('212') ON CONFLICT DO NOTHING;
+
 -- TEST DATA
 
 INSERT INTO us_user
@@ -37,14 +39,14 @@ VALUES
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_topic
-  (thesis, name)
+  (semester_id, thesis, name)
 VALUES
-    (false, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}')
-  , (false, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}')
-  , (false, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}')
-  , (true, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}')
-  , (true, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}')
-  , (true, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}')
+    (1, false, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}')
+  , (1, false, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}')
+  , (1, false, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}')
+  , (1, true, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}')
+  , (1, true, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}')
+  , (1, true, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_topic_assign

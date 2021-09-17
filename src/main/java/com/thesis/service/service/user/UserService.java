@@ -29,7 +29,7 @@ public class UserService extends ABaseService<UserTable, UserRepository> {
           .email(email)
           .type(UserType.STUDENT)
           .roles(List.of(UserType.STUDENT.name()))
-          .createdAt(new Date())
+          // .createdAt(new Date())
           .updatedAt(new Date())
           .build();
       user = super.repository.save(newUser);

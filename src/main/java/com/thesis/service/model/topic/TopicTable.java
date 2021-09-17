@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -14,6 +15,7 @@ import com.thesis.service.dto.MultiLangDto;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.system.EducationMethodTable;
 import com.thesis.service.model.system.MajorTable;
+import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.model.user.UserTable;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
@@ -33,7 +35,8 @@ public class TopicTable extends BaseTable {
   @Column(columnDefinition = "TEXT")
   private MultiLangDto name;
 
-  private Integer semester;
+  @ManyToOne(optional = false)
+  private SemesterTable semester;
 
   private Boolean thesis = false;
 

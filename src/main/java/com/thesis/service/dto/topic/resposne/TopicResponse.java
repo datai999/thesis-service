@@ -13,7 +13,7 @@ import lombok.Data;
 public class TopicResponse {
 
   private Long id;
-  private Integer semester;
+  private String semester;
   private Integer minStudentTake = 1;
   private Integer maxStudentTake = 3;
   private String description;
@@ -33,6 +33,7 @@ public class TopicResponse {
 
     mapper.map(entity, this);
 
+    this.semester = entity.getSemester().getName();
     this.names = mapper.map(entity.getName());
     this.educationMethodNames =
         mapper.map(entity.getEducationMethods(), EducationMethodTable::getName);
