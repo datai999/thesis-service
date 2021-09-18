@@ -74,4 +74,9 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
     return true;
   }
 
+  public Object deleteById(Long id) {
+    this.repository.deleteById(id);
+    return true;
+  }
+
 }

@@ -18,7 +18,11 @@ INSERT INTO sy_subject_department (name) VALUES
   , ('Khoa học máy tính'), ('Kỹ thuật máy tính')
 ON CONFLICT DO NOTHING;
 
-INSERT INTO sy_semester (name) VALUES ('210'), ('211'), ('212') ON CONFLICT DO NOTHING;
+INSERT INTO sy_semester (name, status) VALUES
+    ('211', 'USED')
+  , ('212', 'USING')
+  , ('213', null)
+ON CONFLICT DO NOTHING;
 
 -- TEST DATA
 

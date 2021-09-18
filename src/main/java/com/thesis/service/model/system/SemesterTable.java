@@ -1,9 +1,12 @@
 package com.thesis.service.model.system;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import com.thesis.service.constant.SemesterStatus;
 import com.thesis.service.model.BaseTable;
 import org.hibernate.annotations.DynamicUpdate;
 import lombok.EqualsAndHashCode;
@@ -23,8 +26,11 @@ public class SemesterTable extends BaseTable {
   @Column(nullable = false)
   private String name;
 
-  private Date registerTopicStart;
+  private LocalDateTime registerTopicStart;
 
-  private Date registerTopicEnd;
+  private LocalDateTime registerTopicEnd;
+
+  @Enumerated(EnumType.STRING)
+  private SemesterStatus status;
 
 }
