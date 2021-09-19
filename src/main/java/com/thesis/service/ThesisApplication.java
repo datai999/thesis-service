@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ThesisApplication {
 
   public static void main(String[] args) {
-    TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+    TimeZone.setDefault(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
     SpringApplication.run(ThesisApplication.class, args);
   }
 

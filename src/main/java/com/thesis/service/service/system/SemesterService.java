@@ -1,5 +1,6 @@
 package com.thesis.service.service.system;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -25,19 +26,24 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
     return super.mapper.map(currentSemester, SemesterResponse.class);
   }
 
+  public boolean allowStudentRegisterCancelTopic() {
+    var currentSemester = super.repository.findCurrentSemester();
+    var now = LocalDateTime.now();
+    return now.isBefore(currentSemester.getRegisterTopicStart())
+        && now.isAfter(currentSemester.getRegisterTopicEnd());
+  }
+
   @Transactional
   public boolean setCurrentSemester(Long semesterId) {
 
     var nextSemester = super.repository.findById(semesterId).orElseThrow();
 
     if (StringUtils.isBlank(nextSemester.getName()))
-      throw BusinessException.code("semester.001").get();
-
+      throw BusinessException.code("semester.001");
     Optional.ofNullable(nextSemester.getRegisterTopicStart())
-        .orElseThrow(BusinessException.code("semester.002"));
-
+        .orElseThrow(BusinessException.codeSupplier("semester.002"));
     Optional.ofNullable(nextSemester.getRegisterTopicEnd())
-        .orElseThrow(BusinessException.code("semester.003"));
+        .orElseThrow(BusinessException.codeSupplier("semester.003"));
 
     var currentSemester = super.repository.findCurrentSemester();
 

@@ -11,7 +11,11 @@ public class BusinessException extends RuntimeException {
   private String code;
   private Object[] args;
 
-  public static Supplier<BusinessException> code(String code, Object... args) {
+  public static BusinessException code(String code, Object... args) {
+    return new BusinessException(code, args);
+  };
+
+  public static Supplier<BusinessException> codeSupplier(String code, Object... args) {
     return () -> new BusinessException(code, args);
   };
 

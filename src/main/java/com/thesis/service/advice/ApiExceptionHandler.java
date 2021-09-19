@@ -44,7 +44,8 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler(BusinessException.class)
   ResponseEntity<Object> businessException(BusinessException ex) {
-    return ResponseEntity.status(HttpStatus.CONFLICT).body(WrapResponse.errorCode(ex.getCode()));
+    return ResponseEntity.status(HttpStatus.CONFLICT)
+        .body(WrapResponse.errorCode(ex.getCode(), ex.getArgs()));
   }
 
 }
