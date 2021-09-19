@@ -13,3 +13,8 @@ X-auth: {{backDoorToken}}
   "name": "221",
   "registerTopicStart": "2021-08-17T00:12:00"
 }
+
+### setting current semester
+PUT {{http}}{{host}}{{port}}{{base-url}}/semesters/current?id=1
+Content-Type: application/json
+X-auth: {{backDoorToken}}
