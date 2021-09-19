@@ -17,6 +17,11 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
     return SemesterResponse.class;
   }
 
+  public SemesterResponse getCurrentSemester() {
+    var currentSemester = super.repository.findCurrentSemester();
+    return super.mapper.map(currentSemester, SemesterResponse.class);
+  }
+
   @Transactional
   public boolean setCurrentSemester(Long semesterId) {
 
