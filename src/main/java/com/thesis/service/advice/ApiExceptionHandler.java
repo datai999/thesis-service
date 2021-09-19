@@ -41,4 +41,10 @@ public class ApiExceptionHandler {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
         .body(WrapResponse.error(ex.getMostSpecificCause().getStackTrace()[0]));
   }
+
+  @ExceptionHandler(BusinessException.class)
+  ResponseEntity<Object> businessException(BusinessException ex) {
+    return ResponseEntity.status(HttpStatus.CONFLICT).body(WrapResponse.errorCode(ex.getCode()));
+  }
+
 }

@@ -70,8 +70,7 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   }
 
   public Object save(T entity) {
-    this.repository.save(entity);
-    return true;
+    return this.repository.save(entity).getId();
   }
 
   public Object deleteById(Long id) {

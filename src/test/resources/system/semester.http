@@ -15,6 +15,6 @@ X-auth: {{backDoorToken}}
 }
 
 ### setting current semester
-PUT {{http}}{{host}}{{port}}{{base-url}}/semesters/current?id=1
+PUT {{http}}{{host}}{{port}}{{base-url}}/semesters/current?id=4
 Content-Type: application/json
 X-auth: {{backDoorToken}}
