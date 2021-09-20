@@ -20,7 +20,7 @@ ON CONFLICT DO NOTHING;
 
 INSERT INTO sy_semester (name, status, register_topic_start, register_topic_end) VALUES
     ('211', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00')
-  , ('212', 'USING', '2021-06-17T00:12:00', '2021-08-17T00:12:00')
+  , ('212', 'USING', '2021-06-17T00:12:00', '2021-11-17T00:12:00')
   , ('213', null, null, null)
 ON CONFLICT DO NOTHING;
 
@@ -45,12 +45,12 @@ ON CONFLICT DO NOTHING;
 INSERT INTO tp_topic
   (semester_id, thesis, name)
 VALUES
-    (1, false, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}')
-  , (1, false, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}')
-  , (1, false, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}')
-  , (1, true, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}')
-  , (1, true, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}')
-  , (1, true, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}')
+    (2, false, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}')
+  , (2, false, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}')
+  , (2, false, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}')
+  , (2, true, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}')
+  , (2, true, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}')
+  , (2, true, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_topic_assign
