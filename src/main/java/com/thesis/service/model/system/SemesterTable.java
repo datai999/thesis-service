@@ -26,11 +26,19 @@ public class SemesterTable extends BaseTable {
   @Column(nullable = false)
   private String name;
 
+  @Enumerated(EnumType.STRING)
+  private SemesterStatus status;
+
   private LocalDateTime registerTopicStart;
 
   private LocalDateTime registerTopicEnd;
 
-  @Enumerated(EnumType.STRING)
-  private SemesterStatus status;
+  private LocalDateTime topicStart;
+
+  private LocalDateTime topicEnd;
+
+  private LocalDateTime thesisStart;
+
+  private LocalDateTime thesisEnd;
 
 }
