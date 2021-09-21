@@ -31,4 +31,6 @@ logging.level.org:
 
 firebase.config.adminSdkPath: firebase-config.json
 
+host: http://localhost:3000
+
 server.servlet.context-path: /api

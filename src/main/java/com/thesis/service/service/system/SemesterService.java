@@ -10,11 +10,17 @@ import com.thesis.service.dto.system.SemesterResponse;
 import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.service.ABaseService;
+import com.thesis.service.service.TimerNotificationService;
+import com.thesis.service.utils.TimeConvert;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class SemesterService extends ABaseService<SemesterTable, SemesterRepository> {
+
+  private final TimerNotificationService timerNotificationService;
 
   @Override
   protected Class<?> getResponseClass() {
@@ -29,6 +35,7 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
   public boolean allowStudentRegisterCancelTopic() {
     var currentSemester = super.repository.findCurrentSemester();
     var now = LocalDateTime.now();
+    // TODO plus 1 minute
     return now.isAfter(currentSemester.getRegisterTopicStart())
         && now.isBefore(currentSemester.getRegisterTopicEnd());
   }
@@ -51,6 +58,9 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
     currentSemester.setStatus(SemesterStatus.USED);
 
     super.repository.saveAll(List.of(nextSemester, currentSemester));
+
+    timerNotificationService.notifyRegisterTopicEnd(
+        TimeConvert.toDate(nextSemester.getRegisterTopicEnd()));
 
     return true;
   }
