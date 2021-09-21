@@ -1,6 +1,5 @@
 package com.thesis.service.service.user;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -25,13 +24,10 @@ public class UserService extends ABaseService<UserTable, UserRepository> {
     var user = super.repository.findByEmail(email);
 
     if (Objects.isNull(user)) {
-      var newUser = UserTable.builder()
-          .email(email)
-          .type(UserType.STUDENT)
-          .roles(List.of(UserType.STUDENT.name()))
-          // .createdAt(new Date())
-          .updatedAt(new Date())
-          .build();
+      var newUser = new UserTable()
+          .setEmail(email)
+          .setType(UserType.STUDENT)
+          .setRoles(List.of(UserType.STUDENT.name()));
       user = super.repository.save(newUser);
     }
 
@@ -49,16 +45,13 @@ public class UserService extends ABaseService<UserTable, UserRepository> {
 
     if (Objects.isNull(user)) {
       var nameBulkhead = firebaseToken.getName().lastIndexOf(" ");
-      var newUser = UserTable.builder()
-          .email(firebaseToken.getEmail())
-          .code(String.valueOf(System.currentTimeMillis()).substring(6))
-          .firstName(firebaseToken.getName().substring(0, nameBulkhead))
-          .lastName(firebaseToken.getName().substring(nameBulkhead + 1))
-          .type(UserType.STUDENT)
-          .roles(List.of(UserType.STUDENT.name()))
-          .createdAt(new Date())
-          .updatedAt(new Date())
-          .build();
+      var newUser = new UserTable()
+          .setEmail(firebaseToken.getEmail())
+          .setCode(String.valueOf(System.currentTimeMillis()).substring(6))
+          .setFirstName(firebaseToken.getName().substring(0, nameBulkhead))
+          .setLastName(firebaseToken.getName().substring(nameBulkhead + 1))
+          .setType(UserType.STUDENT)
+          .setRoles(List.of(UserType.STUDENT.name()));
       user = super.repository.save(newUser);
     }
 

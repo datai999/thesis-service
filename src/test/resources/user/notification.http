@@ -1,0 +1,14 @@
+###  get all
+GET {{http}}{{host}}{{port}}{{base-url}}/notifications
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+###  get by request user
+GET {{http}}{{host}}{{port}}{{base-url}}/notifications/my
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+###  seen
+PUT {{http}}{{host}}{{port}}{{base-url}}/notifications/seen/1
+Content-Type: application/json
+X-auth: {{backDoorToken}}

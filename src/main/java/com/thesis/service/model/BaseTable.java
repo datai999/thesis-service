@@ -1,23 +1,21 @@
 package com.thesis.service.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import com.vladmihalcea.hibernate.type.array.LongArrayType;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.TextType;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,14 +40,12 @@ public abstract class BaseTable implements Serializable {
   @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
   protected boolean deleted;
 
-  @CreatedDate
-  @Temporal(TemporalType.TIMESTAMP)
+  @CreationTimestamp
   @Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
-  protected Date createdAt = new Date();
+  protected LocalDateTime createdAt = LocalDateTime.now();
 
-  @LastModifiedDate
-  @Temporal(TemporalType.TIMESTAMP)
+  @UpdateTimestamp
   @Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
-  protected Date updatedAt = new Date();
+  private LocalDateTime updatedAt = LocalDateTime.now();
 
 }

@@ -70,3 +70,12 @@ VALUES
     (1, 1, 1)
   , (1, 2, 2)
 ON CONFLICT DO NOTHING;
+
+INSERT INTO us_notification (receiver_id, message) VALUES
+    (1, 'Tin nhắn thử nghiệm')
+  , (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
+  , (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
+  , (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
+  , (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
+  , (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
+ON CONFLICT DO NOTHING;
