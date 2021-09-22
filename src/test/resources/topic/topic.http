@@ -18,20 +18,78 @@ GET {{http}}{{host}}{{port}}{{base-url}}/topics/user?userId=1&topicRole=STUDENT&
 Content-Type: application/json
 X-auth: {{backDoorToken}}
 
+
+###  student cancel topic
+DELETE  {{http}}{{host}}{{port}}{{base-url}}/topics/4/students/cancel
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
 ###  create topic
 POST {{http}}{{host}}{{port}}{{base-url}}/topics
 Content-Type: application/json
 X-auth: {{backDoorToken}}
 
 {
-  "guideTeachers":[
+  "thesis": "true",
+  "semester": {
+    "id": 2,
+    "name": "212",
+    "status": "USING",
+    "registerTopicStart": "2021-06-17T00:12",
+    "registerTopicEnd": "2021-11-17T00:12",
+    "topicStart": "",
+    "topicEnd": "",
+    "thesisStart": "",
+    "thesisEnd": ""
+  },
+  "educationMethods": [
+    1
+  ],
+  "majors": [
+    1
+  ],
+  "minStudentTake": 1,
+  "maxStudentTake": 3,
+  "name": {
+    "vi": "x",
+    "en": "y"
+  },
+  "description": "z",
+  "task": "t",
+  "documentReference": "v",
+  "guideTeachers": [
     {
-      "id":2
+      "id": 1,
+      "code": "1713015",
+      "firstName": "Nguyễn Đức Anh",
+      "lastName": "Tài",
+      "email": "tai.nguyen.cse.datai@hcmut.edu.vn",
+      "gender": "Nam",
+      "roles": [
+        "ADMIN",
+        "TEACHER"
+      ],
+      "type": "TEACHER",
+      "educationMethodName": "Chính quy",
+      "majorName": "Khoa học máy tính",
+      "subjectDepartmentName": "Hệ thống thông tin",
+      "degreeName": "Thạc sĩ"
+    },
+    {
+      "id": 4,
+      "code": "63",
+      "firstName": "Nguyễn Thị",
+      "lastName": "C",
+      "email": "nguyenthic@hcmut.edu.vn",
+      "gender": "Nam",
+      "roles": [
+        "TEACHER"
+      ],
+      "type": "TEACHER",
+      "educationMethodName": "Chính quy",
+      "majorName": "Khoa học máy tính",
+      "subjectDepartmentName": "Hệ thống thông tin",
+      "degreeName": "Giáo sư"
     }
   ]
 }
-
-###  student cancel topic
-DELETE  {{http}}{{host}}{{port}}{{base-url}}/topics/4/students/cancel
-Content-Type: application/json
-X-auth: {{backDoorToken}}

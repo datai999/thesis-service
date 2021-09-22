@@ -34,13 +34,15 @@ VALUES
   , ('TEACHER', '25', 'Nguyễn Văn', 'B', 'nguyenvanb@hcmut.edu.vn', 1, 1, 1, 2)
   , ('TEACHER', '63', 'Nguyễn Thị', 'C', 'nguyenthic@hcmut.edu.vn', 1, 1, 1, 3)
   , ('TEACHER', '47', 'Nguyễn Văn', 'D', 'nguyenvand@hcmut.edu.vn', 1, 1, 2, 1)
-  , ('TEACHER', '85', 'Nguyễn Văn', 'E', 'nguyenvane@hcmut.edu.vn', 1, 2, 3, 2)
-  , ('TEACHER', '36', 'Nguyễn Thị', 'F', 'nguyenthif@hcmut.edu.vn', 2, 2, 4, 3)
-  , ('TEACHER', '27', 'Nguyễn Thị', 'G', 'nguyenthig@hcmut.edu.vn', 2, 1, 5, 1)
+  , ('STUDENT', '85', 'Nguyễn Văn', 'E', 'nguyenvane@hcmut.edu.vn', 1, 2, 3, 2)
+  , ('STUDENT', '36', 'Nguyễn Thị', 'F', 'nguyenthif@hcmut.edu.vn', 2, 2, 4, 3)
+  , ('STUDENT', '27', 'Nguyễn Thị', 'G', 'nguyenthig@hcmut.edu.vn', 2, 1, 5, 1)
   , ('STUDENT', '8', 'Nguyễn Thị', 'F', 'nguyenthih@hcmut.edu.vn', 1, 1, 1, 2)
   , ('STUDENT', '84', 'Nguyễn Thị', 'B', 'nguyenthib@hcmut.edu.vn', 2, 2, 3, 1)
   , ('STUDENT', '38', 'Nguyễn Thị', 'H', 'nguyenthih@hcmut.edu.vn', 2, 1, 5, 2)
 ON CONFLICT DO NOTHING;
+UPDATE us_user SET roles = array_cat(roles, ARRAY[type]::text[]);
+update us_user SET roles = array_append(roles, 'ADMIN') WHERE id = 1;
 
 INSERT INTO tp_topic
   (semester_id, thesis, name)
@@ -72,10 +74,12 @@ VALUES
 ON CONFLICT DO NOTHING;
 
 INSERT INTO us_notification (receiver_id, message) VALUES
-    (1, 'Tin nhắn thử nghiệm')
-  , (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
+    (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
   , (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
   , (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
   , (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
   , (1, 'Tin nhắn thử nghiệm 2 <a href="http://localhost:3000/semesters">link</a>')
 ON CONFLICT DO NOTHING;
+INSERT INTO us_notification (receiver_id, message)
+  SELECT id, 'Kết thúc thời gian đăng ký đề tài. <a target="_blank" href="http://localhost:3000/my/topics">chi tiết</a>'
+  FROM us_user;

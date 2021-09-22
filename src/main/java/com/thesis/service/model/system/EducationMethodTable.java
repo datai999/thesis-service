@@ -30,4 +30,8 @@ public class EducationMethodTable extends BaseTable {
     this.setId(Long.parseLong(id));
   }
 
+  public EducationMethodTable(Long id) {
+    this.setId(id);
+  }
+
 }

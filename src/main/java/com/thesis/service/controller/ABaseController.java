@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +36,11 @@ public abstract class ABaseController<T extends BaseTable, S extends ABaseServic
   @PostMapping
   public Object save(@RequestBody T entity) {
     return service.save(entity);
+  }
+
+  @PatchMapping
+  public Object update(@RequestBody T entity) {
+    return service.update(entity);
   }
 
   @DeleteMapping("/{id}")

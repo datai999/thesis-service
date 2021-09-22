@@ -29,4 +29,9 @@ public class MajorTable extends BaseTable {
   public MajorTable(String id) {
     this.setId(Long.parseLong(id));
   }
+
+  public MajorTable(Long id) {
+    this.setId(id);
+  }
+
 }
