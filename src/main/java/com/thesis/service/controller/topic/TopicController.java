@@ -40,6 +40,15 @@ public class TopicController
     return super.service.findByUserAndRole(userId, role, sortable);
   }
 
+  @GetMapping("/subject-department")
+  public Object findBySubjectDepartment(
+      @RequestParam Long id,
+      @RequestParam(defaultValue = "ASC") String direction,
+      @RequestParam(defaultValue = "id") String sort) {
+    Sort sortable = Sort.by(Direction.valueOf(direction), sort);
+    return super.service.findBySubjectDepartment(id, sortable);
+  }
+
   @PostMapping("/{topicId}/students")
   public Object studentRegisterTopic(@PathVariable Long topicId) {
     return super.service.studentRegister(topicId);

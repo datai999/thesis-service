@@ -73,6 +73,10 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
     return this.repository.save(entity).getId();
   }
 
+  public Object create(T entity) {
+    return this.repository.save(entity).getId();
+  }
+
   public Object update(T entity) {
     this.repository.findById(entity.getId()).orElseThrow();
     return this.repository.save(entity).getId();

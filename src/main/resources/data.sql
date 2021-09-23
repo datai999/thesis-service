@@ -42,17 +42,17 @@ VALUES
   , ('STUDENT', '38', 'Nguyễn Thị', 'H', 'nguyenthih@hcmut.edu.vn', 2, 1, 5, 2)
 ON CONFLICT DO NOTHING;
 UPDATE us_user SET roles = array_cat(roles, ARRAY[type]::text[]);
-update us_user SET roles = array_append(roles, 'ADMIN') WHERE id = 1;
+UPDATE us_user SET roles = array_append(roles, 'ADMIN') WHERE id = 1;
 
 INSERT INTO tp_topic
-  (semester_id, thesis, name)
+  (semester_id, thesis, name, subject_department_id)
 VALUES
-    (2, false, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}')
-  , (2, false, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}')
-  , (2, false, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}')
-  , (2, true, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}')
-  , (2, true, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}')
-  , (2, true, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}')
+    (2, false, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}', 1)
+  , (2, false, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}', 1)
+  , (2, false, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}', 1)
+  , (2, true, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}', 1)
+  , (2, true, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}', 1)
+  , (2, true, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}', 1)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_topic_assign

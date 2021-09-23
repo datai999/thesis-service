@@ -34,8 +34,8 @@ public abstract class ABaseController<T extends BaseTable, S extends ABaseServic
   }
 
   @PostMapping
-  public Object save(@RequestBody T entity) {
-    return service.save(entity);
+  public Object create(@RequestBody T entity) {
+    return service.create(entity);
   }
 
   @PatchMapping

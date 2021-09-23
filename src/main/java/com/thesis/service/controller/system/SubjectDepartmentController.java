@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/subject-department")
+@RequestMapping("/subject-departments")
 @RequiredArgsConstructor
 public class SubjectDepartmentController
     extends

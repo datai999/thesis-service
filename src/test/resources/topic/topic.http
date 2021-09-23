@@ -8,6 +8,11 @@ GET {{http}}{{host}}{{port}}{{base-url}}/topics/outline
 Content-Type: application/json
 X-auth: {{backDoorToken}}
 
+###  get by subject department
+GET {{http}}{{host}}{{port}}{{base-url}}/topics/subject-department?id=1&direction=DESC
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
 ###  get one
 GET {{http}}{{host}}{{port}}{{base-url}}/topics/detail/1
 Content-Type: application/json

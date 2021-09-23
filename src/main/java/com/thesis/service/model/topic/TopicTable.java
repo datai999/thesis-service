@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,6 +17,7 @@ import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.system.EducationMethodTable;
 import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.system.SemesterTable;
+import com.thesis.service.model.system.SubjectDepartmentTable;
 import com.thesis.service.model.user.UserTable;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
@@ -38,7 +40,8 @@ public class TopicTable extends BaseTable {
   @ManyToOne(optional = false)
   private SemesterTable semester;
 
-  private Boolean thesis = false;
+  @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT FALSE")
+  private Boolean thesis;
 
   @ManyToMany
   @JoinTable(name = "tp_topic_property",
@@ -51,6 +54,9 @@ public class TopicTable extends BaseTable {
       joinColumns = @JoinColumn(name = "topic_id"),
       inverseJoinColumns = @JoinColumn(name = "major_id"))
   private List<MajorTable> majors;
+
+  @OneToOne
+  private SubjectDepartmentTable subjectDepartment;
 
   @Min(1)
   @Column(columnDefinition = "INTEGER DEFAULT 1")
