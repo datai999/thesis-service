@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import com.thesis.service.constant.SemesterStatus;
 import com.thesis.service.model.BaseTable;
+import com.thesis.service.repository.system.SemesterRepository;
+import com.thesis.service.utils.ContextAccessor;
 import org.hibernate.annotations.DynamicUpdate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,5 +42,11 @@ public class SemesterTable extends BaseTable {
   private LocalDateTime thesisStart;
 
   private LocalDateTime thesisEnd;
+
+  public SemesterTable(String name) {
+    var semester = ContextAccessor.getBean(SemesterRepository.class)
+        .findTopByName(name).orElseThrow();
+    ContextAccessor.getModelConverter().map(semester, this);
+  }
 
 }

@@ -39,6 +39,7 @@ public class TopicResponse {
 
   private List<UserResponse> students;
   private List<UserResponse> guideTeachers;
+  private List<UserResponse> reviewTeachers;
 
   public TopicResponse(TopicTable entity) {
 
@@ -55,6 +56,7 @@ public class TopicResponse {
     this.majorNames = mapper.map(entity.getMajors(), MajorTable::getName);
     this.students = mapper.map(entity.getStudents(), UserResponse.class);
     this.guideTeachers = mapper.map(entity.getGuideTeachers(), UserResponse.class);
+    this.reviewTeachers = mapper.map(entity.getReviewTeachers(), UserResponse.class);
 
   }
 
