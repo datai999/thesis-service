@@ -1,43 +1,47 @@
 package com.thesis.service.model.topic;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
-import lombok.Data;
+import com.thesis.service.model.system.SubjectDepartmentTable;
+import com.thesis.service.model.user.UserTable;
+import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "tp_council")
 public class CouncilTable extends BaseTable {
 
-  // @OneToOne
-  // @JoinColumn(name = "subject_department_id")
-  // private ConstDataTable subjectDepartment;
+  @OneToOne
+  private SubjectDepartmentTable subjectDepartment;
 
-  // private String reserveRoom;
+  private String reserveRoom;
 
-  // private LocalDate reserveDate;
+  private LocalDate reserveDate;
 
-  // private LocalTime startTime;
+  private LocalTime startTime;
 
-  // private LocalTime endTime;
+  private LocalTime endTime;
 
-  // @JsonIgnore
-  // @Type(type = "list-array")
-  // @Column(name = "role_id", columnDefinition = "bigint[]")
-  // private Collection<Long> roleId;
+  @ManyToMany
+  @JoinTable(name = "tp_council_member",
+      joinColumns = @JoinColumn(name = "council_id"),
+      inverseJoinColumns = @JoinColumn(name = "member_id"))
+  private List<UserTable> members;
 
-  // @Transient
-  // private List<ConstDataTable> role;
-
-  // @JsonIgnore
-  // @Type(type = "list-array")
-  // @Column(name = "teacher_code", columnDefinition = "varchar[]")
-  // private Collection<String> teacherCode;
-
-  // @Transient
-  // private List<TeacherTable> teacher;
+  @Type(type = "text")
+  private String note;
 
 }

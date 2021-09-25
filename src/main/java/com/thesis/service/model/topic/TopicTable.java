@@ -94,6 +94,9 @@ public class TopicTable extends BaseTable {
       inverseJoinColumns = @JoinColumn(name = "review_teacher_id"))
   private List<UserTable> reviewTeachers;
 
+  @OneToOne
+  private CouncilTable council;
+
   public String getMultiName(String format) {
     return Objects.isNull(this.name) ? null
         : String.format(format, this.name.getVi(), this.name.getEn());

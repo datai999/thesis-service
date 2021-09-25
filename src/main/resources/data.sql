@@ -24,6 +24,12 @@ INSERT INTO sy_semester (name, status, register_topic_start, register_topic_end)
   , ('213', null, null, null)
 ON CONFLICT DO NOTHING;
 
+INSERT INTO tp_council_role (name, min, max, display_order) VALUES
+    ('Chủ tịch', 1, 1, 1)
+  , ('Thư ký', 1, 1, 2)
+  , ('Ủy viên', 3, 3, 3)
+ON CONFLICT DO NOTHING;
+
 -- TEST DATA
 
 INSERT INTO us_user
