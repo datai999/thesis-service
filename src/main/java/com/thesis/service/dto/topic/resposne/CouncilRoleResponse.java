@@ -14,6 +14,4 @@ public class CouncilRoleResponse extends BaseResponse {
 
   private int displayOrder;
 
-  protected boolean deleted;
-
 }

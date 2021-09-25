@@ -21,6 +21,14 @@ public abstract class ABaseController<T extends BaseTable, S extends ABaseServic
   protected S service;
 
   @GetMapping
+  public Object findByDeletedFalse(
+      @RequestParam(defaultValue = "ASC") String direction,
+      @RequestParam(defaultValue = "id") String sort) {
+    Sort sortable = Sort.by(Direction.valueOf(direction), sort);
+    return service.findByDeletedFalse(sortable);
+  }
+
+  @GetMapping("/all")
   public Object findAll(
       @RequestParam(defaultValue = "ASC") String direction,
       @RequestParam(defaultValue = "id") String sort) {

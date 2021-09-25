@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class BaseResponse {
 
-  private Long id;
+  private long id;
   private String name;
+  private boolean deleted;
 
 }

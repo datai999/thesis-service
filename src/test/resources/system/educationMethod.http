@@ -2,3 +2,4 @@
 ###  get all
 GET {{http}}{{host}}{{port}}{{base-url}}/education-methods
 Content-Type: application/json
+X-auth: {{backDoorToken}}

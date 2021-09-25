@@ -23,9 +23,4 @@ public class CouncilRoleService extends ABaseService<CouncilRoleTable, CouncilRo
     return this.repository.save(entity).getId();
   }
 
-  public Object findActive() {
-    var response = super.repository.findByDeletedFalseOrderByDisplayOrder();
-    return super.mapper.map(response, CouncilRoleResponse.class);
-  }
-
 }
