@@ -1,6 +1,7 @@
 package com.thesis.service.service.topic;
 
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 import com.thesis.service.dto.topic.resposne.CouncilResponse;
 import com.thesis.service.model.topic.CouncilTable;
 import com.thesis.service.repository.topic.CouncilMemberRepository;
@@ -27,6 +28,17 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
         .parallelStream().map(e -> e.setCouncil(council)).collect(Collectors.toList());
     councilMemberRepository.saveAll(councilMember);
     return council.getId();
+  }
+
+  @Override
+  @Transactional
+  public Object update(CouncilTable entity) {
+    var council = this.repository.findById(entity.getId()).orElseThrow();
+    this.councilMemberRepository.removeAllMember(council.getId());
+    var councilMember = entity.getMembers()
+        .parallelStream().map(e -> e.setCouncil(council)).collect(Collectors.toList());
+    councilMemberRepository.saveAll(councilMember);
+    return super.update(entity);
   }
 
 }

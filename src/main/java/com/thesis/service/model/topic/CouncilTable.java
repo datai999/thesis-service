@@ -26,7 +26,7 @@ public class CouncilTable extends BaseTable {
   @ManyToOne(optional = false)
   private SemesterTable semester;
 
-  @OneToOne
+  @OneToOne(optional = false)
   private SubjectDepartmentTable subjectDepartment;
 
   private String location;
