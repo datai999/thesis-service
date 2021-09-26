@@ -1,13 +1,15 @@
 
 ###  get all
-GET {{http}}{{host}}{{port}}{{base-url}}/council
+GET {{http}}{{host}}{{port}}{{base-url}}/councils
 Content-Type: application/json
+X-auth: {{backDoorToken}}
 
-###  create one
-POST {{http}}{{host}}{{port}}{{base-url}}/council
+
+###  get by subject department
+POST {{http}}{{host}}{{port}}{{base-url}}/councils/example
 Content-Type: application/json
+X-auth: {{backDoorToken}}
 
 {
-  "reserveDate": "2021-06-02",
-  "startTime": "10:15:30"
+  "subjectDepartment": 2
 }

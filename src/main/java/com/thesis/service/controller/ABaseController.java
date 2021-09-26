@@ -41,6 +41,15 @@ public abstract class ABaseController<T extends BaseTable, S extends ABaseServic
     return service.findById(id);
   }
 
+  @PostMapping("/example")
+  public Object findByExample(
+      @RequestParam(defaultValue = "ASC") String direction,
+      @RequestParam(defaultValue = "id") String sort,
+      @RequestBody T entity) {
+    Sort sortable = Sort.by(Direction.valueOf(direction), sort);
+    return service.findByExample(entity, sortable);
+  }
+
   @PostMapping
   public Object create(@RequestBody T entity) {
     return service.create(entity);

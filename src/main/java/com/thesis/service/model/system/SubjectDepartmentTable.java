@@ -23,4 +23,9 @@ public class SubjectDepartmentTable extends BaseTable {
   public SubjectDepartmentTable(String id) {
     this.setId(Long.parseLong(id));
   }
+
+  public SubjectDepartmentTable(long id) {
+    this.setId(id);
+  }
+
 }

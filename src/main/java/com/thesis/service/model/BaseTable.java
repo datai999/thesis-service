@@ -42,10 +42,10 @@ public abstract class BaseTable implements Serializable {
 
   @CreationTimestamp
   @Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
-  protected LocalDateTime createdAt = LocalDateTime.now();
+  protected LocalDateTime createdAt;
 
   @UpdateTimestamp
   @Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
-  private LocalDateTime updatedAt = LocalDateTime.now();
+  private LocalDateTime updatedAt;
 
 }

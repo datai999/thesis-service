@@ -26,7 +26,7 @@ public class FirebaseFilter extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
       FilterChain filterChain) throws ServletException, IOException {
 
-    System.out.println("\nNew request");
+    System.out.println("\n" + request.getMethod() + request.getRequestURI());
 
     String xAuth = request.getHeader(HEADER_NAME);
 

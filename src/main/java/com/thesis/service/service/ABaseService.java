@@ -82,12 +82,12 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   }
 
   public Object create(T entity) {
-    return this.repository.save(entity).getId();
+    return this.map(this.repository.save(entity));
   }
 
   public Object update(T entity) {
     this.repository.findById(entity.getId()).orElseThrow();
-    return this.repository.save(entity).getId();
+    return this.map(this.repository.save(entity));
   }
 
   public Object deleteById(Long id) {
