@@ -30,6 +30,8 @@ public class TopicResponse {
   private List<BaseResponse> majors;
   private List<String> majorNames;
 
+  private String subjectDepartmentName;
+
   private int minStudentTake = 1;
   private int maxStudentTake = 3;
 

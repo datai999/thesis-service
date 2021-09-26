@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/degree")
+@RequestMapping("/degrees")
 @RequiredArgsConstructor
 public class DegreeController
     extends ABaseController<DegreeTable, DegreeService> {

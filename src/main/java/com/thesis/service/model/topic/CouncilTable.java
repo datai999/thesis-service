@@ -4,14 +4,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
+import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.model.system.SubjectDepartmentTable;
-import com.thesis.service.model.user.UserTable;
 import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,10 +23,13 @@ import lombok.Setter;
 @Table(name = "tp_council")
 public class CouncilTable extends BaseTable {
 
+  @ManyToOne(optional = false)
+  private SemesterTable semester;
+
   @OneToOne
   private SubjectDepartmentTable subjectDepartment;
 
-  private String reserveRoom;
+  private String location;
 
   private LocalDate reserveDate;
 
@@ -35,11 +37,8 @@ public class CouncilTable extends BaseTable {
 
   private LocalTime endTime;
 
-  @ManyToMany
-  @JoinTable(name = "tp_council_member",
-      joinColumns = @JoinColumn(name = "council_id"),
-      inverseJoinColumns = @JoinColumn(name = "member_id"))
-  private List<UserTable> members;
+  @OneToMany(mappedBy = "council")
+  private List<CouncilMemberTable> members;
 
   @Type(type = "text")
   private String note;
