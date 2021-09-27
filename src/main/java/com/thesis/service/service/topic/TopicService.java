@@ -94,9 +94,9 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
     return true;
   }
 
-  public Object findBySubjectDepartment(Long id, Sort sort) {
-    var subjectDepartment = subjectDepartmentRepository.findById(id).orElseThrow();
-    return super.findByExample(new TopicTable().setSubjectDepartment(subjectDepartment), sort);
+  public Object findNeedAssignCouncil(long subjectDepartmentId, Sort sort) {
+    var response = super.repository.findNeedAssignCouncil(subjectDepartmentId, sort);
+    return super.map(response);
   }
 
 }

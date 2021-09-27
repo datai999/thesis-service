@@ -9,7 +9,16 @@ Content-Type: application/json
 X-auth: {{backDoorToken}}
 
 ###  get by subject department
-GET {{http}}{{host}}{{port}}{{base-url}}/topics/subject-department?id=1&direction=DESC
+POST {{http}}{{host}}{{port}}{{base-url}}/topics/example
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+{
+  "subjectDepartment": 2
+}
+
+###  get need assign council
+GET {{http}}{{host}}{{port}}{{base-url}}/topics/need-council?subjectDepartmentId=1
 Content-Type: application/json
 X-auth: {{backDoorToken}}
 

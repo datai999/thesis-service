@@ -22,8 +22,10 @@ public class CouncilResponse {
 
   private LocalTime endTime;
 
+  private String note;
+
   private List<CouncilMemberResponse> members;
 
-  private String note;
+  private List<TopicResponse> topics;
 
 }

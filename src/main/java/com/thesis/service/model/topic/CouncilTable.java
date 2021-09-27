@@ -37,10 +37,13 @@ public class CouncilTable extends BaseTable {
 
   private LocalTime endTime;
 
+  @Type(type = "text")
+  private String note;
+
   @OneToMany(mappedBy = "council")
   private List<CouncilMemberTable> members;
 
-  @Type(type = "text")
-  private String note;
+  @OneToMany(mappedBy = "council")
+  private List<TopicTable> topics;
 
 }
