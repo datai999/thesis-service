@@ -6,12 +6,14 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import com.thesis.service.dto.topic.resposne.CouncilResponse;
+import com.thesis.service.model.topic.CouncilMemberTable;
 import com.thesis.service.model.topic.CouncilTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.repository.topic.CouncilMemberRepository;
 import com.thesis.service.repository.topic.CouncilRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.service.ABaseService;
+import com.thesis.service.service.user.NotificationService;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +23,7 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
 
   private final CouncilMemberRepository councilMemberRepository;
   private final TopicRepository topicRepository;
+  private final NotificationService notificationService;
 
   @Override
   protected Function<CouncilTable, ?> mapping() {
@@ -30,20 +33,43 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
   @Override
   public Object create(CouncilTable entity) {
     var council = this.repository.save(entity);
-    var councilMember = council.getMembers()
+    var councilMembers = council.getMembers()
         .parallelStream().map(e -> e.setCouncil(council)).collect(Collectors.toList());
-    councilMemberRepository.saveAll(councilMember);
-    return council.getId();
+    councilMemberRepository.saveAll(councilMembers);
+
+    var councilMembersGroupRole = councilMembers.parallelStream()
+        .collect(Collectors.groupingBy(councilMember -> councilMember.getRole().getName()));
+
+    var councilMessage = super.messageSource.toATag(council);
+    councilMembersGroupRole.entrySet().forEach(
+        entry -> {
+          var roleMessage =
+              super.messageSource.getMessage("council.member.join", entry.getKey(), councilMessage);
+          var receivers = entry.getValue().parallelStream()
+              .map(CouncilMemberTable::getMember).collect(Collectors.toList());
+          notificationService.notify(receivers, roleMessage);
+        });
+    return super.map(council);
   }
 
   @Override
   @Transactional
   public Object update(CouncilTable entity) {
     var council = this.repository.findById(entity.getId()).orElseThrow();
+
+    var receivers = council.getMembers().parallelStream()
+        .map(CouncilMemberTable::getMember).collect(Collectors.toList());
+    receivers.addAll(entity.getMembers().parallelStream()
+        .map(CouncilMemberTable::getMember).collect(Collectors.toList()));
+
+    var councilMessage = super.messageSource.toATag(council);
+    var message = super.messageSource.requestUserUpdate(councilMessage);
+    this.notificationService.notify(receivers, message);
+
     this.councilMemberRepository.removeAllMember(council.getId());
-    var councilMember = entity.getMembers()
+    var councilMembers = entity.getMembers()
         .parallelStream().map(e -> e.setCouncil(council)).collect(Collectors.toList());
-    councilMemberRepository.saveAll(councilMember);
+    councilMemberRepository.saveAll(councilMembers);
     return super.update(entity);
   }
 
@@ -56,11 +82,15 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
     var removeAssignTopicIds = removeAssignTopics.parallelStream()
         .map(TopicTable::getId).collect(Collectors.toSet());
     topicRepository.updateCouncil(null, removeAssignTopicIds);
+    notificationService.notifyTopics(removeAssignTopics,
+        super.messageSource.getMessage("council.removeAssign"));
 
     council.getTopics().removeAll(removeAssignTopics);
     topicIds.removeAll(council.getTopics().parallelStream()
         .map(TopicTable::getId).collect(Collectors.toList()));
     topicRepository.updateCouncil(council, topicIds);
+    notificationService.notifyTopicIds(topicIds,
+        super.messageSource.getMessage("council.assigned"));
 
     return true;
   }

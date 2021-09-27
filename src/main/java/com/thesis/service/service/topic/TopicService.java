@@ -84,7 +84,7 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
           topic.getSemester().getRegisterTopicEnd());
     }
     this.topicAssignRepository.studentCancel(topicId, super.getAuth().getId());
-    String message = super.getMessage(
+    String message = super.messageSource.getMessage(
         "student.cancelTopic",
         super.getAuth().getFullName(),
         topic.getMultiName("[%s,%s]"));

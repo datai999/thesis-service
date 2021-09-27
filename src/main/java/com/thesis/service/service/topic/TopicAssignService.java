@@ -27,13 +27,13 @@ public class TopicAssignService
     super.repository.saveAll(newAssign);
 
     var topicMultiName = topic.getMultiName("[%s,%s]");
-    String studentsMessage = super.getMessage(
+    String studentsMessage = super.messageSource.getMessage(
         "topic.assign.review.forStudent",
         HtmlUtil.toATag("/my/topics/execute", topicMultiName));
-    String guideTeachersMessage = super.getMessage(
+    String guideTeachersMessage = super.messageSource.getMessage(
         "topic.assign.review.forGuideTeacher",
         HtmlUtil.toATag("/my/topics/guide", topicMultiName));
-    String reviewTeachersMessage = super.getMessage(
+    String reviewTeachersMessage = super.messageSource.getMessage(
         "topic.assign.review.forReviewTeacher",
         HtmlUtil.toATag("/my/topics/review", topicMultiName));
     this.notificationService.notify(topic.getGuideTeachers(), studentsMessage);

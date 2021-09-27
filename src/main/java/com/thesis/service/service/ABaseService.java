@@ -9,8 +9,6 @@ import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,14 +19,10 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   protected ModelConverter mapper;
 
   @Autowired
-  private MessageSource messageSource;
+  protected MessageSourceService messageSource;
 
   @Autowired
   protected R repository;
-
-  protected String getMessage(String code, Object... args) {
-    return this.messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
-  }
 
   public UserTable getAuth() {
     return UserTable.class.cast(
