@@ -9,7 +9,6 @@ import com.thesis.service.dto.topic.resposne.TopicResponse;
 import com.thesis.service.model.topic.TopicAssignTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.repository.system.SemesterRepository;
-import com.thesis.service.repository.system.SubjectDepartmentRepository;
 import com.thesis.service.repository.topic.TopicAssignRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.repository.user.UserRepository;
@@ -27,7 +26,6 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
   private final TopicAssignRepository topicAssignRepository;
   private final UserRepository userRepository;
   private final SemesterRepository semesterRepository;
-  private final SubjectDepartmentRepository subjectDepartmentRepository;
 
   private final NotificationService notificationService;
   private final SemesterService semesterService;

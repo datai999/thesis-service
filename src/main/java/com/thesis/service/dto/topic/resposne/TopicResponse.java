@@ -10,8 +10,10 @@ import com.thesis.service.model.topic.TopicAssignTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.utils.ContextAccessor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class TopicResponse {
 
   private long id;

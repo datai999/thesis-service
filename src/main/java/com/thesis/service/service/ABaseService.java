@@ -52,7 +52,7 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   protected Object map(T resource) {
     return Objects.isNull(this.mapping())
         ? this.mapper.map(resource, this.getResponseClass())
-        : this.mapper.map(resource, this.mapping());
+        : this.mapping().apply(resource);
   }
 
   public Object findAll(Sort sort) {
