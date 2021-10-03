@@ -20,9 +20,6 @@ import lombok.Setter;
 @Table(name = "sc_criterion")
 public class CriterionTable extends BaseTable {
 
-  @ManyToOne
-  private CriterionTemplateTable template;
-
   private String name;
 
   @Type(type = "text")
