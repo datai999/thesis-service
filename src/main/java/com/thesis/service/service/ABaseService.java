@@ -1,6 +1,6 @@
 package com.thesis.service.service;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Function;
 import com.thesis.service.dto.ModelConverter;
@@ -37,7 +37,7 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
     return null;
   }
 
-  protected Object map(List<T> resource) {
+  protected Object map(Collection<T> resource) {
     return Objects.isNull(this.mapping())
         ? this.mapper.map(resource, this.getResponseClass())
         : this.mapper.map(resource, this.mapping());
@@ -59,7 +59,7 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
     return this.map(response);
   }
 
-  public Object findById(Long id) {
+  public Object findById(long id) {
     var response = this.repository.findById(id).orElseThrow();
     return this.map(response);
   }

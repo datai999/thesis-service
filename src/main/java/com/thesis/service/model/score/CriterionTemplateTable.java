@@ -3,37 +3,37 @@ package com.thesis.service.model.score;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.thesis.service.dto.MultiLangDto;
 import com.thesis.service.model.BaseTable;
 import org.hibernate.annotations.Type;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "sc_criterion_template")
 public class CriterionTemplateTable extends BaseTable {
 
-  @Type(type = "json")
-  private MultiLangDto name;
+  private String name;
 
-  @Type(type = "json")
-  private MultiLangDto description;
+  @Type(type = "list-array")
+  @Column(name = "score_range", columnDefinition = "text[]")
+  private List<String> scoreRange;
 
-  @JsonIgnore
-  @Type(type = "long-array")
-  @Column(name = "criterion_id", columnDefinition = "bigint[]")
-  private List<Long> criterionId;
+  private String description;
 
-  @Transient
-  private List<CriterionTable> criterion;
+  @OneToMany(mappedBy = "template")
+  private List<CriterionTable> criterions;
 
-  @Type(type = "int-array")
-  @Column(name = "criterion_score", columnDefinition = "int[]")
-  private List<Long> criterionScore;
+  // void a(){
+  // ScriptEngineManager mgr = new ScriptEngineManager();
+  // ScriptEngine engine = mgr.getEngineByName("JavaScript");
+  // String foo = "40+2";
+  // System.out.println(engine.eval(foo));
+  // }
 
 }

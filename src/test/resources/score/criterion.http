@@ -1,4 +1,11 @@
 
-###  get all
-GET {{http}}{{host}}{{port}}{{base-url}}/criterion
+###  get all template
+GET {{http}}{{host}}{{port}}{{base-url}}/criterions/templates
 Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+
+###  get one template
+GET {{http}}{{host}}{{port}}{{base-url}}/criterions/detail/1
+Content-Type: application/json
+X-auth: {{backDoorToken}}

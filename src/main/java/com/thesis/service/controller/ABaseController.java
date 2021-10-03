@@ -37,7 +37,7 @@ public abstract class ABaseController<T extends BaseTable, S extends ABaseServic
   }
 
   @GetMapping("/detail/{id}")
-  public Object findById(@PathVariable Long id) {
+  public Object findById(@PathVariable long id) {
     return service.findById(id);
   }
 

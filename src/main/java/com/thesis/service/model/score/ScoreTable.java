@@ -1,39 +1,36 @@
 package com.thesis.service.model.score;
 
-import java.util.Collection;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
+import com.thesis.service.model.user.UserTable;
 import org.hibernate.annotations.Type;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "sc_score")
 public class ScoreTable extends BaseTable {
 
-  // @OneToOne
-  // @JoinColumn(name = "topic_assign_id")
-  // private TopicAssignTable topicAssign;
+  @ManyToOne
+  private CriterionTable criterion;
 
-  @OneToOne
-  @JoinColumn(name = "criterion_template_id")
-  private CriterionTemplateTable criterionTemplate;
+  @ManyToOne
+  private UserTable teacher;
 
-  // @OneToOne
-  // private TeacherTable teacher;
+  private boolean scoreFromCouncil;
 
-  // @OneToOne
-  // private StudentTable student;
+  private String teacherRole;
 
-  @Type(type = "int-array")
-  @Column(name = "score", columnDefinition = "integer[]")
-  private Collection<Integer> score;
+  @ManyToOne
+  private UserTable student;
+
+  private String score;
 
   @Type(type = "text")
   private String comment;

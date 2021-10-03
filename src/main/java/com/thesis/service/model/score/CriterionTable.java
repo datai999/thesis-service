@@ -1,29 +1,43 @@
 package com.thesis.service.model.score;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
-import lombok.Data;
+import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "sc_criterion")
 public class CriterionTable extends BaseTable {
 
-  // @Type(type = "json")
-  // private MultiLangDto name;
+  @ManyToOne
+  private CriterionTemplateTable template;
 
-  // @OneToOne
-  // @JoinColumn(name = "score_method_id")
-  // private ConstDataTable scoreMethod;
+  private String name;
 
-  // @Type(type = "int-array")
-  // @Column(name = "score_percent", columnDefinition = "integer[]")
-  // private Collection<Integer> scorePercent;
+  @Type(type = "text")
+  private String description;
 
-  // @Type(type = "json")
-  // private MultiLangDto description;
+  private Integer displayOrder;
+
+  private Double minScore;
+
+  private Double maxScore;
+
+  private String formula;
+
+  @ManyToOne
+  private CriterionTable parent;
+
+  @OneToMany(mappedBy = "parent")
+  private List<CriterionTable> children;
 
 }
