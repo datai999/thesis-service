@@ -6,6 +6,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,6 +37,7 @@ public class CriterionTable extends BaseTable {
   private String formula;
 
   @ManyToOne
+  @OnDelete(action = OnDeleteAction.CASCADE)
   private CriterionTable parent;
 
   @OneToMany(mappedBy = "parent")

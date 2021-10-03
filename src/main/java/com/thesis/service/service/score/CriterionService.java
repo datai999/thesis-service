@@ -1,5 +1,6 @@
 package com.thesis.service.service.score;
 
+import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import com.thesis.service.advice.BusinessException;
@@ -11,6 +12,7 @@ import com.thesis.service.service.ABaseService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CriterionService extends ABaseService<CriterionTable, CriterionRepository> {
@@ -45,18 +47,42 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
     return this.map(response);
   }
 
+  private Collection<Long> getChildrenIds(CriterionTable entity) {
+    return entity.getChildren().parallelStream()
+        .map(CriterionTable::getId).collect(Collectors.toList());
+  }
+
+  @Transactional
   private CriterionTable recursiveSave(CriterionTable entity) {
+    if (Objects.nonNull(entity.getId()))
+      super.repository.findById(entity.getId())
+          .ifPresent(createdEntity -> {
+            var newChildrenIds = this.getChildrenIds(entity);
+            var notUseIds = this.getChildrenIds(createdEntity);
+            notUseIds.removeAll(newChildrenIds);
+            notUseIds.parallelStream().distinct()
+                .filter(Objects::nonNull)
+                .forEach(super.repository::deleteById);
+          });
+
     var savedEntity = this.repository.save(entity);
-    for (int i = 0; i < savedEntity.getChildren().size(); i++) {
-      this.recursiveSave(savedEntity.getChildren().get(i)
-          .setParent(savedEntity)
-          .setDisplayOrder(i));
+    for (int i = 0; i < entity.getChildren().size(); i++) {
+      var child = entity.getChildren().get(i).setParent(savedEntity).setDisplayOrder(i);
+      var savedChild = this.recursiveSave(child);
+      savedEntity.getChildren().set(i, savedChild);
     }
     return savedEntity;
   }
 
   @Override
   public Object create(CriterionTable entity) {
+    var response = this.recursiveSave(entity);
+    this.sortChildren(response);
+    return super.map(response);
+  }
+
+  @Override
+  public Object update(CriterionTable entity) {
     var response = this.recursiveSave(entity);
     this.sortChildren(response);
     return super.map(response);
