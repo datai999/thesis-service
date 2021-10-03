@@ -94,7 +94,7 @@ INSERT INTO sc_criterion
   (parent_id, display_order, min_score, max_score, formula, name, description)
 VALUES
     (null, 1, null, null, null, 'Phiếu đánh giá dành cho GVHD', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
-  , (1, 1, 0, 100, '#3', 'I. PHẦN ĐÁNH GIÁ ĐIỂM CỦA SINH VIÊN THỰC HIỆN LUẬN VĂN TỐT NGHIỆP', 'Hướng dẫn đánh giá: cho mỗi Tiêu chí đánh giá, Thầy/ Cô cho điểm đánh giá ở cột Điểm đánh giá tương ứng với lựa chọn A, B, C, hoặc D nhằm phản ánh kết quả luận văn cũng như năng lực và thái độ của sinh viên ngay sau khi thực hiện luận văn tốt nghiệp')
+  , (1, 1, 0, 100, '#3', null, 'I. PHẦN ĐÁNH GIÁ ĐIỂM CỦA SINH VIÊN THỰC HIỆN LUẬN VĂN TỐT NGHIỆP. Hướng dẫn đánh giá: cho mỗi Tiêu chí đánh giá, Thầy/ Cô cho điểm đánh giá ở cột Điểm đánh giá tương ứng với lựa chọn A, B, C, hoặc D nhằm phản ánh kết quả luận văn cũng như năng lực và thái độ của sinh viên ngay sau khi thực hiện luận văn tốt nghiệp')
   , (2, 1, 0, 50, '#4', null, '(i) KẾT QUẢ LUẬN VĂN SO VỚI NHIỆM VỤ CỦA ĐỀ TÀI ĐẶT RA')
   , (3, 1, 0, 50, '#5+#6+#7+#8', null, 'Câu 1. Đánh giá về kết quả luận văn so với nhiệm vụ của đề tài đặt ra')
   , (4, 1, 0, 10, null, null, 'A. Kết quả chỉ đáp ứng một phần nhỏ nhiệm vụ của đề tài với khối lượng công việc dưới 50%.')

@@ -1,6 +1,8 @@
 package com.thesis.service.service.score;
 
+import java.util.Objects;
 import java.util.stream.Collectors;
+import com.thesis.service.advice.BusinessException;
 import com.thesis.service.dto.score.CriterionResponse;
 import com.thesis.service.dto.score.CriterionTemplateResponse;
 import com.thesis.service.model.score.CriterionTable;
@@ -36,8 +38,28 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
   @Override
   public Object findById(long id) {
     var response = this.repository.findById(id).orElseThrow();
+    if (Objects.nonNull(response.getParent())) {
+      throw BusinessException.code("criterion-template.notFound", id);
+    }
     this.sortChildren(response);
     return this.map(response);
+  }
+
+  private CriterionTable recursiveSave(CriterionTable entity) {
+    var savedEntity = this.repository.save(entity);
+    for (int i = 0; i < savedEntity.getChildren().size(); i++) {
+      this.recursiveSave(savedEntity.getChildren().get(i)
+          .setParent(savedEntity)
+          .setDisplayOrder(i));
+    }
+    return savedEntity;
+  }
+
+  @Override
+  public Object create(CriterionTable entity) {
+    var response = this.recursiveSave(entity);
+    this.sortChildren(response);
+    return super.map(response);
   }
 
 }

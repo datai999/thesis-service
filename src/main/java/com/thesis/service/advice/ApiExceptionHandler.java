@@ -1,5 +1,6 @@
 package com.thesis.service.advice;
 
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import javax.validation.ConstraintViolationException;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -40,6 +41,12 @@ public class ApiExceptionHandler {
   ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
         .body(WrapResponse.error(ex.getMostSpecificCause().getStackTrace()[0]));
+  }
+
+  @ExceptionHandler(NoSuchElementException.class)
+  ResponseEntity<Object> businessException(NoSuchElementException ex) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        .body(WrapResponse.errorCode("data.notFound"));
   }
 
   @ExceptionHandler(BusinessException.class)
