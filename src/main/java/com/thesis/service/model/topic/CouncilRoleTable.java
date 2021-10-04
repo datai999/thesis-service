@@ -1,8 +1,11 @@
 package com.thesis.service.model.topic;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
+import com.thesis.service.model.score.CriterionRoleTable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,5 +22,8 @@ public class CouncilRoleTable extends BaseTable {
   private Integer max;
 
   private Integer displayOrder;
+
+  @OneToMany(mappedBy = "councilRole")
+  private List<CriterionRoleTable> templates;
 
 }

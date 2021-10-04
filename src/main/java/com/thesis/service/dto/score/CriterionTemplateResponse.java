@@ -1,13 +1,12 @@
 package com.thesis.service.dto.score;
 
+import com.thesis.service.dto.system.BaseResponse;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class CriterionTemplateResponse {
-
-  private long id;
-
-  private String name;
+@EqualsAndHashCode(callSuper = false)
+public class CriterionTemplateResponse extends BaseResponse {
 
   private String description;
 

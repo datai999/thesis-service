@@ -1,0 +1,16 @@
+
+###  get all
+GET {{http}}{{host}}{{port}}{{base-url}}/criterion-roles
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+
+###  get all
+GET {{http}}{{host}}{{port}}{{base-url}}/criterion-roles/detail/1
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+###  get template
+GET {{http}}{{host}}{{port}}{{base-url}}/criterion-roles/template
+Content-Type: application/json
+X-auth: {{backDoorToken}}
