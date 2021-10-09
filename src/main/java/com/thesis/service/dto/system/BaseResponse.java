@@ -7,6 +7,7 @@ public class BaseResponse {
 
   private long id;
   private String name;
+  private String description;
   private boolean deleted;
 
 }

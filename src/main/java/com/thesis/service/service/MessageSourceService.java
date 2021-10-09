@@ -1,6 +1,7 @@
 package com.thesis.service.service;
 
 import com.thesis.service.config.firebase.FirebaseAuthenticationToken;
+import com.thesis.service.constant.MessageCode;
 import com.thesis.service.model.topic.CouncilTable;
 import com.thesis.service.model.topic.TopicTable;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,7 +52,7 @@ public class MessageSourceService {
 
   public String toATag(CouncilTable council) {
     var href = String.format("/councils/%s", council.getSubjectDepartment().getId());
-    var councilMessage = this.getMessage("council", council.getId());
+    var councilMessage = this.getMessage(MessageCode.Council.CODE, council.getId());
     return this.toATag(href, councilMessage);
   }
 

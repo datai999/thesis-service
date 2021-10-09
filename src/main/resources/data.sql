@@ -101,16 +101,19 @@ VALUES
   , (4, 4, 47, 50, null, null, 'D. Kết quả đáp ứng đầy đủ nhiệm vụ của đề tài đặt ra với khối lượng công việc trên 95%')
   , (4, 2, 10, 35, null, null, 'B. Kết quả đáp ứng phần nhiệm vụ cơ bản của đề tài đặt ra với khối lượng công việc từ 50% đến 70%')
   , (4, 3, 35, 47, null, null, 'C. Kết quả đáp ứng phần lớn nhiệm vụ chính của đề tài đặt ra với khối lượng công việc từ 70% đến 95%')
+  , (null, 2, null, null, null, 'Phiếu đánh giá của Giáo viên phản biện', 'Là phiếu đánh giá dành cho giáo viên phản biện')
+  , (null, 3, null, null, null, 'Phiếu đánh giá của Chủ tịch', 'Chủ tịch đánh giá sinh viên')
+  , (null, 4, null, null, null, 'Phiếu đánh giá của Thư ký', 'Thư kí đánh giá sinh viên')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO sc_criterion_role
   (thesis, topic_role, council_role_id, template_id)
 VALUES
     (FALSE, 'GUIDE_TEACHER', null, 1)
-  , (FALSE, 'REVIEW_TEACHER', null, 1)
+  , (FALSE, 'REVIEW_TEACHER', null, 9)
   , (TRUE, 'GUIDE_TEACHER', null, 1)
-  -- , (TRUE, 'REVIEW_TEACHER', null, 1)
-  , (TRUE, null, 1, 1)
-  , (TRUE, null, 2, 1)
+  , (TRUE, 'REVIEW_TEACHER', null, 9)
+  , (TRUE, null, 1, 10)
+  , (TRUE, null, 2, 11)
   -- , (TRUE, null, 3, 1)
 ON CONFLICT DO NOTHING;

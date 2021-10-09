@@ -65,4 +65,9 @@ public abstract class ABaseController<T extends BaseTable, S extends ABaseServic
     return service.deleteById(id);
   }
 
+  @DeleteMapping("/logic/{id}")
+  public Object deleteLogicById(@PathVariable long id) {
+    return service.deleteLogicById(id);
+  }
+
 }

@@ -6,8 +6,10 @@ import com.thesis.service.model.score.CriterionTable;
 import com.thesis.service.utils.ContextAccessor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class CriterionRoleResponse extends BaseResponse {
 
