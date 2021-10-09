@@ -27,6 +27,8 @@ public class CriterionTable extends BaseTable {
   @Type(type = "text")
   private String description;
 
+  private boolean mark;
+
   private Integer displayOrder;
 
   private Double minScore;

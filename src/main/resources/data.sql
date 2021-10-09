@@ -53,12 +53,12 @@ UPDATE us_user SET roles = array_append(roles, 'ADMIN') WHERE id = 1;
 INSERT INTO tp_topic
   (semester_id, thesis, name, subject_department_id)
 VALUES
-    (2, false, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}', 1)
-  , (2, false, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}', 2)
-  , (2, false, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}', 1)
-  , (2, true, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}', 1)
-  , (2, true, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}', 1)
-  , (2, true, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}', 1)
+    (2, FALSE, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}', 1)
+  , (2, FALSE, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}', 2)
+  , (2, FALSE, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}', 1)
+  , (2, TRUE, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}', 1)
+  , (2, TRUE, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}', 1)
+  , (2, TRUE, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}', 1)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_topic_assign
@@ -91,19 +91,19 @@ INSERT INTO us_notification (receiver_id, message)
   FROM us_user;
 
 INSERT INTO sc_criterion
-  (parent_id, display_order, min_score, max_score, formula, name, description)
+  (parent_id, display_order, mark, min_score, max_score, formula, name, description)
 VALUES
-    (null, 1, null, null, null, 'Phiếu đánh giá dành cho GVHD', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
-  , (1, 1, 0, 100, '#3', null, 'I. PHẦN ĐÁNH GIÁ ĐIỂM CỦA SINH VIÊN THỰC HIỆN LUẬN VĂN TỐT NGHIỆP. Hướng dẫn đánh giá: cho mỗi Tiêu chí đánh giá, Thầy/ Cô cho điểm đánh giá ở cột Điểm đánh giá tương ứng với lựa chọn A, B, C, hoặc D nhằm phản ánh kết quả luận văn cũng như năng lực và thái độ của sinh viên ngay sau khi thực hiện luận văn tốt nghiệp')
-  , (2, 1, 0, 50, '#4', null, '(i) KẾT QUẢ LUẬN VĂN SO VỚI NHIỆM VỤ CỦA ĐỀ TÀI ĐẶT RA')
-  , (3, 1, 0, 50, '#5+#6+#7+#8', null, 'Câu 1. Đánh giá về kết quả luận văn so với nhiệm vụ của đề tài đặt ra')
-  , (4, 1, 0, 10, null, null, 'A. Kết quả chỉ đáp ứng một phần nhỏ nhiệm vụ của đề tài với khối lượng công việc dưới 50%.')
-  , (4, 4, 47, 50, null, null, 'D. Kết quả đáp ứng đầy đủ nhiệm vụ của đề tài đặt ra với khối lượng công việc trên 95%')
-  , (4, 2, 10, 35, null, null, 'B. Kết quả đáp ứng phần nhiệm vụ cơ bản của đề tài đặt ra với khối lượng công việc từ 50% đến 70%')
-  , (4, 3, 35, 47, null, null, 'C. Kết quả đáp ứng phần lớn nhiệm vụ chính của đề tài đặt ra với khối lượng công việc từ 70% đến 95%')
-  , (null, 2, null, null, null, 'Phiếu đánh giá của Giáo viên phản biện', 'Là phiếu đánh giá dành cho giáo viên phản biện')
-  , (null, 3, null, null, null, 'Phiếu đánh giá của Chủ tịch', 'Chủ tịch đánh giá sinh viên')
-  , (null, 4, null, null, null, 'Phiếu đánh giá của Thư ký', 'Thư kí đánh giá sinh viên')
+    (null, 1, FALSE, null, null, null, 'Phiếu đánh giá dành cho GVHD', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
+  , (1, 1, FALSE, 0, 100, '#3', null, 'I. PHẦN ĐÁNH GIÁ ĐIỂM CỦA SINH VIÊN THỰC HIỆN LUẬN VĂN TỐT NGHIỆP. Hướng dẫn đánh giá: cho mỗi Tiêu chí đánh giá, Thầy/ Cô cho điểm đánh giá ở cột Điểm đánh giá tương ứng với lựa chọn A, B, C, hoặc D nhằm phản ánh kết quả luận văn cũng như năng lực và thái độ của sinh viên ngay sau khi thực hiện luận văn tốt nghiệp')
+  , (2, 1, FALSE, 0, 50, '#4', null, '(i) KẾT QUẢ LUẬN VĂN SO VỚI NHIỆM VỤ CỦA ĐỀ TÀI ĐẶT RA')
+  , (3, 1, TRUE, 0, 50, '#5+#6+#7+#8', null, 'Câu 1. Đánh giá về kết quả luận văn so với nhiệm vụ của đề tài đặt ra')
+  , (4, 1, FALSE, 0, 10, null, null, 'A. Kết quả chỉ đáp ứng một phần nhỏ nhiệm vụ của đề tài với khối lượng công việc dưới 50%.')
+  , (4, 4, FALSE, 47, 50, null, null, 'D. Kết quả đáp ứng đầy đủ nhiệm vụ của đề tài đặt ra với khối lượng công việc trên 95%')
+  , (4, 2, FALSE, 10, 35, null, null, 'B. Kết quả đáp ứng phần nhiệm vụ cơ bản của đề tài đặt ra với khối lượng công việc từ 50% đến 70%')
+  , (4, 3, FALSE, 35, 47, null, null, 'C. Kết quả đáp ứng phần lớn nhiệm vụ chính của đề tài đặt ra với khối lượng công việc từ 70% đến 95%')
+  , (null, 2, FALSE, null, null, null, 'Phiếu đánh giá của Giáo viên phản biện', 'Là phiếu đánh giá dành cho giáo viên phản biện')
+  , (null, 3, FALSE, null, null, null, 'Phiếu đánh giá của Chủ tịch', 'Chủ tịch đánh giá sinh viên')
+  , (null, 4, FALSE, null, null, null, 'Phiếu đánh giá của Thư ký', 'Thư kí đánh giá sinh viên')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO sc_criterion_role
