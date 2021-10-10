@@ -22,7 +22,9 @@ import lombok.Setter;
 @Table(name = "sc_criterion")
 public class CriterionTable extends BaseTable {
 
-  private String name;
+  @ManyToOne
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  private TemplateTable template;
 
   @Type(type = "text")
   private String description;

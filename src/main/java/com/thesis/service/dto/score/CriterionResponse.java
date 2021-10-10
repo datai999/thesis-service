@@ -9,17 +9,17 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class CriterionResponse extends BaseResponse {
 
-  private String description;
+  private long templateId;
 
   private boolean mark;
 
   private int displayOrder;
 
-  private Double minScore;
+  // private Double minScore;
 
-  private Double maxScore;
+  // private Double maxScore;
 
-  private String formula;
+  // private String formula;
 
   private Long parentId;
 

@@ -14,3 +14,8 @@ X-auth: {{backDoorToken}}
 GET {{http}}{{host}}{{port}}{{base-url}}/criterion-roles/template
 Content-Type: application/json
 X-auth: {{backDoorToken}}
+
+###  get template by role
+GET {{http}}{{host}}{{port}}{{base-url}}/criterion-roles/template-role?thesis=false&role=review
+Content-Type: application/json
+X-auth: {{backDoorToken}}

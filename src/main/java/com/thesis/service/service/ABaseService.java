@@ -37,13 +37,13 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
     return null;
   }
 
-  protected Object map(Collection<T> resource) {
+  public Object map(Collection<T> resource) {
     return Objects.isNull(this.mapping())
         ? this.mapper.map(resource, this.getResponseClass())
         : this.mapper.map(resource, this.mapping());
   }
 
-  protected Object map(T resource) {
+  public Object map(T resource) {
     return Objects.isNull(this.mapping())
         ? this.mapper.map(resource, this.getResponseClass())
         : this.mapping().apply(resource);

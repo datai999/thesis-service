@@ -90,30 +90,45 @@ INSERT INTO us_notification (receiver_id, message)
   SELECT id, 'Kết thúc thời gian đăng ký đề tài. <a target="_blank" href="http://localhost:3000/my/topics">chi tiết</a>'
   FROM us_user;
 
-INSERT INTO sc_criterion
-  (parent_id, display_order, mark, min_score, max_score, formula, name, description)
+INSERT INTO sc_template
+  (major_id, thesis, topic_role, council_role_id, name, description)
 VALUES
-    (null, 1, FALSE, null, null, null, 'Phiếu đánh giá dành cho GVHD', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
-  , (1, 1, FALSE, 0, 100, '#3', null, 'I. PHẦN ĐÁNH GIÁ ĐIỂM CỦA SINH VIÊN THỰC HIỆN LUẬN VĂN TỐT NGHIỆP. Hướng dẫn đánh giá: cho mỗi Tiêu chí đánh giá, Thầy/ Cô cho điểm đánh giá ở cột Điểm đánh giá tương ứng với lựa chọn A, B, C, hoặc D nhằm phản ánh kết quả luận văn cũng như năng lực và thái độ của sinh viên ngay sau khi thực hiện luận văn tốt nghiệp')
-  , (2, 1, FALSE, 0, 50, '#4', null, '(i) KẾT QUẢ LUẬN VĂN SO VỚI NHIỆM VỤ CỦA ĐỀ TÀI ĐẶT RA')
-  , (3, 1, TRUE, 0, 50, '#5+#6+#7+#8', null, 'Câu 1. Đánh giá về kết quả luận văn so với nhiệm vụ của đề tài đặt ra')
-  , (4, 1, FALSE, 0, 10, null, null, 'A. Kết quả chỉ đáp ứng một phần nhỏ nhiệm vụ của đề tài với khối lượng công việc dưới 50%.')
-  , (4, 4, FALSE, 47, 50, null, null, 'D. Kết quả đáp ứng đầy đủ nhiệm vụ của đề tài đặt ra với khối lượng công việc trên 95%')
-  , (4, 2, FALSE, 10, 35, null, null, 'B. Kết quả đáp ứng phần nhiệm vụ cơ bản của đề tài đặt ra với khối lượng công việc từ 50% đến 70%')
-  , (4, 3, FALSE, 35, 47, null, null, 'C. Kết quả đáp ứng phần lớn nhiệm vụ chính của đề tài đặt ra với khối lượng công việc từ 70% đến 95%')
-  , (null, 2, FALSE, null, null, null, 'Phiếu đánh giá của Giáo viên phản biện', 'Là phiếu đánh giá dành cho giáo viên phản biện')
-  , (null, 3, FALSE, null, null, null, 'Phiếu đánh giá của Chủ tịch', 'Chủ tịch đánh giá sinh viên')
-  , (null, 4, FALSE, null, null, null, 'Phiếu đánh giá của Thư ký', 'Thư kí đánh giá sinh viên')
+    (1, FALSE, 'GUIDE_TEACHER', null, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
+  , (1, FALSE, 'REVIEW_TEACHER', null, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
+  , (1, TRUE, 'GUIDE_TEACHER', null, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
+  -- , (1, TRUE, 'REVIEW_TEACHER', null, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
+  -- , (1, TRUE, null, 1, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
+  , (1, TRUE, null, 2, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
 ON CONFLICT DO NOTHING;
 
-INSERT INTO sc_criterion_role
-  (thesis, topic_role, council_role_id, template_id)
+
+
+
+
+INSERT INTO sc_criterion
+  (template_id, parent_id, display_order, mark, min_score, max_score, description)
 VALUES
-    (FALSE, 'GUIDE_TEACHER', null, 1)
-  , (FALSE, 'REVIEW_TEACHER', null, 9)
-  , (TRUE, 'GUIDE_TEACHER', null, 1)
-  , (TRUE, 'REVIEW_TEACHER', null, 9)
-  , (TRUE, null, 1, 10)
-  , (TRUE, null, 2, 11)
-  -- , (TRUE, null, 3, 1)
+    (1, null, 1, FALSE, 0, 100, 'I. PHẦN ĐÁNH GIÁ ĐIỂM CỦA SINH VIÊN THỰC HIỆN LUẬN VĂN TỐT NGHIỆP. Hướng dẫn đánh giá: cho mỗi Tiêu chí đánh giá, Thầy/ Cô cho điểm đánh giá ở cột Điểm đánh giá tương ứng với lựa chọn A, B, C, hoặc D nhằm phản ánh kết quả luận văn cũng như năng lực và thái độ của sinh viên ngay sau khi thực hiện luận văn tốt nghiệp')
+    , (null, 1, 1, FALSE, 0, 50, '(i) KẾT QUẢ LUẬN VĂN SO VỚI NHIỆM VỤ CỦA ĐỀ TÀI ĐẶT RA')
+      , (null, 2, 1, TRUE, 0, 50, 'Câu 1. Đánh giá về kết quả luận văn so với nhiệm vụ của đề tài đặt ra')
+        , (null, 3, 1, FALSE, 0, 10, 'A. Kết quả chỉ đáp ứng một phần nhỏ nhiệm vụ của đề tài với khối lượng công việc dưới 50%.')
+        , (null, 3, 4, FALSE, 47, 50, 'D. Kết quả đáp ứng đầy đủ nhiệm vụ của đề tài đặt ra với khối lượng công việc trên 95%')
+        , (null, 3, 2, FALSE, 10, 35, 'B. Kết quả đáp ứng phần nhiệm vụ cơ bản của đề tài đặt ra với khối lượng công việc từ 50% đến 70%')
+        , (null, 3, 3, FALSE, 35, 47, 'C. Kết quả đáp ứng phần lớn nhiệm vụ chính của đề tài đặt ra với khối lượng công việc từ 70% đến 95%')
+    , (null, 1, 2, FALSE, 0, 20, '(ii). VIỆC THỰC HIỆN ĐÁNH GIÁ KẾT QUẢ LUẬN VĂN CỦA SINH VIÊN')
+      , (null, 8, 1, TRUE, 0, 5, 'Câu 2. Đánh giá việc nhận diện các lợi ích thực tế của giải pháp trong luận văn')
+        , (null, 9, 1, FALSE, 0, 1, 'A. A.Sinh viên không nêu được các lợi ích thực tế của giải pháp trong luận văn. (0Điểm1)')
+        , (null, 9, 2, FALSE, 1, 3, 'B. B.Sinh viên nêu được một vài lợi ích thực tế của giải pháp trong luận văn về một vài khía cạnh nhất định nhưng không có minh chứng cụ thể. (1Điểm3)')
+        , (null, 9, 3, FALSE, 3, 4, 'C. C.Sinh viên nêu được các lợi ích thực tế của giải pháp trong luận văn về một vài khía cạnh nhất định và có kèm theo minh chứng cụ thể. (3Điểm4)')
+        , (null, 9, 4, FALSE, 4, 5, 'D. Sinh viên nêu được các lợi ích thực tế của giải pháp trong luận văn về các khía cạnh một cách toàn diện và có kèm theo đầy đủ các minh chứng cụ thể. (4Điểm5)')
+      , (null, 8, 2, TRUE, 0, 5, 'Câu 3. Đánh giá về những giải pháp được đề xuất trong luận văn để giải quyết vấn đề')
+        , (null, 14, 1, FALSE, 0, 1, 'A.Sinh viên nêu ra một giải pháp nhưng không biết ưu và nhược điểm. (0Điểm1)')
+        , (null, 14, 2, FALSE, 1, 3, 'B.Sinh viên nêu ra một giải pháp, và phân tích ưu và nhược điểm. (1Điểm3)')
+        , (null, 14, 3, FALSE, 3, 4, 'C.Sinh viên đưa ra nhiều giải pháp để giải quyết bài toán, có biện luận lựa chọn giải pháp nhưng chưa hợp lý. (3Điểm4)')
+        , (null, 14, 4, FALSE, 4, 5, 'D.Sinh viên đưa ra nhiều giải pháp để giải quyết bài toán, đồng thời nêu rõ lý do và biện luận đúng, rõ ràng tại sao lựa chọn giải pháp đó. (4Điểm5)')
+      , (null, 8, 3, TRUE, 0, 10, 'Câu 4. Đánh giá sản phẩm đạt được (mô hình, chương trình, hệ thống, …)')
+        , (null, 19, 1, FALSE, 0, 1, 'A.Sinh viên không thực hiện đánh giá sản phẩm đạt được của đề tài. (0Điểm1))')
+        , (null, 19, 2, FALSE, 1, 5, 'B.Sinh viên trình bày phần đánh giá cho đề tài nhưng chưa đánh giá cho sản phẩm đạt được của đề tài. (1Điểm5)')
+        , (null, 19, 3, FALSE, 5, 9, 'C.Sinh viên đánh giá sản phẩm đạt được của đề tài, ví dụ: bằng kỹ thuật kiểm tra chuyên môn hoặc làm thí nghiệm, nhưng không phù hợp với các yêu cầu của đề tài. (5Điểm9)')
+        , (null, 19, 4, FALSE, 9, 10, 'D.Sinh viên đánh giá sản phẩm đạt được của đề tài, ví dụ: bằng kỹ thuật kiểm tra chuyên môn hoặc làm thí nghiệm, phù hợp với các yêu cầu của đề tài. (9Điểm10)')
 ON CONFLICT DO NOTHING;

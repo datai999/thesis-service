@@ -1,0 +1,11 @@
+
+###  get all
+GET {{http}}{{host}}{{port}}{{base-url}}/templates
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+
+###  get one
+GET {{http}}{{host}}{{port}}{{base-url}}/templates/detail/1
+Content-Type: application/json
+X-auth: {{backDoorToken}}

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import com.thesis.service.constant.MessageCode;
 import com.thesis.service.constant.TopicRole;
 import com.thesis.service.dto.system.BaseResponse;
-import com.thesis.service.model.score.CriterionRoleTable;
+import com.thesis.service.model.score.TemplateTable;
 import com.thesis.service.model.topic.CouncilRoleTable;
 import com.thesis.service.utils.ContextAccessor;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ public class CriterionGroupRoleResponse {
     private List<CriterionRoleResponse> templates = List.of();
 
     public Role(String name, boolean thesis, TopicRole topicRole,
-        List<CriterionRoleTable> templates) {
+        List<TemplateTable> templates) {
       this.name = name;
       this.thesis = thesis;
       this.topicRole = topicRole;

@@ -35,8 +35,7 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
   public boolean allowStudentRegisterCancelTopic() {
     var currentSemester = super.repository.findCurrentSemester();
     var now = LocalDateTime.now();
-    // TODO plus 1 minute
-    return now.isAfter(currentSemester.getRegisterTopicStart())
+    return now.plusMinutes(1).isAfter(currentSemester.getRegisterTopicStart())
         && now.isBefore(currentSemester.getRegisterTopicEnd());
   }
 
