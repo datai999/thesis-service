@@ -9,8 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class CriterionResponse extends BaseResponse {
 
-  private long templateId;
-
   private boolean mark;
 
   private int displayOrder;

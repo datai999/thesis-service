@@ -1,12 +1,10 @@
 package com.thesis.service.model.score;
 
-import java.util.List;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.constant.TopicRole;
 import com.thesis.service.model.BaseTable;
@@ -34,7 +32,6 @@ public class TemplateTable extends BaseTable {
   @ManyToOne
   private MajorTable major;
 
-  @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT FALSE")
   private Boolean thesis;
 
   @Enumerated(EnumType.STRING)
@@ -43,7 +40,7 @@ public class TemplateTable extends BaseTable {
   @ManyToOne
   private CouncilRoleTable councilRole;
 
-  @OneToMany(mappedBy = "template")
-  private List<CriterionTable> criterions;
+  @OneToOne
+  private CriterionTable rootCriterion;
 
 }

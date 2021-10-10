@@ -3,6 +3,7 @@ package com.thesis.service.service.score;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.transaction.Transactional;
 import com.thesis.service.constant.MessageCode;
 import com.thesis.service.constant.TopicRole;
 import com.thesis.service.dto.score.CriterionGroupRoleResponse;
@@ -29,6 +30,30 @@ public class TemplateService
   @Override
   protected Class<?> getResponseClass() {
     return TemplateResponse.class;
+  }
+
+  @Override
+  @Transactional
+  public Object create(TemplateTable entity) {
+    var rootCriterion = criterionService.recursiveSave(entity.getRootCriterion());
+    var entityCreated = super.repository.save(entity.setRootCriterion(rootCriterion));
+    return super.map(entityCreated);
+  }
+
+  @Override
+  @Transactional
+  public Object update(TemplateTable entity) {
+    this.repository.findById(entity.getId()).orElseThrow();
+    var rootCriterion = criterionService.recursiveSave(entity.getRootCriterion());
+    var entityCreated = super.repository.save(entity.setRootCriterion(rootCriterion));
+    return super.map(entityCreated);
+  }
+
+  @Override
+  public Object findById(long id) {
+    var response = this.repository.findById(id).orElseThrow();
+    criterionService.sortChildren(response.getRootCriterion());
+    return this.map(response);
   }
 
   // @Override

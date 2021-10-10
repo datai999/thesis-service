@@ -27,7 +27,7 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
     return super.mapper.map(templates, CriterionTemplateResponse.class);
   }
 
-  private void sortChildren(CriterionTable template) {
+  public void sortChildren(CriterionTable template) {
     if (CollectionUtils.isEmpty(template.getChildren()))
       return;
     var childrenSorted = template.getChildren().parallelStream()
@@ -53,7 +53,7 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
   }
 
   @Transactional
-  private CriterionTable recursiveSave(CriterionTable entity) {
+  public CriterionTable recursiveSave(CriterionTable entity) {
     if (Objects.nonNull(entity.getId()))
       super.repository.findById(entity.getId())
           .ifPresent(createdEntity -> {

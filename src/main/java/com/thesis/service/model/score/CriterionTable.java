@@ -22,14 +22,10 @@ import lombok.Setter;
 @Table(name = "sc_criterion")
 public class CriterionTable extends BaseTable {
 
-  @ManyToOne
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  private TemplateTable template;
-
   @Type(type = "text")
   private String description;
 
-  private boolean mark;
+  private Boolean mark;
 
   private Integer displayOrder;
 
