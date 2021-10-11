@@ -1,7 +1,6 @@
 package com.thesis.service.dto;
 
 import java.io.Serializable;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,4 +12,7 @@ public class MultiLangDto implements Serializable {
 
   private String en;
   private String vi;
+
+  public MultiLangDto(String value) {}
+
 }

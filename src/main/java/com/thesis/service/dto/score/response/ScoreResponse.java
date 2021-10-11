@@ -1,6 +1,7 @@
 package com.thesis.service.dto.score.response;
 
 import com.thesis.service.dto.system.BaseResponse;
+import com.thesis.service.dto.user.response.UserResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -8,15 +9,15 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class ScoreResponse extends BaseResponse {
 
-  private long topicId;
+  private BaseResponse topic;
 
-  private long settingTemplateId;
+  private BaseResponse settingTemplate;
 
-  private long teacherId;
+  private UserResponse teacher;
 
-  private long studentId;
+  private UserResponse student;
 
-  private long criterionId;
+  private BaseResponse criterion;
 
   private String score;
 

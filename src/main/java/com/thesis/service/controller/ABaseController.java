@@ -1,5 +1,6 @@
 package com.thesis.service.controller;
 
+import com.thesis.service.dto.ListEntityRequest;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.service.ABaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,13 +56,18 @@ public abstract class ABaseController<T extends BaseTable, S extends ABaseServic
     return service.create(entity);
   }
 
+  @PostMapping("/all")
+  public Object saveAll(@RequestBody ListEntityRequest<T> requestBody) {
+    return service.saveAll(requestBody.getEntities());
+  }
+
   @PatchMapping
   public Object update(@RequestBody T entity) {
     return service.update(entity);
   }
 
   @DeleteMapping("/{id}")
-  public Object deleteById(@PathVariable Long id) {
+  public Object deleteById(@PathVariable long id) {
     return service.deleteById(id);
   }
 

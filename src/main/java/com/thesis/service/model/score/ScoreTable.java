@@ -7,6 +7,8 @@ import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.model.user.UserTable;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,6 +35,7 @@ public class ScoreTable extends BaseTable {
   private UserTable student;
 
   @ManyToOne
+  @OnDelete(action = OnDeleteAction.CASCADE)
   private CriterionTable criterion;
 
   private String score;

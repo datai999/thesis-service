@@ -25,7 +25,7 @@ public class SettingTemplateTable extends BaseTable {
   @ManyToOne
   private MajorTable major;
 
-  private boolean thesis;
+  private Boolean thesis;
 
   @Enumerated(EnumType.STRING)
   private TopicRole topicRole;

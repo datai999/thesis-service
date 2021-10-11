@@ -3,3 +3,24 @@
 GET {{http}}{{host}}{{port}}{{base-url}}/scores
 Content-Type: application/json
 X-auth: {{backDoorToken}}
+
+
+###  get by example
+POST {{http}}{{host}}{{port}}{{base-url}}/scores/example
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+{
+  "settingTemplate": {
+    "id": 3
+  },
+  "topic": {
+    "id": "4"
+  },
+  "teacher": {
+    "id": 1
+  },
+  "student": {
+    "id": 1
+  }
+}
