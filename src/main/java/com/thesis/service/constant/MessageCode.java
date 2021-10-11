@@ -8,6 +8,9 @@ public interface MessageCode {
   interface Council {
     String COUNCIL = "council";
     String CODE = "council.code";
+    String MEMBER_JOIN = "council.member.join";
+    String REMOVE_ASSIGN = "council.removeAssign";
+    String ASSIGNED = "council.assigned";
   }
 
 }

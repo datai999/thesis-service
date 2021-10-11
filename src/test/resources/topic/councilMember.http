@@ -1,0 +1,10 @@
+###  get all
+GET {{http}}{{host}}{{port}}{{base-url}}/council-members
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+###  get by member
+GET {{http}}{{host}}{{port}}{{base-url}}/council-members/member?memberId=10
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+

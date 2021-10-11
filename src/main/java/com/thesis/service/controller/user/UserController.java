@@ -37,9 +37,4 @@ public class UserController extends ABaseController<UserTable, UserService> {
     return service.findByExample(entity, sortable);
   }
 
-  @GetMapping("/topics")
-  public Object findTopics() {
-    return super.service.findTopics();
-  }
-
 }

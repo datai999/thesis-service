@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
+import com.thesis.service.constant.MessageCode;
 import com.thesis.service.dto.topic.resposne.CouncilResponse;
 import com.thesis.service.model.topic.CouncilMemberTable;
 import com.thesis.service.model.topic.CouncilTable;
@@ -44,7 +45,10 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
     councilMembersGroupRole.entrySet().forEach(
         entry -> {
           var roleMessage =
-              super.messageSource.getMessage("council.member.join", entry.getKey(), councilMessage);
+              super.messageSource.getMessage(
+                  MessageCode.Council.MEMBER_JOIN,
+                  entry.getKey(),
+                  councilMessage);
           var receivers = entry.getValue().parallelStream()
               .map(CouncilMemberTable::getMember).collect(Collectors.toList());
           notificationService.notify(receivers, roleMessage);
@@ -83,14 +87,14 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
         .map(TopicTable::getId).collect(Collectors.toSet());
     topicRepository.updateCouncil(null, removeAssignTopicIds);
     notificationService.notifyTopics(removeAssignTopics,
-        super.messageSource.getMessage("council.removeAssign"));
+        super.messageSource.getMessage(MessageCode.Council.REMOVE_ASSIGN));
 
     council.getTopics().removeAll(removeAssignTopics);
     topicIds.removeAll(council.getTopics().parallelStream()
         .map(TopicTable::getId).collect(Collectors.toList()));
     topicRepository.updateCouncil(council, topicIds);
     notificationService.notifyTopicIds(topicIds,
-        super.messageSource.getMessage("council.assigned"));
+        super.messageSource.getMessage(MessageCode.Council.ASSIGNED));
 
     return true;
   }

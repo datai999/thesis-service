@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 import com.google.firebase.auth.FirebaseToken;
 import com.thesis.service.config.firebase.FirebaseAuthenticationToken;
 import com.thesis.service.constant.UserType;
-import com.thesis.service.dto.topic.resposne.TopicResponse;
-import com.thesis.service.dto.user.response.TopicOfUserResponse;
 import com.thesis.service.dto.user.response.UserResponse;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.user.UserRepository;
@@ -75,13 +73,6 @@ public class UserService extends ABaseService<UserTable, UserRepository> {
 
   public Object findByType(UserType type, Sort sort) {
     return super.mapper.map(super.repository.findByType(type, sort), UserResponse.class);
-  }
-
-  public Object findTopics() {
-    return new TopicOfUserResponse()
-        .setExecute(super.mapper.map(super.getAuth().getTopicExecutes(), TopicResponse::new))
-        .setGuide(super.mapper.map(super.getAuth().getTopicGuides(), TopicResponse::new))
-        .setReview(super.mapper.map(super.getAuth().getTopicReviews(), TopicResponse::new));
   }
 
 }

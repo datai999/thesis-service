@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.constant.UserType;
@@ -15,6 +16,7 @@ import com.thesis.service.model.system.DegreeTable;
 import com.thesis.service.model.system.EducationMethodTable;
 import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.system.SubjectDepartmentTable;
+import com.thesis.service.model.topic.CouncilMemberTable;
 import com.thesis.service.model.topic.TopicTable;
 import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
@@ -74,6 +76,14 @@ public class UserTable extends BaseTable {
 
   @ManyToMany(mappedBy = "reviewTeachers")
   private List<TopicTable> topicReviews;
+
+  @OneToMany(mappedBy = "member")
+  private List<CouncilMemberTable> councilMembers;
+
+  public UserTable setId(Long id) {
+    super.setId(id);
+    return this;
+  }
 
   public String getFullName() {
     return String.format("%s %s", this.firstName, this.lastName);

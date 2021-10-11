@@ -147,3 +147,20 @@ VALUES
     (4, 3, 1, 1, 4, '30', 'Đạt 30 điểm')
   , (4, 3, 1, 1, 10, '5', 'Đạt tối đa')
 ON CONFLICT DO NOTHING;
+
+INSERT INTO tp_council
+  (semester_id, subject_department_id)
+VALUES
+    (2, 1)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO tp_council_member
+  (council_id, role_id, member_id)
+VALUES
+    (1, 1, 1)
+  , (1, 2, 1)
+  , (1, 3, 2)
+  , (1, 3, 3)
+ON CONFLICT DO NOTHING;
+
+UPDATE tp_topic SET council_id = 1 WHERE id = 4;
