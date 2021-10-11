@@ -1,6 +1,5 @@
 package com.thesis.service.dto.score.response;
 
-import com.thesis.service.dto.score.CriterionResponse;
 import com.thesis.service.dto.system.BaseResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -6,6 +6,7 @@ import java.util.List;
 import com.thesis.service.constant.MessageCode;
 import com.thesis.service.constant.TopicRole;
 import com.thesis.service.dto.score.response.SettingTemplateGroupRoleResponse;
+import com.thesis.service.dto.score.response.SettingTemplateResponse;
 import com.thesis.service.model.score.SettingTemplateTable;
 import com.thesis.service.repository.score.SettingTemplateRepository;
 import com.thesis.service.repository.topic.CouncilRoleRepository;
@@ -23,6 +24,11 @@ public class SettingTemplateService
   private final CouncilRoleRepository councilRoleRepository;
   private final TopicRepository topicRepository;
   private final MessageSourceService messageSourceService;
+  private final CriterionService criterionService;
+
+  protected Class<?> getResponseClass() {
+    return SettingTemplateResponse.class;
+  }
 
   public Object findTemplateGroupByRole() {
     var guideTeacher = messageSourceService.getMessage(MessageCode.GUIDE_TEACHER);
@@ -49,10 +55,9 @@ public class SettingTemplateService
   public Object findTemplateByRole(long topicId, TopicRole role) {
     var topic = topicRepository.findById(topicId).orElseThrow();
     var queryResult = super.repository.findTemplateByTopicRole(topic.getThesis(), role);
-    // return criterionService.map(
-    // queryResult.parallelStream()
-    // .map(TemplateTable::getTemplate).collect(Collectors.toList()));
-    return null;
+    queryResult.parallelStream().forEach(settingTemplate -> criterionService
+        .sortChildren(settingTemplate.getTemplate().getRootCriterion()));
+    return super.map(queryResult);
   }
 
 }

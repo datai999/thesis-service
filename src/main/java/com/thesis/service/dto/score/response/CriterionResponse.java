@@ -1,4 +1,4 @@
-package com.thesis.service.dto.score;
+package com.thesis.service.dto.score.response;
 
 import java.util.List;
 import com.thesis.service.dto.system.BaseResponse;

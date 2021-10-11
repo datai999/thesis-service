@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import com.thesis.service.advice.BusinessException;
-import com.thesis.service.dto.score.CriterionResponse;
+import com.thesis.service.dto.score.response.CriterionResponse;
 import com.thesis.service.model.score.CriterionTable;
 import com.thesis.service.repository.score.CriterionRepository;
 import com.thesis.service.service.ABaseService;

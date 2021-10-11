@@ -100,13 +100,13 @@ INSERT INTO sc_criterion
 VALUES
     (null, null, null, null, null, null)
       , (1, 1, FALSE, 0, 100, 'I. PHẦN ĐÁNH GIÁ ĐIỂM CỦA SINH VIÊN THỰC HIỆN LUẬN VĂN TỐT NGHIỆP. Hướng dẫn đánh giá: cho mỗi Tiêu chí đánh giá, Thầy/ Cô cho điểm đánh giá ở cột Điểm đánh giá tương ứng với lựa chọn A, B, C, hoặc D nhằm phản ánh kết quả luận văn cũng như năng lực và thái độ của sinh viên ngay sau khi thực hiện luận văn tốt nghiệp')
-        , (2, 1, FALSE, 0, 50, '(i) KẾT QUẢ LUẬN VĂN SO VỚI NHIỆM VỤ CỦA ĐỀ TÀI ĐẶT RA')
-          , (3, 1, TRUE, 0, 50, 'Câu 1. Đánh giá về kết quả luận văn so với nhiệm vụ của đề tài đặt ra')
-            , (4, 1, FALSE, 0, 10, 'A. Kết quả chỉ đáp ứng một phần nhỏ nhiệm vụ của đề tài với khối lượng công việc dưới 50%.')
-            , (4, 4, FALSE, 47, 50, 'D. Kết quả đáp ứng đầy đủ nhiệm vụ của đề tài đặt ra với khối lượng công việc trên 95%')
-            , (4, 2, FALSE, 10, 35, 'B. Kết quả đáp ứng phần nhiệm vụ cơ bản của đề tài đặt ra với khối lượng công việc từ 50% đến 70%')
-            , (4, 3, FALSE, 35, 47, 'C. Kết quả đáp ứng phần lớn nhiệm vụ chính của đề tài đặt ra với khối lượng công việc từ 70% đến 95%')
-        , (2, 2, FALSE, 0, 20, '(ii). VIỆC THỰC HIỆN ĐÁNH GIÁ KẾT QUẢ LUẬN VĂN CỦA SINH VIÊN')
+        , (2, 1, FALSE, 0, 50, '(i) KẾT QUẢ LUẬN VĂN SO VỚI NHIỆM VỤ CỦA ĐỀ TÀI ĐẶT RA. Tối đa 50đ')
+          , (3, 1, TRUE, 0, 50, 'Câu 1. Đánh giá về kết quả luận văn so với nhiệm vụ của đề tài đặt ra. Tối đa 50đ')
+            , (4, 1, FALSE, 0, 10, 'A. Kết quả chỉ đáp ứng một phần nhỏ nhiệm vụ của đề tài với khối lượng công việc dưới 50%.(0->10đ)')
+            , (4, 4, FALSE, 47, 50, 'D. Kết quả đáp ứng đầy đủ nhiệm vụ của đề tài đặt ra với khối lượng công việc trên 95%.(47->50)')
+            , (4, 2, FALSE, 10, 35, 'B. Kết quả đáp ứng phần nhiệm vụ cơ bản của đề tài đặt ra với khối lượng công việc từ 50% đến 70%.(10->35)')
+            , (4, 3, FALSE, 35, 47, 'C. Kết quả đáp ứng phần lớn nhiệm vụ chính của đề tài đặt ra với khối lượng công việc từ 70% đến 95%.(35->47)')
+        , (2, 2, FALSE, 0, 20, '(ii). VIỆC THỰC HIỆN ĐÁNH GIÁ KẾT QUẢ LUẬN VĂN CỦA SINH VIÊN. Tối đa 20đ')
           , (9, 1, TRUE, 0, 5, 'Câu 2. Đánh giá việc nhận diện các lợi ích thực tế của giải pháp trong luận văn')
             , (10, 1, FALSE, 0, 1, 'A. A.Sinh viên không nêu được các lợi ích thực tế của giải pháp trong luận văn. (0Điểm1)')
             , (10, 2, FALSE, 1, 3, 'B. B.Sinh viên nêu được một vài lợi ích thực tế của giải pháp trong luận văn về một vài khía cạnh nhất định nhưng không có minh chứng cụ thể. (1Điểm3)')
@@ -132,7 +132,6 @@ VALUES
   , (9, 'Phieu Danh Gia LVTN Nganh CS GVPB', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
 ON CONFLICT DO NOTHING;
 
-
 INSERT INTO sc_setting_template
   (major_id, thesis, topic_role, council_role_id, template_id)
 VALUES
@@ -140,4 +139,10 @@ VALUES
   , (1, FALSE, 'REVIEW_TEACHER', null, 2)
   , (1, TRUE, 'GUIDE_TEACHER', null, 1)
   , (1, TRUE, null, 2, 3)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO sc_score
+  (topic_id, setting_template_id, teacher_id, student_id, criterion_id, score, comment)
+VALUES
+    (4, 3, 1, 1, 4, '30', 'Đạt 30 điểm')
 ON CONFLICT DO NOTHING;

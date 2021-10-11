@@ -24,7 +24,7 @@ public class ScoreTable extends BaseTable {
   private TopicTable topic;
 
   @ManyToOne
-  private CriterionTable criterion;
+  private SettingTemplateTable settingTemplate;
 
   @ManyToOne
   private UserTable teacher;
@@ -33,7 +33,7 @@ public class ScoreTable extends BaseTable {
   private UserTable student;
 
   @ManyToOne
-  private TemplateTable role;
+  private CriterionTable criterion;
 
   private String score;
 
