@@ -1,4 +1,4 @@
-package com.thesis.service.dto.score;
+package com.thesis.service.dto.score.response;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CriterionGroupRoleResponse {
+public class SettingTemplateGroupRoleResponse {
 
   private List<Role> outline = List.of();
   private List<Role> thesis = List.of();
@@ -24,7 +24,7 @@ public class CriterionGroupRoleResponse {
     private boolean thesis;
     private TopicRole topicRole;
     private BaseResponse councilRole;
-    private List<CriterionRoleResponse> templates = List.of();
+    private List<BaseResponse> templates = List.of();
 
     public Role(String name, boolean thesis, TopicRole topicRole,
         List<TemplateTable> templates) {
@@ -32,7 +32,7 @@ public class CriterionGroupRoleResponse {
       this.thesis = thesis;
       this.topicRole = topicRole;
       this.templates = ContextAccessor.getModelConverter()
-          .map(templates, CriterionRoleResponse.class);
+          .map(templates, BaseResponse.class);
     }
 
     public Role(CouncilRoleTable councilRole) {
@@ -40,9 +40,9 @@ public class CriterionGroupRoleResponse {
           ContextAccessor.getMessageSource().getMessage(MessageCode.Council.COUNCIL));
       this.thesis = true;
       this.councilRole = ContextAccessor.getModelConverter().map(councilRole, BaseResponse.class);
-      this.templates = councilRole.getTemplates().parallelStream()
+      this.templates = councilRole.getSettingTemplates().parallelStream()
           .map(criterionRole -> ContextAccessor.getModelConverter()
-              .map(criterionRole, CriterionRoleResponse.class))
+              .map(criterionRole.getTemplate(), BaseResponse.class))
           .collect(Collectors.toList());
     }
   }

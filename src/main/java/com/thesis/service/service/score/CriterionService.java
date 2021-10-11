@@ -5,12 +5,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import com.thesis.service.advice.BusinessException;
 import com.thesis.service.dto.score.CriterionResponse;
-import com.thesis.service.dto.score.CriterionTemplateResponse;
 import com.thesis.service.model.score.CriterionTable;
 import com.thesis.service.repository.score.CriterionRepository;
 import com.thesis.service.service.ABaseService;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +18,6 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
   @Override
   protected Class<?> getResponseClass() {
     return CriterionResponse.class;
-  }
-
-  public Object getTemplates(Sort sort) {
-    var templates = super.repository.findByDeletedFalseAndParent(null, sort);
-    return super.mapper.map(templates, CriterionTemplateResponse.class);
   }
 
   public void sortChildren(CriterionTable template) {

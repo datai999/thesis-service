@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 public class TemplateResponse extends BaseResponse {
 
-  private BaseResponse major;
-
   private CriterionResponse rootCriterion;
 
 }

@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
-import com.thesis.service.model.score.TemplateTable;
+import com.thesis.service.model.score.SettingTemplateTable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +24,6 @@ public class CouncilRoleTable extends BaseTable {
   private Integer displayOrder;
 
   @OneToMany(mappedBy = "councilRole")
-  private List<TemplateTable> templates;
+  private List<SettingTemplateTable> settingTemplates;
 
 }

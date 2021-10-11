@@ -125,12 +125,19 @@ VALUES
 ON CONFLICT DO NOTHING;
 
 INSERT INTO sc_template
-  (major_id, thesis, topic_role, council_role_id, root_criterion_id, name, description)
+  (root_criterion_id, name, description)
 VALUES
-    (1, FALSE, 'GUIDE_TEACHER', null, 1, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
-  , (1, FALSE, 'REVIEW_TEACHER', null, 1, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
-  , (1, TRUE, 'GUIDE_TEACHER', null, 1, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
-  -- , (1, TRUE, 'REVIEW_TEACHER', null, 1, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
-  -- , (1, TRUE, null, 1, 1, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
-  , (1, TRUE, null, 2, 1, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
+    (1, 'Phieu Danh Gia LVTN Nganh CS _GVHD_20210622', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
+  , (10, 'Phieu Danh Gia LVTN Nganh CS GVPB', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
+  , (9, 'Phieu Danh Gia LVTN Nganh CS GVPB', 'Phiếu đánh giá LVTN gồm 2 phần: phần Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp và phần Đánh giá dành cho chuẩn đầu ra của chương trình. Thầy/ Cô vui lòng đánh giá cho cả 2 phần')
+ON CONFLICT DO NOTHING;
+
+
+INSERT INTO sc_setting_template
+  (major_id, thesis, topic_role, council_role_id, template_id)
+VALUES
+    (1, FALSE, 'GUIDE_TEACHER', null, 1)
+  , (1, FALSE, 'REVIEW_TEACHER', null, 2)
+  , (1, TRUE, 'GUIDE_TEACHER', null, 1)
+  , (1, TRUE, null, 2, 3)
 ON CONFLICT DO NOTHING;
