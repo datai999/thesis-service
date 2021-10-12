@@ -1,5 +1,7 @@
 package com.thesis.service.dto.topic.resposne;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import com.thesis.service.dto.MultiLangDto;
 import com.thesis.service.dto.system.BaseResponse;
@@ -45,6 +47,27 @@ public class TopicResponse {
   private List<UserResponse> guideTeachers;
   private List<UserResponse> reviewTeachers;
 
+  private CouncilInTopicResponse council;
+
+  @Data
+  private static class CouncilInTopicResponse {
+    private long id;
+
+    private String semesterName;
+
+    private String subjectDepartmentName;
+
+    private String location;
+
+    private LocalDate reserveDate;
+
+    private LocalTime startTime;
+
+    private LocalTime endTime;
+
+    private List<CouncilMemberResponse> members;
+  }
+
   public TopicResponse(TopicTable entity) {
 
     var mapper = ContextAccessor.getModelConverter();
@@ -61,7 +84,7 @@ public class TopicResponse {
     this.students = mapper.map(entity.getStudents(), UserResponse.class);
     this.guideTeachers = mapper.map(entity.getGuideTeachers(), UserResponse.class);
     this.reviewTeachers = mapper.map(entity.getReviewTeachers(), UserResponse.class);
-
+    this.council = mapper.map(entity.getCouncil(), CouncilInTopicResponse.class);
   }
 
   public TopicResponse(TopicAssignTable topicAssign) {

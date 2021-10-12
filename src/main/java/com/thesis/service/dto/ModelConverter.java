@@ -33,7 +33,9 @@ public class ModelConverter {
    * @return new object of {@code destination} type.
    */
   public <D, S> D map(final S source, Class<D> destinationType) {
-    return modelMapper.map(source, destinationType);
+    return Objects.isNull(source)
+        ? null
+        : modelMapper.map(source, destinationType);
   }
 
   /**
