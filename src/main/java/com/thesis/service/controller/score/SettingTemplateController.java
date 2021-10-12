@@ -22,9 +22,12 @@ public class SettingTemplateController
   @GetMapping("/topic")
   public Object findTemplateByRole(
       @RequestParam long topicId,
-      @RequestParam String role) {
-    return super.service.findTemplateByRole(topicId,
-        "guide".equalsIgnoreCase(role) ? TopicRole.GUIDE_TEACHER : TopicRole.REVIEW_TEACHER);
+      @RequestParam String role,
+      @RequestParam(required = false) Long memberId) {
+    var topicRole = TopicRole.from(role);
+    return (TopicRole.GUIDE_TEACHER.equals(topicRole) || TopicRole.REVIEW_TEACHER.equals(topicRole))
+        ? super.service.findTemplateByRole(topicId, topicRole)
+        : super.service.findTemplateByRole(topicId, memberId);
   }
 
 }

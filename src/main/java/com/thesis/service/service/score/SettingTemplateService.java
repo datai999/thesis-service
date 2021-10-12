@@ -13,6 +13,7 @@ import com.thesis.service.repository.topic.CouncilRoleRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.service.ABaseService;
 import com.thesis.service.service.MessageSourceService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -58,6 +59,21 @@ public class SettingTemplateService
     queryResult.parallelStream().forEach(settingTemplate -> criterionService
         .sortChildren(settingTemplate.getTemplate().getRootCriterion()));
     return super.map(queryResult);
+  }
+
+  public Object findTemplateByRole(long topicId, Long memberId) {
+    var topic = topicRepository.findById(topicId).orElseThrow();
+    var id = ObjectUtils.defaultIfNull(memberId, super.getAuth().getId());
+    var settingTemplates = topic
+        .getCouncil()
+        .getMembers().parallelStream()
+        .filter(councilMember -> id.equals(councilMember.getMember().getId()))
+        .findAny().get()
+        .getRole()
+        .getSettingTemplates();
+    settingTemplates.parallelStream().forEach(settingTemplate -> criterionService
+        .sortChildren(settingTemplate.getTemplate().getRootCriterion()));
+    return super.map(settingTemplates);
   }
 
 }

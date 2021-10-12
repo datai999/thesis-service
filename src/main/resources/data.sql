@@ -157,9 +157,9 @@ ON CONFLICT DO NOTHING;
 INSERT INTO tp_council_member
   (council_id, role_id, member_id)
 VALUES
-    (1, 1, 1)
+    (1, 1, 2)
   , (1, 2, 1)
-  , (1, 3, 2)
+  , (1, 3, 4)
   , (1, 3, 3)
 ON CONFLICT DO NOTHING;
 
