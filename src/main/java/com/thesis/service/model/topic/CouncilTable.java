@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.system.SemesterTable;
@@ -26,7 +25,7 @@ public class CouncilTable extends BaseTable {
   @ManyToOne(optional = false)
   private SemesterTable semester;
 
-  @OneToOne(optional = false)
+  @ManyToOne(optional = false)
   private SubjectDepartmentTable subjectDepartment;
 
   private String location;
