@@ -62,7 +62,6 @@ public class UserTable extends BaseTable {
   private List<UserPermission> permissions;
 
   @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
   private UserType type;
 
   @OneToOne

@@ -30,25 +30,30 @@ INSERT INTO tp_council_role (name, min, max, display_order) VALUES
   , ('Ủy viên', 3, 3, 3)
 ON CONFLICT DO NOTHING;
 
+
+
+
 -- TEST DATA
 
 INSERT INTO us_user
-  (type, code, first_name, last_name, email, education_method_id, major_id, subject_department_id, degree_id)
+  (subject_department_id, degree_id, education_method_id, major_id, first_name, last_name, email)
 VALUES
-    ('TEACHER', '1713015', 'Nguyễn Đức Anh', 'Tài', 'tai.nguyen.cse.datai@hcmut.edu.vn', 1, 1, 1, 1)
-  , ('TEACHER', '12', 'Nguyễn Văn', 'A', 'nguyenvana@hcmut.edu.vn', 1, 1, 1, 1)
-  , ('TEACHER', '25', 'Nguyễn Văn', 'B', 'nguyenvanb@hcmut.edu.vn', 1, 1, 1, 2)
-  , ('TEACHER', '63', 'Nguyễn Thị', 'C', 'nguyenthic@hcmut.edu.vn', 1, 1, 1, 3)
-  , ('TEACHER', '47', 'Nguyễn Văn', 'D', 'nguyenvand@hcmut.edu.vn', 1, 1, 2, 1)
-  , ('STUDENT', '85', 'Nguyễn Văn', 'E', 'nguyenvane@hcmut.edu.vn', 1, 2, 3, 2)
-  , ('STUDENT', '36', 'Nguyễn Thị', 'F', 'nguyenthif@hcmut.edu.vn', 2, 2, 4, 3)
-  , ('STUDENT', '27', 'Nguyễn Thị', 'G', 'nguyenthig@hcmut.edu.vn', 2, 1, 5, 1)
-  , ('STUDENT', '8', 'Nguyễn Thị', 'F', 'nguyenthih@hcmut.edu.vn', 1, 1, 1, 2)
-  , ('STUDENT', '84', 'Nguyễn Thị', 'B', 'nguyenthib@hcmut.edu.vn', 2, 2, 3, 1)
-  , ('STUDENT', '38', 'Nguyễn Thị', 'H', 'nguyenthih@hcmut.edu.vn', 2, 1, 5, 2)
+    (1, 1, 1, 1, 'Nguyễn Đức Anh', 'Tài', 'tai.nguyen.cse.datai@hcmut.edu.vn')
+  , (null, null, null, null, 'Giáo', 'Vụ', 'giaovu@hcmut.edu.vn')
+  , (1, 1, null, null, 'Trưởng bộ môn', 'Hệ thống thông tin', 'headHTTT@hcmut.edu.vn')
+  , (2, 2, null, null, 'Head', 'Công nghệ phần mềm', 'headCNPM@hcmut.edu.vn')
+  , (3, 3, null, null, 'Head', 'Hệ thống và mạng', 'headHTVM@hcmut.edu.vn')
+  , (null, null, 1, 1, 'Nguyễn Văn', 'D', 'nguyenvand@hcmut.edu.vn')
+  , (null, null, 1, 2, 'Nguyễn Thị', 'E', 'nguyenvane@hcmut.edu.vn')
+  , (null, null, 2, 1, 'Nguyễn Văn', 'F', 'nguyenvanf@hcmut.edu.vn')
+  , (null, null, 2, 2, 'Nguyễn Thị', 'G', 'nguyenvang@hcmut.edu.vn')
 ON CONFLICT DO NOTHING;
+UPDATE us_user SET code = id, type = 'TEACHER';
+UPDATE us_user SET type = 'STUDENT' WHERE id > 5;
 UPDATE us_user SET permissions = array_cat(permissions, ARRAY[type]::text[]);
-UPDATE us_user SET permissions = '{"STUDENT", "TEACHER", "HEAD_SUBJECT_DEPARTMENT", "ADMIN"}' WHERE id = 1;
+UPDATE us_user SET permissions = '{"STUDENT", "TEACHER", "HEAD_SUBJECT_DEPARTMENT", "EDUCATION_STAFF", "ADMIN"}' WHERE id = 1;
+UPDATE us_user SET permissions = '{"EDUCATION_STAFF"}' WHERE id = 2;
+UPDATE us_user SET permissions = '{"TEACHER", "HEAD_SUBJECT_DEPARTMENT"}' WHERE id > 2 AND id < 6;
 
 INSERT INTO tp_topic
   (semester_id, thesis, name, subject_department_id)
@@ -89,11 +94,6 @@ ON CONFLICT DO NOTHING;
 INSERT INTO us_notification (receiver_id, message)
   SELECT id, 'Kết thúc thời gian đăng ký đề tài. <a target="_blank" href="http://localhost:3000/my/topics">chi tiết</a>'
   FROM us_user;
-
-
-
-
-
 
 INSERT INTO sc_criterion
   (parent_id, display_order, mark, min_score, max_score, description)
