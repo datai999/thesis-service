@@ -2,6 +2,7 @@ package com.thesis.service.model.user;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,7 +10,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import com.thesis.service.constant.UserPermission;
 import com.thesis.service.constant.UserType;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.system.DegreeTable;
@@ -18,6 +23,7 @@ import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.system.SubjectDepartmentTable;
 import com.thesis.service.model.topic.CouncilMemberTable;
 import com.thesis.service.model.topic.TopicTable;
+import org.apache.commons.collections4.CollectionUtils;
 import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -49,8 +55,11 @@ public class UserTable extends BaseTable {
   private Boolean male;
 
   @Type(type = "list-array")
-  @Column(columnDefinition = "text[]")
-  private List<String> roles;
+  @Column(name = "permissions", columnDefinition = "text[]")
+  private List<String> permissionValues;
+
+  @Transient
+  private List<UserPermission> permissions;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
@@ -80,6 +89,23 @@ public class UserTable extends BaseTable {
   @OneToMany(mappedBy = "member")
   private List<CouncilMemberTable> councilMembers;
 
+  @PostLoad
+  private void fillTransient() {
+    if (CollectionUtils.isNotEmpty(this.permissionValues)) {
+      this.permissions = this.permissionValues.parallelStream()
+          .map(UserPermission::of).collect(Collectors.toList());
+    }
+  }
+
+  @PrePersist
+  private void fillPersistent() {
+    if (CollectionUtils.isNotEmpty(this.permissions)) {
+      this.permissionValues = this.permissions.parallelStream()
+          .map(UserPermission::getValue).collect(Collectors.toList());
+    }
+  }
+
+  @Override
   public UserTable setId(Long id) {
     super.setId(id);
     return this;

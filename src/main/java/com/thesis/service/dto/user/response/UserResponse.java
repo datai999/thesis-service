@@ -1,6 +1,7 @@
 package com.thesis.service.dto.user.response;
 
-import java.util.Set;
+import java.util.List;
+import com.thesis.service.constant.UserPermission;
 import com.thesis.service.constant.UserType;
 import lombok.Data;
 
@@ -21,7 +22,7 @@ public class UserResponse {
 
   private String gender;
 
-  private Set<String> roles;
+  private List<UserPermission> permissions;
 
   private UserType type;
 

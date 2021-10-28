@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import com.google.firebase.auth.FirebaseToken;
 import com.thesis.service.config.firebase.FirebaseAuthenticationToken;
+import com.thesis.service.constant.UserPermission;
 import com.thesis.service.constant.UserType;
 import com.thesis.service.dto.user.response.UserResponse;
 import com.thesis.service.model.user.UserTable;
@@ -25,12 +26,12 @@ public class UserService extends ABaseService<UserTable, UserRepository> {
       var newUser = new UserTable()
           .setEmail(email)
           .setType(UserType.STUDENT)
-          .setRoles(List.of(UserType.STUDENT.name()));
+          .setPermissions(List.of(UserPermission.STUDENT));
       user = super.repository.save(newUser);
     }
 
-    var roles = Objects.nonNull(user.getRoles())
-        ? user.getRoles().stream()
+    var roles = Objects.nonNull(user.getPermissions())
+        ? user.getPermissions().stream()
             .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
             .collect(Collectors.toList())
         : null;
@@ -49,12 +50,12 @@ public class UserService extends ABaseService<UserTable, UserRepository> {
           .setFirstName(firebaseToken.getName().substring(0, nameBulkhead))
           .setLastName(firebaseToken.getName().substring(nameBulkhead + 1))
           .setType(UserType.STUDENT)
-          .setRoles(List.of(UserType.STUDENT.name()));
+          .setPermissions(List.of(UserPermission.STUDENT));
       user = super.repository.save(newUser);
     }
 
-    var roles = Objects.nonNull(user.getRoles())
-        ? user.getRoles().stream()
+    var roles = Objects.nonNull(user.getPermissions())
+        ? user.getPermissions().stream()
             .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
             .collect(Collectors.toList())
         : null;

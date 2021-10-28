@@ -47,8 +47,8 @@ VALUES
   , ('STUDENT', '84', 'Nguyễn Thị', 'B', 'nguyenthib@hcmut.edu.vn', 2, 2, 3, 1)
   , ('STUDENT', '38', 'Nguyễn Thị', 'H', 'nguyenthih@hcmut.edu.vn', 2, 1, 5, 2)
 ON CONFLICT DO NOTHING;
-UPDATE us_user SET roles = array_cat(roles, ARRAY[type]::text[]);
-UPDATE us_user SET roles = array_append(roles, 'ADMIN') WHERE id = 1;
+UPDATE us_user SET permissions = array_cat(permissions, ARRAY[type]::text[]);
+UPDATE us_user SET permissions = '{"STUDENT", "TEACHER", "HEAD_SUBJECT_DEPARTMENT", "ADMIN"}' WHERE id = 1;
 
 INSERT INTO tp_topic
   (semester_id, thesis, name, subject_department_id)
