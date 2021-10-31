@@ -13,4 +13,8 @@ public interface MessageCode {
     String ASSIGNED = "council.assigned";
   }
 
+  interface Error {
+    String BLANK_TOKEN = "error.token.blank";
+  }
+
 }
