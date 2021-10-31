@@ -23,7 +23,7 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler(BadCredentialsException.class)
   Object handleBadCredentialsException(BadCredentialsException ex) {
-    return ResponseEntity.badRequest().body(WrapResponse.error(ex.getMessage()));
+    return ResponseEntity.badRequest().body(WrapResponse.errorCode(ex.getMessage()));
   }
 
   @ExceptionHandler(ConstraintViolationException.class)

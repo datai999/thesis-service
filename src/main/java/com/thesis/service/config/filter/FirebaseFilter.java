@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
+import com.thesis.service.constant.MessageCode;
 import com.thesis.service.service.user.UserService;
 import com.thesis.service.utils.ContextAccessor;
 import org.apache.commons.lang3.StringUtils;
@@ -32,7 +33,7 @@ public class FirebaseFilter extends OncePerRequestFilter {
 
     try {
       if (StringUtils.isBlank(xAuth) || xAuth.length() < 10) {
-        throw new BadCredentialsException("Token must not be blank");
+        throw new BadCredentialsException(MessageCode.Error.BLANK_TOKEN);
       }
 
       // TODO: remove back door
