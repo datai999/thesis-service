@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=public
-    username: postgres
-    password: 1
+    url: jdbc:postgresql://ec2-34-193-113-223.compute-1.amazonaws.com:5432/dat8ap7r4qr89j
+    username: vrhwfhxfqlxdip
+    password: bc7f7e681cf96e905afc1a28e77aa7ef623c49b81fae4dec58f0527b8a25bdf7
     initialization-mode: always
   jpa:
     hibernate:
@@ -31,6 +31,6 @@ logging.level.org:
 
 firebase.config.adminSdkPath: firebase-config.json
 
-host: http://localhost:3000
+host: https://datai999.github.io/thesis-web
 
 server.servlet.context-path: /api
