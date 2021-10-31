@@ -18,10 +18,12 @@ INSERT INTO sy_subject_department (name) VALUES
   , ('Khoa học máy tính'), ('Kỹ thuật máy tính')
 ON CONFLICT DO NOTHING;
 
-INSERT INTO sy_semester (name, status, register_topic_start, register_topic_end) VALUES
-    ('211', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00')
-  , ('212', 'USING', '2021-06-17T00:12:00', '2021-11-17T00:12:00')
-  , ('213', null, null, null)
+INSERT INTO sy_semester
+  (name, status, register_topic_start, register_topic_end, topic_start, topic_end, thesis_start, thesis_end)
+VALUES
+    ('211', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00', '2021-03-17T00:12:00', '2021-05-17T00:12:00', '2021-03-17T00:12:00', '2021-06-17T00:12:00')
+  , ('212', 'USING', '2021-06-17T00:12:00', '2021-11-17T00:12:00', '2021-11-17T00:12:00', '2022-03-17T00:12:00', '2021-11-17T00:12:00', '2022-04-17T00:12:00')
+  , ('213', null, null, null, null, null, null, null)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_council_role (name, min, max, display_order) VALUES
