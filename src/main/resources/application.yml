@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=public
+    username: postgres
+    password: 1
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: com.thesis.service.config.CustomPostgreSQLDialect
+        enable_lazy_load_no_trans: true
+  mvc.format:
+    date: yyyy-MM-dd
+    date-time: yyyy-MM-dd HH:mm:ss
+    time: HH:mm:ss
+  jackson.default-property-inclusion: NON_NULL
+
+logging.level.org:
+  hibernate:
+    SQL: DEBUG
+    type.descriptor.sql.BasicBinder: TRACE
+  springframework:
+    web.filter.CommonsRequestLoggingFilter: INFO
+    web: TRACE
+# logging.file: D:/log/myapp.log
+
+firebase.config.adminSdkPath: firebase-config.json
+
+host: http://localhost:3000
+
+server.servlet.context-path: /api

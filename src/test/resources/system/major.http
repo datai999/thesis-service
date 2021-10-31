@@ -1,0 +1,5 @@
+
+###  get all
+GET {{http}}{{host}}{{port}}{{base-url}}/majors
+Content-Type: application/json
+X-auth: {{backDoorToken}}

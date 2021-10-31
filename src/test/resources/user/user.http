@@ -1,0 +1,24 @@
+###  get all users
+GET {{http}}{{host}}{{port}}{{base-url}}/users?direction=DESC
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+###  get all teacher
+GET {{http}}{{host}}{{port}}{{base-url}}/users/token
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+###  get all teacher
+GET {{http}}{{host}}{{port}}{{base-url}}/users/type-teacher?direction=DESC
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+###  get all student
+GET {{http}}{{host}}{{port}}{{base-url}}/users/type-student?direction=DESC
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+###  get one
+GET {{http}}{{host}}{{port}}{{base-url}}/users/detail/1
+Content-Type: application/json
+X-auth: {{backDoorToken}}
