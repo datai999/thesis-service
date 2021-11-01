@@ -31,6 +31,6 @@ logging.level.org:
 
 firebase.config.adminSdkPath: firebase-config.json
 
-host: https://datai999.github.io/thesis-web
+host: https://datai-thesis-web.herokuapp.com
 
 server.servlet.context-path: /api
