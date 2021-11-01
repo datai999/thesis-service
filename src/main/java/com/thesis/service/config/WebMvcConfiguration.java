@@ -14,7 +14,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         .allowedOrigins(
             "http://localhost:3000",
             "https://datai999.github.io",
-            "https://datai-thesis-web.herokuapp.com")
+            "https://datai-thesis-web.herokuapp.com",
+            "https://datai-thesis-web-dev.herokuapp.com")
         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE");
   }
 
