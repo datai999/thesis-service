@@ -1,5 +1,7 @@
 package com.thesis.service.controller.user;
 
+import java.util.List;
+import com.thesis.service.constant.UserPermission;
 import com.thesis.service.constant.UserType;
 import com.thesis.service.controller.ABaseController;
 import com.thesis.service.model.user.UserTable;
@@ -35,6 +37,16 @@ public class UserController extends ABaseController<UserTable, UserService> {
     var entity = new UserTable().setType(UserType.valueOf(type.toUpperCase()));
     Sort sortable = Sort.by(Direction.valueOf(direction), sort);
     return service.findByExample(entity, sortable);
+  }
+
+  @GetMapping("/permissions")
+  public Object getPermissions() {
+    var requestUserIsAdmin = super.service.getAuth().getPermissions()
+        .contains(UserPermission.ADMIN);
+    return requestUserIsAdmin
+        ? UserPermission.values()
+        : List.of(UserPermission.values()).parallelStream()
+            .filter(e -> !UserPermission.ADMIN.equals(e));
   }
 
 }

@@ -23,6 +23,8 @@ public class UserResponse {
 
   private String phone;
 
+  private Boolean male;
+
   private String gender;
 
   private List<UserPermission> permissions;
