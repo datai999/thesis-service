@@ -11,7 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PostLoad;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import com.thesis.service.constant.UserPermission;
@@ -96,8 +95,8 @@ public class UserTable extends BaseTable {
     }
   }
 
-  @PrePersist
-  private void fillPersistent() {
+  @Override
+  public void fillPersistent() {
     if (CollectionUtils.isNotEmpty(this.permissions)) {
       this.permissionValues = this.permissions.parallelStream()
           .map(UserPermission::getValue).collect(Collectors.toList());

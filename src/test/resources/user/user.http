@@ -22,3 +22,8 @@ X-auth: {{backDoorToken}}
 GET {{http}}{{host}}{{port}}{{base-url}}/users/detail/1
 Content-Type: application/json
 X-auth: {{backDoorToken}}
+
+###  get permissions
+GET {{http}}{{host}}{{port}}{{base-url}}/users/permissions
+Content-Type: application/json
+X-auth: {{backDoorToken}}

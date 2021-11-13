@@ -48,4 +48,6 @@ public abstract class BaseTable implements Serializable {
   @Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
   private LocalDateTime updatedAt;
 
+  public void fillPersistent() {}
+
 }
