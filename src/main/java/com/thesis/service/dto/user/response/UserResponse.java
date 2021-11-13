@@ -33,12 +33,18 @@ public class UserResponse {
 
   private String educationMethodName;
 
+  private BaseResponse educationMethod;
+
   private String majorName;
+
+  private BaseResponse major;
 
   private String subjectDepartmentName;
 
   private BaseResponse subjectDepartment;
 
   private String degreeName;
+
+  private BaseResponse degree;
 
 }
