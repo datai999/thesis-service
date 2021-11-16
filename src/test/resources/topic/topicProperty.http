@@ -1,0 +1,6 @@
+###  get by example
+POST {{http}}{{host}}{{port}}{{base-url}}/topics-property/example
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+{"topic":{"thesis":false,"semester":{"name":"212"}},"direction":"DESC"}

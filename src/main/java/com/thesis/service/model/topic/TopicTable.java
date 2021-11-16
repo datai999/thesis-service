@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -55,7 +54,7 @@ public class TopicTable extends BaseTable {
       inverseJoinColumns = @JoinColumn(name = "major_id"))
   private List<MajorTable> majors;
 
-  @OneToOne
+  @ManyToOne
   private SubjectDepartmentTable subjectDepartment;
 
   @Min(1)

@@ -21,7 +21,8 @@ ON CONFLICT DO NOTHING;
 INSERT INTO sy_semester
   (name, status, register_topic_start, register_topic_end, topic_start, topic_end, thesis_start, thesis_end)
 VALUES
-    ('211', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00', '2021-03-17T00:12:00', '2021-05-17T00:12:00', '2021-03-17T00:12:00', '2021-06-17T00:12:00')
+    ('201', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00', '2021-03-17T00:12:00', '2021-05-17T00:12:00', '2021-03-17T00:12:00', '2021-06-17T00:12:00')
+  , ('211', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00', '2021-03-17T00:12:00', '2021-05-17T00:12:00', '2021-03-17T00:12:00', '2021-06-17T00:12:00')
   , ('212', 'USING', '2021-06-17T00:12:00', '2021-11-10T00:12:00', '2021-11-1T00:12:00', '2022-03-01T00:12:00', '2021-11-1T00:12:00', '2022-04-17T00:12:00')
   , ('213', null, null, null, null, null, null, null)
 ON CONFLICT DO NOTHING;
@@ -62,12 +63,12 @@ UPDATE us_user SET permissions = '{"TEACHER", "HEAD_SUBJECT_DEPARTMENT"}' WHERE 
 INSERT INTO tp_topic
   (semester_id, thesis, name, subject_department_id)
 VALUES
-    (2, FALSE, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}', 1)
-  , (2, FALSE, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}', 2)
-  , (2, FALSE, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}', 1)
-  , (2, TRUE, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}', 1)
-  , (2, TRUE, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}', 1)
-  , (2, TRUE, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}', 1)
+    (3, FALSE, '{"vi":"Đề tài thử nghiệm 1", "en": "Topic test 1"}', 1)
+  , (3, FALSE, '{"vi":"Đề tài thử nghiệm 2", "en": "Topic test 2"}', 2)
+  , (3, FALSE, '{"vi":"Đề tài thử nghiệm 3", "en": "Topic test 3"}', 1)
+  , (3, TRUE, '{"vi":"Luận văn thử nghiệm 1", "en": "Thesis test 1"}', 1)
+  , (3, TRUE, '{"vi":"Luận văn thử nghiệm 2", "en": "Thesis test 2"}', 1)
+  , (3, TRUE, '{"vi":"Luận văn thử nghiệm 3", "en": "Thesis test 3"}', 1)
 ON CONFLICT DO NOTHING;
 INSERT INTO tp_topic (created_at, deleted, updated_at, description, document_reference, max_student_take, min_student_take, name, task, thesis, council_id, semester_id, subject_department_id) VALUES ('2021-11-02 00:21:19.937812', false, '2021-11-02 00:21:19.937812', 'Nghiên cứu quy trình bán hàng trong một cửa hàng bán lẻ, siêu thị từ đó xây dựng mô hình tự động hóa quy trình này thông qua ứng dụng di động. Nghiên cứu vận dụng các kỹ thuật/công nghệ IoT, tính toán di động, khai phá dữ liệu, học máy, AI, Big data trong các giải pháp đề xuất.', NULL, 3, 1, '{"en":"Building a mobile app for retail system","vi":"Xây dựng ứng dụng bán hàng bách hóa trên ứng dụng di động"}', 'Phân tích, thiết kế và xây dựng ứng dụng trên di động hỗ trợ hoạt động của các cửa hàng bách hóa với các chức năng sau:
 - Tìm hiểu về mô hình thanh toán điện tử, không tiền mặt (ví dụ qua các ví điện tử với QR code,...)

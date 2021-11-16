@@ -19,16 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TopicController
     extends ABaseController<TopicTable, TopicService> {
 
-  @GetMapping("/type")
-  public Object findByType(
-      @RequestParam String type,
-      @RequestParam(defaultValue = "ASC") String direction,
-      @RequestParam(defaultValue = "id") String sort) {
-    var entity = new TopicTable().setThesis("thesis".equals(type));
-    Sort sortable = Sort.by(Direction.valueOf(direction), sort);
-    return service.findByExample(entity, sortable);
-  }
-
   @GetMapping("/user")
   public Object findTopicsByRole(
       @RequestParam Long userId,
