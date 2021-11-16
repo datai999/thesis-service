@@ -3,6 +3,15 @@ GET {{http}}{{host}}{{port}}{{base-url}}/users?direction=DESC
 Content-Type: application/json
 X-auth: {{backDoorToken}}
 
+###  get by example
+POST {{http}}{{host}}{{port}}{{base-url}}/users/example
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+{
+  "permissions": ["ADMIN"]
+}
+
 ###  get all teacher
 GET {{http}}{{host}}{{port}}{{base-url}}/users/token
 Content-Type: application/json

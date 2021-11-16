@@ -37,28 +37,43 @@ ON CONFLICT DO NOTHING;
 -- TEST DATA
 
 INSERT INTO us_user
-  (subject_department_id, degree_id, education_method_id, major_id, first_name, last_name, email)
+  (permission, first_name, last_name, email)
 VALUES
-    (1, 1, 1, 1, 'Nguyễn Đức Anh', 'Tài', 'tai.nguyen.cse.datai@hcmut.edu.vn')
-  , (null, null, null, null, 'Giáo', 'Vụ', 'giaovu@hcmut.edu.vn')
-  , (1, 1, null, null, 'Trưởng bộ môn', 'Hệ thống thông tin', 'headHTTT@hcmut.edu.vn')
-  , (2, 2, null, null, 'Head', 'Công nghệ phần mềm', 'headCNPM@hcmut.edu.vn')
-  , (3, 3, null, null, 'Head', 'Hệ thống và mạng', 'headHTVM@hcmut.edu.vn')
-  , (1, 3, null, null, 'Nguyễn Văn', 'A', 'a@hcmut.edu.vn')
-  , (1, 3, null, null, 'Nguyễn Văn', 'B', 'b@hcmut.edu.vn')
-  , (1, 3, null, null, 'Nguyễn Văn', 'C', 'c@hcmut.edu.vn')
-  , (null, null, 1, 1, 'Nguyễn Văn', 'D', 'nguyenvand@hcmut.edu.vn')
-  , (null, null, 1, 2, 'Nguyễn Thị', 'E', 'nguyenvane@hcmut.edu.vn')
-  , (null, null, 2, 1, 'Nguyễn Văn', 'F', 'nguyenvanf@hcmut.edu.vn')
-  , (null, null, 2, 2, 'Nguyễn Thị', 'G', 'nguyenvang@hcmut.edu.vn')
+  ('ADMIN', '', 'Admin', 'admin@hcmut.edu.vn')
 ON CONFLICT DO NOTHING;
+
+INSERT INTO us_user
+  (permission, first_name, last_name, email)
+VALUES
+  ('EDUCATION_STAFF', 'Giáo', 'Vụ', 'giaovu@hcmut.edu.vn')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO us_user
+  (permission, subject_department_id, first_name, last_name, email)
+VALUES
+    ('HEAD_SUBJECT_DEPARTMENT', 1, 'Trưởng bộ môn', 'Hệ thống thông tin', 'headHTTT@hcmut.edu.vn')
+  , ('HEAD_SUBJECT_DEPARTMENT', 2, 'Trưởng bộ môn', 'Công nghệ phần mềm', 'headCNPM@hcmut.edu.vn')
+  , ('HEAD_SUBJECT_DEPARTMENT', 3, 'Trưởng bộ môn', 'Hệ thống và mạng', 'headHTVM@hcmut.edu.vn')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO us_user
+  (permission, subject_department_id, first_name, last_name, email)
+VALUES
+    ('TEACHER', 1, 'Giáo viên', 'A', 'gva@hcmut.edu.vn')
+  , ('TEACHER', 2, 'Giáo viên', 'B', 'gvb@hcmut.edu.vn')
+  , ('TEACHER', 3, 'Giáo viên', 'C', 'gvc@hcmut.edu.vn')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO us_user
+  (permission, education_method_id, major_id, first_name, last_name, email)
+VALUES
+    ('STUDENT', 1, 1, 'Nguyễn Văn', 'D', 'svD@hcmut.edu.vn')
+  , ('STUDENT', 1, 2, 'Nguyễn Thị', 'E', 'sve@hcmut.edu.vn')
+  , ('STUDENT', 2, 1, 'Nguyễn Văn', 'F', 'svf@hcmut.edu.vn')
+  , ('STUDENT', 2, 2, 'Nguyễn Thị', 'G', 'svg@hcmut.edu.vn')
+ON CONFLICT DO NOTHING;
+
 UPDATE us_user SET code = id;
-UPDATE us_user SET type = 'TEACHER' WHERE id != 2;
-UPDATE us_user SET type = 'STUDENT' WHERE id >= 9;
-UPDATE us_user SET permissions = array_cat(permissions, ARRAY[type]::text[]);
-UPDATE us_user SET permissions = '{"STUDENT", "TEACHER", "HEAD_SUBJECT_DEPARTMENT", "EDUCATION_STAFF", "ADMIN"}' WHERE id = 1;
-UPDATE us_user SET permissions = '{"EDUCATION_STAFF"}' WHERE id = 2;
-UPDATE us_user SET permissions = '{"TEACHER", "HEAD_SUBJECT_DEPARTMENT"}' WHERE id >= 3 AND id <= 8;
 
 INSERT INTO tp_topic
   (semester_id, thesis, name, subject_department_id)

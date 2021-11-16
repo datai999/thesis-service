@@ -1,8 +1,6 @@
 package com.thesis.service.dto.user.response;
 
-import java.util.List;
 import com.thesis.service.constant.UserPermission;
-import com.thesis.service.constant.UserType;
 import com.thesis.service.dto.system.BaseResponse;
 import lombok.Data;
 
@@ -27,9 +25,7 @@ public class UserResponse {
 
   private String gender;
 
-  private List<UserPermission> permissions;
-
-  private UserType type;
+  private UserPermission permission;
 
   private String educationMethodName;
 
