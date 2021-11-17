@@ -9,6 +9,8 @@ import com.thesis.service.dto.user.response.UserResponse;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.ABaseService;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +59,19 @@ public class UserService extends ABaseService<UserTable, UserRepository> {
   @Override
   protected Class<?> getResponseClass() {
     return UserResponse.class;
+  }
+
+  @Override
+  public Object findByExample(UserTable entity, Sort sort) {
+    entity.setCreatedAt(null).setUpdatedAt(null);
+    var example = Example.of(entity);
+    var response = this.repository.findAll(example, sort);
+    if (UserPermission.TEACHER.equals(entity.getPermission())) {
+      var headExample = Example.of(entity.setPermission(UserPermission.HEAD_SUBJECT_DEPARTMENT));
+      var headResponse = this.repository.findAll(headExample, sort);
+      response.addAll(headResponse);
+    }
+    return this.map(response);
   }
 
   public Object getRequestUser() {
