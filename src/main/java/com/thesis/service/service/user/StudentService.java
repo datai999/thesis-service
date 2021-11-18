@@ -61,9 +61,8 @@ public class StudentService {
 
   public Object allowRegisterTopic(long studentId) {
     var student = userRepository.findById(studentId).orElseThrow();
-    var currentSemester = semesterService.getCurrentSemester();
     var haveTopicInSemester = student.getTopicExecutes().stream()
-        .anyMatch(e -> currentSemester.getId().equals(e.getSemester().getId()));
+        .anyMatch(e -> e.getSemester().isCurrent());
     var semesterAllow = semesterService.allowStudentRegisterCancelTopic();
     return !haveTopicInSemester && semesterAllow;
   }
@@ -88,6 +87,12 @@ public class StudentService {
         topic.getMultiName());
     this.notificationService.notify(topic.getStudents(), message);
     return true;
+  }
+
+  public Object doneOutline(long studentId) {
+    var student = userRepository.findById(studentId).orElseThrow();
+    return student.getTopicExecutes().stream()
+        .anyMatch(e -> !e.getSemester().isCurrent() && !e.getThesis());
   }
 
 }

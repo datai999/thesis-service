@@ -27,6 +27,11 @@ public class StudentController {
     return studentService.allowRegisterTopic(userId);
   }
 
+  @GetMapping("/{userId}/done-outline")
+  public Object doneOutline(@PathVariable long userId) {
+    return studentService.doneOutline(userId);
+  }
+
   @PostMapping("/{userId}/topic-register")
   public Object getTopics(@PathVariable long userId, @RequestParam long topicId) {
     return studentService.registerTopic(userId, topicId);

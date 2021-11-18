@@ -49,4 +49,8 @@ public class SemesterTable extends BaseTable {
     ContextAccessor.getModelConverter().map(semester, this);
   }
 
+  public boolean isCurrent() {
+    return SemesterStatus.USING.equals(this.status);
+  }
+
 }
