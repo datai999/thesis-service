@@ -1,14 +1,11 @@
 package com.thesis.service.controller.topic;
 
-import com.thesis.service.constant.TopicRole;
 import com.thesis.service.controller.ABaseController;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.service.topic.TopicService;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,17 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TopicController
     extends ABaseController<TopicTable, TopicService> {
 
-  @GetMapping("/user")
-  public Object findTopicsByRole(
-      @RequestParam Long userId,
-      @RequestParam String topicRole,
-      @RequestParam(defaultValue = "ASC") String direction,
-      @RequestParam(defaultValue = "id") String sort) {
-    TopicRole role = TopicRole.valueOf(topicRole.toUpperCase());
-    Sort sortable = Sort.by(Direction.valueOf(direction), sort);
-    return super.service.findByUserAndRole(userId, role, sortable);
-  }
-
   @GetMapping("/need-council")
   public Object findNeedAssignCouncil(
       @RequestParam long subjectDepartmentId,
@@ -36,11 +22,6 @@ public class TopicController
       @RequestParam(defaultValue = "id") String sort) {
     Sort sortable = Sort.by(Direction.valueOf(direction), sort);
     return super.service.findNeedAssignCouncil(subjectDepartmentId, sortable);
-  }
-
-  @DeleteMapping("/{topicId}/students/cancel")
-  public Object studentCancel(@PathVariable Long topicId) {
-    return super.service.studentCancel(topicId);
   }
 
 }
