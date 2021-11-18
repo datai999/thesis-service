@@ -22,6 +22,11 @@ public class StudentController {
     return studentService.getTopic(userId);
   }
 
+  @GetMapping("/{userId}/allow-register-topic")
+  public Object allowRegisterTopic(@PathVariable long userId) {
+    return studentService.allowRegisterTopic(userId);
+  }
+
   @PostMapping("/{userId}/topic-register")
   public Object getTopics(@PathVariable long userId, @RequestParam long topicId) {
     return studentService.registerTopic(userId, topicId);

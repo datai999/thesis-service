@@ -59,6 +59,15 @@ public class StudentService {
     return true;
   }
 
+  public Object allowRegisterTopic(long studentId) {
+    var student = userRepository.findById(studentId).orElseThrow();
+    var currentSemester = semesterService.getCurrentSemester();
+    var haveTopicInSemester = student.getTopicExecutes().stream()
+        .anyMatch(e -> currentSemester.getId().equals(e.getSemester().getId()));
+    var semesterAllow = semesterService.allowStudentRegisterCancelTopic();
+    return !haveTopicInSemester && semesterAllow;
+  }
+
   public Object cancelTopic(long studentId, long topicId) {
     var topic = topicRepository.findById(topicId).orElseThrow();
 
