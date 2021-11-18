@@ -20,7 +20,7 @@ INSERT INTO sy_semester
 VALUES
     ('201', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00', '2021-03-17T00:12:00', '2021-05-17T00:12:00', '2021-03-17T00:12:00', '2021-06-17T00:12:00')
   , ('211', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00', '2021-03-17T00:12:00', '2021-05-17T00:12:00', '2021-03-17T00:12:00', '2021-06-17T00:12:00')
-  , ('212', 'USING', '2021-06-17T00:12:00', '2021-11-10T00:12:00', '2021-11-1T00:12:00', '2022-03-01T00:12:00', '2021-11-1T00:12:00', '2022-04-17T00:12:00')
+  , ('212', 'USING', '2021-06-17T00:12:00', '2021-12-10T00:12:00', '2021-11-1T00:12:00', '2022-03-01T00:12:00', '2021-11-1T00:12:00', '2022-04-17T00:12:00')
   , ('213', null, null, null, null, null, null, null)
 ON CONFLICT DO NOTHING;
 
@@ -249,69 +249,68 @@ Phát triển ứng dụng kiểm thử
 
 -- tp_topic_education_methods_1637226599520-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('1','2');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('1','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('2','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('2','2');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('3','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('4','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('5','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('5','2');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('6','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('7','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('8','2');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('9','2');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('10','2');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('10','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('11','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('11','2');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('12','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('13','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('14','1');
-insert into tp_topic_education_methods(topics_id,education_methods_id) values('14','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('1','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('1','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('2','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('2','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('3','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('4','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('5','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('5','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('6','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('7','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('8','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('9','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('10','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('10','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('11','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('11','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('12','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('13','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('14','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('14','2');
 
 
 -- tp_topic_majors_1637227003638-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-insert into tp_topic_majors(topics_id,majors_id) values('1','1');
-insert into tp_topic_majors(topics_id,majors_id) values('1','2');
-insert into tp_topic_majors(topics_id,majors_id) values('2','2');
-insert into tp_topic_majors(topics_id,majors_id) values('3','2');
-insert into tp_topic_majors(topics_id,majors_id) values('4','2');
-insert into tp_topic_majors(topics_id,majors_id) values('5','2');
-insert into tp_topic_majors(topics_id,majors_id) values('6','2');
-insert into tp_topic_majors(topics_id,majors_id) values('7','1');
-insert into tp_topic_majors(topics_id,majors_id) values('7','2');
-insert into tp_topic_majors(topics_id,majors_id) values('8','2');
-insert into tp_topic_majors(topics_id,majors_id) values('9','2');
-insert into tp_topic_majors(topics_id,majors_id) values('10','1');
-insert into tp_topic_majors(topics_id,majors_id) values('10','2');
-insert into tp_topic_majors(topics_id,majors_id) values('11','2');
-insert into tp_topic_majors(topics_id,majors_id) values('12','2');
-insert into tp_topic_majors(topics_id,majors_id) values('13','2');
-insert into tp_topic_majors(topics_id,majors_id) values('14','2');
+insert into tp_topic_majors(topic_id,major_id) values('1','1');
+insert into tp_topic_majors(topic_id,major_id) values('1','2');
+insert into tp_topic_majors(topic_id,major_id) values('2','2');
+insert into tp_topic_majors(topic_id,major_id) values('3','2');
+insert into tp_topic_majors(topic_id,major_id) values('4','2');
+insert into tp_topic_majors(topic_id,major_id) values('5','2');
+insert into tp_topic_majors(topic_id,major_id) values('6','2');
+insert into tp_topic_majors(topic_id,major_id) values('7','1');
+insert into tp_topic_majors(topic_id,major_id) values('7','2');
+insert into tp_topic_majors(topic_id,major_id) values('8','2');
+insert into tp_topic_majors(topic_id,major_id) values('9','2');
+insert into tp_topic_majors(topic_id,major_id) values('10','1');
+insert into tp_topic_majors(topic_id,major_id) values('10','2');
+insert into tp_topic_majors(topic_id,major_id) values('11','2');
+insert into tp_topic_majors(topic_id,major_id) values('12','2');
+insert into tp_topic_majors(topic_id,major_id) values('13','2');
+insert into tp_topic_majors(topic_id,major_id) values('14','2');
 
 
--- tp_topic_assign_1637140963553-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- tp_topic_guide_teachers-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:09:11.055341','false','2021-11-17 16:09:11.055341','11',null,null,'1');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:10:01.542013','false','2021-11-17 16:10:01.542013','12',null,null,'2');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:10:01.542013','false','2021-11-17 16:10:01.542013','11',null,null,'2');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:10:51.47695','false','2021-11-17 16:10:51.47695','13',null,null,'3');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:11:24.941871','false','2021-11-17 16:11:24.941871','13',null,null,'4');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:12:07.945491','false','2021-11-17 16:12:07.945491','13',null,null,'5');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:12:07.945491','false','2021-11-17 16:12:07.945491','14',null,null,'5');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:12:49.486955','false','2021-11-17 16:12:49.486955','13',null,null,'6');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:13:35.484623','false','2021-11-17 16:13:35.484623','10',null,null,'7');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:15:53.490548','false','2021-11-17 16:15:53.490548','10',null,null,'8');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:16:57.528164','false','2021-11-17 16:16:57.528164','15',null,null,'9');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:17:32.667064','false','2021-11-17 16:17:32.667064','15',null,null,'10');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:18:12.256383','false','2021-11-17 16:18:12.256383','15',null,null,'11');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:19:13.028374','false','2021-11-17 16:19:13.028374','12',null,null,'12');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:20:02.226633','false','2021-11-17 16:20:02.226633','16',null,null,'13');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:20:02.226633','false','2021-11-17 16:20:02.226633','17',null,null,'13');
-insert into tp_topic_assign(created_at,deleted,updated_at,guide_teacher_id,review_teacher_id,student_id,topic_id) values('2021-11-17 16:20:51.567503','false','2021-11-17 16:20:51.567503','16',null,null,'14');
-
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('11','1');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('12','2');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('11','2');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('13','3');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('13','4');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('13','5');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('14','5');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('13','6');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('10','7');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('10','8');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('15','9');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('15','10');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('15','11');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('12','12');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('16','13');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('17','13');
+insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('16','14');
 
 -- us_notification-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

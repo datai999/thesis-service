@@ -43,9 +43,15 @@ public class TopicTable extends BaseTable {
   private Boolean thesis;
 
   @ManyToMany
+  @JoinTable(
+      joinColumns = @JoinColumn(name = "topic_id"),
+      inverseJoinColumns = @JoinColumn(name = "education_method_id"))
   private List<EducationMethodTable> educationMethods;
 
   @ManyToMany
+  @JoinTable(
+      joinColumns = @JoinColumn(name = "topic_id"),
+      inverseJoinColumns = @JoinColumn(name = "major_id"))
   private List<MajorTable> majors;
 
   @ManyToOne
@@ -76,7 +82,7 @@ public class TopicTable extends BaseTable {
   private List<UserTable> students;
 
   @ManyToMany
-  @JoinTable(name = "tp_topic_assign",
+  @JoinTable(
       joinColumns = @JoinColumn(name = "topic_id"),
       inverseJoinColumns = @JoinColumn(name = "guide_teacher_id"))
   private List<UserTable> guideTeachers;
