@@ -81,22 +81,6 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
     return this.map(response);
   }
 
-  public Object studentRegister(Long topicId) {
-    var topic = super.repository.findById(topicId).orElseThrow();
-    if (!semesterService.allowStudentRegisterCancelTopic()) {
-      throw BusinessException.code("semester.004",
-          topic.getSemester().getName(),
-          topic.getSemester().getRegisterTopicStart(),
-          topic.getSemester().getRegisterTopicEnd());
-    }
-    if (topic.getStudents().size() >= topic.getMaxStudentTake()) {
-      throw BusinessException.code("topic.001", topic.getMultiName("[%s - %s]"));
-    }
-    var topicAssign = new TopicAssignTable().setTopic(topic).setStudent(super.getAuth());
-    topicAssignRepository.save(topicAssign);
-    return true;
-  }
-
   public Object findByUserAndRole(Long userId, TopicRole role, Sort sort) {
 
     var user = Objects.nonNull(userId)

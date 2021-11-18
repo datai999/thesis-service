@@ -1,0 +1,53 @@
+package com.thesis.service.service.user;
+
+import com.thesis.service.advice.BusinessException;
+import com.thesis.service.constant.MessageCode;
+import com.thesis.service.repository.topic.TopicRepository;
+import com.thesis.service.repository.user.UserRepository;
+import com.thesis.service.service.system.SemesterService;
+import com.thesis.service.service.topic.TopicService;
+import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class StudentService {
+
+  private final TopicRepository topicRepository;
+  private final UserRepository userRepository;
+  private final SemesterService semesterService;
+  private final TopicService topicService;
+
+  public Object registerTopic(long studentId, long topicId) {
+
+    var topic = topicRepository.findById(topicId).orElseThrow();
+
+    if (!semesterService.allowStudentRegisterCancelTopic()) {
+      throw BusinessException.code(
+          MessageCode.Semester.OVERDUE_TOPIC_REGISTER,
+          topic.getSemester().getName());
+    }
+
+    if (topic.getStudents().size() >= topic.getMaxStudentTake()) {
+      throw BusinessException.code(MessageCode.Topic.FULL_MEMBER, topic.getMultiName());
+    }
+
+    var student = userRepository.findById(studentId).orElseThrow();
+
+    if (topic.getStudents().stream().anyMatch(e -> e.getId().equals(studentId))) {
+      throw BusinessException.code(MessageCode.Topic.EXIST_STUDENT,
+          student.getCode(), topic.getMultiName());
+    }
+
+    topic.getStudents().add(student);
+    topicRepository.save(topic);
+
+    return true;
+  }
+
+  public Object getTopic(long userId) {
+    var user = userRepository.findById(userId).orElseThrow();
+    return topicService.map(user.getTopicExecutes());
+  }
+
+}

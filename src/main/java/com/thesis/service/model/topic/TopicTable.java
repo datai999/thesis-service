@@ -76,7 +76,7 @@ public class TopicTable extends BaseTable {
   private String documentReference;
 
   @ManyToMany
-  @JoinTable(name = "tp_topic_assign",
+  @JoinTable(
       joinColumns = @JoinColumn(name = "topic_id"),
       inverseJoinColumns = @JoinColumn(name = "student_id"))
   private List<UserTable> students;
@@ -88,7 +88,7 @@ public class TopicTable extends BaseTable {
   private List<UserTable> guideTeachers;
 
   @ManyToMany
-  @JoinTable(name = "tp_topic_assign",
+  @JoinTable(
       joinColumns = @JoinColumn(name = "topic_id"),
       inverseJoinColumns = @JoinColumn(name = "review_teacher_id"))
   private List<UserTable> reviewTeachers;
@@ -99,6 +99,10 @@ public class TopicTable extends BaseTable {
   public String getMultiName(String format) {
     return Objects.isNull(this.name) ? null
         : String.format(format, this.name.getVi(), this.name.getEn());
+  }
+
+  public String getMultiName() {
+    return this.getMultiName("[%s - %s]");
   }
 
   public String getType() {

@@ -23,7 +23,7 @@ public class TopicResponse {
   private MultiLangDto name;
   private List<String> names;
 
-  private String semester;
+  private BaseResponse semester;
 
   private boolean thesis;
   private String type;
@@ -74,7 +74,6 @@ public class TopicResponse {
 
     mapper.map(entity, this);
 
-    this.semester = entity.getSemester().getName();
     this.names = mapper.map(entity.getName());
     this.educationMethods = mapper.map(entity.getEducationMethods(), BaseResponse.class);
     this.educationMethodNames =

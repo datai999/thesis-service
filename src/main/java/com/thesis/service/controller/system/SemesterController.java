@@ -18,6 +18,11 @@ public class SemesterController extends ABaseController<SemesterTable, SemesterS
     return super.service.getCurrentSemester();
   }
 
+  @GetMapping("/allow-student-register-cancel")
+  public Object allowStudentRegisterCancelTopic() {
+    return super.service.allowStudentRegisterCancelTopic();
+  }
+
   @PutMapping("/current")
   public Object setCurrentSemester(@RequestParam Long id) {
     return super.service.setCurrentSemester(id);
