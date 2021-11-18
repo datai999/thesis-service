@@ -99,9 +99,14 @@ public class ModelConverter {
   // }
 
   public List<String> map(final MultiLangDto multiLang) {
-    return Objects.nonNull(multiLang)
-        ? List.of(multiLang.getVi(), multiLang.getEn())
-        : null;
+    if (Objects.isNull(multiLang)
+        || (Objects.isNull(multiLang.getVi()) && Objects.isNull(multiLang.getEn())))
+      return List.of();
+    if (Objects.isNull(multiLang.getEn()))
+      return List.of(multiLang.getVi());
+    if (Objects.isNull(multiLang.getVi()))
+      return List.of(multiLang.getEn());
+    return List.of(multiLang.getVi(), multiLang.getEn());
   }
 
 }

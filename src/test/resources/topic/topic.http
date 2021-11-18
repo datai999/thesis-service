@@ -14,7 +14,7 @@ Content-Type: application/json
 X-auth: {{backDoorToken}}
 
 {
-  "subjectDepartment": 2
+  "majors": [1]
 }
 
 ###  get need assign council
@@ -28,7 +28,7 @@ Content-Type: application/json
 X-auth: {{backDoorToken}}
 
 ###  get by one user
-GET {{http}}{{host}}{{port}}{{base-url}}/topics/user?userId=1&topicRole=STUDENT&direction=DESC
+GET {{http}}{{host}}{{port}}{{base-url}}/topics/user?userId=10&topicRole=GUIDE_TEACHER&direction=DESC
 Content-Type: application/json
 X-auth: {{backDoorToken}}
 
