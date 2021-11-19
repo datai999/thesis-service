@@ -20,14 +20,14 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
     return CriterionResponse.class;
   }
 
-  public void sortChildren(CriterionTable template) {
-    if (CollectionUtils.isEmpty(template.getChildren()))
+  public void sortChildren(CriterionTable entity) {
+    if (Objects.isNull(entity) || CollectionUtils.isEmpty(entity.getChildren()))
       return;
-    var childrenSorted = template.getChildren().parallelStream()
+    var childrenSorted = entity.getChildren().parallelStream()
         .sorted((x, y) -> Integer.compare(x.getDisplayOrder(), y.getDisplayOrder()))
         .collect(Collectors.toList());
     childrenSorted.parallelStream().forEach(this::sortChildren);
-    template.setChildren(childrenSorted);
+    entity.setChildren(childrenSorted);
   }
 
   @Override
@@ -47,6 +47,9 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
 
   @Transactional
   public CriterionTable recursiveSave(CriterionTable entity) {
+    if (Objects.isNull(entity))
+      return null;
+
     if (Objects.nonNull(entity.getId()))
       super.repository.findById(entity.getId())
           .ifPresent(createdEntity -> {

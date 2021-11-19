@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 public class TemplateResponse extends BaseResponse {
 
+  private Boolean numberMark;
+
   private CriterionResponse rootCriterion;
 
 }

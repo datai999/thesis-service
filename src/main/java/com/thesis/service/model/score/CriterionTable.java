@@ -33,8 +33,6 @@ public class CriterionTable extends BaseTable {
 
   private Double maxScore;
 
-  private String formula;
-
   @ManyToOne
   @OnDelete(action = OnDeleteAction.CASCADE)
   private CriterionTable parent;
