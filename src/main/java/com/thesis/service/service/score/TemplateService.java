@@ -1,5 +1,6 @@
 package com.thesis.service.service.score;
 
+import java.util.function.Function;
 import javax.transaction.Transactional;
 import com.thesis.service.dto.score.response.TemplateResponse;
 import com.thesis.service.model.score.TemplateTable;
@@ -16,8 +17,8 @@ public class TemplateService
   private final CriterionService criterionService;
 
   @Override
-  protected Class<?> getResponseClass() {
-    return TemplateResponse.class;
+  protected Function<TemplateTable, ?> mapping() {
+    return TemplateResponse::new;
   }
 
   @Override

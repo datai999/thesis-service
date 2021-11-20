@@ -4,10 +4,14 @@ public interface MessageCode {
 
   String GUIDE_TEACHER = "guideTeacher";
   String REVIEW_TEACHER = "reviewTeacher";
+  String OUTLINE = "outline";
+  String THESIS = "thesis";
 
   interface Semester {
     String OVERDUE_TOPIC_REGISTER = "semester.overdueTopicRegister";
     String OVERDUE_TOPIC_CANCEL = "semester.overdueTopicCancel";
+    String MID = "semester.mid";
+    String FINAL = "semester.final";
   }
 
   interface Topic {
@@ -18,7 +22,7 @@ public interface MessageCode {
   interface Student {
     String REGISTER_TOPIC = "student.registerTopic";
     String CANCEL_TOPIC = "student.cancelTopic";
-  }
+}
 
   interface Council {
     String COUNCIL = "council";
