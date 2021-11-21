@@ -229,7 +229,7 @@ Chạy ứng dụng nhận diện khuôn mặt
 Đề xuất các cơ chế cải tiến
 Hiện thực thử nghiệm 
 Đề xuất ứng dụng sẽ thực hiện trong giai đoạn luận văn 
-','false',null,'3','1');
+','false',null,'2','1');
 insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-17 16:20:02.222099','false','2021-11-17 16:20:02.222099','Đề tài tập trung vào phân tích mã nguồn của Openpiton RISC-V SoC để tìm các lỗ hỏng bảo mật mức phần cứng và đề xuất các giải pháp khắc phục',null,'3','1','{"en":"RISC-V SoC HW security testing with HDL analysis","vi":"Kiểm thử bảo mật phần cứng của RISC-V SoC bằng việc phân tích mã nguồn RTL"}','Dựng lại môi trường mô phỏng của openpiton.
 Đọc và phân tích Verilog source code, từ đó dựng lại block diagram cho toàn bộ SoC và cho từng module của hệ thống.
 Đào sâu vào từng module để tìm những lỗ hổng trong hiện thực phần cứng. Nếu tìm thấy lỗ hổng:
@@ -238,7 +238,7 @@ Viết user application bằng C để khai thác lỗ hổng từ phần mềm.
 Đánh giá độ nguy hiểm của lỗi.
 Đưa ra đề xuất để vá những lỗi tìm được, có thể đưa ra những tình huống mà lỗi có thể xảy ra trong thực tế
 Tổng hợp lại về hardware bugs, hardware attack patterns, ...
-','false',null,'3','1');
+','false',null,'2','1');
 insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-17 16:20:51.562302','false','2021-11-17 16:20:51.562302','Đề tài tập trung vào tìm hiểu và phân tích mạng nơ-ron học sâu và đề xuất phương pháp tăng tốc độ xử lý giai đoạn suy luận (inference) bằng cách kết hợp phần cứng tái cấu hình FPGA với các bộ xử lý truyền thống. Đề tài tập trung vào việc phát triển lõi tính toán phục vụ cho việc xử lý mạng nơ-ron trên FPGA đồng thời phát triển hệ thống SoC kết hợp phần cứng phần mềm để thực thi hệ thống và đo đạc số liệu liên quan đến hiệu suất.',null,'3','2','{"en":"RISC-V SoC HW security testing with HDL analysis","vi":"Tăng tốc mạng nơ-ron học sâu với phần cứng tái cấu hình"}','Tìm hiểu mạng nơ-ron CNN.
 Phân tích hoạt động tìm hiểu các model phù hợp cho các nền tảng phần cứng tái cấu hình/điện toán biên
 Phát triễn lõi tính toán (core) phù hợp cho việc tăng tốc mạng nơ-ron
@@ -316,7 +316,7 @@ insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('16','14')
 
 INSERT INTO tp_topic_students(topic_id, student_id, mid_pass) VALUES
     (1, 41, FALSE)
-  , (1, 42, FALSE)
+  , (1, 42, TRUE)
 ON CONFLICT DO NOTHING;
 
 -- sc_criterion_1637403518823-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -80,6 +81,9 @@ public class TopicTable extends BaseTable {
       joinColumns = @JoinColumn(name = "topic_id"),
       inverseJoinColumns = @JoinColumn(name = "student_id"))
   private List<UserTable> students;
+
+  @OneToMany(mappedBy = "topic")
+  private List<TopicStudentTable> topicStudents;
 
   @ManyToMany
   @JoinTable(
