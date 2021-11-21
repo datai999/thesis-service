@@ -20,7 +20,7 @@ INSERT INTO sy_semester
 VALUES
     ('201', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00', '2021-03-17T00:12:00', '2021-05-17T00:12:00', '2021-03-17T00:12:00', '2021-06-17T00:12:00')
   , ('211', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00', '2021-03-17T00:12:00', '2021-05-17T00:12:00', '2021-03-17T00:12:00', '2021-06-17T00:12:00')
-  , ('212', 'USING', '2021-06-17T00:12:00', '2021-12-10T00:12:00', '2021-11-1T00:12:00', '2022-03-01T00:12:00', '2021-11-1T00:12:00', '2022-04-17T00:12:00')
+  , ('212', 'USING', '2021-06-17T00:12:00', '2021-11-10T00:12:00', '2021-11-1T00:12:00', '2022-03-01T00:12:00', '2021-11-1T00:12:00', '2022-04-17T00:12:00')
   , ('213', null, null, null, null, null, null, null)
 ON CONFLICT DO NOTHING;
 
@@ -314,6 +314,13 @@ insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('16','14')
 
 -- sc_criterion_1637403518823-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+INSERT INTO tp_topic_students(topic_id, student_id, mid_pass) VALUES
+    (1, 41, FALSE)
+  , (1, 42, FALSE)
+ON CONFLICT DO NOTHING;
+
+-- sc_criterion_1637403518823-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 insert into sc_criterion(created_at,deleted,updated_at,description,display_order,mark,max_score,min_score,parent_id) values('2021-11-20 16:17:23.8059','false','2021-11-20 16:19:38.390783',null,'0','false',null,null,null);
 insert into sc_criterion(created_at,deleted,updated_at,description,display_order,mark,max_score,min_score,parent_id) values('2021-11-20 16:17:23.809889','false','2021-11-20 16:19:38.392777','<p><strong>A. Mục tiêu và định hướng của luận văn</strong></p>','0','false',null,null,'1');
 insert into sc_criterion(created_at,deleted,updated_at,description,display_order,mark,max_score,min_score,parent_id) values('2021-11-20 16:17:23.812883','false','2021-11-20 16:19:38.397765','<p>A1. <i>Động cơ và mục tiêu của luận văn</i></p><p>a. Sinh viên hoàn toàn không đề cập đến động cơ và mục tiêu của công việc luận văn</p><p>b. Sinh viên có đề cập đến động cơ và mục tiêu của công việc luận văn nhưng chưa rõ ràng</p><p>c. Sinh viên trình bày rõ động cơ và mục tiêu của công việc luận văn nhưng nên điều chỉnh vì quá mục tiêu là hơi khó hoặc còn đơn giản</p><p>d. Sinh viên trình bày động cơ và mục tiêu của công việc luận văn rõ ràng và hợp lý</p>','0','true',null,null,'2');
@@ -386,8 +393,8 @@ Hướng dẫn đánh giá: cho mỗi Tiêu chí đánh giá, Thầy/ Cô cho đ
 insert into sc_template(created_at,deleted,updated_at,description,guide_teacher,mid_semester,name,number_mark,review_teacher,thesis,root_criterion_id) values('2021-11-20 18:01:07.035873','false','2021-11-20 18:01:07.035873','<p><strong>II. PHẦN ĐÁNH GIÁ DÀNH CHO CHUẨN ĐẦU RA CỦA CHƯƠNG TRÌNH</strong></p><p>Việc đánh giá ở phần này chỉ dùng để đo lường chất lượng của việc giảng dạy-học tập mà không làm ảnh hưởng đến kết quả đánh giá học tập của các sinh viên được đánh giá.</p><p>Hướng dẫn đánh giá: Thầy/ Cô điền A, B, C hoặc D vào cột&nbsp;<strong>Điểm đánh giá</strong> hoặc khoanh lựa chọn ở cột <strong>Tiêu chí đánh giá</strong> tương ứng để đánh giá hoặc nêu lý do ở lựa chọn E trong trường hợp không đánh giá được.&nbsp;</p>','true','false','Phieu Danh Gia LVTN Nganh CS _GVHD phần 2','false','false','true','48');
 insert into sc_template(created_at,deleted,updated_at,description,guide_teacher,mid_semester,name,number_mark,review_teacher,thesis,root_criterion_id) values('2021-11-20 18:01:07.036114','false','2021-11-20 18:01:07.036114','<p><strong>PHẦN ĐÁNH GIÁ ĐIỂM CỦA SINH VIÊN THỰC HIỆN LUẬN VĂN TỐT NGHIỆP</strong></p><p>Hướng dẫn đánh giá: cho mỗi&nbsp;<strong>Tiêu chí đánh giá</strong>, Thầy/ Cô cho điểm đánh giá ở cột&nbsp;<strong>Điểm đánh giá</strong> tương ứng với lựa chọn A, B, C, hoặc D nhằm phản ánh kết quả luận văn cũng như năng lực và thái độ của sinh viên ngay sau khi thực hiện luận văn tốt nghiệp.</p>','false','false','Phieu Danh Gia LVTN Nganh CS _GVPB phần 1','true','true','true','53');
 insert into sc_template(created_at,deleted,updated_at,description,guide_teacher,mid_semester,name,number_mark,review_teacher,thesis,root_criterion_id) values('2021-11-20 18:01:07.036348','false','2021-11-20 18:01:07.036348',null,'false','false','Phieu Danh Gia LVTN hội đồng','true','false','true','56');
-insert into sc_template(created_at,deleted,updated_at,description,guide_teacher,mid_semester,name,number_mark,review_teacher,thesis,root_criterion_id) values('2021-11-20 18:01:45.389948','false','2021-11-20 18:01:45.390945','<p>Cán bộ chấm đạt hoặc không đạt</p>','true','true','Phiếu chấm điểm đề cương giữa kỳ','false','false','false',null);
-insert into sc_template(created_at,deleted,updated_at,description,guide_teacher,mid_semester,name,number_mark,review_teacher,thesis,root_criterion_id) values('2021-11-20 18:02:17.369305','false','2021-11-20 18:02:17.369305','<p>Cán bộ chấm đạt hoặc không đạt</p>','true','true','Phiếu chấm điểm luận văn giữa kỳ','false','false','true',null);
+-- insert into sc_template(created_at,deleted,updated_at,description,guide_teacher,mid_semester,name,number_mark,review_teacher,thesis,root_criterion_id) values('2021-11-20 18:01:45.389948','false','2021-11-20 18:01:45.390945','<p>Cán bộ chấm đạt hoặc không đạt</p>','true','true','Phiếu chấm điểm đề cương giữa kỳ','false','false','false',null);
+-- insert into sc_template(created_at,deleted,updated_at,description,guide_teacher,mid_semester,name,number_mark,review_teacher,thesis,root_criterion_id) values('2021-11-20 18:02:17.369305','false','2021-11-20 18:02:17.369305','<p>Cán bộ chấm đạt hoặc không đạt</p>','true','true','Phiếu chấm điểm luận văn giữa kỳ','false','false','true',null);
 
 -- sc_template_council_roles_1637403278396-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -407,11 +414,10 @@ insert into sc_template_majors(template_id,major_id) values('5','1');
 insert into sc_template_majors(template_id,major_id) values('5','2');
 insert into sc_template_majors(template_id,major_id) values('6','1');
 insert into sc_template_majors(template_id,major_id) values('6','2');
-insert into sc_template_majors(template_id,major_id) values('7','1');
-insert into sc_template_majors(template_id,major_id) values('7','2');
-insert into sc_template_majors(template_id,major_id) values('8','2');
-insert into sc_template_majors(template_id,major_id) values('8','1');
-
+-- insert into sc_template_majors(template_id,major_id) values('7','1');
+-- insert into sc_template_majors(template_id,major_id) values('7','2');
+-- insert into sc_template_majors(template_id,major_id) values('8','2');
+-- insert into sc_template_majors(template_id,major_id) values('8','1');
 
 -- us_notification-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
