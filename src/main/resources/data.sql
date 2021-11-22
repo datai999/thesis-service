@@ -317,6 +317,8 @@ insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('16','14')
 INSERT INTO tp_topic_students(topic_id, student_id, mid_pass) VALUES
     (1, 41, FALSE)
   , (1, 42, TRUE)
+  , (10, 43, TRUE)
+  , (12, 50, TRUE)
 ON CONFLICT DO NOTHING;
 
 -- sc_criterion_1637403518823-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

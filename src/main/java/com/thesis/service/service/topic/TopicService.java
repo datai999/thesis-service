@@ -68,6 +68,15 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
     return this.map(response);
   }
 
+  @Override
+  public Object update(TopicTable entity) {
+    var existEntity = this.repository.findById(entity.getId()).orElseThrow();
+    entity.setStudents(existEntity.getStudents())
+        .setCreatedAt(existEntity.getCreatedAt());
+    var response = this.repository.save(entity);
+    return this.map(response);
+  }
+
   public Object findNeedAssignCouncil(long subjectDepartmentId, Sort sort) {
     var response = super.repository.findNeedAssignCouncil(subjectDepartmentId, sort);
     return super.map(response);

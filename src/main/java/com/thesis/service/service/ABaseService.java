@@ -86,7 +86,6 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   public Object update(T entity) {
     var existEntity = this.repository.findById(entity.getId()).orElseThrow();
     entity.setCreatedAt(existEntity.getCreatedAt());
-    entity.fillPersistent();
     var response = this.repository.save(entity);
     return this.map(response);
   }
