@@ -32,6 +32,9 @@ public class ScoreTable extends BaseTable {
   private UserTable student;
 
   @ManyToOne
+  private TemplateTable template;
+
+  @ManyToOne
   @OnDelete(action = OnDeleteAction.CASCADE)
   private CriterionTable criterion;
 

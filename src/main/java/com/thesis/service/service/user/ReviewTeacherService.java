@@ -5,6 +5,7 @@ import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.model.system.SubjectDepartmentTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.repository.topic.TopicRepository;
+import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.topic.TopicService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Example;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class ReviewTeacherService {
 
   private final TopicRepository topicRepository;
+  private final UserRepository userRepository;
   private final TopicService topicService;
 
   public Object getTopicReview(long subjectDepartmentId, String semesterName) {
@@ -37,6 +39,13 @@ public class ReviewTeacherService {
         .collect(Collectors.toList());
 
     return topicService.map(queryResult);
+  }
+
+  public Object getTopic(long userId, String semesterName) {
+    var user = userRepository.findById(userId).orElseThrow();
+    var response = user.getTopicReviews().parallelStream()
+        .filter(e -> semesterName.equals(e.getSemester().getName())).collect(Collectors.toList());
+    return topicService.map(response);
   }
 
 }

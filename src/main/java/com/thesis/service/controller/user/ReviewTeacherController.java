@@ -22,4 +22,10 @@ public class ReviewTeacherController {
     return reviewTeacherService.getTopicReview(subjectDepartmentId, semesterName);
   }
 
+  @GetMapping("/{userId}/topics")
+  public Object getTopics(@PathVariable long userId,
+      @RequestParam String semesterName) {
+    return reviewTeacherService.getTopic(userId, semesterName);
+  }
+
 }

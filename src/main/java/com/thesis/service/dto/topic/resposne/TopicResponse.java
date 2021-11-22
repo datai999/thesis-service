@@ -44,11 +44,16 @@ public class TopicResponse {
   private String task;
   private String documentReference;
 
-  private List<UserResponse> students;
+  private List<StudentResponse> students;
   private List<UserResponse> guideTeachers;
   private List<UserResponse> reviewTeachers;
 
   private CouncilInTopicResponse council;
+
+  @Data
+  private static class StudentResponse extends UserResponse {
+    private Boolean midPass;
+  }
 
   @Data
   private static class CouncilInTopicResponse {
@@ -81,10 +86,16 @@ public class TopicResponse {
         mapper.map(entity.getEducationMethods(), EducationMethodTable::getName);
     this.majors = mapper.map(entity.getMajors(), BaseResponse.class);
     this.majorNames = mapper.map(entity.getMajors(), MajorTable::getName);
-    this.students = mapper.map(entity.getStudents(), UserResponse.class);
+    this.students = mapper.map(entity.getStudents(), StudentResponse.class);
     this.guideTeachers = mapper.map(entity.getGuideTeachers(), UserResponse.class);
     this.reviewTeachers = mapper.map(entity.getReviewTeachers(), UserResponse.class);
     this.council = mapper.map(entity.getCouncil(), CouncilInTopicResponse.class);
+
+    this.students.stream().forEach(student -> {
+      var midPass = entity.getTopicStudents().stream()
+          .anyMatch(e -> e.getStudent().getId().equals(student.getId()) && e.getMidPass());
+      student.setMidPass(midPass);
+    });
   }
 
   public TopicResponse(TopicAssignTable topicAssign) {

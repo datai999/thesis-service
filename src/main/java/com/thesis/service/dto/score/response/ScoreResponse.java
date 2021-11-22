@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper =false)
 public class ScoreResponse extends BaseResponse {
 
   private BaseResponse topic;
 
-  private BaseResponse settingTemplate;
-
   private UserResponse teacher;
 
   private UserResponse student;
+
+  private BaseResponse template;
 
   private BaseResponse criterion;
 
