@@ -11,7 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import com.thesis.service.dto.MultiLangDto;
 import com.thesis.service.model.BaseTable;
@@ -65,7 +64,6 @@ public class TopicTable extends BaseTable {
   private Integer minStudentTake;
 
   @Min(1)
-  @Max(3)
   @Column(columnDefinition = "INTEGER DEFAULT 3")
   private Integer maxStudentTake;
 

@@ -12,10 +12,11 @@ ON CONFLICT DO NOTHING;
 INSERT INTO sy_semester
   (name, status, register_topic_start, register_topic_end, topic_start, topic_end, thesis_start, thesis_end)
 VALUES
-    ('201', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00', '2021-03-17T00:12:00', '2021-05-17T00:12:00', '2021-03-17T00:12:00', '2021-06-17T00:12:00')
-  , ('211', 'USED', '2021-01-17T00:12:00', '2021-03-17T00:12:00', '2021-03-17T00:12:00', '2021-05-17T00:12:00', '2021-03-17T00:12:00', '2021-06-17T00:12:00')
-  , ('212', 'USING', '2021-06-17T00:12:00', '2021-11-10T00:12:00', '2021-11-1T00:12:00', '2022-03-01T00:12:00', '2021-11-1T00:12:00', '2022-04-17T00:12:00')
-  , ('213', null, null, null, null, null, null, null)
+    ('201', 'USED', '2020-01-17T00:12:00', '2020-02-17T00:12:00', '2020-02-17T00:12:00', '2020-06-17T00:12:00', '2020-02-17T00:12:00', '2020-06-17T00:12:00')
+  , ('211', 'USED', '2020-09-17T00:12:00', '2020-10-17T00:12:00', '2020-10-17T00:12:00', '2021-01-17T00:12:00', '2020-10-17T00:12:00', '2021-02-17T00:12:00')
+  , ('212', 'USED', '2021-03-17T00:12:00', '2021-04-10T00:12:00', '2021-04-1T00:12:00', '2022-08-01T00:12:00', '2021-04-1T00:12:00', '2022-09-17T00:12:00')
+  , ('213', 'USING', '2021-09-17T00:12:00', '2021-10-10T00:12:00', '2021-10-1T00:12:00', '2022-01-01T00:12:00', '2021-10-1T00:12:00', '2022-02-17T00:12:00')
+  , ('221', null, null, null, null, null, null, null)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_council_role (name, min, max, display_order) VALUES
@@ -58,17 +59,12 @@ VALUES
     ('TEACHER', 1, 1, true, 'Phạm Hoàng', 'Anh', 'anhpham@hcmut.edu.vn')
   , ('TEACHER', 1, 2, true, 'Phan Đình Thế', 'Duy', 'duypdt@hcmut.edu.vn')
   , ('TEACHER', 1, 3, true, 'Trần Thanh', 'Bình', 'thanhbinh@hcmut.edu.vn')
-  , ('TEACHER', 1, 1, true, 'Trần văn', 'Hoài', 'vanhoai@hcmut.edu.vn')
-  , ('TEACHER', 1, 1, true, 'Lê Trọng', 'Nhân', 'trongnhanle@hcmut.edu.vn')
-  , ('TEACHER', 1, 1, true, 'Phạm Quốc', 'Cường', 'cuongpham@hcmut.edu.vn')
   , ('TEACHER', 1, 1, true, 'Nguyễn Trí', 'Đức', 'triduc@hcmut.edu.vn')
   , ('TEACHER', 2, 1, true, 'Nguyễn Xuân', 'Quang', 'nxquang@hcmut.edu.vn')
   , ('TEACHER', 2, 1, true, 'Lê Lam', 'Sơn', 'lamson@hcmut.edu.vn')
   , ('TEACHER', 3, 1, true, 'Băng Ngọc Bảo', 'Tâm', 'bnbaotam@hcmut.edu.vn')
   , ('TEACHER', 3, 1, true, 'Mai Đức', 'Trung', 'mdtrung@hcmut.edu.vn')
   , ('TEACHER', 3, 1, true, 'Nguyễn An', 'Khương', 'nakhuong@hcmut.edu.vn')
-  , ('TEACHER', 4, 1, true, 'Nguyễn Tiến', 'Thịnh', 'ntthinh@hcmut.edu.vn')
-  , ('TEACHER', 4, 1, true, 'Trương Tuấn', 'Anh', 'anhtt@hcmut.edu.vn')
   , ('TEACHER', 4, 1, false, 'Võ Thị Ngọc', 'Châu', 'chauvtn@hcmut.edu.vn')
   , ('TEACHER', 4, 1, false, 'Trương Quỳnh', 'Chi', 'tqchi@hcmut.edu.vn')
   , ('TEACHER', 4, 2, true, 'Phan Trọng', 'Nhân', 'nhanpt@hcmut.edu.vn')
@@ -77,13 +73,8 @@ VALUES
   , ('TEACHER', 5, 1, false, 'Nguyễn Thị Ái', 'Thảo', 'thaonguyen@hcmut.edu.vn')
   , ('TEACHER', 5, 1, true, 'Nguyễn Đình', 'Thành', 'dinhthanh@hcmut.edu.vn')
   , ('TEACHER', 5, 1, false, 'Trần Thị Quế', 'Nguyệt', 'ttqnguyet@hcmut.edu.vn')
-  , ('TEACHER', 5, 1, true, 'Nguyễn Thanh', 'Tùng', 'thanhtung@hcmut.edu.vn')
-  , ('TEACHER', 5, 1, true, 'Võ Thị Hồng', 'Tuyết', 'hongtuyet@hcmut.edu.vn')
   , ('TEACHER', 5, 2, true, 'Trần Tuấn', 'Anh', 'tranh@hcmut.edu.vn')
   , ('TEACHER', 5, 2, true, 'Nguyễn Tiến', 'Thịnh', 'ntthinh@hcmut.edu.vn')
-  , ('TEACHER', 5, 1, true, 'Trần Hồng', 'Tài', 'thtai@hcmut.edu.vn')
-  , ('TEACHER', 5, 1, true, 'Trần Giang', 'Sơn', 'tgson@hcmut.edu.vn')
-  , ('TEACHER', 5, 1, true, 'Trần Ngọc Bảo', 'Duy', 'duytnb@hcmut.edu.vn')
   , ('TEACHER', 5, 3, true, 'Huỳnh Tường', 'Nguyên', 'htnguyen@hcmut.edu.vn')
 ON CONFLICT DO NOTHING;
 
@@ -120,7 +111,7 @@ ON CONFLICT DO NOTHING;
 
 UPDATE us_user SET code = id;
 
--- tp_topic_1637140938823-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- tp_topic_1637684674374-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-17 16:09:11.047771','false','2021-11-17 16:09:11.047771','Phát triển tiếp kết quả của nhóm đề tài K16 để xây dựng được thư viện và module điều khiển bay cho quadcopter có khả năng tích hợp thêm các cảm biến và module giao tiếp khác.
 Hiện thực được ứng dụng điều khiển 2-3 quadcopter hoạt động theo mô hình bầy đàn. 
@@ -223,7 +214,7 @@ Chạy ứng dụng nhận diện khuôn mặt
 Đề xuất các cơ chế cải tiến
 Hiện thực thử nghiệm 
 Đề xuất ứng dụng sẽ thực hiện trong giai đoạn luận văn 
-','false',null,'2','1');
+','false',null,'3','1');
 insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-17 16:20:02.222099','false','2021-11-17 16:20:02.222099','Đề tài tập trung vào phân tích mã nguồn của Openpiton RISC-V SoC để tìm các lỗ hỏng bảo mật mức phần cứng và đề xuất các giải pháp khắc phục',null,'3','1','{"en":"RISC-V SoC HW security testing with HDL analysis","vi":"Kiểm thử bảo mật phần cứng của RISC-V SoC bằng việc phân tích mã nguồn RTL"}','Dựng lại môi trường mô phỏng của openpiton.
 Đọc và phân tích Verilog source code, từ đó dựng lại block diagram cho toàn bộ SoC và cho từng module của hệ thống.
 Đào sâu vào từng module để tìm những lỗ hổng trong hiện thực phần cứng. Nếu tìm thấy lỗ hổng:
@@ -232,7 +223,7 @@ Viết user application bằng C để khai thác lỗ hổng từ phần mềm.
 Đánh giá độ nguy hiểm của lỗi.
 Đưa ra đề xuất để vá những lỗi tìm được, có thể đưa ra những tình huống mà lỗi có thể xảy ra trong thực tế
 Tổng hợp lại về hardware bugs, hardware attack patterns, ...
-','false',null,'2','1');
+','false',null,'3','1');
 insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-17 16:20:51.562302','false','2021-11-17 16:20:51.562302','Đề tài tập trung vào tìm hiểu và phân tích mạng nơ-ron học sâu và đề xuất phương pháp tăng tốc độ xử lý giai đoạn suy luận (inference) bằng cách kết hợp phần cứng tái cấu hình FPGA với các bộ xử lý truyền thống. Đề tài tập trung vào việc phát triển lõi tính toán phục vụ cho việc xử lý mạng nơ-ron trên FPGA đồng thời phát triển hệ thống SoC kết hợp phần cứng phần mềm để thực thi hệ thống và đo đạc số liệu liên quan đến hiệu suất.',null,'3','2','{"en":"RISC-V SoC HW security testing with HDL analysis","vi":"Tăng tốc mạng nơ-ron học sâu với phần cứng tái cấu hình"}','Tìm hiểu mạng nơ-ron CNN.
 Phân tích hoạt động tìm hiểu các model phù hợp cho các nền tảng phần cứng tái cấu hình/điện toán biên
 Phát triễn lõi tính toán (core) phù hợp cho việc tăng tốc mạng nơ-ron
@@ -240,20 +231,39 @@ Xây dựng hệ thống SoC kết hợp phần cứng FGPA và phần mềm tr�
 Phát triển ứng dụng kiểm thử
 Đo đạc và tính toán hiệu suất xử lý.
 ','false',null,'3','1');
+insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-23 23:11:17.794345','false','2021-11-23 23:11:17.794345','<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Leveraging blockchain technology in validating, storing and managing the work history of individuals. The main idea is to write down to an underlying shared ledger blockchain to keep track when a person graduated, obtained a certificate, joined / left a company or got promoted. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>','<p>Ethereum yellow paper: https://ethereum.github.io/yellowpaper/paper.pdf<br>Solidity: https://docs.soliditylang.org/en/v0.8.7/&nbsp;</p>','2','1','{"en":"A Blockchain-Enabled Platform for Certifying Employee Résumés","vi":"Nền tảng chứng thực lý lịch làm việc dùng chuỗi khối"}','<p>Constructing a blockchain database for storing each individuals work record.<br>Launching a mobile application for individuals to manage their own achievements.<br>Releasing a web portal for enterprises to keep track of the promotion of their own employees.<br>Provide an open API for the certification of employees’ work history.<br>Package the blockchain program (Docker image) for the business party wishing to store the entire blockchain directly.</p>'
+,'false',null,'3','2');
+insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-23 23:14:28.775785','false','2021-11-23 23:14:28.775785','<p>OISP is currently in need of a digital initiative to monitor the social work program undertaken by its undergraduate students. A student must undertake a certain amount of social work and accumulated a designated number of credits to be able to graduate. This digital attempt allows the undergraduate students to register their social work jobs and check if they really show up to get the job done. Such a portal also facilitates the management of the social work program from the administrative perspective.</p>','<p>Liên hệ GVHD</p>','3','1','{"en":"A Web portal for monitoring the social work program at OISP","vi":"Cổng thông tin số hóa việc thực hiện ngày công tác xã hội tại OISP"}','<p>Nghiên cứu các kiến trúc hệ thống microservices.&nbsp;<br>Thiết kế hệ thống các services theo kiến trúc microservices.&nbsp;<br>Thiết kế giao diện và các giải pháp số hoá cổng thông tin ngày công tác xã hội OISP.&nbsp;<br>Xây dựng hệ thống số hoá các hoạt động và chuỗi hoạt động và đăng ký tham gia các hoạt động ngoại khoá.&nbsp;<br>Xây dựng mô đun truy xuất và phân tích dữ liệu từ các hoạt động và đưa ra các gợi ý cho việc tổ chức hoạt động hiệu quả.<br>Xây dựng mô đun điểm danh bằng cách sử dụng vị trí thời gian thực và ứng dụng nhận diện khuôn mặt.&nbsp;<br>Xây dựng ứng dụng di động cho cổng thông tin công tác xã hội OISP và ứng dụng web cho việc quản lý và truy xuất dữ liệu.&nbsp;<br>Tối ưu hoá hệ thống bằng cách sử dụng caching và message queue cho các services chịu tải lớn.<br>Triển khai hệ thống và kiểm định khả năng sử dụng trong thực tế.</p>'
+,'false',null,'3','3');
+insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-23 23:15:32.996545','false','2021-11-23 23:15:32.996545','<p>Messaging utilities are essentially part of many collaborative work systems in use today. With the rise of software bots and computer graphics, end-users and software developers expect to enjoy lightweight yet fancy chatting services for various purposes. In this thesis, we investigate an open architecture following which a centralized messaging module might be developed. An effective database system, techniques for implementing a conversational assistant and a Web interface facilitating message delivery should be considered in this work.</p>','<p>Liên hệ GVHD</p>','3','1','{"en":"An Open Architecture for Centralized Message Delivery","vi":"Nền tảng trao đổi tinh nhắn nhanh theo kiến trúc có tính mở"}','<p>- Xây dựng hệ thống cơ sở dữ liệu phục vụ cho việc lưu trữ thông tin chat và người dùng.<br>- Xây dựng phương thức kết nối an toàn cho mục đích trao đổi tin nhắn.<br>- Xây dựng giao diện website đáp ứng được nhu cầu đăng nhập, cập nhập thông tin, theo dõi tin nhắn và lịch sử tin nhắn.<br>- Xây dựng hệ thống phân tích và tự động phản hồi tin nhắn sử dụng các kĩ thuật phân tích ngôn ngữ tự nhiên.</p>'
+,'false',null,'3','4');
+insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-23 23:17:16.094668','false','2021-11-23 23:17:16.094668','<p>Spelling and grammar mistakes are quite common in people writing essays, emails, reports and in daily conversations. &nbsp;These mistakes might lead to severe consequences, such as misunderstanding or even cause the reader to feel irritated. Currently, some popular spell checking tools exist but can only support English. Hence, the need for a tool to tackle this problem in the Vietnamese language is significant and in high demand.</p><p>The goal of this project is to develop a system that could analyse and correct spelling and grammar mistakes with the use of Machine Learning model, while also providing an efficient way of text preprocessing for various NLP models.</p>',null,'3','1','{"en":"Building a browser-integrated system for correcting Vietnamese spelling and grammar.","vi":""}','<p>Prepare training data.<br>Research Vietnamese spell and grammar correction models.<br>Develop a complete system.<br>Testing and evaluating the systems accuracy.<br>Develop a plugin demo.</p>'
+,'false',null,'3','2');
+insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-23 23:22:29.301604','false','2021-11-23 23:22:29.301604','<p>The number of news published everyday is nearly uncountable. Due to the explosion of social media where users frequently share content just by clicking some buttons, the information spreads quickly. People then may be misled to fake news or too believe in news that has not been verified. Hence, the reliability and credibility of both the information source and information itself have emerged as a global issue in contemporary society [1]. The exposed consequence of trusting fake news on the Internet has been clearly shown in the middle COVID-19 pandemic, which results in negative behavioral change.. Furthermore, anti-vaccine information and fake COVID-19 treatment can cause serious danger to public health [2,3]. It is not an overstatement to say that currently combating fake news is as important as treating COVID-19.<br>In this project, a Machine Learning model will be built in order to evaluate news sources whether it is verified, unverified or fake and applied to a web browser extension for usage afterward. During the development process, an automated Machine Learning service will also be implemented for collecting data as well as training the model automatically.</p>','<p>[1] Zha, X., Yang, H., Yan, Y., Liu, K., &amp; Huang, C. (2018). Exploring the effect of social media information quality, source credibility and reputation on informational fit-to-task: Moderating role of focused immersion. Computers in Human Behavior, 79, 227-237.<br>[2] Greene, C., &amp; Murphy, G. (2020). Can fake news really change behaviour? Evidence from a study of COVID-19 misinformation.<br>[3] Germani, F., &amp; Biller-Andorno, N. (2021). The anti-vaccination infodemic on social media: A behavioral analysis. PloS one, 16(3), e0247642.</p>','3','1','{"en":" Evaluation of news sources using Machine Learning and its application to a web browser extension.","vi":null}','<p>Find out the criteria to spot fake news.<br>Research on Machine Learning models on fake news detection.<br>Collect, create and manage a database storing verified news and fake news for training.<br>Create a web scraper to collect news.<br>Apply the model in a web browser extension.<br>Create an automated pipeline for deployment.<br>Develop a demo.</p>'
+,'false',null,'3','3');
+insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-11-23 23:24:00.740587','false','2021-11-23 23:24:00.740587','<p>Vấn đề về giám sát phương tiện di chuyển qua lại trên các đoạn đường hiện đang là một trong những vấn đề phổ biến và cấp thiết đối trong cuộc sống. Có khá nhiều ứng dụng cho vấn dề này như: phát hiện người vi phạm giao thông, quản lý số lượng các phương tiện di chuyển, tính toán mật độ tham gia giao thông,.v..v.. Hệ thống xây dựng trong đề tài này hướng tới việc giám sát các phương tiên qua lại với đầu vào là video trực tiếp từ camera giám sát. Các thông tin về thời gian di chuyển, biển số xe của phương tiện sẽ được hệ thống detect sau đó được lưu trữ lại để phục vụ cho các nhu cầu trong thực tế như: quản lý các biển số của người dân sử dụng trong khu vực, các phương tiên không đủ tiêu chuẩn tham gia giao thông.</p>','<p>Liên hệ GVHD</p>','2','1','{"en":null,"vi":"Hệ thống giám sát phương tiện qua lại"}','<p>Xây dựng module detect phương tiện di chuyển<br>Xây dựng module detect biển số<br>Deploy web server thu thập và hiển thị dữ liệu<br>Cải thiện độ chính xác, tốc độ, tính áp dụng thực tế của ứng dụng</p>'
+,'false',null,'3','4');
 
--- tp_topic_education_methods_1637226599520-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO tp_topic(description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id)
+SELECT description,document_reference,max_student_take,min_student_take,name,task,TRUE,council_id,semester_id+1 AS semester_id,subject_department_id
+FROM tp_topic;
+
+-- tp_topic_education_methods_1637685038642-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into tp_topic_education_methods(topic_id,education_method_id) values('1','2');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('1','1');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('2','1');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('2','2');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('3','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('3','2');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('4','1');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('5','1');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('5','2');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('6','1');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('7','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('8','1');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('8','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('9','1');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('9','2');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('10','2');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('10','1');
@@ -263,65 +273,110 @@ insert into tp_topic_education_methods(topic_id,education_method_id) values('12'
 insert into tp_topic_education_methods(topic_id,education_method_id) values('13','1');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('14','1');
 insert into tp_topic_education_methods(topic_id,education_method_id) values('14','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('15','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('15','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('16','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('17','1');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('18','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('19','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('20','2');
+insert into tp_topic_education_methods(topic_id,education_method_id) values('20','1');
 
+INSERT INTO tp_topic_education_methods(topic_id,education_method_id)
+SELECT topic_id+20 AS topic_id,education_method_id
+FROM tp_topic_education_methods;
 
--- tp_topic_majors_1637227003638-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- tp_topic_majors_1637685059108-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into tp_topic_majors(topic_id,major_id) values('1','1');
 insert into tp_topic_majors(topic_id,major_id) values('1','2');
 insert into tp_topic_majors(topic_id,major_id) values('2','2');
 insert into tp_topic_majors(topic_id,major_id) values('3','2');
 insert into tp_topic_majors(topic_id,major_id) values('4','2');
+insert into tp_topic_majors(topic_id,major_id) values('5','1');
 insert into tp_topic_majors(topic_id,major_id) values('5','2');
-insert into tp_topic_majors(topic_id,major_id) values('6','2');
+insert into tp_topic_majors(topic_id,major_id) values('6','1');
 insert into tp_topic_majors(topic_id,major_id) values('7','1');
 insert into tp_topic_majors(topic_id,major_id) values('7','2');
 insert into tp_topic_majors(topic_id,major_id) values('8','2');
+insert into tp_topic_majors(topic_id,major_id) values('9','1');
 insert into tp_topic_majors(topic_id,major_id) values('9','2');
 insert into tp_topic_majors(topic_id,major_id) values('10','1');
 insert into tp_topic_majors(topic_id,major_id) values('10','2');
-insert into tp_topic_majors(topic_id,major_id) values('11','2');
+insert into tp_topic_majors(topic_id,major_id) values('11','1');
 insert into tp_topic_majors(topic_id,major_id) values('12','2');
+insert into tp_topic_majors(topic_id,major_id) values('13','1');
 insert into tp_topic_majors(topic_id,major_id) values('13','2');
-insert into tp_topic_majors(topic_id,major_id) values('14','2');
+insert into tp_topic_majors(topic_id,major_id) values('14','1');
+insert into tp_topic_majors(topic_id,major_id) values('15','1');
+insert into tp_topic_majors(topic_id,major_id) values('16','1');
+insert into tp_topic_majors(topic_id,major_id) values('17','2');
+insert into tp_topic_majors(topic_id,major_id) values('18','1');
+insert into tp_topic_majors(topic_id,major_id) values('18','2');
+insert into tp_topic_majors(topic_id,major_id) values('19','1');
+insert into tp_topic_majors(topic_id,major_id) values('20','1');
+insert into tp_topic_majors(topic_id,major_id) values('20','2');
 
+INSERT INTO tp_topic_majors(topic_id,major_id)
+SELECT topic_id+20 AS topic_id,major_id
+FROM tp_topic_majors;
 
--- tp_guide_teacher-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- tp_guide_teacher_1637685091603-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','11','1');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('false','6','1');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','12','2');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('false','11','2');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','13','3');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','13','4');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','13','5');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('false','14','5');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','13','6');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','10','7');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','10','8');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','15','9');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','15','10');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','15','11');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','12','12');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','16','13');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('false','17','13');
-insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','16','14');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.606533','false','2021-11-23 23:07:22.606533','true','11','1');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.60718','false','2021-11-23 23:07:22.60718','false','6','1');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.607451','false','2021-11-23 23:07:22.607451','true','12','2');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.607738','false','2021-11-23 23:07:22.607738','false','11','2');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.608009','false','2021-11-23 23:07:22.608009','true','13','3');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.608275','false','2021-11-23 23:07:22.608275','true','13','4');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.608537','false','2021-11-23 23:07:22.608537','true','13','5');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.60873','false','2021-11-23 23:07:22.60873','false','14','5');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.608926','false','2021-11-23 23:07:22.608926','true','13','6');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.609222','false','2021-11-23 23:07:22.609222','true','10','7');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.609528','false','2021-11-23 23:07:22.609528','true','10','8');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.609856','false','2021-11-23 23:07:22.609856','true','11','9');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.610204','false','2021-11-23 23:07:22.610204','true','14','10');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.610531','false','2021-11-23 23:07:22.610531','true','13','11');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.610852','false','2021-11-23 23:07:22.610852','true','12','12');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.61107','false','2021-11-23 23:07:22.61107','true','13','13');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.611271','false','2021-11-23 23:07:22.611271','false','14','13');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:07:22.611466','false','2021-11-23 23:07:22.611466','true','11','14');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:11:17.856046','false','2021-11-23 23:11:17.856046','true','7','15');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:11:17.859039','false','2021-11-23 23:11:17.859039','false','16','15');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:14:28.78476','false','2021-11-23 23:14:28.78476','true','8','16');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:14:28.786755','false','2021-11-23 23:14:28.786755','false','19','16');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:14:28.78875','false','2021-11-23 23:14:28.78875','false','18','16');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:15:33.005489','false','2021-11-23 23:15:33.005489','true','9','17');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:17:16.103646','false','2021-11-23 23:17:16.103646','true','7','18');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:17:16.10564','false','2021-11-23 23:17:16.10564','false','15','18');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:22:29.311577','false','2021-11-23 23:22:29.311577','true','8','19');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:22:29.31457','false','2021-11-23 23:22:29.31457','false','17','19');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:24:00.749596','false','2021-11-23 23:24:00.749596','true','9','20');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-11-23 23:24:00.751558','false','2021-11-23 23:24:00.751558','false','24','20');
 
--- tp_students-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id)
+SELECT created_at,deleted,updated_at,main,guide_teacher_id,topic_id+20 AS topic_id
+FROM tp_guide_teacher;
 
-INSERT INTO tp_students(topic_id, student_id, mid_pass) VALUES
-    (1, 41, FALSE)
-  , (1, 42, TRUE)
-  , (10, 43, TRUE)
-  , (12, 50, TRUE)
+-- tp_student-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO tp_student(topic_id, student_id, mid_pass) VALUES
+    (1, 31, FALSE)
+  , (1, 32, TRUE)
+  , (10, 33, TRUE)
+  , (12, 40, TRUE)
 ON CONFLICT DO NOTHING;
 
 -- tp_topic_review_teachers-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO tp_topic_review_teachers(topic_id, review_teacher_id) VALUES
-    (1, 15)
+    (1, 12)
   , (10, 11)
 ON CONFLICT DO NOTHING;
+
+INSERT INTO tp_topic_review_teachers(topic_id, review_teacher_id)
+SELECT topic_id+20 AS topic_id, review_teacher_id
+FROM tp_topic_review_teachers;
 
 -- sc_criterion_1637403518823-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -425,9 +480,9 @@ insert into sc_template_majors(template_id,major_id) values('6','2');
 
 -- sc_score_1637661754080-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'A','3','41','6','1','1');
-insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:57:10.674332','false','2021-11-23 16:57:10.674332',null,'B','3','41','11','1','1');
-insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 17:01:40.018786','false','2021-11-23 17:01:40.018786',null,'D','3','41','15','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'A','3','32','6','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:57:10.674332','false','2021-11-23 16:57:10.674332',null,'B','3','32','11','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 17:01:40.018786','false','2021-11-23 17:01:40.018786',null,'D','3','32','12','1','1');
 
 -- us_notification-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
