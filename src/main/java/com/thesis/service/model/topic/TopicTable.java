@@ -2,6 +2,7 @@ package com.thesis.service.model.topic;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -19,6 +20,7 @@ import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.model.system.SubjectDepartmentTable;
 import com.thesis.service.model.user.UserTable;
+import org.apache.commons.collections4.CollectionUtils;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
@@ -76,20 +78,11 @@ public class TopicTable extends BaseTable {
   @Type(type = "text")
   private String documentReference;
 
-  @ManyToMany
-  @JoinTable(
-      joinColumns = @JoinColumn(name = "topic_id"),
-      inverseJoinColumns = @JoinColumn(name = "student_id"))
-  private List<UserTable> students;
+  @OneToMany(targetEntity = TopicStudentTable.class, mappedBy = "topic")
+  private List<TopicStudentTable> students;
 
-  @OneToMany(mappedBy = "topic")
-  private List<TopicStudentTable> topicStudents;
-
-  @ManyToMany
-  @JoinTable(
-      joinColumns = @JoinColumn(name = "topic_id"),
-      inverseJoinColumns = @JoinColumn(name = "guide_teacher_id"))
-  private List<UserTable> guideTeachers;
+  @OneToMany(targetEntity = TopicGuideTeacherTable.class, mappedBy = "topic")
+  private List<TopicGuideTeacherTable> guideTeachers;
 
   @ManyToMany
   @JoinTable(
@@ -113,6 +106,19 @@ public class TopicTable extends BaseTable {
     if (Objects.isNull(this.thesis))
       return null;
     return this.thesis ? "Luận văn" : "Đề cương";
+  }
+
+  public List<UserTable> getTopicStudents() {
+    return CollectionUtils.isEmpty(students)
+        ? List.of()
+        : students.stream().map(TopicStudentTable::getStudent).collect(Collectors.toList());
+  }
+
+  public List<UserTable> getTopicGuideTeachers() {
+    return CollectionUtils.isEmpty(guideTeachers)
+        ? List.of()
+        : guideTeachers.stream()
+            .map(TopicGuideTeacherTable::getGuideTeacher).collect(Collectors.toList());
   }
 
 }

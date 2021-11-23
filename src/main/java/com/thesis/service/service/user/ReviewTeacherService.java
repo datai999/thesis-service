@@ -32,7 +32,7 @@ public class ReviewTeacherService {
         .filter(e -> {
           if (CollectionUtils.isEmpty(e.getStudents()))
             return false;
-          if (e.getTopicStudents().stream().allMatch(student -> !student.getMidPass()))
+          if (e.getStudents().stream().allMatch(student -> !student.getMidPass()))
             return false;
           return true;
         })

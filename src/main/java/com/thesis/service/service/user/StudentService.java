@@ -2,7 +2,9 @@ package com.thesis.service.service.user;
 
 import com.thesis.service.advice.BusinessException;
 import com.thesis.service.constant.MessageCode;
+import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.repository.topic.TopicRepository;
+import com.thesis.service.repository.topic.TopicStudentRepository;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.MessageSourceService;
 import com.thesis.service.service.system.SemesterService;
@@ -16,6 +18,7 @@ public class StudentService {
 
   private final MessageSourceService messageSource;
   private final TopicRepository topicRepository;
+  private final TopicStudentRepository topicStudentRepository;
   private final UserRepository userRepository;
   private final SemesterService semesterService;
   private final TopicService topicService;
@@ -47,14 +50,13 @@ public class StudentService {
           student.getCode(), topic.getMultiName());
     }
 
-    topic.getStudents().add(student);
-    topicRepository.save(topic);
+    topicStudentRepository.save(new TopicStudentTable().setTopic(topic).setStudent(student));
 
     String message = messageSource.getMessage(
         MessageCode.Student.REGISTER_TOPIC,
         student.getFullName(),
         topic.getMultiName());
-    this.notificationService.notify(topic.getStudents(), message);
+    this.notificationService.notify(topic.getTopicStudents(), message);
 
     return true;
   }
@@ -85,7 +87,7 @@ public class StudentService {
         MessageCode.Student.CANCEL_TOPIC,
         student.getFullName(),
         topic.getMultiName());
-    this.notificationService.notify(topic.getStudents(), message);
+    this.notificationService.notify(topic.getTopicStudents(), message);
     return true;
   }
 

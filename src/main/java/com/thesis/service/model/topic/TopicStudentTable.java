@@ -16,7 +16,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @DynamicUpdate
-@Table(name = "tp_topic_students")
+@Table(name = "tp_students")
 public class TopicStudentTable extends BaseTable {
 
   @ManyToOne

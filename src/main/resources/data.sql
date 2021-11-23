@@ -1,9 +1,3 @@
--- DROP CONTRAINT
-
-ALTER TABLE tp_topic_assign ALTER COLUMN student_id DROP NOT NULL,
-                            ALTER COLUMN guide_teacher_id DROP NOT NULL,
-                            ALTER COLUMN review_teacher_id DROP NOT NULL;
-
 -- INIT DATA
 
 INSERT INTO sy_education_method (name) VALUES ('Chính quy'), ('Chất lượng cao') ON CONFLICT DO NOTHING;
@@ -292,29 +286,30 @@ insert into tp_topic_majors(topic_id,major_id) values('13','2');
 insert into tp_topic_majors(topic_id,major_id) values('14','2');
 
 
--- tp_topic_guide_teachers-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- tp_guide_teacher-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('11','1');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('12','2');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('11','2');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('13','3');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('13','4');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('13','5');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('14','5');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('13','6');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('10','7');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('10','8');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('15','9');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('15','10');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('15','11');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('12','12');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('16','13');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('17','13');
-insert into tp_topic_guide_teachers(guide_teacher_id,topic_id) values('16','14');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','11','1');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('false','6','1');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','12','2');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('false','11','2');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','13','3');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','13','4');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','13','5');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('false','14','5');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','13','6');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','10','7');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','10','8');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','15','9');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','15','10');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','15','11');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','12','12');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','16','13');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('false','17','13');
+insert into tp_guide_teacher(main,guide_teacher_id,topic_id) values('true','16','14');
 
--- tp_topic_students-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- tp_students-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO tp_topic_students(topic_id, student_id, mid_pass) VALUES
+INSERT INTO tp_students(topic_id, student_id, mid_pass) VALUES
     (1, 41, FALSE)
   , (1, 42, TRUE)
   , (10, 43, TRUE)

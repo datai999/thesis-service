@@ -8,6 +8,7 @@ import com.thesis.service.dto.topic.resposne.TopicResponse;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.repository.system.SemesterRepository;
+import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.service.ABaseService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class TopicService extends ABaseService<TopicTable, TopicRepository> {
 
   private final SemesterRepository semesterRepository;
+  private final TopicGuideTeacherRepository topicGuideTeacherRepository;
 
   @Override
   protected Function<TopicTable, ?> mapping() {
@@ -31,7 +33,21 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
   public Object create(TopicTable entity) {
     var semester = semesterRepository.findCurrentSemester();
     entity.setSemester(semester).setSubjectDepartment(this.getAuth().getSubjectDepartment());
-    return this.repository.save(entity).getId();
+    var topicResponse = this.repository.save(entity);
+    var guideTeachers = entity.getGuideTeachers().stream()
+        .map(e -> e.setTopic(topicResponse).setMain(false)).collect(Collectors.toList());
+    guideTeachers.get(0).setMain(true);
+    topicGuideTeacherRepository.saveAll(guideTeachers);
+    return this.map(topicResponse);
+  }
+
+  @Override
+  public Object update(TopicTable entity) {
+    var existEntity = this.repository.findById(entity.getId()).orElseThrow();
+    entity.setStudents(existEntity.getStudents())
+        .setCreatedAt(existEntity.getCreatedAt());
+    var response = this.repository.save(entity);
+    return this.map(response);
   }
 
   public Function<TopicTable, List<BaseTable>> getGenericPredicate(
@@ -65,15 +81,6 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
           .filter(e -> filter.test(e, TopicTable::getMajors))
           .collect(Collectors.toList());
 
-    return this.map(response);
-  }
-
-  @Override
-  public Object update(TopicTable entity) {
-    var existEntity = this.repository.findById(entity.getId()).orElseThrow();
-    entity.setStudents(existEntity.getStudents())
-        .setCreatedAt(existEntity.getCreatedAt());
-    var response = this.repository.save(entity);
     return this.map(response);
   }
 
