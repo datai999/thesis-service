@@ -17,6 +17,8 @@ import com.thesis.service.model.system.EducationMethodTable;
 import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.system.SubjectDepartmentTable;
 import com.thesis.service.model.topic.CouncilMemberTable;
+import com.thesis.service.model.topic.TopicGuideTeacherTable;
+import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.model.topic.TopicTable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -62,11 +64,11 @@ public class UserTable extends BaseTable {
   @OneToOne
   private DegreeTable degree;
 
-  @ManyToMany(mappedBy = "students")
-  private List<TopicTable> topicExecutes;
+  @OneToMany(targetEntity = TopicStudentTable.class, mappedBy = "student")
+  private List<TopicStudentTable> topicExecutes;
 
-  @ManyToMany(mappedBy = "guideTeachers")
-  private List<TopicTable> topicGuides;
+  @OneToMany(targetEntity = TopicGuideTeacherTable.class, mappedBy = "guideTeacher")
+  private List<TopicGuideTeacherTable> topicGuides;
 
   @ManyToMany(mappedBy = "reviewTeachers")
   private List<TopicTable> topicReviews;

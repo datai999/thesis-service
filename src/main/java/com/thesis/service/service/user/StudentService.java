@@ -1,5 +1,6 @@
 package com.thesis.service.service.user;
 
+import java.util.stream.Collectors;
 import com.thesis.service.advice.BusinessException;
 import com.thesis.service.constant.MessageCode;
 import com.thesis.service.model.topic.TopicStudentTable;
@@ -26,7 +27,9 @@ public class StudentService {
 
   public Object getTopic(long userId) {
     var user = userRepository.findById(userId).orElseThrow();
-    return topicService.map(user.getTopicExecutes());
+    var topicExecutes = user.getTopicExecutes().stream()
+        .map(TopicStudentTable::getTopic).collect(Collectors.toList());
+    return topicService.map(topicExecutes);
   }
 
   public Object registerTopic(long studentId, long topicId) {
@@ -64,7 +67,7 @@ public class StudentService {
   public Object allowRegisterTopic(long studentId) {
     var student = userRepository.findById(studentId).orElseThrow();
     var haveTopicInSemester = student.getTopicExecutes().stream()
-        .anyMatch(e -> e.getSemester().isCurrent());
+        .anyMatch(e -> e.getTopic().getSemester().isCurrent());
     var semesterAllow = semesterService.allowStudentRegisterCancelTopic();
     return !haveTopicInSemester && semesterAllow;
   }
@@ -94,7 +97,7 @@ public class StudentService {
   public Object doneOutline(long studentId) {
     var student = userRepository.findById(studentId).orElseThrow();
     return student.getTopicExecutes().stream()
-        .anyMatch(e -> !e.getSemester().isCurrent() && !e.getThesis());
+        .anyMatch(e -> !e.getTopic().getSemester().isCurrent() && !e.getTopic().getThesis());
   }
 
 }

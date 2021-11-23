@@ -1,6 +1,7 @@
 package com.thesis.service.service.user;
 
 import java.util.stream.Collectors;
+import com.thesis.service.model.topic.TopicGuideTeacherTable;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.topic.TopicService;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,8 @@ public class GuideTeacherService {
   public Object getTopic(long userId, String semesterName) {
     var user = userRepository.findById(userId).orElseThrow();
     var response = user.getTopicGuides().parallelStream()
-        .filter(e -> semesterName.equals(e.getSemester().getName())).collect(Collectors.toList());
+        .filter(e -> semesterName.equals(e.getTopic().getSemester().getName()))
+        .map(TopicGuideTeacherTable::getTopic).collect(Collectors.toList());
     return topicService.map(response);
   }
 

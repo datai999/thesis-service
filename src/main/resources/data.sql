@@ -423,6 +423,12 @@ insert into sc_template_majors(template_id,major_id) values('6','2');
 -- insert into sc_template_majors(template_id,major_id) values('8','2');
 -- insert into sc_template_majors(template_id,major_id) values('8','1');
 
+-- sc_score_1637661754080-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'A','3','41','6','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:57:10.674332','false','2021-11-23 16:57:10.674332',null,'B','3','41','11','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 17:01:40.018786','false','2021-11-23 17:01:40.018786',null,'D','3','41','15','1','1');
+
 -- us_notification-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO us_notification (receiver_id, message) VALUES

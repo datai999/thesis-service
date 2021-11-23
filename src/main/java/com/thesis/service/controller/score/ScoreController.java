@@ -17,4 +17,9 @@ public class ScoreController extends ABaseController<ScoreTable, ScoreService> {
     return service.getStudentScore(entity);
   }
 
+  @PostMapping("/teacher")
+  public Object getTeacherScore(@RequestBody ScoreTable entity) {
+    return service.getTeacherScore(entity);
+  }
+
 }

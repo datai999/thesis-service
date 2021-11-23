@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-public class StudentScoreResponse {
+public class UserScoreResponse {
 
   private Long id;
   private String code;
@@ -49,7 +49,7 @@ public class StudentScoreResponse {
     }
   }
 
-  public StudentScoreResponse(Entry<UserTable, List<ScoreTable>> entry) {
+  public UserScoreResponse(Entry<UserTable, List<ScoreTable>> entry) {
     ContextAccessor.getModelConverter().map(entry.getKey(), this);
     var templateScore = entry.getValue().stream()
         .collect(Collectors.groupingBy(ScoreTable::getTemplate));
