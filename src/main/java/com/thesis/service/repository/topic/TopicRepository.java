@@ -13,10 +13,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TopicRepository extends BaseRepository<TopicTable> {
 
-  @Query("SELECT tT FROM TopicTable tT " +
+  @Query("SELECT DISTINCT tT FROM TopicTable tT " +
+      "INNER JOIN tT.students uS " +
+      "INNER JOIN tT.reviewTeachers " +
       "WHERE tT.semester.status = 'USING' " +
       "AND tT.subjectDepartment.id = ?1 " +
-      "AND tT.council IS NULL")
+      "AND tT.thesis IS TRUE " +
+      "AND tT.council IS NULL " +
+      "AND uS.midPass IS TRUE")
   List<TopicTable> findNeedAssignCouncil(long subjectDepartmentId, Sort sort);
 
   @Modifying

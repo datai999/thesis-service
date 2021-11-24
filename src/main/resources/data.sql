@@ -489,6 +489,8 @@ insert into tp_council(created_at,deleted,updated_at,end_time,location,note,rese
 insert into tp_council(created_at,deleted,updated_at,end_time,location,note,reserve_date,start_time,semester_id,subject_department_id) values('2021-11-24 18:59:05.892568','false','2021-11-24 18:59:05.892568',null,null,null,null,null,'4','1');
 insert into tp_council(created_at,deleted,updated_at,end_time,location,note,reserve_date,start_time,semester_id,subject_department_id) values('2021-11-24 18:59:17.128277','false','2021-11-24 18:59:17.128277',null,null,null,null,null,'4','1');
 
+UPDATE tp_topic SET council_id = 1 WHERE id IN (21);
+
 -- tp_council_member_1637755259559-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into tp_council_member(created_at,deleted,updated_at,council_id,member_id,role_id) values('2021-11-24 18:58:47.35919','false','2021-11-24 18:58:47.35919','1','6','1');

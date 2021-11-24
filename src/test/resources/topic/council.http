@@ -11,5 +11,8 @@ Content-Type: application/json
 X-auth: {{backDoorToken}}
 
 {
-  "subjectDepartment": 2
+  "semester":{
+    "id": 4
+  },
+  "subjectDepartment": 1
 }
