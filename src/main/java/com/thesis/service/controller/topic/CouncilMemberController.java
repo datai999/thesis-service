@@ -5,7 +5,8 @@ import com.thesis.service.model.topic.CouncilMemberTable;
 import com.thesis.service.service.topic.CouncilMemberService;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CouncilMemberController
     extends ABaseController<CouncilMemberTable, CouncilMemberService> {
 
-  @GetMapping("/member")
-  public Object findByDeletedFalse(
+  @PostMapping("/council")
+  public Object getCouncil(
       @RequestParam(defaultValue = "ASC") String direction,
       @RequestParam(defaultValue = "id") String sort,
-      @RequestParam(required = false) Long memberId) {
+      @RequestBody CouncilMemberTable entity) {
     Sort sortable = Sort.by(Direction.valueOf(direction), sort);
-    return service.findByMemberId(memberId, sortable);
+    return service.getCouncil(entity, sortable);
   }
 
 }

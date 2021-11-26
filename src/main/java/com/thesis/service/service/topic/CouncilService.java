@@ -59,7 +59,9 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
   @Override
   @Transactional
   public Object update(CouncilTable entity) {
-    var council = this.repository.findById(entity.getId()).orElseThrow();
+    var existEntity = this.repository.findById(entity.getId()).orElseThrow();
+    entity.setCreatedAt(existEntity.getCreatedAt());
+    var council = this.repository.save(entity);
 
     var receivers = council.getMembers().parallelStream()
         .map(CouncilMemberTable::getMember).collect(Collectors.toList());
@@ -74,7 +76,8 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
     var councilMembers = entity.getMembers()
         .parallelStream().map(e -> e.setCouncil(council)).collect(Collectors.toList());
     councilMemberRepository.saveAll(councilMembers);
-    return super.update(entity);
+
+    return this.map(council);
   }
 
   @Transactional
