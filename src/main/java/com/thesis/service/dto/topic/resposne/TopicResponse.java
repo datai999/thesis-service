@@ -94,6 +94,8 @@ public class TopicResponse {
 
     private LocalTime endTime;
 
+    private String note;
+
     private List<CouncilMemberResponse> members;
   }
 

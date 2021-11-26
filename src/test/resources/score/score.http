@@ -24,3 +24,18 @@ X-auth: {{backDoorToken}}
     "id": 1
   }
 }
+
+###  get by teacher
+POST {{http}}{{host}}{{port}}{{base-url}}/scores/teacher?teacherIds=13,12,11
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+{"topic":{"id":21},"student":{"id":32},"template":{"midSemester":false,"councilRoles":[{"id":3}]}}
+
+
+###  get by teacher
+POST {{http}}{{host}}{{port}}{{base-url}}/scores/teacher?teacherIds=12
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+{"topic":{"id":21},"student":{"id":32},"template":{"midSemester":false,"reviewTeacher":true}}

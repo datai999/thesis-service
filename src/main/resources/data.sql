@@ -512,8 +512,21 @@ insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,st
 insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 17:01:40.018786','false','2021-11-23 17:01:40.018786',null,'D','3','32','12','1','1');
 
 INSERT INTO sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id)
-SELECT created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,4,topic_id+20 AS topic_id
-FROM sc_score WHERE template_id IN (1,2);
+SELECT sS.created_at,sS.deleted,sS.updated_at,comment,score,criterion_id,student_id,teacher_id,4,sS.topic_id+20 AS topic_id
+FROM sc_score sS
+INNER JOIN tp_guide_teacher tGT ON tGT.topic_id = sS.topic_id AND tGT.guide_teacher_id = sS.teacher_id
+WHERE sS.template_id IN (1,2);
+
+INSERT INTO sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id)
+SELECT created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,6,sS.topic_id+20 AS topic_id
+FROM sc_score sS
+INNER JOIN tp_topic_review_teachers tTRT ON tTRT.topic_id = sS.topic_id AND tTRT.review_teacher_id = sS.teacher_id
+WHERE sS.template_id IN (1,2);
+
+insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-27 00:02:37.474734','false','2021-11-27 00:02:37.474734',null,'13','62','32','6','7','21');
+insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-27 00:02:37.477728','false','2021-11-27 00:02:37.477728',null,'3','63','32','6','7','21');
+insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-27 00:02:37.48072','false','2021-11-27 00:02:37.48072',null,'3','64','32','6','7','21');
+insert into sc_score(created_at,deleted,updated_at,comment,score,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-27 00:02:37.483735','false','2021-11-27 00:02:37.483735',null,'5','65','32','6','7','21');
 
 -- us_notification-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
