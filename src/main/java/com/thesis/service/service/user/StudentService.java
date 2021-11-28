@@ -97,7 +97,9 @@ public class StudentService {
   public Object doneOutline(long studentId) {
     var student = userRepository.findById(studentId).orElseThrow();
     return student.getTopicExecutes().stream()
-        .anyMatch(e -> !e.getTopic().getSemester().isCurrent() && !e.getTopic().getThesis());
+        .anyMatch(e -> !e.getTopic().getSemester().isCurrent()
+            && !e.getTopic().getThesis()
+            && e.getMidPass());
   }
 
 }

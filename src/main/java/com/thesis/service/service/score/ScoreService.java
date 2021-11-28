@@ -6,13 +6,18 @@ import com.thesis.service.dto.score.response.ScoreResponse;
 import com.thesis.service.dto.score.response.UserScoreResponse;
 import com.thesis.service.model.score.ScoreTable;
 import com.thesis.service.repository.score.ScoreRepository;
+import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.ABaseService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class ScoreService extends ABaseService<ScoreTable, ScoreRepository> {
+
+  private final UserRepository userRepository;
 
   @Override
   protected Class<?> getResponseClass() {
@@ -38,8 +43,11 @@ public class ScoreService extends ABaseService<ScoreTable, ScoreRepository> {
               .anyMatch(role -> role.getId().equals(roleId)))
           .collect(Collectors.toList());
     }
-    var studentScore = queryResult.stream().collect(Collectors.groupingBy(ScoreTable::getTeacher));
-    return studentScore.entrySet().parallelStream().map(UserScoreResponse::new);
+
+    var studentScore = queryResult.stream().collect(
+        Collectors.groupingBy(score -> score.getTeacher().getId()));
+    var teachers = userRepository.findAllById(teacherIds);
+    return teachers.stream().map(e -> new UserScoreResponse(e, studentScore.get(e.getId())));
   }
 
 }

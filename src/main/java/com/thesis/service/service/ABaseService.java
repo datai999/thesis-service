@@ -80,7 +80,8 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   }
 
   public Object saveAll(Collection<T> entities) {
-    return this.map(this.repository.saveAll(entities));
+    var response = this.repository.saveAll(entities);
+    return this.map(response);
   }
 
   public Object update(T entity) {

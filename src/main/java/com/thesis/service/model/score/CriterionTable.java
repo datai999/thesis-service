@@ -27,6 +27,8 @@ public class CriterionTable extends BaseTable {
 
   private Boolean mark;
 
+  private Boolean comment;
+
   private Integer displayOrder;
 
   private Double minScore;

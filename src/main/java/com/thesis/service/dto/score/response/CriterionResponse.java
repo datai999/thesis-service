@@ -11,6 +11,8 @@ public class CriterionResponse extends BaseResponse {
 
   private boolean mark;
 
+  private boolean comment;
+
   private int displayOrder;
 
   // private Double minScore;

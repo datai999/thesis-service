@@ -39,3 +39,34 @@ Content-Type: application/json
 X-auth: {{backDoorToken}}
 
 {"topic":{"id":21},"student":{"id":32},"template":{"midSemester":false,"reviewTeacher":true}}
+
+### scoring
+POST {{http}}{{host}}{{port}}{{base-url}}/scores/all
+Content-Type: application/json
+X-auth: {{backDoorToken}}
+
+{
+  "entities": [
+    {
+      "criterion": {
+        "id": 3
+      },
+      "score": "A",
+      "topic": {
+        "id": 5
+      },
+      "teacher": {
+        "id": 13
+      },
+      "student": {
+        "id": 33
+      },
+      "template": {
+        "id": 1
+      },
+      "councilRole": {},
+      "guideTeacher": true,
+      "reviewTeacher": false
+    }
+  ]
+}

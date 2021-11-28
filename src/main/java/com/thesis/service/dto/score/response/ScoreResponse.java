@@ -1,12 +1,13 @@
 package com.thesis.service.dto.score.response;
 
 import com.thesis.service.dto.system.BaseResponse;
+import com.thesis.service.dto.topic.resposne.CouncilRoleResponse;
 import com.thesis.service.dto.user.response.UserResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper =false)
+@EqualsAndHashCode(callSuper = false)
 public class ScoreResponse extends BaseResponse {
 
   private BaseResponse topic;
@@ -18,6 +19,12 @@ public class ScoreResponse extends BaseResponse {
   private BaseResponse template;
 
   private BaseResponse criterion;
+
+  private Boolean guideTeacher;
+
+  private Boolean reviewTeacher;
+
+  private CouncilRoleResponse councilRole;
 
   private String score;
 

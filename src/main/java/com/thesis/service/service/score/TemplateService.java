@@ -66,6 +66,7 @@ public class TemplateService
       response = response.parallelStream()
           .filter(e -> e.getCouncilRoles().stream()
               .anyMatch(role -> roleIds.contains(role.getId())))
+          .map(e -> e.setCouncilRoles(entity.getCouncilRoles()))
           .collect(Collectors.toList());
     }
 

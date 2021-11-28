@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
+import com.thesis.service.model.topic.CouncilRoleTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.model.user.UserTable;
 import org.hibernate.annotations.DynamicUpdate;
@@ -37,6 +38,13 @@ public class ScoreTable extends BaseTable {
   @ManyToOne
   @OnDelete(action = OnDeleteAction.CASCADE)
   private CriterionTable criterion;
+
+  private Boolean guideTeacher;
+
+  private Boolean reviewTeacher;
+
+  @ManyToOne
+  private CouncilRoleTable councilRole;
 
   private String score;
 
