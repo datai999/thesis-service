@@ -3,7 +3,9 @@ package com.thesis.service.constant;
 public interface MessageCode {
 
   String GUIDE_TEACHER = "guideTeacher";
+  String GUIDE_TEACHER_MINI = "guideTeacher.mini";
   String REVIEW_TEACHER = "reviewTeacher";
+  String REVIEW_TEACHER_MINI = "reviewTeacher.mini";
   String OUTLINE = "outline";
   String THESIS = "thesis";
 
