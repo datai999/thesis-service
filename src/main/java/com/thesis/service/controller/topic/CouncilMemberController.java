@@ -1,10 +1,13 @@
 package com.thesis.service.controller.topic;
 
+import java.time.LocalDate;
 import com.thesis.service.controller.ABaseController;
 import com.thesis.service.model.topic.CouncilMemberTable;
 import com.thesis.service.service.topic.CouncilMemberService;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,13 @@ public class CouncilMemberController
       @RequestBody CouncilMemberTable entity) {
     Sort sortable = Sort.by(Direction.valueOf(direction), sort);
     return service.getCouncil(entity, sortable);
+  }
+
+  @GetMapping("/{councilId}/conflict-timeline")
+  public Object checkConflictTimeLine(
+      @PathVariable long councilId,
+      @RequestParam LocalDate date) {
+    return super.service.checkConflictTimeLine(councilId, date);
   }
 
 }

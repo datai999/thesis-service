@@ -8,6 +8,8 @@ public class CouncilMemberResponse {
 
   private long id;
 
+  private long councilId;
+
   private CouncilRoleResponse role;
 
   private UserResponse member;

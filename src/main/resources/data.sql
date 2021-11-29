@@ -14,8 +14,8 @@ INSERT INTO sy_semester
 VALUES
     ('201', 'USED', '2020-01-17T00:12:00', '2020-02-17T00:12:00', '2020-02-17T00:12:00', '2020-06-17T00:12:00', '2020-02-17T00:12:00', '2020-06-17T00:12:00')
   , ('211', 'USED', '2020-09-17T00:12:00', '2020-10-17T00:12:00', '2020-10-17T00:12:00', '2021-01-17T00:12:00', '2020-10-17T00:12:00', '2021-02-17T00:12:00')
-  , ('212', 'USING', '2021-03-17T00:12:00', '2021-04-10T00:12:00', '2021-04-1T00:12:00', '2022-08-01T00:12:00', '2021-04-1T00:12:00', '2022-09-17T00:12:00')
-  , ('213', 'USED', '2021-09-17T00:12:00', '2021-10-10T00:12:00', '2021-10-1T00:12:00', '2022-01-01T00:12:00', '2021-10-1T00:12:00', '2022-02-17T00:12:00')
+  , ('212', 'USED', '2021-03-17T00:12:00', '2021-04-10T00:12:00', '2021-04-1T00:12:00', '2022-08-01T00:12:00', '2021-04-1T00:12:00', '2022-09-17T00:12:00')
+  , ('213', 'USING', '2021-09-17T00:12:00', '2021-10-10T00:12:00', '2021-10-1T00:12:00', '2022-01-01T00:12:00', '2021-10-1T00:12:00', '2022-02-17T00:12:00')
   , ('221', null, null, null, null, null, null, null)
 ON CONFLICT DO NOTHING;
 
@@ -360,22 +360,20 @@ FROM tp_guide_teacher;
 
 -- tp_student-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO tp_student(topic_id, student_id, mid_pass) VALUES
-    (1, 31, FALSE)
-  , (1, 32, TRUE)
-  , (5, 33, TRUE)
-ON CONFLICT DO NOTHING;
+insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-11-29 00:31:18.491107','false','2021-11-29 00:31:18.491107','false','31','1');
+insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-11-29 00:31:18.491107','false','2021-11-29 00:31:18.491107','true','32','1');
+insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-11-29 00:31:18.491107','false','2021-11-29 00:31:18.491107','true','33','5');
+insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-11-29 00:31:18.491107','false','2021-11-29 00:31:18.491107','true','34','5');
 
 INSERT INTO tp_student(topic_id, student_id, mid_pass)
 SELECT topic_id+20 AS topic_id,student_id,TRUE
-FROM tp_student WHERE mid_pass = TRUE AND student_id != 33;
+FROM tp_student WHERE mid_pass = TRUE;
 
 -- tp_topic_review_teachers-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO tp_topic_review_teachers(topic_id, review_teacher_id) VALUES
-    (1, 12)
-  , (10, 11)
-ON CONFLICT DO NOTHING;
+insert into tp_topic_review_teachers(topic_id,review_teacher_id) values('1','12');
+insert into tp_topic_review_teachers(topic_id,review_teacher_id) values('5','6');
+insert into tp_topic_review_teachers(topic_id,review_teacher_id) values('10','11');
 
 INSERT INTO tp_topic_review_teachers(topic_id, review_teacher_id)
 SELECT topic_id+20 AS topic_id, review_teacher_id
@@ -485,7 +483,7 @@ insert into sc_template_majors(template_id,major_id) values('7','2');
 
 -- tp_council_1637755247794-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-insert into tp_council(created_at,deleted,updated_at,end_time,location,note,reserve_date,start_time,semester_id,subject_department_id) values('2021-11-24 18:58:47.337417','false','2021-11-24 18:58:47.337417',null,null,null,null,null,'4','1');
+insert into tp_council(created_at,deleted,updated_at,end_time,location,note,reserve_date,start_time,semester_id,subject_department_id) values('2021-11-24 18:58:47.337417','false','2021-11-29 15:53:58.32735',null,'101-H1 Cs1','<p>SV đến sớm 15p chuẩn bị</p>','2021-11-29','08:00:00','4','1');
 insert into tp_council(created_at,deleted,updated_at,end_time,location,note,reserve_date,start_time,semester_id,subject_department_id) values('2021-11-24 18:59:05.892568','false','2021-11-24 18:59:05.892568',null,null,null,null,null,'4','1');
 insert into tp_council(created_at,deleted,updated_at,end_time,location,note,reserve_date,start_time,semester_id,subject_department_id) values('2021-11-24 18:59:17.128277','false','2021-11-24 18:59:17.128277',null,null,null,null,null,'4','1');
 
@@ -512,53 +510,91 @@ insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','B',null,'6','32','6','1','1');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'7','32','6','1','1');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'9','32','6','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:42:36.437652','false','2021-11-29 14:42:36.437652',null,'true','false','B',null,'13','32','6','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:42:36.449933','false','2021-11-29 14:42:36.449933',null,'true','false','B',null,'19','32','6','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:42:36.446941','false','2021-11-29 14:42:36.446941',null,'true','false','B',null,'17','32','6','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:42:36.44395','false','2021-11-29 14:42:36.44395',null,'true','false','C',null,'16','32','6','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:42:36.440958','false','2021-11-29 14:42:36.440958',null,'true','false','C',null,'14','32','6','2','1');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'3','32','11','1','1');
-insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','D',null,'4','32','11','1','1');
-insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'6','32','11','1','1');
-insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','D',null,'7','32','11','1','1');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'9','32','11','1','1');
-insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','D',null,'3','32','12','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','D',null,'7','32','11','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'6','32','11','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','D',null,'4','32','11','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:13.347016','false','2021-11-29 14:43:18.038297',null,'true','false','D',null,'17','32','11','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:13.350008','false','2021-11-29 14:43:18.040304',null,'true','false','D',null,'19','32','11','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:13.344024','false','2021-11-29 14:43:18.0373',null,'true','false','C',null,'16','32','11','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:13.341033','false','2021-11-29 14:43:18.0373',null,'true','false','B',null,'14','32','11','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:13.337044','false','2021-11-29 14:43:18.036302',null,'true','false','A',null,'13','32','11','2','1');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','A',null,'4','32','12','1','1');
-insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','B',null,'6','32','12','1','1');
-insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'7','32','12','1','1');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'9','32','12','1','1');
-
-
--- INSERT INTO sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,criterion_id,student_id,teacher_id,template_id,topic_id)
--- SELECT sS.created_at,sS.deleted,sS.updated_at,comment,guide_teacher,review_teacher,score,sS.criterion_id+30 AS criterion_id,student_id,teacher_id,4,sS.topic_id+20 AS topic_id
--- FROM sc_score sS
--- INNER JOIN tp_guide_teacher tGT ON tGT.topic_id = sS.topic_id AND tGT.guide_teacher_id = sS.teacher_id
--- WHERE sS.criterion_id IN (3,4);
-
--- INSERT INTO sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,criterion_id,student_id,teacher_id,template_id,topic_id)
--- SELECT sS.created_at,sS.deleted,sS.updated_at,comment,guide_teacher,review_teacher,score,sS.criterion_id+31 AS criterion_id,student_id,teacher_id,4,sS.topic_id+20 AS topic_id
--- FROM sc_score sS
--- INNER JOIN tp_guide_teacher tGT ON tGT.topic_id = sS.topic_id AND tGT.guide_teacher_id = sS.teacher_id
--- WHERE sS.criterion_id IN (6,7);
-
--- INSERT INTO sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,criterion_id,student_id,teacher_id,template_id,topic_id)
--- SELECT sS.created_at,sS.deleted,sS.updated_at,comment,guide_teacher,review_teacher,score,sS.criterion_id+33 AS criterion_id,student_id,teacher_id,4,sS.topic_id+20 AS topic_id
--- FROM sc_score sS
--- INNER JOIN tp_guide_teacher tGT ON tGT.topic_id = sS.topic_id AND tGT.guide_teacher_id = sS.teacher_id
--- WHERE sS.criterion_id IN (9);
-
--- INSERT INTO sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,criterion_id,student_id,teacher_id,template_id,topic_id)
--- SELECT sS.created_at,sS.deleted,sS.updated_at,comment,guide_teacher,review_teacher,score,sS.criterion_id+30 AS criterion_id,student_id,teacher_id,4,sS.topic_id+20 AS topic_id
--- FROM sc_score sS
--- INNER JOIN tp_topic_review_teachers tTRT ON tTRT.topic_id = sS.topic_id AND tTRT.review_teacher_id = sS.teacher_id
--- WHERE sS.criterion_id IN (3,4);
-
--- INSERT INTO sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,criterion_id,student_id,teacher_id,template_id,topic_id)
--- SELECT sS.created_at,sS.deleted,sS.updated_at,comment,guide_teacher,review_teacher,score,sS.criterion_id+31 AS criterion_id,student_id,teacher_id,4,sS.topic_id+20 AS topic_id
--- FROM sc_score sS
--- INNER JOIN tp_topic_review_teachers tTRT ON tTRT.topic_id = sS.topic_id AND tTRT.review_teacher_id = sS.teacher_id
--- WHERE sS.criterion_id IN (6,7);
-
--- INSERT INTO sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,criterion_id,student_id,teacher_id,template_id,topic_id)
--- SELECT sS.created_at,sS.deleted,sS.updated_at,comment,guide_teacher,review_teacher,score,sS.criterion_id+33 AS criterion_id,student_id,teacher_id,4,sS.topic_id+20 AS topic_id
--- FROM sc_score sS
--- INNER JOIN tp_topic_review_teachers tTRT ON tTRT.topic_id = sS.topic_id AND tTRT.review_teacher_id = sS.teacher_id
--- WHERE sS.criterion_id IN (9);
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','D',null,'3','32','12','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'7','32','12','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','B',null,'6','32','12','1','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:33.51171','false','2021-11-29 14:43:33.51171',null,'false','true','C',null,'19','32','12','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:33.497749','false','2021-11-29 14:43:33.498748',null,'false','true','C',null,'13','32','12','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:33.502734','false','2021-11-29 14:43:33.502734',null,'false','true','B',null,'14','32','12','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:33.505726','false','2021-11-29 14:43:33.505726',null,'false','true','C',null,'16','32','12','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:33.508718','false','2021-11-29 14:43:33.508718',null,'false','true','B',null,'17','32','12','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:40:52.119586','false','2021-11-29 14:40:52.119586',null,'false','true','A',null,'3','33','6','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:40:52.123599','false','2021-11-29 14:40:52.123599',null,'false','true','B',null,'4','33','6','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:40:52.126566','false','2021-11-29 14:40:52.126566',null,'false','true','C',null,'6','33','6','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:40:52.130555','false','2021-11-29 14:40:52.130555',null,'false','true','D',null,'7','33','6','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:40:52.134544','false','2021-11-29 14:40:52.134544',null,'false','true','D',null,'9','33','6','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:01.613305','false','2021-11-29 14:41:01.613305',null,'false','true','D',null,'13','33','6','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:01.627266','false','2021-11-29 14:41:01.627266',null,'false','true','D',null,'19','33','6','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:01.624274','false','2021-11-29 14:41:01.624274',null,'false','true','A',null,'17','33','6','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:01.621282','false','2021-11-29 14:41:01.621282',null,'false','true','B',null,'16','33','6','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:01.618291','false','2021-11-29 14:41:01.618291',null,'false','true','C',null,'14','33','6','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:12.038085','false','2021-11-29 14:41:12.039082',null,'false','true','C',null,'9','34','6','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:12.034095','false','2021-11-29 14:41:12.034095',null,'false','true','C',null,'7','34','6','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:12.030107','false','2021-11-29 14:41:12.030107',null,'false','true','C',null,'6','34','6','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:12.02512','false','2021-11-29 14:41:12.02512',null,'false','true','C',null,'4','34','6','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:12.019135','false','2021-11-29 14:41:12.019135',null,'false','true','C',null,'3','34','6','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:21.378021','false','2021-11-29 14:41:21.378021',null,'false','true','B',null,'19','34','6','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:21.375027','false','2021-11-29 14:41:21.375027',null,'false','true','B',null,'17','34','6','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:21.372036','false','2021-11-29 14:41:21.372036',null,'false','true','B',null,'16','34','6','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:21.369045','false','2021-11-29 14:41:21.369045',null,'false','true','B',null,'14','34','6','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:41:21.365059','false','2021-11-29 14:41:21.365059',null,'false','true','B',null,'13','34','6','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:31.358195','false','2021-11-29 14:39:31.358195',null,'true','false','A',null,'3','33','13','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:31.364226','false','2021-11-29 14:39:31.364226',null,'true','false','B',null,'4','33','13','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:31.369169','false','2021-11-29 14:39:31.369169',null,'true','false','B',null,'6','33','13','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:31.373158','false','2021-11-29 14:39:31.373158',null,'true','false','C',null,'7','33','13','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:31.377146','false','2021-11-29 14:39:31.377146',null,'true','false','C',null,'9','33','13','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:39.266744','false','2021-11-29 14:39:39.266744',null,'true','false','C',null,'19','33','13','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:39.254776','false','2021-11-29 14:39:39.254776',null,'true','false','C',null,'13','33','13','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:39.258767','false','2021-11-29 14:39:39.258767',null,'true','false','C',null,'14','33','13','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:39.26076','false','2021-11-29 14:39:39.26076',null,'true','false','C',null,'16','33','13','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:39.263753','false','2021-11-29 14:39:39.263753',null,'true','false','C',null,'17','33','13','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:47.750559','false','2021-11-29 14:39:47.750559',null,'true','false','B',null,'9','34','13','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:47.747568','false','2021-11-29 14:39:47.747568',null,'true','false','B',null,'7','34','13','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:47.74358','false','2021-11-29 14:39:47.74358',null,'true','false','B',null,'6','34','13','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:47.739589','false','2021-11-29 14:39:47.739589',null,'true','false','B',null,'4','34','13','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:47.7356','false','2021-11-29 14:39:47.7356',null,'true','false','B',null,'3','34','13','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:56.74822','false','2021-11-29 14:39:56.74822',null,'true','false','D',null,'17','34','13','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:56.745228','false','2021-11-29 14:39:56.745228',null,'true','false','A',null,'16','34','13','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:56.74226','false','2021-11-29 14:39:56.74226',null,'true','false','C',null,'14','34','13','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:56.738245','false','2021-11-29 14:39:56.738245',null,'true','false','B',null,'13','34','13','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:39:56.751212','false','2021-11-29 14:39:56.751212',null,'true','false','B',null,'19','34','13','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:37:46.139875','false','2021-11-29 14:38:00.490412',null,'true','false','D',null,'7','33','14','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:37:46.117291','false','2021-11-29 14:38:00.487419',null,'true','false','A',null,'3','33','14','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:37:46.131357','false','2021-11-29 14:38:00.489414',null,'true','false','B',null,'4','33','14','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:37:46.135885','false','2021-11-29 14:38:00.489414',null,'true','false','C',null,'6','33','14','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:37:46.142878','false','2021-11-29 14:38:00.491409',null,'true','false','C',null,'9','33','14','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:21.933921','false','2021-11-29 14:38:21.933921',null,'true','false','B',null,'14','33','14','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:21.944866','false','2021-11-29 14:38:21.944866',null,'true','false','C',null,'19','33','14','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:21.941901','false','2021-11-29 14:38:21.941901',null,'true','false','C',null,'17','33','14','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:21.937885','false','2021-11-29 14:38:21.937885',null,'true','false','D',null,'16','33','14','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:21.929907','false','2021-11-29 14:38:21.929907',null,'true','false','A',null,'13','33','14','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:32.344214','false','2021-11-29 14:38:32.344214',null,'true','false','C',null,'9','34','14','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:32.331248','false','2021-11-29 14:38:32.331248',null,'true','false','B',null,'3','34','14','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:32.335236','false','2021-11-29 14:38:32.335236',null,'true','false','B',null,'4','34','14','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:32.338228','false','2021-11-29 14:38:32.338228',null,'true','false','B',null,'6','34','14','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:32.341221','false','2021-11-29 14:38:32.341221',null,'true','false','C',null,'7','34','14','1','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:43.241005','false','2021-11-29 14:38:43.241005',null,'true','false','C',null,'19','34','14','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:43.227041','false','2021-11-29 14:38:43.227041',null,'true','false','C',null,'13','34','14','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:43.231029','false','2021-11-29 14:38:43.231029',null,'true','false','D',null,'14','34','14','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:43.234021','false','2021-11-29 14:38:43.234021',null,'true','false','B',null,'16','34','14','2','5');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:38:43.237013','false','2021-11-29 14:38:43.237013',null,'true','false','D',null,'17','34','14','2','5');
 
 -- us_notification-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
