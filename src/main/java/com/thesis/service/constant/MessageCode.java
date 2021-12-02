@@ -24,7 +24,7 @@ public interface MessageCode {
   interface Student {
     String REGISTER_TOPIC = "student.registerTopic";
     String CANCEL_TOPIC = "student.cancelTopic";
-}
+  }
 
   interface Council {
     String COUNCIL = "council";
@@ -36,6 +36,10 @@ public interface MessageCode {
 
   interface Error {
     String BLANK_TOKEN = "error.token.blank";
+  }
+
+  interface User {
+    String EMAIL_NOT_FOUND = "email.notFound";
   }
 
 }

@@ -37,6 +37,11 @@ public class UserController extends ABaseController<UserTable, UserService> {
     return jwtTokenService.generateToken(super.service.getAuth());
   }
 
+  @GetMapping("/current")
+  public Object getUser() {
+    return super.service.getRequestUser();
+  }
+
   @GetMapping("/permissions")
   public Object getPermissions() {
     return UserPermission.ADMIN.equals(super.service.getAuth().getPermission())

@@ -3,7 +3,9 @@ package com.thesis.service.service.user;
 import java.util.List;
 import java.util.Objects;
 import com.google.firebase.auth.FirebaseToken;
+import com.thesis.service.advice.BusinessException;
 import com.thesis.service.config.firebase.FirebaseAuthenticationToken;
+import com.thesis.service.constant.MessageCode;
 import com.thesis.service.constant.UserPermission;
 import com.thesis.service.dto.user.CustomUserDetail;
 import com.thesis.service.dto.user.response.UserResponse;
@@ -85,7 +87,8 @@ public class UserService extends ABaseService<UserTable, UserRepository>
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    var user = super.repository.findByEmail(username).orElseThrow();
+    var user = super.repository.findByEmail(username)
+        .orElseThrow(BusinessException.codeSupplier(MessageCode.User.EMAIL_NOT_FOUND));
     return new CustomUserDetail(user);
   }
 

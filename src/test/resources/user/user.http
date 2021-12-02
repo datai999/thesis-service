@@ -42,6 +42,6 @@ POST {{http}}{{host}}{{port}}{{base-url}}/users/login
 Content-Type: application/json
 
 {
-  "username": "admin@hcmut.edu.vn",
+  "username": "admin@hcmut.edu.v1n",
   "password": "123456"
 }
