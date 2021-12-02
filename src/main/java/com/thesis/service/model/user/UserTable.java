@@ -44,6 +44,8 @@ public class UserTable extends BaseTable {
   @Column(unique = true)
   private String email;
 
+  private String password;
+
   private String phone;
 
   @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")

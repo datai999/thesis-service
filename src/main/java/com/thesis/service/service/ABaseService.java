@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import com.thesis.service.dto.ModelConverter;
 import com.thesis.service.dto.system.BaseResponse;
+import com.thesis.service.dto.user.CustomUserDetail;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.BaseRepository;
@@ -25,8 +26,9 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
   protected R repository;
 
   public UserTable getAuth() {
-    return UserTable.class.cast(
+    var userDetail = CustomUserDetail.class.cast(
         SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    return userDetail.getUser();
   }
 
   protected Class<?> getResponseClass() {

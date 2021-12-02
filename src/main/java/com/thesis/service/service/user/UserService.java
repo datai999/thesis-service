@@ -5,6 +5,7 @@ import java.util.Objects;
 import com.google.firebase.auth.FirebaseToken;
 import com.thesis.service.config.firebase.FirebaseAuthenticationToken;
 import com.thesis.service.constant.UserPermission;
+import com.thesis.service.dto.user.CustomUserDetail;
 import com.thesis.service.dto.user.response.UserResponse;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.user.UserRepository;
@@ -12,14 +13,18 @@ import com.thesis.service.service.ABaseService;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService extends ABaseService<UserTable, UserRepository> {
+public class UserService extends ABaseService<UserTable, UserRepository>
+    implements UserDetailsService {
 
   public FirebaseAuthenticationToken getAuthentication(String email) {
 
-    var user = super.repository.findByEmail(email);
+    var user = super.repository.findByEmail(email).orElseThrow();
 
     if (Objects.isNull(user)) {
       var newUser = new UserTable()
@@ -36,7 +41,7 @@ public class UserService extends ABaseService<UserTable, UserRepository> {
   }
 
   public FirebaseAuthenticationToken getAuthentication(FirebaseToken firebaseToken) {
-    var user = super.repository.findByEmail(firebaseToken.getEmail());
+    var user = super.repository.findByEmail(firebaseToken.getEmail()).orElseThrow();
 
     if (Objects.isNull(user)) {
       var nameBulkhead = firebaseToken.getName().lastIndexOf(" ");
@@ -76,6 +81,12 @@ public class UserService extends ABaseService<UserTable, UserRepository> {
 
   public Object getRequestUser() {
     return mapper.map(super.getAuth(), UserResponse.class);
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    var user = super.repository.findByEmail(username).orElseThrow();
+    return new CustomUserDetail(user);
   }
 
 }

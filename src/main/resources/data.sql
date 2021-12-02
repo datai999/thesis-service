@@ -1,3 +1,7 @@
+-- Install extension for postgresql
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- INIT DATA
 
 INSERT INTO sy_education_method (name) VALUES ('Chính quy'), ('Chất lượng cao') ON CONFLICT DO NOTHING;
@@ -109,7 +113,7 @@ VALUES
   , ('STUDENT', 2, 2, true, 'Nguyễn', 'm', 'm@hcmut.edu.vn')
 ON CONFLICT DO NOTHING;
 
-UPDATE us_user SET code = id;
+UPDATE us_user SET code = id, password = crypt('123456',gen_salt('bf'));
 
 -- tp_topic_1637684674374-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
