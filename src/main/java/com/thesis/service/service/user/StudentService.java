@@ -4,12 +4,16 @@ import java.util.stream.Collectors;
 import com.thesis.service.advice.BusinessException;
 import com.thesis.service.constant.MessageCode;
 import com.thesis.service.model.topic.TopicStudentTable;
+import com.thesis.service.model.topic.TopicTable;
+import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.repository.topic.TopicStudentRepository;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.MessageSourceService;
 import com.thesis.service.service.system.SemesterService;
 import com.thesis.service.service.topic.TopicService;
+import com.thesis.service.utils.HtmlUtil;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -73,24 +77,20 @@ public class StudentService {
   }
 
   public Object cancelTopic(long studentId, long topicId) {
-    var topic = topicRepository.findById(topicId).orElseThrow();
-
-    if (!semesterService.allowStudentRegisterCancelTopic()) {
-      throw BusinessException.code(
-          MessageCode.Semester.OVERDUE_TOPIC_CANCEL,
-          topic.getSemester().getName());
-    }
-
-    var student = userRepository.findById(studentId).orElseThrow();
-
-    topic.getStudents().removeIf(e -> e.getId().equals(studentId));
-    topicRepository.save(topic);
+    var entity = new TopicStudentTable()
+        .setTopic(new TopicTable(topicId))
+        .setStudent(new UserTable(studentId));
+    var topicStudent = topicStudentRepository.findAll(Example.of(entity))
+        .stream().findFirst().orElseThrow();
+    topicStudentRepository.delete(topicStudent);
 
     String message = messageSource.getMessage(
         MessageCode.Student.CANCEL_TOPIC,
-        student.getFullName(),
-        topic.getMultiName());
-    this.notificationService.notify(topic.getTopicStudents(), message);
+        HtmlUtil.toUserTag(topicStudent.getStudent()),
+        HtmlUtil.toTopicTag(topicStudent.getTopic()));
+    var anotherStudents = topicStudent.getTopic().getTopicStudents().stream()
+        .filter(e -> !e.getId().equals(studentId)).collect(Collectors.toList());
+    this.notificationService.notify(anotherStudents, message);
     return true;
   }
 

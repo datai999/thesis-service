@@ -19,7 +19,7 @@ VALUES
     ('201', 'USED', '2020-01-17T00:12:00', '2020-02-17T00:12:00', '2020-02-17T00:12:00', '2020-06-17T00:12:00', '2020-02-17T00:12:00', '2020-06-17T00:12:00')
   , ('211', 'USED', '2020-09-17T00:12:00', '2020-10-17T00:12:00', '2020-10-17T00:12:00', '2021-01-17T00:12:00', '2020-10-17T00:12:00', '2021-02-17T00:12:00')
   , ('212', 'USED', '2021-03-17T00:12:00', '2021-04-10T00:12:00', '2021-04-1T00:12:00', '2022-08-01T00:12:00', '2021-04-1T00:12:00', '2022-09-17T00:12:00')
-  , ('213', 'USING', '2021-09-17T00:12:00', '2021-10-10T00:12:00', '2021-10-1T00:12:00', '2022-01-01T00:12:00', '2021-10-1T00:12:00', '2022-02-17T00:12:00')
+  , ('213', 'USING', '2021-09-17T00:12:00', '2021-12-10T00:12:00', '2021-10-1T00:12:00', '2022-01-01T00:12:00', '2021-10-1T00:12:00', '2022-02-17T00:12:00')
   , ('221', null, null, null, null, null, null, null)
 ON CONFLICT DO NOTHING;
 
@@ -50,9 +50,9 @@ ON CONFLICT DO NOTHING;
 INSERT INTO us_user
   (permission, subject_department_id, degree_id, first_name, last_name, email)
 VALUES
-    ('HEAD_SUBJECT_DEPARTMENT', 1, 3, 'Trưởng phòng ban', 'HTTT', 'headHTTT@hcmut.edu.vn')
-  , ('HEAD_SUBJECT_DEPARTMENT', 2, 3, 'Trưởng phòng ban', 'Công nghệ phần mềm', 'headCNPM@hcmut.edu.vn')
-  , ('HEAD_SUBJECT_DEPARTMENT', 3, 3, 'Trưởng phòng ban', 'Hệ thống và mạng', 'headHTVM@hcmut.edu.vn')
+    ('HEAD_SUBJECT_DEPARTMENT', 1, 3, 'Trưởng phòng', 'HTTT', 'headHTTT@hcmut.edu.vn')
+  , ('HEAD_SUBJECT_DEPARTMENT', 2, 3, 'Trưởng phòng', 'Công nghệ phần mềm', 'headCNPM@hcmut.edu.vn')
+  , ('HEAD_SUBJECT_DEPARTMENT', 3, 3, 'Trưởng phòng', 'Hệ thống và mạng', 'headHTVM@hcmut.edu.vn')
   , ('HEAD_SUBJECT_DEPARTMENT', 4, 3, 'Quản Thành', 'Thơ', 'qttho@hcmut.edu.vn')
   , ('HEAD_SUBJECT_DEPARTMENT', 5, 3, 'Trần Ngọc', 'Thịnh', 'tnthinh@hcmut.edu.vn')
 ON CONFLICT DO NOTHING;
@@ -252,6 +252,8 @@ INSERT INTO tp_topic(description,document_reference,max_student_take,min_student
 SELECT description,document_reference,max_student_take,min_student_take,name,task,TRUE,council_id,semester_id+1 AS semester_id,subject_department_id
 FROM tp_topic;
 
+insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-12-03 11:42:02.914172','false','2021-12-03 11:55:23.515337','<p>Theo thống kê điểm thi THPT quốc gia của năm 2019, một trong những con số khiến nhiều người chú ý là thống kê: có tới 70% số bài thi môn lịch sử đạt điểm dưới trung bình. Vì hiện trạng học lệch đã xảy xa cách đây từ lâu nên đây là con phản ánh chính xác của việc giới trẻ không có hứng thú với việc học môn lịch sử hay là tìm hiểu lịch sử của nước nhà và thế giới. Đặc biệt hơn nữa, khoảng cách giữa giáo viên với học sinh cũng như nguồn thông tin đa chiều chưa được xác thực trên mạng internet ngày nay làm cho việc tìm hiểu lịch sử của học sinh càng gặp nhiều khó khăn</p><p>Trong bối cảnh này, để xây dựng văn hóa tìm hiểu lịch sử, tạo được sự hứng thú trong việc học lịch sử là cấp bách và thiết thực. Hệ thống “QA hỗ trợ các bạn học sinh học môn Lịch Sử” sẽ giúp giải quyết được vấn đề này.</p>',null,'2','1','{"en":null,"vi":"Xây dựng hệ thống QUESTION ANSWERING hỗ trợ các bạn học sinh học môn Lịch Sử"}','<p>Nghiên cứu kiến trúc của hệ thống DrQA của Facebook.</p><p>Sử dụng PhoBERT để làm pretrain language model cho tiếng Việt</p><p>Thu thập data set từ sách giáo khoa THPT của Bộ Giáo dục và Đào tạo và một số trang web chính thống.</p><p>Thiết kế hệ thống</p><p>Xây dựng demo</p>','false',null,'4','2');
+
 -- tp_topic_education_methods_1637685038642-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into tp_topic_education_methods(topic_id,education_method_id) values('1','2');
@@ -290,6 +292,8 @@ INSERT INTO tp_topic_education_methods(topic_id,education_method_id)
 SELECT topic_id+20 AS topic_id,education_method_id
 FROM tp_topic_education_methods;
 
+insert into tp_topic_education_methods(topic_id,education_method_id) values('41','1');
+
 -- tp_topic_majors_1637685059108-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into tp_topic_majors(topic_id,major_id) values('1','1');
@@ -324,6 +328,8 @@ insert into tp_topic_majors(topic_id,major_id) values('20','2');
 INSERT INTO tp_topic_majors(topic_id,major_id)
 SELECT topic_id+20 AS topic_id,major_id
 FROM tp_topic_majors;
+
+insert into tp_topic_majors(topic_id,major_id) values('41','1');
 
 -- tp_guide_teacher_1637685091603-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -362,6 +368,8 @@ INSERT INTO tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id
 SELECT created_at,deleted,updated_at,main,guide_teacher_id,topic_id+20 AS topic_id
 FROM tp_guide_teacher;
 
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-12-03 11:42:02.946087','false','2021-12-03 11:42:02.946087','false','7','41');
+
 -- tp_student-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-11-29 00:31:18.491107','false','2021-11-29 00:31:18.491107','false','31','1');
@@ -372,6 +380,8 @@ insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_i
 INSERT INTO tp_student(topic_id, student_id, mid_pass)
 SELECT topic_id+20 AS topic_id,student_id,TRUE
 FROM tp_student WHERE mid_pass = TRUE;
+
+insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-12-03 14:20:35.883308','false','2021-12-03 14:20:35.883308',null,'35','41');
 
 -- tp_topic_review_teachers-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -614,12 +624,4 @@ insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_
 
 -- us_notification-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO us_notification (receiver_id, message) VALUES
-    (1, 'Tin nhắn thử nghiệm 1 <a href="https://datai-thesis-web.herokuapp.com/users/1">link</a>')
-  , (1, 'Tin nhắn thử nghiệm 2 <a href="https://datai-thesis-web.herokuapp.com/semesters">link</a>')
-  , (1, 'Tin nhắn thử nghiệm 3 <a href="https://datai-thesis-web.herokuapp.com/topics">link</a>')
-ON CONFLICT DO NOTHING;
-INSERT INTO us_notification (receiver_id, message)
-  SELECT id, 'Kết thúc thời gian đăng ký đề tài. <a target="_blank" href="http://localhost:3000/my/topics">chi tiết</a>'
-  FROM us_user;
-
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 01:30:59.382664','false','2021-12-04 01:30:59.382664','<user id=36>Nguyễn y</user> đã hủy đăng ký <topic id=41>đề tài mã số 41</topic>','false','35');

@@ -78,6 +78,10 @@ public class UserTable extends BaseTable {
   @OneToMany(mappedBy = "member")
   private List<CouncilMemberTable> councilMembers;
 
+  public UserTable(Long id) {
+    this.setId(id);
+  }
+
   @Override
   public UserTable setId(Long id) {
     super.setId(id);

@@ -24,10 +24,12 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @DynamicUpdate
@@ -90,6 +92,10 @@ public class TopicTable extends BaseTable {
 
   @ManyToOne
   private CouncilTable council;
+
+  public TopicTable(Long id) {
+    this.setId(id);
+  }
 
   public String getMultiName(String format) {
     return Objects.isNull(this.name) ? null

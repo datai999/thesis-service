@@ -1,0 +1,4 @@
+###  cancel topic
+DELETE  {{http}}{{host}}{{port}}{{base-url}}/students/36/topic-cancel?topicId=41
+Content-Type: application/json
+X-auth: {{backDoorToken}}
