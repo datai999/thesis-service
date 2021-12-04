@@ -1,11 +1,15 @@
 package com.thesis.service.service.user;
 
+import java.util.List;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
+import com.thesis.service.constant.MessageCode;
 import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.model.system.SubjectDepartmentTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.repository.user.UserRepository;
+import com.thesis.service.service.MessageSourceService;
 import com.thesis.service.service.topic.TopicService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Example;
@@ -19,6 +23,30 @@ public class ReviewTeacherService {
   private final TopicRepository topicRepository;
   private final UserRepository userRepository;
   private final TopicService topicService;
+  private final MessageSourceService messageSourceService;
+  private final NotificationService notificationService;
+
+  @Transactional
+  public Object assignReview(TopicTable entity) {
+    var result = topicService.update(entity);
+
+    var actorTag = messageSourceService.toUserTag(topicService.getAuth());
+    var teacherTags = entity.getReviewTeachers().stream()
+        .map(messageSourceService::toUserTag).collect(Collectors.toList());
+    var topicTag = messageSourceService.toTopicTag(entity);
+
+    var teacherTagMsg = String.join(", ", teacherTags);
+
+    var message2Topic = messageSourceService.getMessage(
+        MessageCode.Assign.REVIEW_ACTION, actorTag, teacherTagMsg, topicTag);
+    var message2Teacher = messageSourceService.getMessage(
+        MessageCode.Assign.YOU_REVIEW, actorTag, topicTag);
+
+    notificationService.notify(entity.getReviewTeachers(), message2Teacher);
+    notificationService.notifyTopics(List.of(entity.setReviewTeachers(null)), message2Topic);
+
+    return result;
+  }
 
   public Object getTopicReview(long subjectDepartmentId, String semesterName) {
 

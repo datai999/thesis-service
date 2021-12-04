@@ -60,4 +60,9 @@ public interface MessageCode {
     String MID_FAIL = "mark.mid.fail";
   }
 
+  interface Assign {
+    String REVIEW_ACTION = "assign.review.action";
+    String YOU_REVIEW = "assign.you.review";
+  }
+
 }
