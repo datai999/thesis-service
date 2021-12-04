@@ -20,6 +20,7 @@ import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.model.system.SubjectDepartmentTable;
 import com.thesis.service.model.user.UserTable;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
@@ -116,6 +117,13 @@ public class TopicTable extends BaseTable {
     return CollectionUtils.isEmpty(students)
         ? List.of()
         : students.stream().map(TopicStudentTable::getStudent).collect(Collectors.toList());
+  }
+
+  public List<UserTable> getMidPassStudents() {
+    return CollectionUtils.isEmpty(students)
+        ? List.of()
+        : students.stream().filter(e -> ObjectUtils.defaultIfNull(e.getMidPass(), true))
+            .map(TopicStudentTable::getStudent).collect(Collectors.toList());
   }
 
   public List<UserTable> getTopicGuideTeachers() {

@@ -79,6 +79,7 @@ public class TemplateService
               .anyMatch(major -> majorIds.contains(major.getId())))
           .collect(Collectors.toList());
     }
+    response.forEach(template -> criterionService.sortChildren(template.getRootCriterion()));
     return response;
   }
 

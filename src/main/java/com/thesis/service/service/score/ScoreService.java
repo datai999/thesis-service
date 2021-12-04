@@ -1,9 +1,12 @@
 package com.thesis.service.service.score;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 import com.thesis.service.constant.MessageCode;
 import com.thesis.service.dto.score.response.ScoreResponse;
 import com.thesis.service.dto.score.response.TopicScoreResponse;
@@ -14,6 +17,7 @@ import com.thesis.service.repository.score.ScoreRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.ABaseService;
+import com.thesis.service.service.user.NotificationService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -25,10 +29,22 @@ public class ScoreService extends ABaseService<ScoreTable, ScoreRepository> {
 
   private final UserRepository userRepository;
   private final TopicRepository topicRepository;
+  private final NotificationService notificationService;
 
   @Override
   protected Class<?> getResponseClass() {
     return ScoreResponse.class;
+  }
+
+  @Override
+  @Transactional
+  public Object saveAll(Collection<ScoreTable> entities) {
+    var response = this.repository.saveAll(entities);
+    var student = response.get(0).getStudent();
+    var actorTag = super.messageSource.toUserTag(super.getAuth());
+    var message = super.messageSource.getMessage(MessageCode.Mark.FINAL, actorTag);
+    notificationService.notify(List.of(student), message);
+    return this.map(response);
   }
 
   public Object getStudentScore(ScoreTable entity) {

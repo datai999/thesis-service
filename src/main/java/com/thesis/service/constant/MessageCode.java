@@ -58,6 +58,7 @@ public interface MessageCode {
   interface Mark {
     String MID_PASS = "mark.mid.pass";
     String MID_FAIL = "mark.mid.fail";
+    String FINAL = "mark.final";
   }
 
   interface Assign {
