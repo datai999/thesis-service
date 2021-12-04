@@ -1,6 +1,7 @@
 package com.thesis.service.service.user;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import com.thesis.service.dto.user.response.NotificationResponse;
@@ -27,6 +28,7 @@ public class NotificationService extends ABaseService<NotificationTable, Notific
   }
 
   public void notify(Collection<UserTable> receivers, String message) {
+    receivers = receivers.stream().filter(Objects::nonNull).collect(Collectors.toList());
     if (CollectionUtils.isEmpty(receivers))
       return;
     var actorId = super.getAuth().getId();

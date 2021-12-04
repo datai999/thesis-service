@@ -1,11 +1,13 @@
 package com.thesis.service.service;
 
 import javax.annotation.PostConstruct;
-import com.thesis.service.config.firebase.FirebaseAuthenticationToken;
 import com.thesis.service.constant.MessageCode;
+import com.thesis.service.dto.user.CustomUserDetail;
 import com.thesis.service.model.topic.CouncilTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.model.user.UserTable;
+import com.thesis.service.service.system.SemesterService;
+import com.thesis.service.utils.ContextAccessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -33,29 +35,34 @@ public class MessageSourceService {
     return this.messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
   }
 
-  public String requestUserUpdate(String message) {
-    var auth = FirebaseAuthenticationToken.class
-        .cast(SecurityContextHolder.getContext().getAuthentication());
-    var requestUserATag = this.toATag("/#", auth.getPrincipal().getFullName());
-    return this.getMessage("user.update", requestUserATag, message);
-  }
-
-  public String toATag(CouncilTable council) {
-    var href = String.format("/councils/%s", council.getSubjectDepartment().getId());
-    var councilMessage = this.getMessage(MessageCode.Council.CODE, council.getId());
-    return this.toATag(href, councilMessage);
-  }
-
   public String toUserTag(UserTable user) {
     return String.format("<user id=%s >%s</user>", user.getId(), user.getFullName());
   }
 
+  public String toTopicTag(long topicId) {
+    return String.format("<topic id=%s >Đề tài mã số %s</topic>", topicId, topicId);
+  }
+
   public String toTopicTag(TopicTable topic) {
-    return String.format("<topic id=%s >đề tài mã số %s</topic>", topic.getId(), topic.getId());
+    return this.toTopicTag(topic.getId());
   }
 
   public String toATag(String href, String innerValue) {
     return String.format("<newTab href=\"%s\" >%s</newTab>", href, innerValue);
+  }
+
+  public String toATag(CouncilTable council) {
+    var currentSemesterName = ContextAccessor.getBean(SemesterService.class)
+        .getCurrentSemester().getName();
+    var href = String.format("/council/%s/%s", currentSemesterName, council.getId());
+    var councilMessage = this.getMessage(MessageCode.Council.CODE, council.getId());
+    return this.toATag(href, councilMessage);
+  }
+
+  public String requestUserUpdate(String message) {
+    var auth = CustomUserDetail.class
+        .cast(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    return this.getMessage("user.update", this.toUserTag(auth.getUser()), message);
   }
 
   public String dashboardTag(String innerValue) {

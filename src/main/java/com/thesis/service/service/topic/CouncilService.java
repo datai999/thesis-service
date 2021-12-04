@@ -89,15 +89,23 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
     var removeAssignTopicIds = removeAssignTopics.parallelStream()
         .map(TopicTable::getId).collect(Collectors.toSet());
     topicRepository.updateCouncil(null, removeAssignTopicIds);
-    notificationService.notifyTopics(removeAssignTopics,
-        super.messageSource.getMessage(MessageCode.Council.REMOVE_ASSIGN));
+
+    var councilTag = super.messageSource.toATag(council);
+    removeAssignTopics.stream().forEach(topic -> {
+      var topicTag = super.messageSource.toTopicTag(topic);
+      notificationService.notifyTopics(List.of(topic),
+          super.messageSource.getMessage(MessageCode.Council.REMOVE_ASSIGN, topicTag, councilTag));
+    });
 
     council.getTopics().removeAll(removeAssignTopics);
     topicIds.removeAll(council.getTopics().parallelStream()
         .map(TopicTable::getId).collect(Collectors.toList()));
     topicRepository.updateCouncil(council, topicIds);
-    notificationService.notifyTopicIds(topicIds,
-        super.messageSource.getMessage(MessageCode.Council.ASSIGNED));
+    topicIds.forEach(topicId -> {
+      var topicTag = super.messageSource.toTopicTag(topicId);
+      notificationService.notifyTopicIds(List.of(topicId),
+          super.messageSource.getMessage(MessageCode.Council.ASSIGNED, topicTag, councilTag));
+    });
 
     return true;
   }
