@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import com.thesis.service.advice.BusinessException;
+import com.thesis.service.constant.MessageCode;
 import com.thesis.service.constant.SemesterStatus;
 import com.thesis.service.dto.system.SemesterResponse;
 import com.thesis.service.model.system.SemesterTable;
@@ -45,11 +46,13 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
     var nextSemester = super.repository.findById(semesterId).orElseThrow();
 
     if (StringUtils.isBlank(nextSemester.getName()))
-      throw BusinessException.code("semester.001");
+      throw BusinessException.code(MessageCode.Semester.NAME_NULL);
     Optional.ofNullable(nextSemester.getRegisterTopicStart())
-        .orElseThrow(BusinessException.codeSupplier("semester.002"));
+        .orElseThrow(BusinessException.codeSupplier(
+            MessageCode.Semester.REGISTER_TOPIC_START_NULL));
     Optional.ofNullable(nextSemester.getRegisterTopicEnd())
-        .orElseThrow(BusinessException.codeSupplier("semester.003"));
+        .orElseThrow(BusinessException.codeSupplier(
+            MessageCode.Semester.REGISTER_TOPIC_END_NULL));
 
     var currentSemester = super.repository.findCurrentSemester();
 
@@ -62,6 +65,16 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
         TimeConvert.toDate(nextSemester.getRegisterTopicEnd()));
 
     return true;
+  }
+
+  @Override
+  public Object update(SemesterTable entity) {
+    var existEntity = this.repository.findById(entity.getId()).orElseThrow();
+    entity.setCreatedAt(existEntity.getCreatedAt());
+    var response = this.repository.save(entity);
+    timerNotificationService.notifyRegisterTopicEnd(
+        TimeConvert.toDate(response.getRegisterTopicEnd()));
+    return this.map(response);
   }
 
 }

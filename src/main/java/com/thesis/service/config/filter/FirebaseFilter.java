@@ -36,16 +36,6 @@ public class FirebaseFilter extends OncePerRequestFilter {
         throw new BadCredentialsException(MessageCode.Error.BLANK_TOKEN);
       }
 
-      // TODO: remove back door
-      if (xAuth.length() < 50) {
-        var auth = ContextAccessor.getBean(UserService.class).getAuthentication(xAuth);
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
-        log.info("Request user >>> {}", auth.getPrincipal().getEmail());
-        filterChain.doFilter(request, response);
-        return;
-      }
-
       FirebaseToken firebaseToken = FirebaseAuth.getInstance().verifyIdToken(xAuth);
 
       var auth = ContextAccessor.getBean(UserService.class).getAuthentication(firebaseToken);

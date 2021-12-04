@@ -6,12 +6,11 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Supplier;
+import com.thesis.service.constant.MessageCode;
 import com.thesis.service.model.user.NotificationTable;
 import com.thesis.service.repository.user.NotificationRepository;
 import com.thesis.service.utils.ContextAccessor;
 import com.thesis.service.utils.HtmlUtil;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +19,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TimerNotificationService {
 
-  private final MessageSource messageSource;
   private final NotificationRepository notificationRepository;
+  private final MessageSourceService messageSourceService;
 
-  private static enum TYPE {
+  private enum TYPE {
     REGISTER_TOPIC_START, REGISTER_TOPIC_END
   }
 
@@ -41,34 +40,18 @@ public class TimerNotificationService {
     }
   }
 
-  public void notifyRegisterTopicStart(Date time) {
-    var timer = timers.get(TYPE.REGISTER_TOPIC_START);
-    // TODO: notify when register topic start time
-    var task = new NotificationTask(() -> List.of());
-    timer.schedule(task, time);
-  }
-
-  // TODO set notify when update current semester
   public void notifyRegisterTopicEnd(Date time) {
-    var timer = timers.get(TYPE.REGISTER_TOPIC_END);
-
-    var htmlMessage = HtmlUtil.toATag(
-        "/my/topics",
-        messageSource.getMessage(
-            "message.detail", null,
-            LocaleContextHolder.getLocale()));
-
-    var message = messageSource.getMessage(
-        "timer.registerTopicEnd", List.of(htmlMessage).toArray(),
-        LocaleContextHolder.getLocale());
-
+    var studentMessage = messageSourceService.getMessage(
+        MessageCode.Timer.REGISTER_TOPIC_END, HtmlUtil.topicExecuteTag());
+    var teacherMessage = messageSourceService.getMessage(
+        MessageCode.Timer.REGISTER_TOPIC_END, HtmlUtil.topicGuideTag());
     var task = new TimerTask() {
       @Override
       public void run() {
-        notificationRepository.notifyUserHasTopicInCurrentSemester(message);
+        notificationRepository.notifyUserHasTopicInCurrentSemester(studentMessage, teacherMessage);
       }
     };
-    timer.schedule(task, time);
+    timers.get(TYPE.REGISTER_TOPIC_END).schedule(task, time);
   }
 
 }

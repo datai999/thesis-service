@@ -14,11 +14,15 @@ public interface MessageCode {
     String OVERDUE_TOPIC_CANCEL = "semester.overdueTopicCancel";
     String MID = "semester.mid";
     String FINAL = "semester.final";
+    String NAME_NULL = "semester.name.null";
+    String REGISTER_TOPIC_START_NULL = "semester.registerTopicStart.null";
+    String REGISTER_TOPIC_END_NULL = "semester.registerTopicEnd.null";
   }
 
   interface Topic {
     String FULL_MEMBER = "topic.fullMember";
     String EXIST_STUDENT = "topic.existStudent";
+    String LIST_VIEW = "topic.listView";
   }
 
   interface Student {
@@ -40,6 +44,14 @@ public interface MessageCode {
 
   interface User {
     String EMAIL_NOT_FOUND = "email.notFound";
+  }
+
+  interface My {
+    String TOPIC_VIEW = "my.topic.view";
+  }
+
+  interface Timer {
+    String REGISTER_TOPIC_END = "timer.registerTopicEnd";
   }
 
 }

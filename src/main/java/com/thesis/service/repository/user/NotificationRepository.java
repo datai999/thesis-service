@@ -22,21 +22,31 @@ public interface NotificationRepository extends BaseRepository<NotificationTable
   List<NotificationTable> findByUnseenIdDesc(long receiverId, int limit);
 
   @Query(nativeQuery = true,
-      value = "WITH "
+      value = "WITH " +
+          "current_semester AS ( " +
+          "SELECT * " +
+          "FROM sy_semester " +
+          "WHERE status = 'USING' )" +
 
-          + "topic_assign AS ( "
-          + "SELECT tpTA.guide_teacher_id, tpTA.review_teacher_id, tpTA.student_id "
-          + "FROM tp_topic_assign tpTA "
-          + "INNER JOIN tp_topic tpT ON tpT.id = tpTA.topic_id "
-          + "INNER JOIN sy_semester syS ON syS.id = tpT.semester_id AND syS.status = 'USING') "
+          ", topic AS (" +
+          "SELECT tT.* " +
+          "FROM tp_topic tT " +
+          "INNER JOIN current_semester ON current_semester.id = tT.semester_id ) " +
 
-          + ",user_id AS ( "
-          + "SELECT guide_teacher_id AS id FROM topic_assign "
-          + "UNION SELECT review_teacher_id FROM topic_assign "
-          + "UNION SELECT student_id FROM topic_assign) "
+          ", student_message AS ( " +
+          "SELECT DISTINCT tS.student_id AS receiver_id, ?1 " +
+          "FROM tp_student tS " +
+          "INNER JOIN topic ON topic.id = tS.topic_id ) " +
 
-          + "INSERT INTO us_notification (receiver_id, message) "
-          + "SELECT id, ?1 FROM user_id WHERE user_id.id IS NOT NULL")
-  void notifyUserHasTopicInCurrentSemester(String message);
+          ", guide_teacher_message AS (" +
+          "SELECT DISTINCT tGT.guide_teacher_id AS receiver_id, ?2 " +
+          "FROM tp_guide_teacher tGT " +
+          "INNER JOIN topic ON topic.id = tGT.topic_id ) " +
+
+          "INSERT INTO us_notification (receiver_id, message) " +
+          "SELECT * FROM student_message " +
+          "UNION " +
+          "SELECT * FROM guide_teacher_message")
+  void notifyUserHasTopicInCurrentSemester(String userMessage, String teacherMessage);
 
 }
