@@ -369,6 +369,7 @@ SELECT created_at,deleted,updated_at,main,guide_teacher_id,topic_id+20 AS topic_
 FROM tp_guide_teacher;
 
 insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-12-03 11:42:02.946087','false','2021-12-03 11:42:02.946087','false','7','41');
+insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-12-03 11:42:02.946087','false','2021-12-03 11:42:02.946087','false','16','41');
 
 -- tp_student-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -645,3 +646,6 @@ insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_
 insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','12');
 insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','15');
 insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','13');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 22:05:25.317805','false','2021-12-04 22:05:25.317805','Giáo viên <user id=7 >Trưởng phòng Công nghệ phần mềm</user> đánh giá sinh viên <user id=35 >Nguyễn t</user> <strong>đạt giữa kỳ</strong> ở <topic id=41 >đề tài mã số 41</topic>','false','35');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 22:05:25.321799','false','2021-12-04 22:05:25.321799','Giáo viên <user id=7 >Trưởng phòng Công nghệ phần mềm</user> đánh giá sinh viên <user id=35 >Nguyễn t</user> <strong>đạt giữa kỳ</strong> ở <topic id=41 >đề tài mã số 41</topic>','false','36');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 22:05:25.327781','false','2021-12-04 22:05:25.327781','Giáo viên <user id=7 >Trưởng phòng Công nghệ phần mềm</user> đánh giá sinh viên <user id=35 >Nguyễn t</user> <strong>đạt giữa kỳ</strong> ở <topic id=41 >đề tài mã số 41</topic>','false','16');
