@@ -22,6 +22,11 @@ public class StudentController {
     return studentService.getTopic(userId);
   }
 
+  @GetMapping("/{userId}/topics/current")
+  public Object getCurrentTopic(@PathVariable long userId) {
+    return studentService.getCurrentTopic(userId);
+  }
+
   @GetMapping("/{userId}/allow-register-topic")
   public Object allowRegisterTopic(@PathVariable long userId) {
     return studentService.allowRegisterTopic(userId);

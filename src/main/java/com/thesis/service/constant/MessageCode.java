@@ -52,6 +52,12 @@ public interface MessageCode {
 
   interface Timer {
     String REGISTER_TOPIC_END = "timer.registerTopicEnd";
+    String TIMELINE_VIEW = "timer.timeline.view";
+  }
+
+  interface Mark {
+    String MID_PASS = "mark.mid.pass";
+    String MID_FAIL = "mark.mid.fail";
   }
 
 }

@@ -16,10 +16,10 @@ ON CONFLICT DO NOTHING;
 INSERT INTO sy_semester
   (name, status, register_topic_start, register_topic_end, topic_start, topic_end, thesis_start, thesis_end)
 VALUES
-    ('201', 'USED', '2020-01-17T00:12:00', '2020-02-17T00:12:00', '2020-02-17T00:12:00', '2020-06-17T00:12:00', '2020-02-17T00:12:00', '2020-06-17T00:12:00')
-  , ('211', 'USED', '2020-09-17T00:12:00', '2020-10-17T00:12:00', '2020-10-17T00:12:00', '2021-01-17T00:12:00', '2020-10-17T00:12:00', '2021-02-17T00:12:00')
-  , ('212', 'USED', '2021-03-17T00:12:00', '2021-04-10T00:12:00', '2021-04-1T00:12:00', '2022-08-01T00:12:00', '2021-04-1T00:12:00', '2022-09-17T00:12:00')
-  , ('213', 'USING', '2021-09-17T00:12:00', '2021-12-10T00:12:00', '2021-10-1T00:12:00', '2022-01-01T00:12:00', '2021-10-1T00:12:00', '2022-02-17T00:12:00')
+    ('201', 'USED', '2020-01-17T01:00:00', '2020-02-17T01:00:00', '2020-02-17T01:00:00', '2020-06-17T01:00:00', '2020-02-17T01:00:00', '2020-06-17T01:00:00')
+  , ('211', 'USED', '2020-09-17T01:00:00', '2020-10-17T01:00:00', '2020-10-17T01:00:00', '2021-01-17T01:00:00', '2020-10-17T01:00:00', '2021-02-17T01:00:00')
+  , ('212', 'USED', '2021-03-17T01:00:00', '2021-04-10T01:00:00', '2021-04-1T01:00:00', '2022-08-01T01:00:00', '2021-04-1T01:00:00', '2022-09-17T01:00:00')
+  , ('213', 'USING', '2021-09-17T01:00:00', '2021-12-04T19:07:00', '2021-10-1T01:00:00', '2022-01-01T01:00:00', '2021-10-1T01:00:00', '2022-02-17T01:00:00')
   , ('221', null, null, null, null, null, null, null)
 ON CONFLICT DO NOTHING;
 
@@ -382,6 +382,7 @@ SELECT topic_id+20 AS topic_id,student_id,TRUE
 FROM tp_student WHERE mid_pass = TRUE;
 
 insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-12-03 14:20:35.883308','false','2021-12-03 14:20:35.883308',null,'35','41');
+insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-12-04 14:20:35.883308','false','2021-12-04 14:20:35.883308',null,'36','41');
 
 -- tp_topic_review_teachers-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -624,4 +625,23 @@ insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_
 
 -- us_notification-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 01:30:59.382664','false','2021-12-04 01:30:59.382664','<user id=36>Nguyễn y</user> đã hủy đăng ký <topic id=41>đề tài mã số 41</topic>','false','35');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 01:30:59.382664','false','2021-12-04 01:30:59.382664','<user id=36 >Nguyễn y</user> đã hủy đăng ký <topic id=41 >đề tài mã số 41</topic>','false','35');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','16');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','9');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','8');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','6');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/execute" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','32');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','10');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','18');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/execute" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','35');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/execute" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','34');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','24');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','19');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','14');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','17');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','7');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','11');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/execute" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','33');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','12');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','15');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','13');

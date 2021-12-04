@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import com.thesis.service.dto.user.response.NotificationResponse;
 import com.thesis.service.dto.user.response.UserNotificationResponse;
-import com.thesis.service.model.topic.TopicGuideTeacherTable;
-import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.model.user.NotificationTable;
 import com.thesis.service.model.user.UserTable;
@@ -31,7 +29,9 @@ public class NotificationService extends ABaseService<NotificationTable, Notific
   public void notify(Collection<UserTable> receivers, String message) {
     if (CollectionUtils.isEmpty(receivers))
       return;
+    var actorId = super.getAuth().getId();
     var notifications = receivers.parallelStream().distinct()
+        .filter(e -> !e.getId().equals(actorId))
         .map(user -> new NotificationTable().setReceiver(user).setSeen(false).setMessage(message))
         .collect(Collectors.toList());
     super.repository.saveAll(notifications);
@@ -45,22 +45,15 @@ public class NotificationService extends ABaseService<NotificationTable, Notific
   public void notifyTopics(Collection<TopicTable> topics, String message) {
     if (CollectionUtils.isEmpty(topics))
       return;
-    topics.parallelStream().forEach(
+    topics.stream().forEach(
         topic -> {
-          var studentMessage = super.messageSource.toATagStudent(topic);
-          var guideTeachersMessage = super.messageSource.toATagGuideTeacher(topic);
-          var reviewTeachersMessage = super.messageSource.toATagReviewTeacher(topic);
-          this.notify(topic.getStudents().stream()
-              .map(TopicStudentTable::getStudent).collect(Collectors.toList()),
-              String.format("%s %s", studentMessage, message));
-          this.notify(topic.getGuideTeachers().stream()
-              .map(TopicGuideTeacherTable::getGuideTeacher).collect(Collectors.toList()),
-              String.format("%s %s", guideTeachersMessage, message));
-          this.notify(topic.getReviewTeachers(),
-              String.format("%s %s", reviewTeachersMessage, message));
+          this.notify(topic.getTopicStudents(), message);
+          this.notify(topic.getTopicGuideTeachers(), message);
+          this.notify(topic.getReviewTeachers(), message);
         });
   }
 
+  @Transactional
   public void notifyTopicIds(Collection<Long> topicIds, String message) {
     if (CollectionUtils.isEmpty(topicIds))
       return;

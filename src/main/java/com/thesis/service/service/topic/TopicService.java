@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 import com.thesis.service.dto.topic.resposne.TopicResponse;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.topic.TopicTable;
@@ -42,12 +43,20 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
   }
 
   @Override
+  @Transactional
   public Object update(TopicTable entity) {
     var existEntity = this.repository.findById(entity.getId()).orElseThrow();
     entity.setStudents(existEntity.getStudents())
         .setCreatedAt(existEntity.getCreatedAt());
-    var response = this.repository.save(entity);
-    return this.map(response);
+    var topicResponse = this.repository.save(entity);
+
+    topicGuideTeacherRepository.deleteByTopic(entity.getId());
+    var guideTeachers = entity.getGuideTeachers().stream()
+        .map(e -> e.setTopic(topicResponse).setMain(false)).collect(Collectors.toList());
+    guideTeachers.get(0).setMain(true);
+    topicGuideTeacherRepository.saveAll(guideTeachers);
+
+    return this.map(topicResponse);
   }
 
   public Function<TopicTable, List<BaseTable>> getGenericPredicate(

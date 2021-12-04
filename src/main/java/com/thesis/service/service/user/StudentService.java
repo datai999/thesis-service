@@ -12,7 +12,6 @@ import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.MessageSourceService;
 import com.thesis.service.service.system.SemesterService;
 import com.thesis.service.service.topic.TopicService;
-import com.thesis.service.utils.HtmlUtil;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +24,7 @@ public class StudentService {
   private final TopicRepository topicRepository;
   private final TopicStudentRepository topicStudentRepository;
   private final UserRepository userRepository;
+  private final MessageSourceService messageSourceService;
   private final SemesterService semesterService;
   private final TopicService topicService;
   private final NotificationService notificationService;
@@ -86,8 +86,8 @@ public class StudentService {
 
     String message = messageSource.getMessage(
         MessageCode.Student.CANCEL_TOPIC,
-        HtmlUtil.toUserTag(topicStudent.getStudent()),
-        HtmlUtil.toTopicTag(topicStudent.getTopic()));
+        messageSourceService.toUserTag(topicStudent.getStudent()),
+        messageSourceService.toTopicTag(topicStudent.getTopic()));
     var anotherStudents = topicStudent.getTopic().getTopicStudents().stream()
         .filter(e -> !e.getId().equals(studentId)).collect(Collectors.toList());
     this.notificationService.notify(anotherStudents, message);
@@ -100,6 +100,15 @@ public class StudentService {
         .anyMatch(e -> !e.getTopic().getSemester().isCurrent()
             && !e.getTopic().getThesis()
             && e.getMidPass());
+  }
+
+  public Object getCurrentTopic(long studentId) {
+    var user = userRepository.findById(studentId).orElseThrow();
+    var topic = user.getTopicExecutes().stream()
+        .filter(e -> e.getTopic().getSemester().isCurrent())
+        .map(TopicStudentTable::getTopic)
+        .findFirst();
+    return topic.isPresent() ? topicService.map(topic.get()) : null;
   }
 
 }

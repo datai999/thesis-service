@@ -10,7 +10,6 @@ import com.thesis.service.constant.MessageCode;
 import com.thesis.service.model.user.NotificationTable;
 import com.thesis.service.repository.user.NotificationRepository;
 import com.thesis.service.utils.ContextAccessor;
-import com.thesis.service.utils.HtmlUtil;
 import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -41,10 +40,16 @@ public class TimerNotificationService {
   }
 
   public void notifyRegisterTopicEnd(Date time) {
+    var timelineViewTag = messageSourceService.dashboardTag(
+        messageSourceService.getMessage(MessageCode.Timer.TIMELINE_VIEW));
     var studentMessage = messageSourceService.getMessage(
-        MessageCode.Timer.REGISTER_TOPIC_END, HtmlUtil.topicExecuteTag());
+        MessageCode.Timer.REGISTER_TOPIC_END,
+        messageSourceService.topicExecuteTag(),
+        timelineViewTag);
     var teacherMessage = messageSourceService.getMessage(
-        MessageCode.Timer.REGISTER_TOPIC_END, HtmlUtil.topicGuideTag());
+        MessageCode.Timer.REGISTER_TOPIC_END,
+        messageSourceService.topicGuideTag(),
+        timelineViewTag);
     var task = new TimerTask() {
       @Override
       public void run() {
