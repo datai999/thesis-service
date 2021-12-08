@@ -8,20 +8,8 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 
 public interface StudentServiceTS {
 
-  // String VALID_GROUP_NAME = "validGroupName";
-  // String VALID_GROUP_CODE = "validGroupCode";
-  // EGroupType ORG_GROUP_TYPE = EGroupType.ORGANIZATION;
-  // EGroupType TEAM_GROUP_TYPE = EGroupType.TEAM;
   Long VALID_USER_ID = 0L;
   Long INVALID_USER_ID = 0L;
-
-  // Supplier<GroupDto> VALID_GROUP_DTO = () -> new GroupDto()
-  // .setName(VALID_GROUP_NAME)
-  // .setCode(VALID_GROUP_CODE)
-  // .setType(ORG_GROUP_TYPE);
-
-  // Supplier<Organization> VALID_ORGANIZATION = () -> new Organization().setId(VALID_ID);
-
 
   class UseMessageCode implements ArgumentsProvider {
     @Override
