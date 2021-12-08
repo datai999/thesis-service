@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.4.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+  id 'jacoco'
 }
 
 group = 'com.thesis'
@@ -45,4 +46,15 @@ test {
   testLogging {
 		events "passed", "skipped", "failed"
 	}
+  finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+  dependsOn test
+  jacocoTestReport {
+    reports {
+      xml.required = false
+      csv.required = false
+    }
+}
 }
