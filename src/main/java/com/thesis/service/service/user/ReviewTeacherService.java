@@ -1,6 +1,5 @@
 package com.thesis.service.service.user;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import com.thesis.service.constant.MessageCode;
@@ -37,13 +36,18 @@ public class ReviewTeacherService {
 
     var teacherTagMsg = String.join(", ", teacherTags);
 
-    var message2Topic = messageSourceService.getMessage(
+    var message2GuideTeacher = messageSourceService.getMessage(
         MessageCode.Assign.REVIEW_ACTION, actorTag, teacherTagMsg, topicTag);
-    var message2Teacher = messageSourceService.getMessage(
+    var message2ReviewTeacher = messageSourceService.getMessage(
         MessageCode.Assign.YOU_REVIEW, actorTag, topicTag);
+    var studentTopicExecuteTag = messageSourceService
+        .topicExecuteTag(messageSourceService.getMessage(MessageCode.Topic.YOUR));
+    var message2Student = messageSourceService.getMessage(
+        MessageCode.Assign.REVIEW_ACTION, actorTag, teacherTagMsg, studentTopicExecuteTag);
 
-    notificationService.notify(entity.getReviewTeachers(), message2Teacher);
-    notificationService.notifyTopics(List.of(entity.setReviewTeachers(null)), message2Topic);
+    notificationService.notify(entity.getReviewTeachers(), message2ReviewTeacher);
+    notificationService.notify(entity.getTopicGuideTeachers(), message2GuideTeacher);
+    notificationService.notify(entity.getTopicStudents(), message2Student);
 
     return result;
   }

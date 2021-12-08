@@ -49,9 +49,12 @@ public class NotificationService extends ABaseService<NotificationTable, Notific
       return;
     topics.stream().forEach(
         topic -> {
-          this.notify(topic.getMidPassStudents(), message);
-          this.notify(topic.getTopicGuideTeachers(), message);
-          this.notify(topic.getReviewTeachers(), message);
+          if (CollectionUtils.isNotEmpty(topic.getMidPassStudents()))
+            this.notify(topic.getMidPassStudents(), message);
+          if (CollectionUtils.isNotEmpty(topic.getTopicGuideTeachers()))
+            this.notify(topic.getTopicGuideTeachers(), message);
+          if (CollectionUtils.isNotEmpty(topic.getReviewTeachers()))
+            this.notify(topic.getReviewTeachers(), message);
         });
   }
 

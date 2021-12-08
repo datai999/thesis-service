@@ -69,8 +69,12 @@ public class MessageSourceService {
     return String.format("<newTab href=\"/dashboard\" >%s</newTab>", innerValue);
   }
 
+  public String topicExecuteTag(String innerValue) {
+    return String.format("<newTab href=\"/execute\" >%s</newTab>", innerValue);
+  }
+
   public String topicExecuteTag() {
-    return String.format("<newTab href=\"/execute\" >%s</newTab>", this.myTopicView);
+    return this.topicExecuteTag(this.myTopicView);
   }
 
   public String topicGuideTag() {

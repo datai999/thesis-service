@@ -23,6 +23,7 @@ public interface MessageCode {
     String FULL_MEMBER = "topic.fullMember";
     String EXIST_STUDENT = "topic.existStudent";
     String LIST_VIEW = "topic.listView";
+    String YOUR = "topic.your";
   }
 
   interface Student {

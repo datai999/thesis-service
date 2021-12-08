@@ -61,8 +61,8 @@ public class StudentService {
 
     String message = messageSource.getMessage(
         MessageCode.Student.REGISTER_TOPIC,
-        student.getFullName(),
-        topic.getMultiName());
+        messageSourceService.toUserTag(student),
+        messageSourceService.toTopicTag(topic));
     this.notificationService.notify(topic.getTopicStudents(), message);
 
     return true;
