@@ -46,11 +46,15 @@ public abstract class ABaseTest {
     System.out.printf(">>>>>>>END TEST: %s", testInfo.getDisplayName());
   }
 
+  protected String getMessage(String code, Object... args) {
+    return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
+  }
+
   protected void hasMessageSourceEachLocale(String code, Object... args) {
     assertDoesNotThrow(() -> {
       System.out.printf("Test message source each locale for code: %s\n", code);
       System.out.printf("%s: %s%n", LocaleContextHolder.getLocale(),
-          messageSource.getMessage(code, args, LocaleContextHolder.getLocale()));
+          this.getMessage(code, args, LocaleContextHolder.getLocale()));
     });
   }
 

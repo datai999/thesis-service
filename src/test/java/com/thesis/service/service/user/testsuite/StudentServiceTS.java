@@ -1,13 +1,10 @@
 package com.thesis.service.service.user.testsuite;
 
+import java.util.stream.Stream;
 import com.thesis.service.constant.MessageCode;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
-
-import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public interface StudentServiceTS {
 
@@ -15,7 +12,8 @@ public interface StudentServiceTS {
   // String VALID_GROUP_CODE = "validGroupCode";
   // EGroupType ORG_GROUP_TYPE = EGroupType.ORGANIZATION;
   // EGroupType TEAM_GROUP_TYPE = EGroupType.TEAM;
-  // Long VALID_ID = 0L;
+  Long VALID_USER_ID = 0L;
+  Long INVALID_USER_ID = 0L;
 
   // Supplier<GroupDto> VALID_GROUP_DTO = () -> new GroupDto()
   // .setName(VALID_GROUP_NAME)
