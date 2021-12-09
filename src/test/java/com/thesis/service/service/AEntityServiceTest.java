@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -27,6 +28,7 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
   protected R repository;
   protected S service;
   protected T entity;
+  protected ModelConverter mapper;
 
   @BeforeAll
   @SuppressWarnings("unchecked")
@@ -43,8 +45,9 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
   @SuppressWarnings("unchecked")
   protected void initService() {
     this.repository = mock((Class<R>) this.getGenericType(1));
+    this.mapper = spy(new ModelConverter());
     ReflectionTestUtils.setField(this.service, "repository", this.repository);
-    ReflectionTestUtils.setField(this.service, "mapper", mock(ModelConverter.class));
+    ReflectionTestUtils.setField(this.service, "mapper", mapper);
     ReflectionTestUtils.setField(this.service, "messageSource", mock(MessageSourceService.class));
   }
 
@@ -65,6 +68,12 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
   void create() {
     when(repository.save(any())).thenReturn(entity);
     assertNotNull(service.create(entity));
+  }
+
+  @Test
+  void saveAll() {
+    when(repository.saveAll(any())).thenReturn(List.of(entity));
+    assertNotNull(service.saveAll(List.of(entity)));
   }
 
   @Test
