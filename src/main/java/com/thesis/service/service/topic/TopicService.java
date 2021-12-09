@@ -26,7 +26,7 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
   private final TopicGuideTeacherRepository topicGuideTeacherRepository;
 
   @Override
-  protected Function<TopicTable, ?> mapping() {
+  public Function<TopicTable, Object> mapping() {
     return TopicResponse::new;
   }
 
@@ -35,10 +35,12 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
     var semester = semesterRepository.findCurrentSemester();
     entity.setSemester(semester).setSubjectDepartment(this.getAuth().getSubjectDepartment());
     var topicResponse = this.repository.save(entity);
-    var guideTeachers = entity.getGuideTeachers().stream()
-        .map(e -> e.setTopic(topicResponse).setMain(false)).collect(Collectors.toList());
-    guideTeachers.get(0).setMain(true);
-    topicGuideTeacherRepository.saveAll(guideTeachers);
+    if (CollectionUtils.isNotEmpty(entity.getGuideTeachers())) {
+      var guideTeachers = entity.getGuideTeachers().stream()
+          .map(e -> e.setTopic(topicResponse).setMain(false)).collect(Collectors.toList());
+      guideTeachers.get(0).setMain(true);
+      topicGuideTeacherRepository.saveAll(guideTeachers);
+    }
     return this.map(topicResponse);
   }
 
@@ -51,19 +53,14 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
     var topicResponse = this.repository.save(entity);
 
     topicGuideTeacherRepository.deleteByTopic(entity.getId());
-    var guideTeachers = entity.getGuideTeachers().stream()
-        .map(e -> e.setTopic(topicResponse).setMain(false)).collect(Collectors.toList());
-    guideTeachers.get(0).setMain(true);
-    topicGuideTeacherRepository.saveAll(guideTeachers);
+    if (CollectionUtils.isNotEmpty(entity.getGuideTeachers())) {
+      var guideTeachers = entity.getGuideTeachers().stream()
+          .map(e -> e.setTopic(topicResponse).setMain(false)).collect(Collectors.toList());
+      guideTeachers.get(0).setMain(true);
+      topicGuideTeacherRepository.saveAll(guideTeachers);
+    }
 
     return this.map(topicResponse);
-  }
-
-  public Function<TopicTable, List<BaseTable>> getGenericPredicate(
-      Function<TopicTable, List<? extends BaseTable>> func) {
-    // some additional code goes here
-    return func
-        .andThen(e -> e.parallelStream().map(BaseTable.class::cast).collect(Collectors.toList()));
   }
 
   @Override

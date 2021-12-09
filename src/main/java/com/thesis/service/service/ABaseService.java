@@ -35,7 +35,7 @@ public abstract class ABaseService<T extends BaseTable, R extends BaseRepository
     return BaseResponse.class;
   }
 
-  protected Function<T, ?> mapping() {
+  public Function<T, Object> mapping() {
     return null;
   }
 

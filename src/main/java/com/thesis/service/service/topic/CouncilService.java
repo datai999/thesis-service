@@ -27,7 +27,7 @@ public class CouncilService extends ABaseService<CouncilTable, CouncilRepository
   private final NotificationService notificationService;
 
   @Override
-  protected Function<CouncilTable, ?> mapping() {
+  public Function<CouncilTable, Object> mapping() {
     return CouncilResponse::new;
   }
 

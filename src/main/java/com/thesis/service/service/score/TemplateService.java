@@ -29,7 +29,7 @@ public class TemplateService
   private final CriterionService criterionService;
 
   @Override
-  protected Function<TemplateTable, ?> mapping() {
+  public Function<TemplateTable, Object> mapping() {
     return TemplateResponse::new;
   }
 
