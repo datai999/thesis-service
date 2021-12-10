@@ -1,5 +1,6 @@
 package com.thesis.service.service.score;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -41,8 +42,10 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
   }
 
   private Collection<Long> getChildrenIds(CriterionTable entity) {
-    return entity.getChildren().parallelStream()
-        .map(CriterionTable::getId).collect(Collectors.toList());
+    return CollectionUtils.isEmpty(entity.getChildren())
+        ? new ArrayList<>()
+        : entity.getChildren().parallelStream()
+            .map(CriterionTable::getId).collect(Collectors.toList());
   }
 
   @Transactional
@@ -62,10 +65,12 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
           });
 
     var savedEntity = this.repository.save(entity);
-    for (int i = 0; i < entity.getChildren().size(); i++) {
-      var child = entity.getChildren().get(i).setParent(savedEntity).setDisplayOrder(i);
-      var savedChild = this.recursiveSave(child);
-      savedEntity.getChildren().set(i, savedChild);
+    if (CollectionUtils.isNotEmpty(entity.getChildren())) {
+      for (int i = 0; i < entity.getChildren().size(); i++) {
+        var child = entity.getChildren().get(i).setParent(savedEntity).setDisplayOrder(i);
+        var savedChild = this.recursiveSave(child);
+        savedEntity.getChildren().set(i, savedChild);
+      }
     }
     return savedEntity;
   }
@@ -79,9 +84,7 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
 
   @Override
   public Object update(CriterionTable entity) {
-    var response = this.recursiveSave(entity);
-    this.sortChildren(response);
-    return super.map(response);
+    return this.create(entity);
   }
 
 }
