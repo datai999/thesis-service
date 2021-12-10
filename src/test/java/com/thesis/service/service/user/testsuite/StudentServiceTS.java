@@ -1,15 +1,21 @@
 package com.thesis.service.service.user.testsuite;
 
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 import com.thesis.service.constant.MessageCode;
+import com.thesis.service.model.user.UserTable;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 
 public interface StudentServiceTS {
 
-  Long VALID_USER_ID = 0L;
-  Long INVALID_USER_ID = 0L;
+  Long VALID_STUDENT_ID = 1L;
+  Long INVALID_STUDENT_ID = 0L;
+  Long VALID_TOPIC_ID = 1L;
+  Long INVALID_TOPIC_ID = 0L;
+
+  Supplier<UserTable> STUDENT = () -> new UserTable(VALID_STUDENT_ID);
 
   class UseMessageCode implements ArgumentsProvider {
     @Override

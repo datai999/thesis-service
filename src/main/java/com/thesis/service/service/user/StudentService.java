@@ -52,7 +52,7 @@ public class StudentService {
 
     var student = userRepository.findById(studentId).orElseThrow();
 
-    if (topic.getStudents().stream().anyMatch(e -> e.getId().equals(studentId))) {
+    if (topic.getTopicStudents().stream().anyMatch(e -> e.getId().equals(studentId))) {
       throw BusinessException.code(MessageCode.Topic.EXIST_STUDENT,
           student.getCode(), topic.getMultiName());
     }

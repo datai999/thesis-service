@@ -65,6 +65,7 @@ jacocoTestReport {
             "**/service/config/**",
             "**/service/constant/**",
             "**/service/model/**",
+            "**/service/service/user/JwtTokenService.class",
             "**/service/utils/ContextAccessor.class",
             "**/service/utils/ContextHolder.class"
         ])
