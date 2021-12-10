@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import com.thesis.service.dto.ModelConverter;
 import com.thesis.service.model.BaseTable;
@@ -40,21 +41,29 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
       e.printStackTrace();
     }
     this.entity.setId(0L);
-  }
-
-  @SuppressWarnings("unchecked")
-  protected void initService() {
+    this.service = spyService();
     this.repository = mock((Class<R>) this.getGenericType(1));
     this.mapper = spy(new ModelConverter());
     ReflectionTestUtils.setField(this.service, "repository", this.repository);
     ReflectionTestUtils.setField(this.service, "mapper", mapper);
     ReflectionTestUtils.setField(this.service, "messageSource", mock(MessageSourceService.class));
+    if (Objects.nonNull(service.mapping())) {
+      when(service.mapping()).thenReturn(x -> new Object());
+    }
   }
+
+  protected abstract S spyService();
 
   private Type getGenericType(int index) {
     return ParameterizedType.class
         .cast(this.getClass().getGenericSuperclass())
         .getActualTypeArguments()[index];
+  }
+
+  @Test
+  void findById() {
+    when(repository.findById(entity.getId())).thenReturn(Optional.of(entity));
+    assertNotNull(service.findById(entity.getId()));
   }
 
   @Test

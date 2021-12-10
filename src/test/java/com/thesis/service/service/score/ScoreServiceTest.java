@@ -9,19 +9,17 @@ import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.AEntityServiceTest;
 import com.thesis.service.service.user.NotificationService;
-import org.junit.jupiter.api.BeforeAll;
 
 public class ScoreServiceTest
     extends AEntityServiceTest<ScoreTable, ScoreRepository, ScoreService> {
 
-  @BeforeAll
-  private void beforeAllTopicService() {
+  @Override
+  protected ScoreService spyService() {
     super.entity.setStudent(new UserTable());
-    super.service = spy(new ScoreService(
+    return spy(new ScoreService(
         mock(UserRepository.class),
         mock(TopicRepository.class),
         mock(NotificationService.class)));
-    super.initService();
   }
 
 }
