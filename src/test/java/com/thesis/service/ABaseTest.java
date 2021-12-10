@@ -1,16 +1,26 @@
 package com.thesis.service;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thesis.service.dto.ModelConverter;
+import com.thesis.service.dto.system.SemesterResponse;
 import com.thesis.service.dto.user.CustomUserDetail;
 import com.thesis.service.model.user.UserTable;
+import com.thesis.service.service.MessageSourceService;
+import com.thesis.service.service.system.SemesterService;
+import com.thesis.service.utils.ContextAccessor;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestInstance;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
@@ -25,15 +35,37 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 @MockitoSettings(strictness = Strictness.LENIENT)
 @DisplayNameGeneration(DisplayNameCamelCase.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class ABaseTest {
 
-  protected static ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+  protected MessageSourceService messageSource;
+  protected ModelConverter mapper;
+
+  private MockedStatic<ContextAccessor> contextAccessor;
 
   @BeforeAll
-  static void beforeAll() {
+  void beforeAll() {
     setRequestUser(new CustomUserDetail(new UserTable()));
-    messageSource.setCacheSeconds(3);
-    messageSource.setBasename("messages");
+
+    var resourceBundleMessageSource = new ResourceBundleMessageSource();
+    resourceBundleMessageSource.setCacheSeconds(3);
+    resourceBundleMessageSource.setBasename("messages");
+    this.messageSource = new MessageSourceService(resourceBundleMessageSource);
+    this.mapper = spy(new ModelConverter());
+
+    var semesterService = mock(SemesterService.class);
+    when(semesterService.getCurrentSemester()).thenReturn(new SemesterResponse());
+
+    this.contextAccessor = Mockito.mockStatic(ContextAccessor.class);
+    this.contextAccessor.when(ContextAccessor::getModelConverter).thenReturn(this.mapper);
+    this.contextAccessor.when(ContextAccessor::getMessageSource).thenReturn(this.messageSource);
+    this.contextAccessor.when(() -> ContextAccessor.getBean(SemesterService.class))
+        .thenReturn(semesterService);
+  }
+
+  @AfterAll
+  void afterAll() {
+    contextAccessor.close();
   }
 
   @BeforeEach

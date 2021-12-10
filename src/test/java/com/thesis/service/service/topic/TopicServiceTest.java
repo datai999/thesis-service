@@ -8,6 +8,7 @@ import com.thesis.service.model.system.EducationMethodTable;
 import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.topic.TopicGuideTeacherTable;
 import com.thesis.service.model.topic.TopicTable;
+import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
 import com.thesis.service.repository.topic.TopicRepository;
@@ -20,7 +21,7 @@ public class TopicServiceTest
   @Override
   protected TopicService spyService() {
     super.entity
-        .setGuideTeachers(List.of(new TopicGuideTeacherTable()))
+        .setGuideTeachers(List.of(new TopicGuideTeacherTable().setGuideTeacher(new UserTable())))
         .setEducationMethods(List.of(new EducationMethodTable()))
         .setMajors(List.of(new MajorTable()));
     return spy(new TopicService(

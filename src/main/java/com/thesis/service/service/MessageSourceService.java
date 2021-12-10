@@ -39,7 +39,7 @@ public class MessageSourceService {
     return String.format("<user id=%s >%s</user>", user.getId(), user.getFullName());
   }
 
-  public String toTopicTag(long topicId) {
+  public String toTopicTag(Long topicId) {
     return String.format("<topic id=%s >Đề tài mã số %s</topic>", topicId, topicId);
   }
 
