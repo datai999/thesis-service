@@ -1,6 +1,7 @@
 package com.thesis.service.service.user;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import com.thesis.service.advice.BusinessException;
+import com.thesis.service.constant.SemesterStatus;
 import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.model.topic.TopicTable;
@@ -28,6 +30,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.data.domain.Example;
 import org.springframework.test.util.ReflectionTestUtils;
 
 public class StudentServiceTest extends ABaseServiceTest {
@@ -170,6 +173,47 @@ public class StudentServiceTest extends ABaseServiceTest {
     assertEquals(true, service.registerTopic(
         StudentServiceTS.VALID_STUDENT_ID,
         StudentServiceTS.VALID_TOPIC_ID));
+  }
+
+  @Test
+  void cancelTopic_noValuePresent() {
+    var entity = new TopicStudentTable()
+        .setTopic(new TopicTable(StudentServiceTS.VALID_TOPIC_ID))
+        .setStudent(new UserTable(StudentServiceTS.VALID_STUDENT_ID));
+    when(topicStudentRepository.findAll(Example.of(entity)))
+        .thenReturn(List.of());
+    Exception exception = assertThrows(NoSuchElementException.class,
+        () -> service.cancelTopic(
+            StudentServiceTS.VALID_STUDENT_ID,
+            StudentServiceTS.VALID_TOPIC_ID));
+    assertEquals("No value present", exception.getMessage());
+  }
+
+  @Test
+  void getCurrentTopic_notFound() {
+    when(userRepository.findById(StudentServiceTS.INVALID_STUDENT_ID))
+        .thenThrow(new NoSuchElementException());
+    Exception exception = assertThrows(NoSuchElementException.class,
+        () -> service.getTopic(StudentServiceTS.INVALID_STUDENT_ID));
+    assertNull(exception.getMessage());
+  }
+
+  @Test
+  void getCurrentTopic_notHaveTopic() {
+    when(userRepository.findById(StudentServiceTS.VALID_STUDENT_ID))
+        .thenReturn(Optional.of(new UserTable().setTopicExecutes(List.of())));
+    assertNull(service.getTopic(StudentServiceTS.VALID_STUDENT_ID));
+  }
+
+  @Test
+  void getCurrentTopic_haveTopic() {
+    when(userRepository.findById(StudentServiceTS.VALID_STUDENT_ID))
+        .thenReturn(Optional.of(
+            new UserTable()
+                .setTopicExecutes(List.of(new TopicStudentTable()
+                    .setTopic(new TopicTable()
+                        .setSemester(new SemesterTable().setStatus(SemesterStatus.USING)))))));
+    service.getTopic(StudentServiceTS.VALID_STUDENT_ID);
   }
 
 }

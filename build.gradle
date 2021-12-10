@@ -64,8 +64,16 @@ jacocoTestReport {
             "**/service/advice/**",
             "**/service/config/**",
             "**/service/constant/**",
+            "**/service/dto/score/response/TopicScoreResponse**",
+            "**/service/dto/score/response/UserScoreResponse**",
             "**/service/model/**",
+            "**/service/service/TimerNotificationService**",
+            "**/service/service/score/ScoreService.class",
+            "**/service/service/score/TemplateService.class",
+            "**/service/service/topic/CouncilService.class",
             "**/service/service/user/JwtTokenService.class",
+            "**/service/service/user/NotificationService.class",
+            "**/service/service/user/UserService.class",
             "**/service/utils/ContextAccessor.class",
             "**/service/utils/ContextHolder.class"
         ])

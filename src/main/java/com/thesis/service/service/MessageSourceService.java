@@ -1,5 +1,6 @@
 package com.thesis.service.service;
 
+import java.util.Objects;
 import javax.annotation.PostConstruct;
 import com.thesis.service.constant.MessageCode;
 import com.thesis.service.dto.user.CustomUserDetail;
@@ -36,6 +37,8 @@ public class MessageSourceService {
   }
 
   public String toUserTag(UserTable user) {
+    if (Objects.isNull(user))
+      user = new UserTable();
     return String.format("<user id=%s >%s</user>", user.getId(), user.getFullName());
   }
 
@@ -44,6 +47,8 @@ public class MessageSourceService {
   }
 
   public String toTopicTag(TopicTable topic) {
+    if (Objects.isNull(topic))
+      topic = new TopicTable();
     return this.toTopicTag(topic.getId());
   }
 
