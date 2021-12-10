@@ -56,5 +56,17 @@ jacocoTestReport {
       xml.required = false
       csv.required = false
     }
-}
+  }
+  afterEvaluate {
+    classDirectories.setFrom(files(classDirectories.files.collect {
+        fileTree(dir: it, exclude: [
+            "**/service/advice/**",
+            "**/service/config/**",
+            "**/service/constant/**",
+            "**/service/model/**",
+            "**/service/utils/ContextAccessor.class",
+            "**/service/utils/ContextHolder.class"
+        ])
+    }))
+  }
 }

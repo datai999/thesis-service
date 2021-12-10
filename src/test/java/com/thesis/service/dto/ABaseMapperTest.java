@@ -1,4 +1,4 @@
-package com.thesis.service.mapper;
+package com.thesis.service.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import com.thesis.service.ABaseTest;
