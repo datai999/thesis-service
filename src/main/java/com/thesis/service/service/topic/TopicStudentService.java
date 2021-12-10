@@ -8,6 +8,7 @@ import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.repository.topic.TopicStudentRepository;
 import com.thesis.service.service.ABaseService;
 import com.thesis.service.service.user.NotificationService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -29,7 +30,9 @@ public class TopicStudentService extends ABaseService<TopicStudentTable, TopicSt
     entity.setCreatedAt(existEntity.getCreatedAt());
     var response = this.repository.save(entity);
 
-    var messageCode = response.getMidPass() ? MessageCode.Mark.MID_PASS : MessageCode.Mark.MID_FAIL;
+    var messageCode = ObjectUtils.defaultIfNull(response.getMidPass(), false)
+        ? MessageCode.Mark.MID_PASS
+        : MessageCode.Mark.MID_FAIL;
     var topicTag = super.messageSource.toTopicTag(response.getTopic());
     var teacherTag = super.messageSource.toUserTag(super.getAuth());
     var studentTag = super.messageSource.toUserTag(response.getStudent());
