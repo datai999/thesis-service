@@ -4,7 +4,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 -- INIT DATA
 
-INSERT INTO sy_education_method (name) VALUES ('Chính quy'), ('Chất lượng cao') ON CONFLICT DO NOTHING;
+INSERT INTO sy_education_method (name, deleted) VALUES ('Chính quy', FALSE), ('Chất lượng cao', FALSE), ('Vừa học vừa làm', TRUE), ('Đào tạo từ xa', TRUE) ON CONFLICT DO NOTHING;
 INSERT INTO sy_major (name) VALUES ('Khoa học máy tính'), ('Kỹ thuật máy tính') ON CONFLICT DO NOTHING;
 INSERT INTO sy_degree (name) VALUES ('Thạc sĩ'), ('Tiến sĩ'), ('PGS.TS') ON CONFLICT DO NOTHING;
 
@@ -23,10 +23,11 @@ VALUES
   , ('221', null, null, null, null, null, null, null)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO tp_council_role (name, min, max, display_order) VALUES
-    ('Chủ tịch', 1, 1, 1)
-  , ('Thư ký', 1, 1, 2)
-  , ('Ủy viên', 3, 3, 3)
+INSERT INTO tp_council_role (name, min, max, display_order, deleted) VALUES
+    ('Chủ tịch', 1, 1, 1, FALSE)
+  , ('Thư ký', 1, 1, 2, FALSE)
+  , ('Ủy viên', 1, 3, 3, FALSE)
+  , ('Bí thư', 1, 1, 4, TRUE)
 ON CONFLICT DO NOTHING;
 
 

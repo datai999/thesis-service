@@ -37,12 +37,13 @@ public class GuideTeacherServiceTest extends ABaseServiceTest {
   @BeforeEach
   void beforeEach() {
     this.userRepository = mock(UserRepository.class);
-    ReflectionTestUtils.setField(this.service, "userRepository", userRepository);
+    ReflectionTestUtils.setField(this.service, "userRepository", this.userRepository);
+    ReflectionTestUtils.setField(this.service, "topicService", this.topicService);
   }
 
   @Test
   @DisplayName("Throw error when not found user")
-  void userNotFound() {
+  void getTopic_userNotFound() {
     when(userRepository.findById(GuideTeacherServiceTS.INVALID_USER_ID))
         .thenThrow(new NoSuchElementException());
     Exception exception = assertThrows(NoSuchElementException.class,
@@ -53,11 +54,12 @@ public class GuideTeacherServiceTest extends ABaseServiceTest {
 
   @Test
   @DisplayName("Teacher not guide topic")
-  void teacherNotGuideTopic() {
+  void getTopic_teacherNotGuideTopic() {
     when(userRepository.findById(GuideTeacherServiceTS.VALID_USER_ID))
         .thenReturn(Optional.of(new UserTable().setTopicGuides(List.of())));
-    service.getTopic(GuideTeacherServiceTS.VALID_USER_ID,
+    var result = service.getTopic(GuideTeacherServiceTS.VALID_USER_ID,
         SemesterServiceTS.CURRENT_SEMESTER_NAME);
+    assertEquals(List.of(), result);
   }
 
   @Test

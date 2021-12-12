@@ -3,15 +3,19 @@ package com.thesis.service.service.user;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import com.thesis.service.constant.MessageCode;
+import com.thesis.service.dto.user.response.ReviewTeacherResponse;
 import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.model.system.SubjectDepartmentTable;
 import com.thesis.service.model.topic.TopicTable;
+import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.repository.user.UserRepository;
 import com.thesis.service.service.MessageSourceService;
+import com.thesis.service.service.system.SemesterService;
 import com.thesis.service.service.topic.TopicService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -21,9 +25,11 @@ public class ReviewTeacherService {
 
   private final TopicRepository topicRepository;
   private final UserRepository userRepository;
-  private final TopicService topicService;
   private final MessageSourceService messageSourceService;
   private final NotificationService notificationService;
+  private final TopicService topicService;
+  private final UserService userService;
+  private final SemesterService semesterService;
 
   @Transactional
   public Object assignReview(TopicTable entity) {
@@ -78,6 +84,14 @@ public class ReviewTeacherService {
     var response = user.getTopicReviews().parallelStream()
         .filter(e -> semesterName.equals(e.getSemester().getName())).collect(Collectors.toList());
     return topicService.map(response);
+  }
+
+  public Object getTeacher(UserTable entity, Sort sort) {
+    var currentSemester = semesterService.getCurrentSemester();
+    var queryResult = userService.shareFindByExample(entity, sort);
+    return queryResult.stream()
+        .map(teacher -> new ReviewTeacherResponse(teacher, currentSemester.getId()))
+        .collect(Collectors.toList());
   }
 
 }

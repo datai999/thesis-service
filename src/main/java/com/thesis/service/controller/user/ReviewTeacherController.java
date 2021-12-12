@@ -1,7 +1,10 @@
 package com.thesis.service.controller.user;
 
 import com.thesis.service.model.topic.TopicTable;
+import com.thesis.service.model.user.UserTable;
 import com.thesis.service.service.user.ReviewTeacherService;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +37,15 @@ public class ReviewTeacherController {
   @PostMapping("/assign")
   public Object findByExample(@RequestBody TopicTable entity) {
     return reviewTeacherService.assignReview(entity);
+  }
+
+  @PostMapping("/get")
+  public Object getTeacher(
+      @RequestParam(defaultValue = "ASC") String direction,
+      @RequestParam(defaultValue = "id") String sort,
+      @RequestBody UserTable entity) {
+    Sort sortable = Sort.by(Direction.valueOf(direction), sort);
+    return reviewTeacherService.getTeacher(entity, sortable);
   }
 
 }

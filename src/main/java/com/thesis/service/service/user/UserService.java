@@ -68,8 +68,7 @@ public class UserService extends ABaseService<UserTable, UserRepository>
     return UserResponse.class;
   }
 
-  @Override
-  public Object findByExample(UserTable entity, Sort sort) {
+  public List<UserTable> shareFindByExample(UserTable entity, Sort sort) {
     entity.setCreatedAt(null).setUpdatedAt(null);
     var example = Example.of(entity);
     var response = this.repository.findAll(example, sort);
@@ -78,6 +77,12 @@ public class UserService extends ABaseService<UserTable, UserRepository>
       var headResponse = this.repository.findAll(headExample, sort);
       response.addAll(headResponse);
     }
+    return response;
+  }
+
+  @Override
+  public Object findByExample(UserTable entity, Sort sort) {
+    var response = this.shareFindByExample(entity, sort);
     return this.map(response);
   }
 
