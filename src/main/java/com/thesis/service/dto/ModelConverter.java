@@ -16,7 +16,7 @@ public class ModelConverter {
 
   public ModelConverter() {
     this.modelMapper = new ModelMapper();
-    this.modelMapper.getConfiguration().setSkipNullEnabled(true);
+    this.modelMapper.getConfiguration().setSkipNullEnabled(false);
   }
 
   /**
