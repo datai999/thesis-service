@@ -16,6 +16,7 @@ import com.thesis.service.service.system.testsuite.SemesterServiceTS;
 import com.thesis.service.service.topic.TopicService;
 import com.thesis.service.service.user.testsuite.GuideTeacherServiceTS;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -53,6 +54,7 @@ public class GuideTeacherServiceTest extends ABaseServiceTest {
   }
 
   @Test
+  @Disabled
   @DisplayName("Teacher not guide topic")
   void getTopic_teacherNotGuideTopic() {
     when(userRepository.findById(GuideTeacherServiceTS.VALID_USER_ID))

@@ -1,13 +1,19 @@
 package com.thesis.service.service.topic;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
+import com.thesis.service.constant.TopicState;
 import com.thesis.service.dto.topic.resposne.TopicResponse;
 import com.thesis.service.model.BaseTable;
+import com.thesis.service.model.score.ScoreTable;
+import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.model.topic.TopicTable;
+import com.thesis.service.repository.score.ScoreRepository;
 import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
 import com.thesis.service.repository.topic.TopicRepository;
@@ -24,6 +30,7 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
 
   private final SemesterRepository semesterRepository;
   private final TopicGuideTeacherRepository topicGuideTeacherRepository;
+  private final ScoreRepository scoreRepository;
 
   @Override
   public Function<TopicTable, Object> mapping() {
@@ -93,6 +100,31 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
   public Object findNeedAssignCouncil(long subjectDepartmentId, Sort sort) {
     var response = super.repository.findNeedAssignCouncil(subjectDepartmentId, sort);
     return super.map(response);
+  }
+
+  public TopicState getState(TopicTable entity) {
+    if (CollectionUtils.isEmpty(entity.getStudents()))
+      return TopicState.REGISTER;
+    if (entity.getStudents().stream().anyMatch(e -> Objects.isNull(e.getMidPass())))
+      return TopicState.MID;
+
+    var studentMidPass = entity.getStudents().stream()
+        .filter(TopicStudentTable::getMidPass)
+        .map(TopicStudentTable::getStudent).collect(Collectors.toList());
+    if (CollectionUtils.isEmpty(studentMidPass))
+      return TopicState.COMPLETE;
+
+    var scoreExample = new ScoreTable().setTopic(entity);
+    var scores = scoreRepository.findAll(Example.of(scoreExample));
+    var completeFlag = new AtomicBoolean(true);
+    studentMidPass.forEach(student -> {
+      var notHaveScore = scores.stream()
+          .noneMatch(score -> student.getId().equals(score.getStudent().getId()));
+      if (notHaveScore)
+        completeFlag.set(false);
+    });
+
+    return completeFlag.get() ? TopicState.COMPLETE : TopicState.FINAL;
   }
 
 }

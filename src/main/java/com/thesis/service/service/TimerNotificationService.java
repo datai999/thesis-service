@@ -2,7 +2,6 @@ package com.thesis.service.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Supplier;
@@ -21,12 +20,7 @@ public class TimerNotificationService {
   private final NotificationRepository notificationRepository;
   private final MessageSourceService messageSourceService;
 
-  private enum TYPE {
-    REGISTER_TOPIC_START, REGISTER_TOPIC_END
-  }
-
-  private static final Map<TYPE, Timer> timers = Map.of(
-      TYPE.REGISTER_TOPIC_START, new Timer(), TYPE.REGISTER_TOPIC_END, new Timer());
+  private static Timer registerTopicEndTimer = new Timer();
 
   @AllArgsConstructor
   public static class NotificationTask extends TimerTask {
@@ -56,7 +50,8 @@ public class TimerNotificationService {
         notificationRepository.notifyUserHasTopicInCurrentSemester(studentMessage, teacherMessage);
       }
     };
-    timers.get(TYPE.REGISTER_TOPIC_END).schedule(task, time);
+    registerTopicEndTimer = new Timer();
+    registerTopicEndTimer.schedule(task, time);
   }
 
 }

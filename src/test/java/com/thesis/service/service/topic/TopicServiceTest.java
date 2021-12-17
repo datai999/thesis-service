@@ -9,6 +9,7 @@ import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.topic.TopicGuideTeacherTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.model.user.UserTable;
+import com.thesis.service.repository.score.ScoreRepository;
 import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
 import com.thesis.service.repository.topic.TopicRepository;
@@ -26,7 +27,8 @@ public class TopicServiceTest
         .setMajors(List.of(new MajorTable()));
     return spy(new TopicService(
         mock(SemesterRepository.class),
-        mock(TopicGuideTeacherRepository.class)));
+        mock(TopicGuideTeacherRepository.class),
+        mock(ScoreRepository.class)));
   }
 
   @Test

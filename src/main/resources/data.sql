@@ -20,7 +20,7 @@ VALUES
   , ('211', 'USED', '2020-09-17T01:00:00', '2020-10-17T01:00:00', '2020-10-17T01:00:00', '2021-01-17T01:00:00', '2020-10-17T01:00:00', '2021-02-17T01:00:00')
   , ('212', 'USED', '2021-03-17T01:00:00', '2021-04-10T01:00:00', '2021-04-1T01:00:00', '2022-08-01T01:00:00', '2021-04-1T01:00:00', '2022-09-17T01:00:00')
   , ('213', 'USING', '2021-09-17T01:00:00', '2021-12-04T19:07:00', '2021-10-1T01:00:00', '2022-01-01T01:00:00', '2021-10-1T01:00:00', '2022-02-17T01:00:00')
-  , ('221', null, null, null, null, null, null, null)
+  , ('214', null, '2021-09-17T01:00:00', '2021-12-04T19:07:00', null, null, null, null)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO tp_council_role (name, min, max, display_order, deleted) VALUES
@@ -255,6 +255,10 @@ FROM tp_topic;
 
 insert into tp_topic(created_at,deleted,updated_at,description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id) values('2021-12-03 11:42:02.914172','false','2021-12-03 11:55:23.515337','<p>Theo thống kê điểm thi THPT quốc gia của năm 2019, một trong những con số khiến nhiều người chú ý là thống kê: có tới 70% số bài thi môn lịch sử đạt điểm dưới trung bình. Vì hiện trạng học lệch đã xảy xa cách đây từ lâu nên đây là con phản ánh chính xác của việc giới trẻ không có hứng thú với việc học môn lịch sử hay là tìm hiểu lịch sử của nước nhà và thế giới. Đặc biệt hơn nữa, khoảng cách giữa giáo viên với học sinh cũng như nguồn thông tin đa chiều chưa được xác thực trên mạng internet ngày nay làm cho việc tìm hiểu lịch sử của học sinh càng gặp nhiều khó khăn</p><p>Trong bối cảnh này, để xây dựng văn hóa tìm hiểu lịch sử, tạo được sự hứng thú trong việc học lịch sử là cấp bách và thiết thực. Hệ thống “QA hỗ trợ các bạn học sinh học môn Lịch Sử” sẽ giúp giải quyết được vấn đề này.</p>',null,'2','1','{"en":null,"vi":"Xây dựng hệ thống QUESTION ANSWERING hỗ trợ các bạn học sinh học môn Lịch Sử"}','<p>Nghiên cứu kiến trúc của hệ thống DrQA của Facebook.</p><p>Sử dụng PhoBERT để làm pretrain language model cho tiếng Việt</p><p>Thu thập data set từ sách giáo khoa THPT của Bộ Giáo dục và Đào tạo và một số trang web chính thống.</p><p>Thiết kế hệ thống</p><p>Xây dựng demo</p>','false',null,'4','2');
 
+INSERT INTO tp_topic(description,document_reference,max_student_take,min_student_take,name,task,thesis,council_id,semester_id,subject_department_id)
+SELECT description,document_reference,max_student_take,min_student_take,name,task,FALSE,council_id,semester_id+1 AS semester_id,subject_department_id
+FROM tp_topic WHERE id < 21;
+
 -- tp_topic_education_methods_1637685038642-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into tp_topic_education_methods(topic_id,education_method_id) values('1','2');
@@ -295,6 +299,11 @@ FROM tp_topic_education_methods;
 
 insert into tp_topic_education_methods(topic_id,education_method_id) values('41','1');
 
+INSERT INTO tp_topic_education_methods(topic_id,education_method_id)
+SELECT topic_id+41 AS topic_id,education_method_id
+FROM tp_topic_education_methods
+WHERE topic_id < 21;
+
 -- tp_topic_majors_1637685059108-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into tp_topic_majors(topic_id,major_id) values('1','1');
@@ -331,6 +340,11 @@ SELECT topic_id+20 AS topic_id,major_id
 FROM tp_topic_majors;
 
 insert into tp_topic_majors(topic_id,major_id) values('41','1');
+
+INSERT INTO tp_topic_majors(topic_id,major_id)
+SELECT topic_id+41 AS topic_id,major_id
+FROM tp_topic_majors
+WHERE topic_id < 21;
 
 -- tp_guide_teacher_1637685091603-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -370,6 +384,11 @@ SELECT created_at,deleted,updated_at,main,guide_teacher_id,topic_id+20 AS topic_
 FROM tp_guide_teacher;
 
 insert into tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id) values('2021-12-03 11:42:02.946087','false','2021-12-03 11:42:02.946087','false','7','41');
+
+INSERT INTO tp_guide_teacher(created_at,deleted,updated_at,main,guide_teacher_id,topic_id)
+SELECT created_at,deleted,updated_at,main,guide_teacher_id,topic_id+41 AS topic_id
+FROM tp_guide_teacher
+WHERE topic_id < 21;
 
 -- tp_student-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

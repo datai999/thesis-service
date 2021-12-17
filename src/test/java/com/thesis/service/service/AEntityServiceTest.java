@@ -12,6 +12,7 @@ import java.util.Optional;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.repository.BaseRepository;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
@@ -20,6 +21,8 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepository<T>, S extends ABaseService<T, R>>
     extends ABaseServiceTest {
+
+  private static final int REPEATED_TEST = 2;
 
   protected R repository;
   protected S service;
@@ -51,12 +54,14 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
   }
 
   @Test
+  @RepeatedTest(REPEATED_TEST)
   void findById() {
     when(repository.findById(entity.getId())).thenReturn(Optional.of(entity));
     assertNotNull(service.findById(entity.getId()));
   }
 
   @Test
+  @RepeatedTest(REPEATED_TEST)
   void findByExample() {
     Sort sort = Sort.by(Direction.ASC, "id");
     when(repository.findAll(Example.of(entity), sort)).thenReturn(List.of());
@@ -64,18 +69,21 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
   }
 
   @Test
+  @RepeatedTest(REPEATED_TEST)
   void create() {
     when(repository.save(any())).thenReturn(entity);
     assertNotNull(service.create(entity));
   }
 
   @Test
+  @RepeatedTest(REPEATED_TEST)
   void saveAll() {
     when(repository.saveAll(any())).thenReturn(List.of(entity));
     assertNotNull(service.saveAll(List.of(entity)));
   }
 
   @Test
+  @RepeatedTest(REPEATED_TEST)
   void update() {
     when(repository.findById(anyLong())).thenReturn(Optional.of(entity));
     when(repository.save(any())).thenReturn(entity);

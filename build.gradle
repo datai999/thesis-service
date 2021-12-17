@@ -64,6 +64,7 @@ jacocoTestReport {
             "**/service/advice/**",
             "**/service/config/**",
             "**/service/constant/**",
+            "**/service/controller/**",
             "**/service/dto/score/response/TopicScoreResponse**",
             "**/service/dto/score/response/UserScoreResponse**",
             "**/service/model/**",
@@ -73,6 +74,7 @@ jacocoTestReport {
             "**/service/service/topic/CouncilService.class",
             "**/service/service/user/JwtTokenService.class",
             "**/service/service/user/NotificationService.class",
+            "**/service/service/user/StudentService.class",
             "**/service/service/user/UserService.class",
             "**/service/utils/ContextAccessor.class",
             "**/service/utils/ContextHolder.class"

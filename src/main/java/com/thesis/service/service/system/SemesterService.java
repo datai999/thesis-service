@@ -72,8 +72,9 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
     var existEntity = this.repository.findById(entity.getId()).orElseThrow();
     entity.setCreatedAt(existEntity.getCreatedAt());
     var response = this.repository.save(entity);
-    timerNotificationService.notifyRegisterTopicEnd(
-        TimeConvert.toDate(response.getRegisterTopicEnd()));
+    if (SemesterStatus.USING.equals(entity.getStatus()))
+      timerNotificationService.notifyRegisterTopicEnd(
+          TimeConvert.toDate(response.getRegisterTopicEnd()));
     return this.map(response);
   }
 

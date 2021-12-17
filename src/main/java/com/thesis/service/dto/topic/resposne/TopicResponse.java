@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import com.thesis.service.constant.TopicState;
 import com.thesis.service.dto.MultiLangDto;
 import com.thesis.service.dto.system.BaseResponse;
 import com.thesis.service.dto.user.response.UserResponse;
@@ -13,6 +14,7 @@ import com.thesis.service.model.system.MajorTable;
 import com.thesis.service.model.topic.TopicGuideTeacherTable;
 import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.model.topic.TopicTable;
+import com.thesis.service.service.topic.TopicService;
 import com.thesis.service.utils.ContextAccessor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -53,6 +55,9 @@ public class TopicResponse {
   private List<UserResponse> reviewTeachers;
 
   private CouncilInTopicResponse council;
+
+  private TopicState state;
+  private String stateName;
 
   @Data
   @EqualsAndHashCode(callSuper = false)
@@ -122,6 +127,9 @@ public class TopicResponse {
     guideTeachers.addAll(entity.getGuideTeachers().stream()
         .filter(e -> !e.getMain())
         .map(GuideTeacherResponse::new).collect(Collectors.toList()));
+
+    this.state = ContextAccessor.getBean(TopicService.class).getState(entity);
+    this.stateName = this.state.getStateName();
   }
 
 }
