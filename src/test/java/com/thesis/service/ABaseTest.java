@@ -67,10 +67,10 @@ public abstract class ABaseTest {
     this.contextAccessor = Mockito.mockStatic(ContextAccessor.class);
     this.contextAccessor.when(ContextAccessor::getModelConverter).thenReturn(this.mapper);
     this.contextAccessor.when(ContextAccessor::getMessageSource).thenReturn(this.messageSource);
-    this.contextAccessor.when(() -> ContextAccessor.getBean(SemesterService.class))
-        .thenReturn(semesterService);
     this.contextAccessor.when(() -> ContextAccessor.getBean(SemesterRepository.class))
         .thenReturn(semesterRepository);
+    this.contextAccessor.when(() -> ContextAccessor.getBean(SemesterService.class))
+        .thenReturn(semesterService);
   }
 
   @AfterAll
@@ -112,9 +112,6 @@ public abstract class ABaseTest {
     ObjectMapper objectMapper = new ObjectMapper();
     T deepCopyRequestBody = null;
     try {
-      var string = objectMapper.writeValueAsString(input);
-      System.out.println(string);
-      var obj = objectMapper.readValue(string, input.getClass());
       deepCopyRequestBody = (T) objectMapper
           .readValue(objectMapper.writeValueAsString(input), input.getClass());
     } catch (JsonProcessingException e) {

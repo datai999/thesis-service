@@ -16,7 +16,6 @@ import com.thesis.service.repository.BaseRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -25,7 +24,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepository<T>, S extends ABaseService<T, R>>
     extends ABaseServiceTest {
 
-  private static final int REPEATED_TEST = 1;
+  private static final int REPEATED_TEST = 3;
 
   protected R repository;
   protected S service;
@@ -83,7 +82,7 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
     assertNotNull(service.findByExample(entity, sort));
   }
 
-  @Test
+  @RepeatedTest(REPEATED_TEST)
   void findByExample_one() {
     Sort sort = Sort.by(Direction.ASC, "id");
     when(repository.findAll(Example.of(entity), sort)).thenReturn(List.of(entity));
