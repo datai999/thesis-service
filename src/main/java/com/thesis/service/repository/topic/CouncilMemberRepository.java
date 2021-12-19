@@ -22,7 +22,7 @@ public interface CouncilMemberRepository extends BaseRepository<CouncilMemberTab
           "WHERE tCM.member_id IN ?1 " +
           "AND tCM.council_id != ?2 " +
           "AND tC.reserve_date = ?3")
-  List<CouncilMemberTable> getConflictTimeLine(List<Long> memberIds, long councilIds,
+  List<CouncilMemberTable> getConflictTimeLine(List<Long> memberIds, long councilId,
       LocalDate reserveDate);
 
 }

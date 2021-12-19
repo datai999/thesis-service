@@ -22,7 +22,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepository<T>, S extends ABaseService<T, R>>
     extends ABaseServiceTest {
 
-  private static final int REPEATED_TEST = 2;
+  private static final int REPEATED_TEST = 1;
 
   protected R repository;
   protected S service;
@@ -31,15 +31,17 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
   @BeforeAll
   @SuppressWarnings("unchecked")
   private void beforeAllService() {
+    var entityClass = (Class<T>) this.getGenericType(0);
     try {
-      var entityClass = (Class<T>) this.getGenericType(0);
       this.entity = entityClass.getDeclaredConstructor().newInstance();
     } catch (Exception e) {
       e.printStackTrace();
     }
     this.entity.setId(0L);
-    this.service = spyService();
     this.repository = mock((Class<R>) this.getGenericType(1));
+    when(repository.save(any(entityClass))).thenAnswer(i -> i.getArgument(0));
+
+    this.service = spyService();
     ReflectionTestUtils.setField(this.service, "repository", this.repository);
     ReflectionTestUtils.setField(this.service, "mapper", super.mapper);
     ReflectionTestUtils.setField(this.service, "messageSource", super.messageSource);
@@ -71,7 +73,6 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
   @Test
   @RepeatedTest(REPEATED_TEST)
   void create() {
-    when(repository.save(any())).thenReturn(entity);
     assertNotNull(service.create(entity));
   }
 
@@ -86,7 +87,6 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
   @RepeatedTest(REPEATED_TEST)
   void update() {
     when(repository.findById(anyLong())).thenReturn(Optional.of(entity));
-    when(repository.save(any())).thenReturn(entity);
     assertNotNull(service.update(entity));
   }
 

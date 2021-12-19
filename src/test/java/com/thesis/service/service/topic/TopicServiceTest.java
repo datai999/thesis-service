@@ -14,6 +14,7 @@ import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.service.AEntityServiceTest;
+import com.thesis.service.utils.ContextAccessor;
 import org.junit.jupiter.api.Test;
 
 public class TopicServiceTest
@@ -25,10 +26,13 @@ public class TopicServiceTest
         .setGuideTeachers(List.of(new TopicGuideTeacherTable().setGuideTeacher(new UserTable())))
         .setEducationMethods(List.of(new EducationMethodTable()))
         .setMajors(List.of(new MajorTable()));
-    return spy(new TopicService(
+    var service = spy(new TopicService(
         mock(SemesterRepository.class),
         mock(TopicGuideTeacherRepository.class),
         mock(ScoreRepository.class)));
+    super.contextAccessor.when(() -> ContextAccessor.getBean(TopicService.class))
+        .thenReturn(service);
+    return service;
   }
 
   @Test

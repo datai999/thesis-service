@@ -51,9 +51,9 @@ ON CONFLICT DO NOTHING;
 INSERT INTO us_user
   (permission, subject_department_id, degree_id, first_name, last_name, email)
 VALUES
-    ('HEAD_SUBJECT_DEPARTMENT', 1, 3, 'Trưởng phòng', 'HTTT', 'headHTTT@hcmut.edu.vn')
-  , ('HEAD_SUBJECT_DEPARTMENT', 2, 3, 'Trưởng phòng', 'Công nghệ phần mềm', 'headCNPM@hcmut.edu.vn')
-  , ('HEAD_SUBJECT_DEPARTMENT', 3, 3, 'Trưởng phòng', 'Hệ thống và mạng', 'headHTVM@hcmut.edu.vn')
+    ('HEAD_SUBJECT_DEPARTMENT', 1, 3, 'Trưởng bộ môn', 'HTTT', 'headHTTT@hcmut.edu.vn')
+  , ('HEAD_SUBJECT_DEPARTMENT', 2, 3, 'Trưởng bộ môn', 'Công nghệ phần mềm', 'headCNPM@hcmut.edu.vn')
+  , ('HEAD_SUBJECT_DEPARTMENT', 3, 3, 'Trưởng bộ môn', 'Hệ thống và mạng', 'headHTVM@hcmut.edu.vn')
   , ('HEAD_SUBJECT_DEPARTMENT', 4, 3, 'Quản Thành', 'Thơ', 'qttho@hcmut.edu.vn')
   , ('HEAD_SUBJECT_DEPARTMENT', 5, 3, 'Trần Ngọc', 'Thịnh', 'tnthinh@hcmut.edu.vn')
 ON CONFLICT DO NOTHING;
@@ -402,6 +402,9 @@ INSERT INTO tp_student(topic_id, student_id, mid_pass)
 SELECT topic_id+20 AS topic_id,student_id,TRUE
 FROM tp_student WHERE mid_pass = TRUE;
 
+insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-12-03 14:20:35.883308','false','2021-12-03 14:20:35.883308','true','38','3');
+insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-12-03 14:20:35.883308','false','2021-12-03 14:20:35.883308',null,'38','23');
+insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-12-03 14:20:35.883308','false','2021-12-03 14:20:35.883308',null,'39','23');
 insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-12-03 14:20:35.883308','false','2021-12-03 14:20:35.883308','true','35','41');
 insert into tp_student(created_at,deleted,updated_at,mid_pass,student_id,topic_id) values('2021-12-04 14:20:35.883308','false','2021-12-04 14:20:35.883308',null,'36','41');
 
@@ -415,6 +418,7 @@ INSERT INTO tp_topic_review_teachers(topic_id, review_teacher_id)
 SELECT topic_id+20 AS topic_id, review_teacher_id
 FROM tp_topic_review_teachers;
 
+insert into tp_topic_review_teachers(topic_id,review_teacher_id) values('3','16');
 insert into tp_topic_review_teachers(topic_id,review_teacher_id) values('41','16');
 
 -- sc_criterion_1637403518823-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -559,6 +563,16 @@ insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:33.502734','false','2021-11-29 14:43:33.502734',null,'false','true','B',null,'14','32','12','2','1');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:33.505726','false','2021-11-29 14:43:33.505726',null,'false','true','C',null,'16','32','12','2','1');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:43:33.508718','false','2021-11-29 14:43:33.508718',null,'false','true','B',null,'17','32','12','2','1');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','B',null,'3','38','13','1','3');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'4','38','13','1','3');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','B',null,'6','38','13','1','3');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'7','38','13','1','3');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'9','38','13','1','3');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','B',null,'3','38','16','1','3');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'4','38','16','1','3');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'6','38','16','1','3');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','C',null,'7','38','16','1','3');
+insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-23 16:56:14.851376','false','2021-11-23 16:56:14.851376',null,'true','false','B',null,'9','38','16','1','3');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:40:52.119586','false','2021-11-29 14:40:52.119586',null,'false','true','A',null,'3','33','6','1','5');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:40:52.123599','false','2021-11-29 14:40:52.123599',null,'false','true','B',null,'4','33','6','1','5');
 insert into sc_score(created_at,deleted,updated_at,comment,guide_teacher,review_teacher,score,council_role_id,criterion_id,student_id,teacher_id,template_id,topic_id) values('2021-11-29 14:40:52.126566','false','2021-11-29 14:40:52.126566',null,'false','true','C',null,'6','33','6','1','5');
@@ -664,8 +678,8 @@ insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_
 insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','12');
 insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','15');
 insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 19:07:25.061427','false','2021-12-04 19:07:25.061427','Kết thúc thời gian đăng ký đề tài. <newTab href="/guide" >Xem đề tài có tôi</newTab>. <newTab href="/dashboard" >Xem mốc thời gian</newTab>.','false','13');
-insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 22:05:25.317805','false','2021-12-04 22:05:25.317805','Giáo viên <user id=7 >Trưởng phòng Công nghệ phần mềm</user> đánh giá sinh viên <user id=35 >Nguyễn t</user> <strong>đạt giữa kỳ</strong> ở <topic id=41 >đề tài mã số 41</topic>','false','35');
-insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 22:05:25.321799','false','2021-12-04 22:05:25.321799','Giáo viên <user id=7 >Trưởng phòng Công nghệ phần mềm</user> đánh giá sinh viên <user id=35 >Nguyễn t</user> <strong>đạt giữa kỳ</strong> ở <topic id=41 >đề tài mã số 41</topic>','false','36');
-insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 23:09:56.308381','false','2021-12-04 23:09:56.308381','Trưởng phòng <user id=7 >Trưởng phòng Công nghệ phần mềm</user> phân công bạn phản biện <topic id=41 >đề tài mã số 41</topic>','false','16');
-insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 23:09:56.314364','false','2021-12-04 23:09:56.314364','Trưởng phòng <user id=7 >Trưởng phòng Công nghệ phần mềm</user> phân công giáo viên <user id=16 >Lê Lam Sơn</user> phản biện <topic id=41 >đề tài mã số 41</topic>','false','35');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 22:05:25.317805','false','2021-12-04 22:05:25.317805','Giáo viên <user id=7 >Trưởng bộ môn Công nghệ phần mềm</user> đánh giá sinh viên <user id=35 >Nguyễn t</user> <strong>đạt giữa kỳ</strong> ở <topic id=41 >đề tài mã số 41</topic>','false','35');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 22:05:25.321799','false','2021-12-04 22:05:25.321799','Giáo viên <user id=7 >Trưởng bộ môn Công nghệ phần mềm</user> đánh giá sinh viên <user id=35 >Nguyễn t</user> <strong>đạt giữa kỳ</strong> ở <topic id=41 >đề tài mã số 41</topic>','false','36');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 23:09:56.308381','false','2021-12-04 23:09:56.308381','Trưởng bộ môn <user id=7 >Trưởng bộ môn Công nghệ phần mềm</user> phân công bạn phản biện <topic id=41 >đề tài mã số 41</topic>','false','16');
+insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-04 23:09:56.314364','false','2021-12-04 23:09:56.314364','Trưởng bộ môn <user id=7 >Trưởng bộ môn Công nghệ phần mềm</user> phân công giáo viên <user id=16 >Lê Lam Sơn</user> phản biện <topic id=41 >đề tài mã số 41</topic>','false','35');
 insert into us_notification(created_at,deleted,updated_at,message,seen,receiver_id) values('2021-12-05 00:29:35.767229','false','2021-12-05 00:29:35.767229','Giáo viên <user id=16 >Lê Lam Sơn</user> đã đánh giá cuối kỳ cho bạn','false','35');

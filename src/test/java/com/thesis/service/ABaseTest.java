@@ -41,7 +41,7 @@ public abstract class ABaseTest {
   protected MessageSourceService messageSource;
   protected ModelConverter mapper;
 
-  private MockedStatic<ContextAccessor> contextAccessor;
+  protected MockedStatic<ContextAccessor> contextAccessor;
 
   @BeforeAll
   void beforeAll() {

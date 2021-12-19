@@ -34,7 +34,7 @@ public class CouncilMemberService
   public Object checkConflictTimeLine(long councilId, LocalDate reserveDate) {
     var council = councilRepository.findById(councilId).orElseThrow();
     var memberIds = council.getMembers().stream()
-        .map(CouncilMemberTable::getId).collect(Collectors.toList());
+        .map(councilMember -> councilMember.getMember().getId()).collect(Collectors.toList());
     var response = super.repository.getConflictTimeLine(memberIds, councilId, reserveDate);
     return super.map(response);
   }
