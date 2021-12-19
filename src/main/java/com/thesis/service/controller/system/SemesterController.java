@@ -15,7 +15,7 @@ public class SemesterController extends ABaseController<SemesterTable, SemesterS
 
   @GetMapping("/current")
   public Object getCurrentSemester() {
-    return super.service.getCurrentSemester();
+    return super.service.map(super.service.getCurrentSemester());
   }
 
   @GetMapping("/allow-student-register-cancel")

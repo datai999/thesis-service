@@ -28,16 +28,15 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
     return SemesterResponse.class;
   }
 
-  public SemesterResponse getCurrentSemester() {
-    var currentSemester = super.repository.findCurrentSemester();
-    return super.mapper.map(currentSemester, SemesterResponse.class);
+  public SemesterTable getCurrentSemester() {
+    return super.repository.findCurrentSemester();
   }
 
   public boolean allowStudentRegisterCancelTopic() {
     var currentSemester = super.repository.findCurrentSemester();
     var now = LocalDateTime.now();
     return now.plusMinutes(1).isAfter(currentSemester.getRegisterTopicStart())
-        && now.isBefore(currentSemester.getRegisterTopicEnd());
+        && now.minusMinutes(1).isBefore(currentSemester.getRegisterTopicEnd());
   }
 
   @Transactional

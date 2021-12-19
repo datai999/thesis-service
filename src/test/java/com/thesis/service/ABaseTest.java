@@ -9,7 +9,6 @@ import java.util.Optional;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thesis.service.dto.ModelConverter;
-import com.thesis.service.dto.system.SemesterResponse;
 import com.thesis.service.dto.user.CustomUserDetail;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.system.SemesterRepository;
@@ -60,8 +59,10 @@ public abstract class ABaseTest {
     var semesterRepository = mock(SemesterRepository.class);
     when(semesterRepository.findTopByName(anyString()))
         .thenReturn(Optional.of(SemesterServiceTS.CURRENT_SEMESTER.get()));
+    when(semesterRepository.findCurrentSemester())
+        .thenReturn(SemesterServiceTS.CURRENT_SEMESTER.get());
     var semesterService = mock(SemesterService.class);
-    when(semesterService.getCurrentSemester()).thenReturn(new SemesterResponse());
+    when(semesterService.getCurrentSemester()).thenReturn(SemesterServiceTS.CURRENT_SEMESTER.get());
 
     this.contextAccessor = Mockito.mockStatic(ContextAccessor.class);
     this.contextAccessor.when(ContextAccessor::getModelConverter).thenReturn(this.mapper);

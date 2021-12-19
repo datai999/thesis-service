@@ -5,12 +5,11 @@ import com.thesis.service.model.system.SemesterTable;
 
 public interface SemesterServiceTS {
 
-  String PREVIOUS_SEMESTER_NAME = "202";
   String CURRENT_SEMESTER_NAME = "203";
 
   Supplier<SemesterTable> PREVIOUS_SEMESTER =
-      () -> new SemesterTable().setName(PREVIOUS_SEMESTER_NAME);
+      () -> new SemesterTable().setName("202");
   Supplier<SemesterTable> CURRENT_SEMESTER =
-      () -> new SemesterTable().setName(CURRENT_SEMESTER_NAME);
+      () -> SemesterTable.builder().id(3L).name(CURRENT_SEMESTER_NAME).build();
 
 }

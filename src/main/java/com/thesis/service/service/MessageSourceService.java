@@ -7,7 +7,7 @@ import com.thesis.service.dto.user.CustomUserDetail;
 import com.thesis.service.model.topic.CouncilTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.model.user.UserTable;
-import com.thesis.service.service.system.SemesterService;
+import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.utils.ContextAccessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -57,8 +57,8 @@ public class MessageSourceService {
   }
 
   public String toATag(CouncilTable council) {
-    var currentSemesterName = ContextAccessor.getBean(SemesterService.class)
-        .getCurrentSemester().getName();
+    var currentSemesterName = ContextAccessor.getBean(SemesterRepository.class)
+        .findCurrentSemester().getName();
     var href = String.format("/council/%s/%s", currentSemesterName, council.getId());
     var councilMessage = this.getMessage(MessageCode.Council.CODE, council.getId());
     return this.toATag(href, councilMessage);
