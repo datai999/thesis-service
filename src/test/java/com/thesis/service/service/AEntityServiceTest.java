@@ -9,6 +9,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.repository.BaseRepository;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,7 +28,21 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
 
   protected R repository;
   protected S service;
-  protected T entity;
+  private T entity;
+  protected Supplier<T> entitySupplier;
+
+  protected abstract S spyService();
+
+  protected Consumer<T> extendEntity() {
+    return (T entity) -> {
+    };
+  }
+
+  private Type getGenericType(int index) {
+    return ParameterizedType.class
+        .cast(this.getClass().getGenericSuperclass())
+        .getActualTypeArguments()[index];
+  }
 
   @BeforeAll
   @SuppressWarnings("unchecked")
@@ -34,10 +50,12 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
     var entityClass = (Class<T>) this.getGenericType(0);
     try {
       this.entity = entityClass.getDeclaredConstructor().newInstance();
+      this.entity.setId(0L);
+      this.extendEntity().accept(this.entity);
+      this.entitySupplier = () -> entity;
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.entity.setId(0L);
     this.repository = mock((Class<R>) this.getGenericType(1));
     when(repository.save(any(entityClass))).thenAnswer(i -> i.getArgument(0));
 
@@ -45,14 +63,6 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
     ReflectionTestUtils.setField(this.service, "repository", this.repository);
     ReflectionTestUtils.setField(this.service, "mapper", super.mapper);
     ReflectionTestUtils.setField(this.service, "messageSource", super.messageSource);
-  }
-
-  protected abstract S spyService();
-
-  private Type getGenericType(int index) {
-    return ParameterizedType.class
-        .cast(this.getClass().getGenericSuperclass())
-        .getActualTypeArguments()[index];
   }
 
   @Test

@@ -2,6 +2,7 @@ package com.thesis.service.service.topic;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import java.util.function.Consumer;
 import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.model.user.UserTable;
@@ -14,9 +15,15 @@ public class TopicStudentServiceTest
 
   @Override
   protected TopicStudentService spyService() {
-    super.entity.setTopic(new TopicTable()).setStudent(new UserTable());
     return spy(new TopicStudentService(
         mock(NotificationService.class)));
+  }
+
+  @Override
+  protected Consumer<TopicStudentTable> extendEntity() {
+    return (TopicStudentTable entity) -> entity
+        .setTopic(new TopicTable())
+        .setStudent(new UserTable());
   }
 
 }

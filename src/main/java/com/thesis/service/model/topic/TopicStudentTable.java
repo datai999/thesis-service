@@ -9,11 +9,15 @@ import com.thesis.service.model.user.UserTable;
 import org.hibernate.annotations.DynamicUpdate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@SuperBuilder
 @Entity
 @DynamicUpdate
 @Table(name = "tp_student")

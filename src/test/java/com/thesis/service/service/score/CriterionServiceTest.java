@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.spy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import com.thesis.service.model.score.CriterionTable;
 import com.thesis.service.repository.score.CriterionRepository;
 import com.thesis.service.service.AEntityServiceTest;
@@ -15,8 +16,13 @@ public class CriterionServiceTest
 
   @Override
   protected CriterionService spyService() {
-    super.entity.setChildren(new ArrayList<>(List.of(new CriterionTable())));
     return spy(new CriterionService());
+  }
+
+  @Override
+  protected Consumer<CriterionTable> extendEntity() {
+    return (CriterionTable entity) -> entity
+        .setChildren(new ArrayList<>(List.of(new CriterionTable())));
   }
 
   @Test

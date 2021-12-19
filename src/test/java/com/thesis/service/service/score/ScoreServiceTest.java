@@ -2,6 +2,7 @@ package com.thesis.service.service.score;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import java.util.function.Consumer;
 import com.thesis.service.model.score.ScoreTable;
 import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.score.ScoreRepository;
@@ -15,11 +16,15 @@ public class ScoreServiceTest
 
   @Override
   protected ScoreService spyService() {
-    super.entity.setStudent(new UserTable());
     return spy(new ScoreService(
         mock(UserRepository.class),
         mock(TopicRepository.class),
         mock(NotificationService.class)));
+  }
+
+  @Override
+  protected Consumer<ScoreTable> extendEntity() {
+    return (ScoreTable entity) -> entity.setStudent(new UserTable());
   }
 
 }
