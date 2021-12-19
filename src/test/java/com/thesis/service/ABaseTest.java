@@ -1,17 +1,21 @@
 package com.thesis.service;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import java.util.Optional;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thesis.service.dto.ModelConverter;
 import com.thesis.service.dto.system.SemesterResponse;
 import com.thesis.service.dto.user.CustomUserDetail;
 import com.thesis.service.model.user.UserTable;
+import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.service.MessageSourceService;
 import com.thesis.service.service.system.SemesterService;
+import com.thesis.service.service.system.testsuite.SemesterServiceTS;
 import com.thesis.service.utils.ContextAccessor;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -53,6 +57,9 @@ public abstract class ABaseTest {
     this.messageSource = new MessageSourceService(resourceBundleMessageSource);
     this.mapper = spy(new ModelConverter());
 
+    var semesterRepository = mock(SemesterRepository.class);
+    when(semesterRepository.findTopByName(anyString()))
+        .thenReturn(Optional.of(SemesterServiceTS.CURRENT_SEMESTER.get()));
     var semesterService = mock(SemesterService.class);
     when(semesterService.getCurrentSemester()).thenReturn(new SemesterResponse());
 
@@ -61,6 +68,8 @@ public abstract class ABaseTest {
     this.contextAccessor.when(ContextAccessor::getMessageSource).thenReturn(this.messageSource);
     this.contextAccessor.when(() -> ContextAccessor.getBean(SemesterService.class))
         .thenReturn(semesterService);
+    this.contextAccessor.when(() -> ContextAccessor.getBean(SemesterRepository.class))
+        .thenReturn(semesterRepository);
   }
 
   @AfterAll

@@ -14,6 +14,7 @@ import com.thesis.service.service.MessageSourceService;
 import com.thesis.service.service.system.SemesterService;
 import com.thesis.service.service.topic.TopicService;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -67,13 +68,9 @@ public class ReviewTeacherService {
     var queryResult = topicRepository.findAll(Example.of(topicExample));
 
     queryResult = queryResult.parallelStream()
-        .filter(e -> {
-          if (CollectionUtils.isEmpty(e.getStudents()))
-            return false;
-          if (e.getStudents().stream().allMatch(student -> !student.getMidPass()))
-            return false;
-          return true;
-        })
+        .filter(e -> CollectionUtils.isNotEmpty(e.getStudents())
+            && e.getStudents().stream()
+                .anyMatch(student -> ObjectUtils.defaultIfNull(student.getMidPass(), false)))
         .collect(Collectors.toList());
 
     return topicService.map(queryResult);
