@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.repository.BaseRepository;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Example;
@@ -28,8 +29,8 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
 
   protected R repository;
   protected S service;
-  private T entity;
-  protected Supplier<T> entitySupplier;
+  protected T entity;
+  protected Supplier<T> entitySupplier = () -> entity;
 
   protected abstract S spyService();
 
@@ -47,17 +48,8 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
   @BeforeAll
   @SuppressWarnings("unchecked")
   private void beforeAllService() {
-    var entityClass = (Class<T>) this.getGenericType(0);
-    try {
-      this.entity = entityClass.getDeclaredConstructor().newInstance();
-      this.entity.setId(0L);
-      this.extendEntity().accept(this.entity);
-      this.entitySupplier = () -> entity;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
     this.repository = mock((Class<R>) this.getGenericType(1));
-    when(repository.save(any(entityClass))).thenAnswer(i -> i.getArgument(0));
+    when(repository.save(any())).thenAnswer(i -> i.getArgument(0));
 
     this.service = spyService();
     ReflectionTestUtils.setField(this.service, "repository", this.repository);
@@ -65,35 +57,50 @@ public abstract class AEntityServiceTest<T extends BaseTable, R extends BaseRepo
     ReflectionTestUtils.setField(this.service, "messageSource", super.messageSource);
   }
 
-  @Test
+  @BeforeEach
+  @SuppressWarnings("unchecked")
+  private void beforeEachService() {
+    var entityClass = (Class<T>) this.getGenericType(0);
+    try {
+      this.entity = entityClass.getDeclaredConstructor().newInstance();
+      this.entity.setId(0L);
+      this.extendEntity().accept(this.entity);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   @RepeatedTest(REPEATED_TEST)
   void findById() {
     when(repository.findById(entity.getId())).thenReturn(Optional.of(entity));
     assertNotNull(service.findById(entity.getId()));
   }
 
-  @Test
   @RepeatedTest(REPEATED_TEST)
-  void findByExample() {
+  void findByExample_empty() {
     Sort sort = Sort.by(Direction.ASC, "id");
     when(repository.findAll(Example.of(entity), sort)).thenReturn(List.of());
     assertNotNull(service.findByExample(entity, sort));
   }
 
   @Test
+  void findByExample_one() {
+    Sort sort = Sort.by(Direction.ASC, "id");
+    when(repository.findAll(Example.of(entity), sort)).thenReturn(List.of(entity));
+    assertNotNull(service.findByExample(entity, sort));
+  }
+
   @RepeatedTest(REPEATED_TEST)
   void create() {
     assertNotNull(service.create(entity));
   }
 
-  @Test
   @RepeatedTest(REPEATED_TEST)
   void saveAll() {
     when(repository.saveAll(any())).thenReturn(List.of(entity));
     assertNotNull(service.saveAll(List.of(entity)));
   }
 
-  @Test
   @RepeatedTest(REPEATED_TEST)
   void update() {
     when(repository.findById(anyLong())).thenReturn(Optional.of(entity));

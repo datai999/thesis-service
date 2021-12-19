@@ -112,6 +112,9 @@ public abstract class ABaseTest {
     ObjectMapper objectMapper = new ObjectMapper();
     T deepCopyRequestBody = null;
     try {
+      var string = objectMapper.writeValueAsString(input);
+      System.out.println(string);
+      var obj = objectMapper.readValue(string, input.getClass());
       deepCopyRequestBody = (T) objectMapper
           .readValue(objectMapper.writeValueAsString(input), input.getClass());
     } catch (JsonProcessingException e) {

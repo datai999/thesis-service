@@ -10,6 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thesis.service.constant.UserPermission;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.system.DegreeTable;
@@ -20,6 +21,8 @@ import com.thesis.service.model.topic.CouncilMemberTable;
 import com.thesis.service.model.topic.TopicGuideTeacherTable;
 import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.model.topic.TopicTable;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.logging.log4j.util.Strings;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -88,14 +91,14 @@ public class UserTable extends BaseTable {
     return this;
   }
 
+  @JsonIgnore
   public String getFullName() {
-    return String.format("%s %s", this.firstName, this.lastName);
+    return String.format("%s %s",
+        ObjectUtils.defaultIfNull(this.firstName, Strings.EMPTY),
+        ObjectUtils.defaultIfNull(this.lastName, Strings.EMPTY));
   }
 
-  public String getFullCodeName() {
-    return String.format("%s - %s", this.getCode(), this.getFullName());
-  }
-
+  @JsonIgnore
   public String getGender() {
     if (Objects.isNull(this.male))
       return null;

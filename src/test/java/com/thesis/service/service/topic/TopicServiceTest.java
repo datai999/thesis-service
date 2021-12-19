@@ -21,23 +21,28 @@ import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.service.AEntityServiceTest;
+import com.thesis.service.service.system.testsuite.SemesterServiceTS;
+import com.thesis.service.service.system.testsuite.SubjectDepartmentServiceTS;
 import com.thesis.service.utils.ContextAccessor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
 
 public class TopicServiceTest
     extends AEntityServiceTest<TopicTable, TopicRepository, TopicService> {
 
-  private ScoreRepository scoreRepository = mock(ScoreRepository.class);
+  private SemesterRepository semesterRepository;
+  private ScoreRepository scoreRepository;
 
   @Override
   protected TopicService spyService() {
     var service = spy(new TopicService(
         mock(SemesterRepository.class),
         mock(TopicGuideTeacherRepository.class),
-        scoreRepository));
+        mock(ScoreRepository.class)));
     super.contextAccessor.when(() -> ContextAccessor.getBean(TopicService.class))
         .thenReturn(service);
     return service;
@@ -46,20 +51,64 @@ public class TopicServiceTest
   @Override
   protected Consumer<TopicTable> extendEntity() {
     return (TopicTable entity) -> entity
-        .setGuideTeachers(List.of(new TopicGuideTeacherTable().setGuideTeacher(new UserTable())))
+        .setGuideTeachers(
+            List.of(new TopicGuideTeacherTable().setMain(false).setGuideTeacher(new UserTable())))
         .setEducationMethods(List.of(new EducationMethodTable()))
         .setMajors(List.of(new MajorTable()));
   }
 
   @BeforeEach
   void beforeEach() {
+    this.semesterRepository = mock(SemesterRepository.class);
     this.scoreRepository = mock(ScoreRepository.class);
+    ReflectionTestUtils.setField(this.service, "semesterRepository", this.semesterRepository);
     ReflectionTestUtils.setField(this.service, "scoreRepository", this.scoreRepository);
   }
 
   @Test
   void haveMapping() {
     assertNotNull(service.mapping());
+  }
+
+  @Test
+  void create_guideTeacherEmpty() {
+    when(semesterRepository.findCurrentSemester())
+        .thenReturn(SemesterServiceTS.CURRENT_SEMESTER.get());
+    var input = super.entity.setGuideTeachers(List.of());
+    var actual = service.create(input);
+    assertNotNull(actual);
+  }
+
+  @Test
+  void update_guideTeacherEmpty() {
+    when(semesterRepository.findCurrentSemester())
+        .thenReturn(SemesterServiceTS.CURRENT_SEMESTER.get());
+    var input = super.entity.setGuideTeachers(List.of());
+    var actual = service.update(input);
+    assertNotNull(actual);
+  }
+
+  @Test
+  void findByExample_educationMethodEmpty() {
+    when(super.repository.findAll(Mockito.<Example<TopicTable>>any(), any(Sort.class)))
+        .thenReturn(List.of(super.entity.setEducationMethods(List.of())));
+    var actual = super.service.findByExample(super.entity, Sort.unsorted());
+    assertNotNull(actual);
+  }
+
+  @Test
+  void findByExample_majorEmpty() {
+    when(super.repository.findAll(Mockito.<Example<TopicTable>>any(), any(Sort.class)))
+        .thenReturn(List.of(super.entity.setMajors(List.of())));
+    var actual = super.service.findByExample(super.entity, Sort.unsorted());
+    assertNotNull(actual);
+  }
+
+  @Test
+  void findNeedAssignCouncil_() {
+    var actual =
+        super.service.findNeedAssignCouncil(SubjectDepartmentServiceTS.VALID_ID, Sort.unsorted());
+    assertNotNull(actual);
   }
 
   @Test
@@ -90,7 +139,7 @@ public class TopicServiceTest
     var student = UserTable.builder().id(0L).build();
     var input = super.entitySupplier.get()
         .setStudents(List.of(new TopicStudentTable().setMidPass(true).setStudent(student)));
-    when(scoreRepository.findAll(any(Example.class)))
+    when(scoreRepository.findAll(Mockito.<Example<ScoreTable>>any()))
         .thenReturn(List.of(new ScoreTable().setStudent(student)));
     var actual = service.getState(input);
     assertEquals(TopicState.COMPLETE, actual);

@@ -16,6 +16,7 @@ import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.model.topic.TopicTable;
 import com.thesis.service.service.topic.TopicService;
 import com.thesis.service.utils.ContextAccessor;
+import org.apache.commons.lang3.ObjectUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -122,10 +123,10 @@ public class TopicResponse {
 
     this.guideTeachers = new ArrayList<>();
     guideTeachers.addAll(entity.getGuideTeachers().stream()
-        .filter(TopicGuideTeacherTable::getMain)
+        .filter(e -> ObjectUtils.defaultIfNull(e.getMain(), false))
         .map(GuideTeacherResponse::new).collect(Collectors.toList()));
     guideTeachers.addAll(entity.getGuideTeachers().stream()
-        .filter(e -> !e.getMain())
+        .filter(e -> !ObjectUtils.defaultIfNull(e.getMain(), false))
         .map(GuideTeacherResponse::new).collect(Collectors.toList()));
 
     this.state = ContextAccessor.getBean(TopicService.class).getState(entity);

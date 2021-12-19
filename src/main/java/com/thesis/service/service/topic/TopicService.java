@@ -78,17 +78,16 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
 
     BiPredicate<TopicTable, Function<TopicTable, List<? extends BaseTable>>> filter =
         (targetTopic, map) -> {
-          if (CollectionUtils.isEmpty(map.apply(targetTopic)))
-            return false;
           var mapToIds =
               map.andThen(e -> e.stream().map(BaseTable::getId).collect(Collectors.toList()));
           return mapToIds.apply(targetTopic).containsAll(mapToIds.apply(entity));
         };
 
-    if (CollectionUtils.isNotEmpty(entity.getEducationMethods()))
+    if (CollectionUtils.isNotEmpty(entity.getEducationMethods())) {
       response = response.stream()
           .filter(e -> filter.test(e, TopicTable::getEducationMethods))
           .collect(Collectors.toList());
+    }
     if (CollectionUtils.isNotEmpty(entity.getMajors()))
       response = response.stream()
           .filter(e -> filter.test(e, TopicTable::getMajors))
