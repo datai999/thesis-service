@@ -17,6 +17,7 @@ import com.thesis.service.repository.score.ScoreRepository;
 import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
 import com.thesis.service.repository.topic.TopicRepository;
+import com.thesis.service.repository.topic.TopicStudentRepository;
 import com.thesis.service.service.ABaseService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Example;
@@ -30,6 +31,7 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
 
   private final SemesterRepository semesterRepository;
   private final TopicGuideTeacherRepository topicGuideTeacherRepository;
+  private final TopicStudentRepository topicStudentRepository;
   private final ScoreRepository scoreRepository;
 
   @Override
@@ -42,12 +44,19 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
     var semester = semesterRepository.findCurrentSemester();
     entity.setSemester(semester).setSubjectDepartment(this.getAuth().getSubjectDepartment());
     var topicResponse = this.repository.save(entity);
+
     if (CollectionUtils.isNotEmpty(entity.getGuideTeachers())) {
-      var guideTeachers = entity.getGuideTeachers().stream()
-          .map(e -> e.setTopic(topicResponse).setMain(false)).collect(Collectors.toList());
+      var guideTeachers = super.mapper.map(entity.getGuideTeachers(),
+          e -> e.setTopic(topicResponse).setMain(false));
       guideTeachers.get(0).setMain(true);
       topicGuideTeacherRepository.saveAll(guideTeachers);
     }
+
+    if (CollectionUtils.isNotEmpty(entity.getStudents())) {
+      var students = super.mapper.map(entity.getStudents(), e -> e.setTopic(topicResponse));
+      topicStudentRepository.saveAll(students);
+    }
+
     return this.map(topicResponse);
   }
 

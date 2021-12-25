@@ -29,7 +29,7 @@ public class TopicStudentTable extends BaseTable {
   @ManyToOne
   private UserTable student;
 
-  @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
+  @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
   private Boolean midPass;
 
 }

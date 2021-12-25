@@ -86,17 +86,11 @@ public class ModelConverter {
     return modelMapper.map(sourceList, new TypeToken<List<D>>() {}.getType());
   }
 
-  public <D, E, S> List<D> map(final Collection<E> sourceList, Function<E, S> mapping) {
+  public <D, E> List<D> map(final Collection<E> sourceList, Function<E, D> mapping) {
     return Objects.nonNull(sourceList)
         ? this.map(sourceList.parallelStream().map(mapping).collect(Collectors.toList()))
-        : null;
+        : List.of();
   }
-
-  // public <D, E> List<D> mapFunction(final Collection<E> sourceList, Function<E, D> mapping) {
-  // return Objects.nonNull(sourceList)
-  // ? sourceList.parallelStream().map(mapping).collect(Collectors.toList())
-  // : null;
-  // }
 
   public List<String> map(final MultiLangDto multiLang) {
     if (Objects.isNull(multiLang)

@@ -53,7 +53,9 @@ public class TopicResponse {
 
   private List<StudentResponse> students;
   private List<GuideTeacherResponse> guideTeachers;
+  private List<String> guideTeacherNames;
   private List<UserResponse> reviewTeachers;
+  private List<String> reviewTeacherNames;
 
   private CouncilInTopicResponse council;
 
@@ -119,6 +121,7 @@ public class TopicResponse {
     this.majorNames = mapper.map(entity.getMajors(), MajorTable::getName);
     this.students = mapper.map(entity.getStudents(), StudentResponse::new);
     this.reviewTeachers = mapper.map(entity.getReviewTeachers(), UserResponse.class);
+    this.reviewTeacherNames = mapper.map(this.reviewTeachers, UserResponse::getFullName);
     this.council = mapper.map(entity.getCouncil(), CouncilInTopicResponse.class);
 
     this.guideTeachers = new ArrayList<>();
@@ -128,6 +131,7 @@ public class TopicResponse {
     guideTeachers.addAll(entity.getGuideTeachers().stream()
         .filter(e -> !ObjectUtils.defaultIfNull(e.getMain(), false))
         .map(GuideTeacherResponse::new).collect(Collectors.toList()));
+    this.guideTeacherNames = mapper.map(this.guideTeachers, GuideTeacherResponse::getFullName);
 
     this.state = ContextAccessor.getBean(TopicService.class).getState(entity);
     this.stateName = this.state.getStateName();
