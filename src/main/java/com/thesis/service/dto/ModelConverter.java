@@ -47,6 +47,8 @@ public class ModelConverter {
    * @param destination object to map to
    */
   public <D, S> D map(final S source, D destination) {
+    if (Objects.isNull(source))
+      return null;
     modelMapper.map(source, destination);
     return destination;
   }

@@ -1,10 +1,11 @@
 package com.thesis.service.model.system;
 
-import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.thesis.service.constant.SemesterStatus;
 import com.thesis.service.model.BaseTable;
@@ -33,17 +34,11 @@ public class SemesterTable extends BaseTable {
   @Enumerated(EnumType.STRING)
   private SemesterStatus status;
 
-  private LocalDateTime registerTopicStart;
+  @ManyToOne(cascade = CascadeType.ALL)
+  private SemesterPropertyTable outline;
 
-  private LocalDateTime registerTopicEnd;
-
-  private LocalDateTime topicStart;
-
-  private LocalDateTime topicEnd;
-
-  private LocalDateTime thesisStart;
-
-  private LocalDateTime thesisEnd;
+  @ManyToOne(cascade = CascadeType.ALL)
+  private SemesterPropertyTable thesis;
 
   public SemesterTable(String name) {
     var semester = ContextAccessor.getBean(SemesterRepository.class)
@@ -53,6 +48,10 @@ public class SemesterTable extends BaseTable {
 
   public boolean isCurrent() {
     return SemesterStatus.USING.equals(this.status);
+  }
+
+  public SemesterPropertyTable getProperty(boolean thesis) {
+    return thesis ? this.thesis : this.outline;
   }
 
 }

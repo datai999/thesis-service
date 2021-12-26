@@ -11,9 +11,8 @@ public class SemesterResponse {
   private SemesterStatus status;
   private String registerTopicStart = "";
   private String registerTopicEnd = "";
-  private String topicStart = "";
-  private String topicEnd = "";
-  private String thesisStart = "";
-  private String thesisEnd = "";
+
+  private SemesterPropertyResponse outline;
+  private SemesterPropertyResponse thesis;
 
 }

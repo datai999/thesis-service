@@ -20,6 +20,7 @@ import com.thesis.service.repository.score.ScoreRepository;
 import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
 import com.thesis.service.repository.topic.TopicRepository;
+import com.thesis.service.repository.topic.TopicStudentRepository;
 import com.thesis.service.service.AEntityServiceTest;
 import com.thesis.service.service.system.testsuite.SemesterServiceTS;
 import com.thesis.service.service.system.testsuite.SubjectDepartmentServiceTS;
@@ -42,6 +43,7 @@ public class TopicServiceTest
     var service = spy(new TopicService(
         mock(SemesterRepository.class),
         mock(TopicGuideTeacherRepository.class),
+        mock(TopicStudentRepository.class),
         mock(ScoreRepository.class)));
     super.contextAccessor.when(() -> ContextAccessor.getBean(TopicService.class))
         .thenReturn(service);
