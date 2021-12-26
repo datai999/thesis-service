@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.user.UserTable;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,5 +32,8 @@ public class TopicStudentTable extends BaseTable {
 
   @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
   private Boolean midPass;
+
+  @Type(type = "text")
+  private String reason;
 
 }

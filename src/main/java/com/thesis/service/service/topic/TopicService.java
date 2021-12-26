@@ -40,6 +40,7 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
   }
 
   @Override
+  @Transactional
   public Object create(TopicTable entity) {
     var semester = semesterRepository.findCurrentSemester();
     entity.setSemester(semester).setSubjectDepartment(this.getAuth().getSubjectDepartment());
@@ -49,12 +50,14 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
       var guideTeachers = super.mapper.map(entity.getGuideTeachers(),
           e -> e.setTopic(topicResponse).setMain(false));
       guideTeachers.get(0).setMain(true);
-      topicGuideTeacherRepository.saveAll(guideTeachers);
+      var guideTeacherResponse = topicGuideTeacherRepository.saveAll(guideTeachers);
+      topicResponse.setGuideTeachers(guideTeacherResponse);
     }
 
     if (CollectionUtils.isNotEmpty(entity.getStudents())) {
       var students = super.mapper.map(entity.getStudents(), e -> e.setTopic(topicResponse));
-      topicStudentRepository.saveAll(students);
+      var studentResponse = topicStudentRepository.saveAll(students);
+      topicResponse.setStudents(studentResponse);
     }
 
     return this.map(topicResponse);
@@ -64,19 +67,12 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
   @Transactional
   public Object update(TopicTable entity) {
     var existEntity = this.repository.findById(entity.getId()).orElseThrow();
-    entity.setStudents(existEntity.getStudents())
-        .setCreatedAt(existEntity.getCreatedAt());
-    var topicResponse = this.repository.save(entity);
+    entity.setCreatedAt(existEntity.getCreatedAt());
 
     topicGuideTeacherRepository.deleteByTopic(entity.getId());
-    if (CollectionUtils.isNotEmpty(entity.getGuideTeachers())) {
-      var guideTeachers = entity.getGuideTeachers().stream()
-          .map(e -> e.setTopic(topicResponse).setMain(false)).collect(Collectors.toList());
-      guideTeachers.get(0).setMain(true);
-      topicGuideTeacherRepository.saveAll(guideTeachers);
-    }
+    topicStudentRepository.deleteByTopic(entity.getId());
 
-    return this.map(topicResponse);
+    return this.create(entity);
   }
 
   @Override
