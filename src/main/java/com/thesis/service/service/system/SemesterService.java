@@ -27,18 +27,6 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
     return super.repository.findCurrentSemester();
   }
 
-  public boolean inRegisterTopicTime(boolean thesis) {
-    var currentSemester = super.repository.findCurrentSemester();
-    var now = LocalDateTime.now();
-    var semesterProperty = currentSemester.getProperty(thesis);
-    return now.plusMinutes(1).isAfter(semesterProperty.getRegisterTopicStart())
-        && now.minusMinutes(1).isBefore(semesterProperty.getRegisterTopicEnd());
-  }
-
-  public boolean allowStudentRegisterCancelTopic() {
-    return this.inRegisterTopicTime(true);
-  }
-
   @Transactional
   public boolean setCurrentSemester(Long semesterId) {
 
@@ -64,6 +52,42 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
       timerNotificationService.notifyRegisterTopicEnd(response);
     }
     return this.map(response);
+  }
+
+  private boolean isAfter(LocalDateTime time) {
+    return LocalDateTime.now().plusMinutes(1).isAfter(time);
+  }
+
+  private boolean nowIn(LocalDateTime from, LocalDateTime to) {
+    var now = LocalDateTime.now();
+    return this.isAfter(from) && now.minusMinutes(1).isBefore(to);
+  }
+
+  public boolean inCreateTime(boolean thesis) {
+    var currentSemester = super.repository.findCurrentSemester();
+    return this.nowIn(currentSemester.getProperty(thesis).getRegisterTopicStart(),
+        currentSemester.getProperty(thesis).getRegisterTopicEnd());
+  }
+
+  public boolean inAnyCreateTime() {
+    return this.inCreateTime(false) || this.inCreateTime(true);
+  }
+
+  public boolean inRegisterTopicTime(boolean thesis) {
+    var currentSemester = super.repository.findCurrentSemester();
+    var semesterProperty = currentSemester.getProperty(thesis);
+    return this.nowIn(semesterProperty.getRegisterTopicStart(),
+        semesterProperty.getRegisterTopicEnd());
+  }
+
+  public boolean beforeMidMarkStartTime(boolean thesis) {
+    var currentSemester = super.repository.findCurrentSemester();
+    return this.isAfter(currentSemester.getProperty(thesis).getMidMarkStart());
+  }
+
+  public boolean beforeMidMarkEndTime(boolean thesis) {
+    var currentSemester = super.repository.findCurrentSemester();
+    return this.isAfter(currentSemester.getProperty(thesis).getMidMarkEnd());
   }
 
 }

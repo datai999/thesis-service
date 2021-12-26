@@ -99,7 +99,7 @@ public class StudentServiceTest extends ABaseServiceTest {
   void registerTopic_notAllow() {
     when(topicRepository.findById(anyLong()))
         .thenReturn(Optional.of(new TopicTable().setSemester(new SemesterTable())));
-    when(semesterService.allowStudentRegisterCancelTopic()).thenReturn(false);
+    when(semesterService.inRegisterTopicTime(false)).thenReturn(false);
     Exception exception = assertThrows(BusinessException.class,
         () -> service.registerTopic(
             StudentServiceTS.VALID_STUDENT_ID,
@@ -115,7 +115,7 @@ public class StudentServiceTest extends ABaseServiceTest {
                 .setSemester(new SemesterTable())
                 .setStudents(List.of())
                 .setMaxStudentTake(0)));
-    when(semesterService.allowStudentRegisterCancelTopic()).thenReturn(true);
+    when(semesterService.inRegisterTopicTime(false)).thenReturn(true);
     Exception exception = assertThrows(BusinessException.class,
         () -> service.registerTopic(
             StudentServiceTS.VALID_STUDENT_ID,
@@ -131,7 +131,7 @@ public class StudentServiceTest extends ABaseServiceTest {
                 .setSemester(new SemesterTable())
                 .setStudents(List.of())
                 .setMaxStudentTake(1)));
-    when(semesterService.allowStudentRegisterCancelTopic()).thenReturn(true);
+    when(semesterService.inRegisterTopicTime(false)).thenReturn(true);
     when(userRepository.findById(any())).thenThrow(new NoSuchElementException());
     Exception exception = assertThrows(NoSuchElementException.class,
         () -> service.registerTopic(
@@ -149,7 +149,7 @@ public class StudentServiceTest extends ABaseServiceTest {
                 .setStudents(List.of(new TopicStudentTable()
                     .setStudent(StudentServiceTS.STUDENT.get())))
                 .setMaxStudentTake(3)));
-    when(semesterService.allowStudentRegisterCancelTopic()).thenReturn(true);
+    when(semesterService.inRegisterTopicTime(false)).thenReturn(true);
     when(userRepository.findById(any()))
         .thenReturn(Optional.of(StudentServiceTS.STUDENT.get()));
     Exception exception = assertThrows(BusinessException.class,
@@ -167,7 +167,7 @@ public class StudentServiceTest extends ABaseServiceTest {
                 .setSemester(new SemesterTable())
                 .setStudents(List.of())
                 .setMaxStudentTake(3)));
-    when(semesterService.allowStudentRegisterCancelTopic()).thenReturn(true);
+    when(semesterService.inRegisterTopicTime(false)).thenReturn(true);
     when(userRepository.findById(any()))
         .thenReturn(Optional.of(StudentServiceTS.STUDENT.get()));
     assertEquals(true, service.registerTopic(

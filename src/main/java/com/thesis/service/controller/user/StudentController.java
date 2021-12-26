@@ -30,8 +30,9 @@ public class StudentController {
   }
 
   @GetMapping("/{userId}/allow-register-topic")
-  public Object allowRegisterTopic(@PathVariable long userId) {
-    return studentService.allowRegisterTopic(userId);
+  public Object allowRegisterTopic(
+      @PathVariable long userId, @RequestParam boolean thesis) {
+    return studentService.allowRegisterTopic(userId, thesis);
   }
 
   @GetMapping("/{userId}/done-outline")

@@ -7,6 +7,8 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
+import com.thesis.service.advice.BusinessException;
+import com.thesis.service.constant.MessageCode;
 import com.thesis.service.constant.TopicState;
 import com.thesis.service.dto.topic.resposne.TopicResponse;
 import com.thesis.service.model.BaseTable;
@@ -19,6 +21,7 @@ import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.repository.topic.TopicStudentRepository;
 import com.thesis.service.service.ABaseService;
+import com.thesis.service.service.system.SemesterService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
@@ -34,6 +37,8 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
   private final TopicStudentRepository topicStudentRepository;
   private final ScoreRepository scoreRepository;
 
+  private final SemesterService semesterService;
+
   @Override
   public Function<TopicTable, Object> mapping() {
     return TopicResponse::new;
@@ -43,6 +48,13 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
   @Transactional
   public Object create(TopicTable entity) {
     var semester = semesterRepository.findCurrentSemester();
+
+    if (!semesterService.inCreateTime(entity.getThesis())) {
+      throw BusinessException.code(entity.getThesis()
+          ? MessageCode.Semester.END_CREATE_THESIS
+          : MessageCode.Semester.END_CREATE_OUTLINE);
+    }
+
     entity.setSemester(semester).setSubjectDepartment(this.getAuth().getSubjectDepartment());
     var topicResponse = this.repository.save(entity);
 

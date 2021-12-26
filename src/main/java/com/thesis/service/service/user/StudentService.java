@@ -42,7 +42,7 @@ public class StudentService {
 
     var topic = topicRepository.findById(topicId).orElseThrow();
 
-    if (!semesterService.allowStudentRegisterCancelTopic()) {
+    if (!semesterService.inRegisterTopicTime(topic.getThesis())) {
       throw BusinessException.code(
           MessageCode.Semester.OVERDUE_TOPIC_REGISTER,
           topic.getSemester().getName());
@@ -70,12 +70,11 @@ public class StudentService {
     return true;
   }
 
-  public Object allowRegisterTopic(long studentId) {
+  public Object allowRegisterTopic(long studentId, boolean thesis) {
     var student = userRepository.findById(studentId).orElseThrow();
     var haveTopicInSemester = student.getTopicExecutes().stream()
         .anyMatch(e -> e.getTopic().getSemester().isCurrent());
-    var semesterAllow = semesterService.allowStudentRegisterCancelTopic();
-    return !haveTopicInSemester && semesterAllow;
+    return !haveTopicInSemester && semesterService.inRegisterTopicTime(thesis);
   }
 
   public Object cancelTopic(long studentId, long topicId) {

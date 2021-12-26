@@ -17,6 +17,8 @@ public interface MessageCode {
     String NAME_NULL = "semester.name.null";
     String REGISTER_TOPIC_START_NULL = "semester.registerTopicStart.null";
     String REGISTER_TOPIC_END_NULL = "semester.registerTopicEnd.null";
+    String END_CREATE_OUTLINE = "semester.endCreateOutline";
+    String END_CREATE_THESIS = "semester.endCreateThesis";
   }
 
   interface Topic {

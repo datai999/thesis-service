@@ -18,9 +18,24 @@ public class SemesterController extends ABaseController<SemesterTable, SemesterS
     return super.service.map(super.service.getCurrentSemester());
   }
 
-  @GetMapping("/allow-student-register-cancel")
-  public Object allowStudentRegisterCancelTopic() {
-    return super.service.allowStudentRegisterCancelTopic();
+  @GetMapping("/in-any-create-time")
+  public Object inAnyCreateTime() {
+    return super.service.inAnyCreateTime();
+  }
+
+  @GetMapping("/in-register-time")
+  public Object inRegisterTopicTime(@RequestParam boolean thesis) {
+    return super.service.inRegisterTopicTime(thesis);
+  }
+
+  @GetMapping("/before-mid-mark-start-time")
+  public Object beforeMidMarkStartTime(@RequestParam boolean thesis) {
+    return super.service.beforeMidMarkStartTime(thesis);
+  }
+
+  @GetMapping("/before-mid-mark-end-time")
+  public Object beforeMidMarkEndTime(@RequestParam boolean thesis) {
+    return super.service.beforeMidMarkEndTime(thesis);
   }
 
   @PutMapping("/current")

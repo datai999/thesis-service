@@ -31,32 +31,32 @@ public class SemesterServiceTest
 
   @Test
   @Disabled
-  void allowStudentRegisterCancelTopic_true() {
+  void inRegisterTopicTime_true() {
     // when(repository.findCurrentSemester())
     // .thenReturn(new SemesterTable()
     // .setRegisterTopicStart(LocalDateTime.now())
     // .setRegisterTopicEnd(LocalDateTime.now()));
-    assertTrue(service.allowStudentRegisterCancelTopic());
+    assertTrue(service.inRegisterTopicTime(false));
   }
 
   @Test
   @Disabled
-  void allowStudentRegisterCancelTopic_before() {
+  void inRegisterTopicTime_before() {
     // when(repository.findCurrentSemester())
     // .thenReturn(new SemesterTable()
     // .setRegisterTopicStart(LocalDateTime.now().plusMinutes(3))
     // .setRegisterTopicEnd(LocalDateTime.now()));
-    assertFalse(service.allowStudentRegisterCancelTopic());
+    assertFalse(service.inRegisterTopicTime(false));
   }
 
   @Test
   @Disabled
-  void allowStudentRegisterCancelTopic_after() {
+  void inRegisterTopicTime_after() {
     // when(repository.findCurrentSemester())
     // .thenReturn(new SemesterTable()
     // .setRegisterTopicStart(LocalDateTime.now())
     // .setRegisterTopicEnd(LocalDateTime.now().minusMinutes(3)));
-    assertFalse(service.allowStudentRegisterCancelTopic());
+    assertFalse(service.inRegisterTopicTime(false));
   }
 
 }
