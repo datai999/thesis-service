@@ -58,8 +58,10 @@ public class StudentService {
       throw BusinessException.code(MessageCode.Topic.EXIST_STUDENT,
           student.getCode(), topic.getMultiName());
     }
-
-    topicStudentRepository.save(new TopicStudentTable().setTopic(topic).setStudent(student));
+    var defaultMidPass = semesterService.getCurrentSemester()
+        .getProperty(topic.getThesis()).getDefaultMid();
+    topicStudentRepository.save(
+        new TopicStudentTable().setTopic(topic).setStudent(student).setMidPass(defaultMidPass));
 
     String message = messageSource.getMessage(
         MessageCode.Student.REGISTER_TOPIC,

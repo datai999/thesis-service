@@ -67,7 +67,10 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
     }
 
     if (CollectionUtils.isNotEmpty(entity.getStudents())) {
-      var students = super.mapper.map(entity.getStudents(), e -> e.setTopic(topicResponse));
+      var defaultMidPass = semesterService.getCurrentSemester()
+          .getProperty(topicResponse.getThesis()).getDefaultMid();
+      var students = super.mapper.map(entity.getStudents(),
+          e -> e.setTopic(topicResponse).setMidPass(defaultMidPass));
       var studentResponse = topicStudentRepository.saveAll(students);
       topicResponse.setStudents(studentResponse);
     }

@@ -1,6 +1,7 @@
 package com.thesis.service.controller.system;
 
 import com.thesis.service.controller.ABaseController;
+import com.thesis.service.model.system.SemesterPropertyTable;
 import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.service.system.SemesterService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,14 @@ public class SemesterController extends ABaseController<SemesterTable, SemesterS
     return super.service.map(super.service.getCurrentSemester());
   }
 
+  @GetMapping("/in-create-time")
+  public boolean inCreateTime(@RequestParam boolean thesis) {
+    return super.service.inCreateTime(thesis);
+  }
+
   @GetMapping("/in-any-create-time")
   public Object inAnyCreateTime() {
-    return super.service.inAnyCreateTime();
+    return this.inCreateTime(false) || this.inCreateTime(true);
   }
 
   @GetMapping("/in-register-time")
@@ -28,14 +34,20 @@ public class SemesterController extends ABaseController<SemesterTable, SemesterS
     return super.service.inRegisterTopicTime(thesis);
   }
 
-  @GetMapping("/before-mid-mark-start-time")
-  public Object beforeMidMarkStartTime(@RequestParam boolean thesis) {
-    return super.service.beforeMidMarkStartTime(thesis);
+  @GetMapping("/in-mid-mark-time")
+  public Object inMidMarkTime(@RequestParam boolean thesis) {
+    return super.service.inMidMarkTime(thesis);
   }
 
-  @GetMapping("/before-mid-mark-end-time")
-  public Object beforeMidMarkEndTime(@RequestParam boolean thesis) {
-    return super.service.beforeMidMarkEndTime(thesis);
+  @GetMapping("/compare-mid-mark-start-time")
+  public Object compareMidMarkStartTime(@RequestParam boolean thesis,
+      @RequestParam boolean before) {
+    return super.service.compare(thesis, before, SemesterPropertyTable::getMidMarkStart);
+  }
+
+  @GetMapping("/compare-mid-mark-end-time")
+  public Object compareMidMarkEndTime(@RequestParam boolean thesis, @RequestParam boolean before) {
+    return super.service.compare(thesis, before, SemesterPropertyTable::getMidMarkEnd);
   }
 
   @PutMapping("/current")

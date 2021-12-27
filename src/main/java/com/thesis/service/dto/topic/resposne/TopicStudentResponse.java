@@ -16,4 +16,6 @@ public class TopicStudentResponse extends BaseResponse {
 
   private Boolean midPass;
 
+  private String reason;
+
 }

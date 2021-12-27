@@ -2,9 +2,11 @@ package com.thesis.service.service.system;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Function;
 import javax.transaction.Transactional;
 import com.thesis.service.constant.SemesterStatus;
 import com.thesis.service.dto.system.SemesterResponse;
+import com.thesis.service.model.system.SemesterPropertyTable;
 import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.service.ABaseService;
@@ -54,40 +56,60 @@ public class SemesterService extends ABaseService<SemesterTable, SemesterReposit
     return this.map(response);
   }
 
-  private boolean isAfter(LocalDateTime time) {
+  public boolean isBefore(LocalDateTime time) {
+    return LocalDateTime.now().minusMinutes(1).isBefore(time);
+  }
+
+  public boolean isAfter(LocalDateTime time) {
     return LocalDateTime.now().plusMinutes(1).isAfter(time);
   }
 
-  private boolean nowIn(LocalDateTime from, LocalDateTime to) {
-    var now = LocalDateTime.now();
-    return this.isAfter(from) && now.minusMinutes(1).isBefore(to);
+  public boolean isBefore(boolean thesis, Function<SemesterPropertyTable, LocalDateTime> getTime) {
+    var currentSemester = super.repository.findCurrentSemester();
+    var time = getTime.apply(currentSemester.getProperty(thesis));
+    return this.isBefore(time);
+  }
+
+  public boolean isAfter(boolean thesis, Function<SemesterPropertyTable, LocalDateTime> getTime) {
+    var currentSemester = super.repository.findCurrentSemester();
+    var time = getTime.apply(currentSemester.getProperty(thesis));
+    return this.isAfter(time);
+  }
+
+  public boolean compare(boolean thesis, boolean before,
+      Function<SemesterPropertyTable, LocalDateTime> getTime) {
+    var currentSemester = super.repository.findCurrentSemester();
+    var time = getTime.apply(currentSemester.getProperty(thesis));
+    return before ? this.isBefore(time) : this.isAfter(time);
+  }
+
+  public boolean nowIn(LocalDateTime from, LocalDateTime to) {
+    return this.isAfter(from) && this.isBefore(to);
+  }
+
+  public boolean nowIn(boolean thesis,
+      Function<SemesterPropertyTable, LocalDateTime> getFromTime,
+      Function<SemesterPropertyTable, LocalDateTime> getToTime) {
+    var semesterProperty = super.repository.findCurrentSemester().getProperty(thesis);
+    return this.nowIn(getFromTime.apply(semesterProperty), getToTime.apply(semesterProperty));
   }
 
   public boolean inCreateTime(boolean thesis) {
-    var currentSemester = super.repository.findCurrentSemester();
-    return this.nowIn(currentSemester.getProperty(thesis).getRegisterTopicStart(),
-        currentSemester.getProperty(thesis).getRegisterTopicEnd());
-  }
-
-  public boolean inAnyCreateTime() {
-    return this.inCreateTime(false) || this.inCreateTime(true);
+    return this.nowIn(thesis,
+        SemesterPropertyTable::getCreateTopicStart,
+        SemesterPropertyTable::getCreateTopicEnd);
   }
 
   public boolean inRegisterTopicTime(boolean thesis) {
-    var currentSemester = super.repository.findCurrentSemester();
-    var semesterProperty = currentSemester.getProperty(thesis);
-    return this.nowIn(semesterProperty.getRegisterTopicStart(),
-        semesterProperty.getRegisterTopicEnd());
+    return this.nowIn(thesis,
+        SemesterPropertyTable::getRegisterTopicStart,
+        SemesterPropertyTable::getRegisterTopicEnd);
   }
 
-  public boolean beforeMidMarkStartTime(boolean thesis) {
-    var currentSemester = super.repository.findCurrentSemester();
-    return this.isAfter(currentSemester.getProperty(thesis).getMidMarkStart());
-  }
-
-  public boolean beforeMidMarkEndTime(boolean thesis) {
-    var currentSemester = super.repository.findCurrentSemester();
-    return this.isAfter(currentSemester.getProperty(thesis).getMidMarkEnd());
+  public boolean inMidMarkTime(boolean thesis) {
+    return this.nowIn(thesis,
+        SemesterPropertyTable::getMidMarkStart,
+        SemesterPropertyTable::getMidMarkEnd);
   }
 
 }

@@ -22,6 +22,7 @@ import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
 import com.thesis.service.repository.topic.TopicRepository;
 import com.thesis.service.repository.topic.TopicStudentRepository;
 import com.thesis.service.service.AEntityServiceTest;
+import com.thesis.service.service.system.SemesterService;
 import com.thesis.service.service.system.testsuite.SemesterServiceTS;
 import com.thesis.service.service.system.testsuite.SubjectDepartmentServiceTS;
 import com.thesis.service.utils.ContextAccessor;
@@ -44,7 +45,8 @@ public class TopicServiceTest
         mock(SemesterRepository.class),
         mock(TopicGuideTeacherRepository.class),
         mock(TopicStudentRepository.class),
-        mock(ScoreRepository.class)));
+        mock(ScoreRepository.class),
+        mock(SemesterService.class)));
     super.contextAccessor.when(() -> ContextAccessor.getBean(TopicService.class))
         .thenReturn(service);
     return service;
