@@ -5,10 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.system.MajorTable;
+import com.thesis.service.model.system.SemesterTable;
 import com.thesis.service.model.topic.CouncilRoleTable;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
@@ -23,6 +25,9 @@ import lombok.Setter;
 @DynamicUpdate
 @Table(name = "sc_template")
 public class TemplateTable extends BaseTable {
+
+  @ManyToOne
+  private SemesterTable semester;
 
   private String name;
 

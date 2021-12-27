@@ -105,4 +105,9 @@ public class TemplateService
     return this.map(response);
   }
 
+  public Object notIsSemester(long semesterId, Sort sort) {
+    var response = super.repository.notIsSemester(semesterId, sort);
+    return this.map(response);
+  }
+
 }

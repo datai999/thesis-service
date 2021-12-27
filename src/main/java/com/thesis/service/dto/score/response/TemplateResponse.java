@@ -18,6 +18,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 public class TemplateResponse extends BaseResponse {
 
+  private BaseResponse semester;
+  private String semesterName;
   private Boolean thesis;
   private String type;
 

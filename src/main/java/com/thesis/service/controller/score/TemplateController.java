@@ -5,6 +5,7 @@ import com.thesis.service.model.score.TemplateTable;
 import com.thesis.service.service.score.TemplateService;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/templates")
 public class TemplateController
     extends ABaseController<TemplateTable, TemplateService> {
+
+  @GetMapping("/not-is-semester")
+  public Object notIsSemester(
+      @RequestParam(defaultValue = "ASC") String direction,
+      @RequestParam(defaultValue = "id") String sort,
+      @RequestParam long semesterId) {
+    Sort sortable = Sort.by(Direction.valueOf(direction), sort);
+    return super.service.notIsSemester(semesterId, sortable);
+  }
 
   @PostMapping("/council")
   public Object getByCouncilMember(
