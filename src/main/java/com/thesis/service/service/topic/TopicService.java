@@ -1,5 +1,6 @@
 package com.thesis.service.service.topic;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -15,6 +16,7 @@ import com.thesis.service.model.BaseTable;
 import com.thesis.service.model.score.ScoreTable;
 import com.thesis.service.model.topic.TopicStudentTable;
 import com.thesis.service.model.topic.TopicTable;
+import com.thesis.service.model.user.UserTable;
 import com.thesis.service.repository.score.ScoreRepository;
 import com.thesis.service.repository.system.SemesterRepository;
 import com.thesis.service.repository.topic.TopicGuideTeacherRepository;
@@ -23,6 +25,7 @@ import com.thesis.service.repository.topic.TopicStudentRepository;
 import com.thesis.service.service.ABaseService;
 import com.thesis.service.service.system.SemesterService;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -84,10 +87,41 @@ public class TopicService extends ABaseService<TopicTable, TopicRepository> {
     var existEntity = this.repository.findById(entity.getId()).orElseThrow();
     entity.setCreatedAt(existEntity.getCreatedAt());
 
-    topicGuideTeacherRepository.deleteByTopic(entity.getId());
-    topicStudentRepository.deleteByTopic(entity.getId());
+    var topicResponse = this.repository.save(entity);
 
-    return this.create(entity);
+    topicGuideTeacherRepository.deleteByTopic(entity.getId());
+    if (CollectionUtils.isNotEmpty(entity.getGuideTeachers())) {
+      var guideTeachers = super.mapper.map(entity.getGuideTeachers(),
+          e -> e.setTopic(topicResponse).setMain(false));
+      guideTeachers.get(0).setMain(true);
+      var guideTeacherResponse = topicGuideTeacherRepository.saveAll(guideTeachers);
+      topicResponse.setGuideTeachers(guideTeacherResponse);
+    }
+
+    var updateStudentIds = super.mapper.map(entity.getTopicStudents(), UserTable::getId);
+    var existStudentIds = super.mapper.map(topicResponse.getTopicStudents(), UserTable::getId);
+
+    var newStudents = ObjectUtils
+        .defaultIfNull(entity.getStudents(), new ArrayList<TopicStudentTable>())
+        .stream().filter(e -> !existStudentIds.contains(e.getStudent().getId()))
+        .collect(Collectors.toList());
+    if (CollectionUtils.isNotEmpty(newStudents)) {
+      var defaultMidPass = semesterService.getCurrentSemester()
+          .getProperty(topicResponse.getThesis()).getDefaultMid();
+      var students = super.mapper.map(newStudents,
+          e -> e.setTopic(topicResponse).setMidPass(defaultMidPass));
+      topicStudentRepository.saveAll(students);
+    }
+
+    var removeStudents = ObjectUtils
+        .defaultIfNull(topicResponse.getStudents(), new ArrayList<TopicStudentTable>())
+        .stream().filter(e -> !updateStudentIds.contains(e.getStudent().getId()))
+        .collect(Collectors.toList());
+    if (CollectionUtils.isNotEmpty(removeStudents)) {
+      topicStudentRepository.deleteAll(removeStudents);
+    }
+
+    return this.map(topicResponse);
   }
 
   @Override

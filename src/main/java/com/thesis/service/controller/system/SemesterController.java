@@ -20,7 +20,7 @@ public class SemesterController extends ABaseController<SemesterTable, SemesterS
   }
 
   @GetMapping("/in-create-time")
-  public boolean inCreateTime(@RequestParam boolean thesis) {
+  public boolean inCreateTime(@RequestParam(defaultValue = "true") boolean thesis) {
     return super.service.inCreateTime(thesis);
   }
 
@@ -30,23 +30,25 @@ public class SemesterController extends ABaseController<SemesterTable, SemesterS
   }
 
   @GetMapping("/in-register-time")
-  public Object inRegisterTopicTime(@RequestParam boolean thesis) {
+  public Object inRegisterTopicTime(@RequestParam(defaultValue = "true") boolean thesis) {
     return super.service.inRegisterTopicTime(thesis);
   }
 
   @GetMapping("/in-mid-mark-time")
-  public Object inMidMarkTime(@RequestParam boolean thesis) {
+  public Object inMidMarkTime(@RequestParam(defaultValue = "true") boolean thesis) {
     return super.service.inMidMarkTime(thesis);
   }
 
   @GetMapping("/compare-mid-mark-start-time")
-  public Object compareMidMarkStartTime(@RequestParam boolean thesis,
+  public Object compareMidMarkStartTime(@RequestParam(defaultValue = "true") boolean thesis,
       @RequestParam boolean before) {
     return super.service.compare(thesis, before, SemesterPropertyTable::getMidMarkStart);
   }
 
   @GetMapping("/compare-mid-mark-end-time")
-  public Object compareMidMarkEndTime(@RequestParam boolean thesis, @RequestParam boolean before) {
+  public Object compareMidMarkEndTime(
+      @RequestParam(defaultValue = "true") boolean thesis,
+      @RequestParam boolean before) {
     return super.service.compare(thesis, before, SemesterPropertyTable::getMidMarkEnd);
   }
 

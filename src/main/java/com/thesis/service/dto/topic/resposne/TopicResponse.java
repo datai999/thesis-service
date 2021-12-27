@@ -66,11 +66,15 @@ public class TopicResponse {
   @EqualsAndHashCode(callSuper = false)
   @NoArgsConstructor
   private static class StudentResponse extends UserResponse {
+    private Long relationId;
     private Boolean midPass;
+    private String reason;
 
     public StudentResponse(TopicStudentTable entity) {
       ContextAccessor.getModelConverter().map(entity.getStudent(), this);
+      this.relationId = entity.getId();
       this.midPass = entity.getMidPass();
+      this.reason = entity.getReason();
     }
   }
 
