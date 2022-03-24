@@ -51,14 +51,6 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
-test {
-	useJUnitPlatform()
-  testLogging {
-		events "passed", "skipped", "failed"
-	}
-  finalizedBy jacocoTestReport
-}
-
 jacocoTestReport {
   dependsOn test
   jacocoTestReport {
