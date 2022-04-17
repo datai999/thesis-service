@@ -17,6 +17,7 @@ public class CriterionService extends ABaseService<CriterionTable, CriterionRepo
 
   @Override
   protected Class<?> getResponseClass() {
+    String test = "test sonar cloud";
     return CriterionResponse.class;
   }
 
